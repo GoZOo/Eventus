@@ -1,0 +1,283 @@
+/* Page Team */
+body[class*="eventus"] .teamList h2{
+	margin: 1em 0 .5em;
+}
+body[class*="eventus"] .teamList > div {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+body[class*="eventus"] .myCard{
+	width: 255px;
+	margin: 10px 2px;
+	position: relative;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 1px solid rgba(0,0,0,.125);
+	border-radius: .25rem;
+}
+body[class*="eventus"] .myCard .card-img-top{
+	width: 100%;
+	border-top-left-radius: calc(.25rem - 1px);
+	border-top-right-radius: calc(.25rem - 1px);
+	height: auto;
+}
+body[class*="eventus"] .myCard .card-body{
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	padding: 1.25rem;
+	text-align: center;
+}
+body[class*="eventus"] .myCard .card-body .card-title{
+	margin-bottom: .75rem;
+	margin-top: 0;
+	font-family: inherit;
+	font-weight: 500;
+	line-height: 1.2;
+	color: inherit;
+	font-size: 1.25rem;
+}
+body[class*="eventus"] .myCard .card-footer.text-muted{
+	padding: .75rem 1.25rem;
+	background-color: rgba(0,0,0,.03);
+	border-top: 1px solid rgba(0,0,0,.125);
+	color: #6c757d !important;
+	text-align: center;
+}
+
+body[class*="eventus"] form.fakeForm{
+	display: inline-block;
+}
+body[class*="eventus"] form.fakeForm button:active{
+	vertical-align: inherit;
+}
+
+
+
+/* Page Matchs */
+body[class*="eventus"] .overflow {
+	overflow-x: auto;
+}
+body[class*="eventus"] table.matchTable{
+    table-layout: fixed;
+    min-width: 1200px;
+}
+body[class*="eventus"] table.matchTable tr:first-child{
+    background: #d8d8d8;
+}
+body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(3), body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(4), body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(5),
+body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(3), body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(4), body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(5){
+	width: 1%;
+}
+body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(7), body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(9),
+body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(7), body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(9){
+	width: 4%;
+}
+body[class*="eventus"] table.matchTable.otherMatches tr td:nth-child(2), body[class*="eventus"] table.matchTable.otherMatches tr td:nth-child(3){
+	width: 1%;
+}
+body[class*="eventus"] table.matchTable.otherMatches tr td:nth-child(5), body[class*="eventus"] table.matchTable.otherMatches tr td:nth-child(7){
+	width: 4%;
+}
+body[class*="eventus"] table.matchTable tr td:last-child{
+	width: 30px;
+}
+body[class*="eventus"] table.matchTable button{
+	width: 30px;
+	margin: 0!important;
+}
+body[class*="eventus"] table.matchTable button:hover svg{
+	fill: white;
+}
+body[class*="eventus"] table.matchTable button svg{
+	fill: ghostwhite;
+	margin: 0 0 -7.4px -4.7px;
+}
+body[class*="eventus"] table.matchTable td input{
+	width: 100%;
+}
+body[class*="eventus"] input[disabled], body[class*="eventus"] input[readonly]{
+	cursor: not-allowed;
+	pointer-events: auto;
+}
+
+/* Page Club */
+body[class*="eventus"] .form-table{
+	margin: .5em 0 35px 0;
+}
+
+/* Commun */
+body[class*="eventus"] button.ico {
+	position: relative!important;
+	padding-left: 25px;
+	margin-bottom: 5px;
+}
+body[class*="eventus"] .ico-save:before {
+	content: url('../../admin/svg/save.svg');
+    position: absolute;
+    left: 2.5px;  
+    top: 3.2px;
+	width: 20px;
+}
+body[class*="eventus"] .ico-add:before {
+	content: url('../../admin/svg/add.svg');
+    position: absolute;
+    left: 0;
+    top: 0.5px;
+	width: 20px;
+}
+body[class*="eventus"] .ico-del:before {
+	content: url('../../admin/svg/del.svg');
+    position: absolute;
+    top: 4.5px;
+    left: 2px;
+	width: 20px;
+}
+body[class*="eventus"] .ico-sync:before {
+	content: url('../../admin/svg/sync.svg');
+    position: absolute;
+    top: 4.5px;
+    left: 2px;
+	width: 20px;
+}
+body[class*="eventus"] .ico-time:before {
+	content: url('../../admin/svg/time.svg');
+    position: absolute;
+    top: 4.5px;
+    left: 2px;
+	width: 20px;
+}
+body[class*="eventus"] .ico-team:before {
+	content: url('../../admin/svg/team.svg');
+    position: absolute;
+    top: 3.5px;
+    left: 2px;
+	width: 20px;
+}
+body[class*="eventus"] .ico-fight:before {
+	content: url('../../admin/svg/fight.svg');
+    position: absolute;
+    top: 3.5px;
+    left: 2px;
+	width: 20px;
+}
+body[class*="eventus"] .ico-info:before {
+	content: url('../../admin/svg/info.svg');
+    position: absolute;
+    top: 3.5px;
+    left: 2px;
+	width: 20px;
+}
+body[class*="eventus"] .ico-settings:before {
+	content: url('../../admin/svg/settings.svg');
+    position: absolute;
+    top: 4.5px;
+	left: 3px;
+	width: 18px;
+}
+body[class*="eventus"] .ico-reset:before {
+	content: url('../../admin/svg/reset.svg');
+    position: absolute;
+    top: 3.5px;
+    left: 2px;
+	width: 19px;
+}
+body[class*="eventus"] .ico-loading:before {
+	content: '';
+	position: absolute;
+	width: 13px;
+	height: 13px;
+	background: transparent;
+	left: 2px;
+	top: 4px;
+	border: 3px solid #f3f3f3;
+	border-top: 3px solid #555;
+	animation: rotating 2s linear infinite;
+	border-radius: 20px;
+}
+@keyframes rotating {
+	from {
+	  transform: rotate(0deg);
+	}
+	to {
+	  transform: rotate(360deg);
+	}
+}
+/* Resultats Shortcode */
+.allClbus {	
+	width: 100%;
+	position: relative;
+	height: 1000px;
+	overflow: hidden;
+	color: black;
+}
+.allClbus .blockClub {
+	width: 100%;
+	position: absolute;
+	opacity: 1;
+	transition: .5s ease-in-out;
+}
+.allClbus .ligneNomSuivant{
+	display: flex;
+	justify-content: space-between;
+	margin: 0 0 15px 0;
+}
+.allClbus .ligneNomSuivant p{
+	margin: 0;
+	font-size: 1.3em;
+	text-transform: uppercase;
+}
+.allClbus .ligneNomSuivant button{
+	padding: 0 5px 1px 8px;
+}
+
+.allClbus .sexe {
+	font-weight: 600;
+	font-size: 1.1em;
+	margin: 0 0 .2em;
+}
+.allClbus .resultat{
+	margin: 0 0 15px 0;
+}
+.allClbus .resultat .ligneEqDate {
+	border-bottom: 2px solid #264782;
+	display: flex;
+	justify-content: space-between;
+	background: #0F3375;
+	padding: 2px 5px 0px 5px;
+	color: white;
+}
+.allClbus .resultat .ligneEqDate a {
+	box-shadow: none;
+}
+.allClbus .resultat .ligneEqDate a:hover {
+	box-shadow: none;
+	color: #fedf47;
+}
+.allClbus .resultat .ligneEqDate p {
+	margin: 0;
+}
+.allClbus .resultat div[class^="equipe"] {
+	border-bottom: 1px solid #eee;
+	display: flex;
+}
+.allClbus .resultat div[class^="equipe"] p:first-child {
+	margin: 0 5px 0 0;
+	min-width: 23px;
+	padding: 0 0 0 5px;
+}
+.allClbus .resultat div[class^="equipe"] p:last-child {
+	border-left: 1px solid #eee;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 0;
+	padding: 0 5px;
+}

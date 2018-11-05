@@ -18,10 +18,10 @@ class MainScreen extends MasterScreen {
 
     function display(){  
 		if (isset($_GET['action']) && $_GET['action']=="team") {
-			TeamScreen::getInstance()->display(); 
+			MainTeamScreen::getInstance()->display(); 
 			return;
 		} else if(isset($_GET['action']) && $_GET['action']=="matchs"){
-			MatchScreen::getInstance()->display(); 
+			MainMatchScreen::getInstance()->display(); 
 			return;
 		}
 		?>

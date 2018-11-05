@@ -1,11 +1,11 @@
 <?php
 
-class MatchScreen extends MasterScreen {	
+class MainMatchScreen extends MasterScreen {	
 	private static $_instance;
 
     public static function getInstance() {
         if (is_null(self::$_instance)) {
-            self::$_instance = new MatchScreen();
+            self::$_instance = new MainMatchScreen();
         }
         return self::$_instance;
     }

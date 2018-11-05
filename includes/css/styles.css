@@ -109,8 +109,8 @@ body[class*="eventus"] input[disabled], body[class*="eventus"] input[readonly]{
 }
 
 /* Page Club */
-body[class*="eventus"] .form-table{
-	margin: .5em 0 35px 0;
+body[class*="eventus"] .myCardClub{
+	width: 355px;
 }
 
 /* Commun */

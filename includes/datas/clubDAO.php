@@ -31,42 +31,43 @@ class ClubDAO extends MasterDAO {
         return new Club($row->id, $row->name, $row->string, $row->boy, $row->girl, $row->mixed, $row->adress);
     }
 
+    function getInfosByClubId($idClub){  
+        return $this->wpdb->get_row("SELECT a.id, count(b.id) as teams FROM {$this->t1} a LEFT JOIN {$this->t3} b ON a.id=b.clubId WHERE b.clubId=$idClub;");
+    }
     /***************************
     ********** UPDATE **********
     ****************************/
-    function updateClubs($myClubs){    
-
-        $clubsIdToDelete;
-        foreach($myClubs as $club) {
-            if ($club->getId()) {
-                $clubsIdToDelete .= $club->getId().", ";
-            }
+    function updateClub($club){    
+        if ($club->getId()){
+            $data = array(
+                'name' => $club->getName(), 
+                'string' => $club->getString(), 
+                'boy' => $club->getBoy(), 
+                'girl' => $club->getGirl(), 
+                'mixed' => $club->getMixed(), 
+                'adress' => $club->getAdress()
+            );
+            $where = array('id' => $club->getId());
+            $this->wpdb->update("{$this->t1}", $data, $where);
         }
-        $this->deleteClubsNotIn(substr($clubsIdToDelete,0 , -2));
-
-        $clubsToInsert = [];
-        foreach($myClubs as $club) {
-            if ($club->getId()){
-                $data = array('name' => $club->getName(), 'string' => $club->getString(), 'boy' => $club->getBoy(), 'girl' => $club->getGirl(), 'mixed' => $club->getMixed(), 'adress' => $club->getAdress());
-                $where = array('id' => $club->getId());
-                $this->wpdb->update("{$this->t1}", $data, $where);
-            } else {
-                $clubsToInsert[] = $club;
-            }
-        }
-        $this->insertClubs($clubsToInsert);
     }
 
     /***************************
     ********** INSERT **********
     ****************************/
-    function insertClubs($myClubs){
-        foreach($myClubs as $club) {
-            if (!$club->getId()){
-                $data = array('name' => $club->getName(), 'string' => $club->getString(), 'boy' => $club->getBoy(), 'girl' => $club->getGirl(), 'mixed' => $club->getMixed(), 'adress' => $club->getAdress());
-                $this->wpdb->insert("{$this->t1}", $data);
-            } 
+    function insertClub($club){
+        if (!$club->getId()){            
+            $data = array(
+                'name' => $club->getName(), 
+                'string' => $club->getString(), 
+                'boy' => $club->getBoy(), 
+                'girl' => $club->getGirl(), 
+                'mixed' => $club->getMixed(), 
+                'adress' => $club->getAdress()
+            );
+            $this->wpdb->insert("{$this->t1}", $data);
         }
+        return $this->wpdb->insert_id;
     }
 
     /***************************

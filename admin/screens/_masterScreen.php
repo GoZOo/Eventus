@@ -50,11 +50,15 @@ abstract class MasterScreen {
             ),  
             'succesUpClub'=>array(
                 'state' => "success", 
-                'str'   => "Les clubs ont bien été mis à jour."
-            ), 
+                'str'   => "Le club a bien été mis à jour."
+            ),
+            'succesNewClub'=>array(
+                'state' => "success", 
+                'str'   => "Le club à bien été ajoutée."
+            ),  
             'succesDelClub'=>array(
                 'state' => "success", 
-                'str'   => "Les clubs ont bien été supprimés."
+                'str'   => "Le club a bien été supprimés."
             ), 
             'succesDelLog'=>array(
                 'state' => "success", 
@@ -88,6 +92,19 @@ abstract class MasterScreen {
             return '<img draggable="false" class="emoji" alt="♂" src="https://s.w.org/images/core/emoji/11/svg/2642.svg"><img draggable="false" class="emoji" alt="♀" src="https://s.w.org/images/core/emoji/11/svg/2640.svg">';
         }	
         return;
+    }
+    protected function getSexIcoClub($boy, $girl, $mixed){
+        $return = [];
+        if ($boy){
+            $return[] = '<img draggable="false" class="emoji" alt="♂" src="https://s.w.org/images/core/emoji/11/svg/2642.svg">';
+        } 
+        if ($girl){
+            $return[] = '<img draggable="false" class="emoji" alt="♀" src="https://s.w.org/images/core/emoji/11/svg/2640.svg">';
+        } 
+        if ($mixed){ 
+            $return[] = '<img draggable="false" class="emoji" alt="♂" src="https://s.w.org/images/core/emoji/11/svg/2642.svg"><img draggable="false" class="emoji" alt="♀" src="https://s.w.org/images/core/emoji/11/svg/2640.svg">';
+        }	
+        return implode("/", $return);
     }
 }
 

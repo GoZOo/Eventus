@@ -20,9 +20,10 @@ include_once plugin_dir_path( __FILE__ ).'includes/datas/clubDAO.php';
 include_once plugin_dir_path( __FILE__ ).'includes/datas/matchDAO.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/_masterScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/mainScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/mainTeamScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/mainMatchScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/clubScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/teamScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/matchScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/clubDetailScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/logScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/adminScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/finder.php';
@@ -60,7 +61,7 @@ class Eventus {
     	$icon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(plugin_dir_path( __FILE__ ).'admin/svg/handball.svg'));
 	    add_menu_page( 'Équipes & Résultats - Eventus', 'Eventus', 'manage_options', 'eventus', array($this, 'callbackMain'), $icon);
 	    add_submenu_page( 'eventus', 'Équipes & Résultats - Eventus', 'Equipes', 'manage_options', 'eventus');
-	    add_submenu_page( 'eventus', 'Clubs - Eventus', 'Clubs', 'manage_options', 'eventus_clubs', array($this, 'callbackClubs'));
+	    add_submenu_page( 'eventus', 'Clubs - Eventus', 'Clubs', 'manage_options', 'eventus_club', array($this, 'callbackClubs'));
 	    add_submenu_page( 'eventus', 'Logs - Eventus', 'Logs', 'manage_options', 'eventus_logs', array($this, 'callbackLogs'));
 	    add_submenu_page( 'eventus', 'Paramètres - Eventus', 'Paramètres', 'manage_options', 'eventus_admin', array($this, 'callbackAdmin'));
 	} 

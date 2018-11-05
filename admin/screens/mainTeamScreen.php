@@ -1,12 +1,12 @@
 <?php
 
-class TeamScreen extends MasterScreen {
+class MainTeamScreen extends MasterScreen {
     private static $imgId = 0;
     private static $_instance;
 
     public static function getInstance() {
         if (is_null(self::$_instance)) {
-            self::$_instance = new TeamScreen();
+            self::$_instance = new MainTeamScreen();
         }
         return self::$_instance;
     }
@@ -19,7 +19,7 @@ class TeamScreen extends MasterScreen {
     function display(){
         if (isset($_GET['teamId'])){  
             $team = TeamDAO::getInstance()->getTeamById($_GET['teamId']);
-            TeamScreen::$imgId = $team->getImg();
+            MainTeamScreen::$imgId = $team->getImg();
             if (!$team->getId()) {
                 echo "<h2>Erreur : L'équipe n'a pas pu être trouvée...</h2>";
                 return;
@@ -150,7 +150,7 @@ class TeamScreen extends MasterScreen {
                 // Uploading files
                 var file_frame;
                 var wp_media_post_id = wp.media.model.settings.post.id; // Store the old id
-                var set_to_post_id = <?php echo TeamScreen::$imgId ? TeamScreen::$imgId : 0; ?>; // Set this
+                var set_to_post_id = <?php echo MainTeamScreen::$imgId ? MainTeamScreen::$imgId : 0; ?>; // Set this
                 jQuery('#upload_image_button').on('click', function( event ){
                     event.preventDefault();
                     // If the media frame already exists, reopen it.

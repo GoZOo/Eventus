@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
 }
 
-if (!class_exists( 'EventusResults')) {
+if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 	class EventusResults extends aviaShortcodeTemplate {
         use MasterTrait;
 

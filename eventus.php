@@ -27,7 +27,9 @@ include_once plugin_dir_path( __FILE__ ).'admin/screens/clubDetailScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/logScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/adminScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/finder.php';
-include_once get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
+if (file_exists ( get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php' )){
+	include_once get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
+}
 include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusCalendrier.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusMatch.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusCirclePosPts.php';

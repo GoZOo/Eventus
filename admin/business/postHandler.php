@@ -174,17 +174,17 @@
             wp_redirect( add_query_arg( 'message', 'succesUpTeam',  wp_get_referer() )); 
         } else {
             $newId = TeamDAO::getInstance()->insertTeam($team); 
-            wp_redirect( add_query_arg( 'message', 'succesNewTeam', 'admin.php?page=eventus_club&action=team&teamId='.$newId )); 
+            wp_redirect( add_query_arg( 'message', 'succesNewTeam', 'admin.php?page=eventus&action=team&teamId='.$newId )); 
         }        
     }
 
     function deleteTeam(){
         if ($_POST['teamId']) {
             TeamDAO::getInstance()->deleteTeam($_POST['teamId']); 
-            wp_redirect( add_query_arg( 'message', 'succesDelTeam', 'admin.php?page=eventus_club')); 
+            wp_redirect( add_query_arg( 'message', 'succesDelTeam', 'admin.php?page=eventus')); 
     	} else {
             TeamDAO::getInstance()->deleteTeam(null); 
-            wp_redirect( add_query_arg( 'message', 'succesDelTeams', 'admin.php?page=eventus_club')); 
+            wp_redirect( add_query_arg( 'message', 'succesDelTeams', 'admin.php?page=eventus')); 
     	}        
     }
     

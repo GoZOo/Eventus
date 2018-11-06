@@ -67,6 +67,9 @@ class MainScreen extends MasterScreen {
 										<button class="button-primary ico ico-team" onclick="location.href='<?php echo 'admin.php?page=eventus&action=team&teamId='.$team->getId(); ?>'">
 											Équipe
 										</button>
+										<button class="button-primary ico ico-club" onclick="location.href='<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$team->getClub()->getId(); ?>'">
+											Club
+										</button>
 									</div>
 									<div class="card-footer text-muted">
 										<?php $infos = MatchDAO::getInstance()->getInfosByTeamId($team->getId());?>

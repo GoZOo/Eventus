@@ -29,9 +29,6 @@ class ClubScreen extends MasterScreen {
 			if (!$allClubs){
 				?>
 				<h2>Veuillez ajouter un club dans un premier temps...</h2>	
-				<button class="button-primary ico ico-add" onclick="location.href='admin.php?page=eventus_clubs&clubId'">
-					Ajouter un club
-				</button>
 				<?php
 			}
 			?>
@@ -46,7 +43,7 @@ class ClubScreen extends MasterScreen {
 									<h5 class="card-title">
 										<?php echo stripcslashes($club->getName()).'<br>'.$this->getSexIcoClub($club->getBoy(), $club->getGirl(), $club->getMixed()); ?>
 									</h5>
-									<button class="button-primary ico ico-team" onclick="location.href='<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$club->getId(); ?>'">
+									<button class="button-primary ico ico-club" onclick="location.href='<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$club->getId(); ?>'">
 										Club
 									</button>
 								</div>

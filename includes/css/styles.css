@@ -9,7 +9,7 @@ body[class*="eventus"] .teamList > div {
 }
 
 body[class*="eventus"] .myCard{
-	width: 255px;
+	width: 300px;
 	margin: 10px 2px;
 	position: relative;
 	display: -ms-flexbox;
@@ -181,6 +181,13 @@ body[class*="eventus"] .ico-settings:before {
     top: 4.5px;
 	left: 3px;
 	width: 18px;
+}
+body[class*="eventus"] .ico-club:before {
+	content: url('../../admin/svg/club.svg');
+    position: absolute;
+    top: 3.5px;
+    left: 2px;
+	width: 19px;
 }
 body[class*="eventus"] .ico-reset:before {
 	content: url('../../admin/svg/reset.svg');

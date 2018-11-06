@@ -76,17 +76,17 @@ class MainTeamScreen extends MasterScreen {
                                 </th>
                                 <td>
                                     <label>
-                                        <input type="radio" value="h" name="sexe" <?php if ($team->getBoy()){ echo "checked='1'"; } ?> title="Masculin" required disabled/>
+                                        <input type="radio" value="h" name="sexe" title="Masculin" <?php echo ($team->getBoy() ? 'checked=\'1\'' : '').' '.(!$team->getClub()->getBoy() ? ' disabled' : ''); ?> required/>
                                         Masculin
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" value="f" name="sexe" <?php if ($team->getGirl()){ echo "checked='1'"; } ?> title="Féminin" disabled/>
+                                        <input type="radio" value="f" name="sexe" title="Féminin" <?php echo ($team->getGirl() ? 'checked=\'1\'' : '').' '.(!$team->getClub()->getGirl() ? ' disabled' : ''); ?>/>
                                         Féminin
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" value="m" name="sexe" <?php if ($team->getMixed()){ echo "checked='1'"; } ?> title="Mixte" disabled/>
+                                        <input type="radio" value="m" name="sexe" title="Mixte" <?php echo ($team->getMixed() ? 'checked=\'1\'' : '').' '.(!$team->getClub()->getMixed() ? ' disabled' : ''); ?>/>
                                         Mixte
                                     </label>
                                 </td>
@@ -121,7 +121,7 @@ class MainTeamScreen extends MasterScreen {
                                 </th>
                                 <td>                                 
                                     <input id="upload_image_button" type="button" class="button" value="Sélectionnez une image" />
-                                    <input id="delete_image_button" type="button" class="button" value="Supprimer l'image" />
+                                    <input id="delete_image_button" type="button" class="button" value="Supprimer l'image" disabled/>
                                     <input id='image_attachment_id' type='hidden' name='img' disabled value='<?php echo $team->getImg() ?>'>
                                 </td>
                             </tr>

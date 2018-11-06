@@ -10,7 +10,9 @@ class ClubDetailScreen extends MasterScreen {
         return self::$_instance;
     }
 		
-    private function __construct() {}
+    private function __construct() {
+        wp_enqueue_script('clubJs', plugin_dir_url( __FILE__ ).'/../../js/club.js', '', '', true); 
+    }
 
     function display(){
         if (isset($_GET['clubId'])){  
@@ -70,17 +72,17 @@ class ClubDetailScreen extends MasterScreen {
                                 </th>
                                 <td>
                                     <label>
-                                        <input type="checkbox" value="1" name="h" <?php if ($club->getBoy()){ echo "checked='1'"; } ?> title="Masculin"/>
+                                        <input type="checkbox" value="1" name="h" <?php if ($club->getBoy()){ echo "checked='1'"; } ?> title="Masculin" required/>
                                         Masculin
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="checkbox" value="1" name="f" <?php if ($club->getGirl()){ echo "checked='1'"; } ?> title="Féminin"/>
+                                        <input type="checkbox" value="1" name="f" <?php if ($club->getGirl()){ echo "checked='1'"; } ?> title="Féminin" required/>
                                         Féminin
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="checkbox" value="1" name="m" <?php if ($club->getMixed()){ echo "checked='1'"; } ?> title="Mixte"/>
+                                        <input type="checkbox" value="1" name="m" <?php if ($club->getMixed()){ echo "checked='1'"; } ?> title="Mixte" required/>
                                         Mixte
                                     </label>
                                 </td>

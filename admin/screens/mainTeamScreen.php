@@ -76,17 +76,17 @@ class MainTeamScreen extends MasterScreen {
                                 </th>
                                 <td>
                                     <label>
-                                        <input type="radio" value="h" name="sexe" title="Masculin" <?php echo ($team->getBoy() ? 'checked=\'1\'' : '').' '.(!$team->getClub()->getBoy() ? ' disabled' : ''); ?> required/>
+                                        <input type="radio" value="h" name="sexe" title="Masculin" <?php echo ($team->getBoy() ? 'checked=\'1\'' : '').' '.($team->getClub() && !$team->getClub()->getBoy() ? ' disabled' : ''); ?> required/>
                                         Masculin
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" value="f" name="sexe" title="Féminin" <?php echo ($team->getGirl() ? 'checked=\'1\'' : '').' '.(!$team->getClub()->getGirl() ? ' disabled' : ''); ?>/>
+                                        <input type="radio" value="f" name="sexe" title="Féminin" <?php echo ($team->getGirl() ? 'checked=\'1\'' : '').' '.($team->getClub() && !$team->getClub()->getGirl() ? ' disabled' : ''); ?>/>
                                         Féminin
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" value="m" name="sexe" title="Mixte" <?php echo ($team->getMixed() ? 'checked=\'1\'' : '').' '.(!$team->getClub()->getMixed() ? ' disabled' : ''); ?>/>
+                                        <input type="radio" value="m" name="sexe" title="Mixte" <?php echo ($team->getMixed() ? 'checked=\'1\'' : '').' '.($team->getClub() && !$team->getClub()->getMixed() ? ' disabled' : ''); ?>/>
                                         Mixte
                                     </label>
                                 </td>

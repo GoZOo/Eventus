@@ -74,9 +74,13 @@ class AdminScreen extends MasterScreen {
                     <a target="_blank" href="<?php echo $pluginData['AuthorURI']; ?>">
                         <?php echo $pluginData['AuthorName']; ?>
                     </a>
+                     - 
+                    <a target="_blank" href="https://github.com/KirianCaumes/eventus">
+                        GitHub
+                    </a>
                 </p>
                 </p>
-                    En cas de soucis, plusieurs moyens de me contacter sont disponibles sur mon site.
+                    En cas de soucis, plusieurs moyens de me contacter sont disponibles sur mon site ou via mon GitHub.
                 <p>
         </div>
         <?php

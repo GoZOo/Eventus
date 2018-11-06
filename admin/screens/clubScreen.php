@@ -11,7 +11,6 @@ class ClubScreen extends MasterScreen {
     }
 		
     private function __construct() {  
-    	wp_enqueue_script('clubJs', plugin_dir_url( __FILE__ ).'/../../js/club.js', '', '', true);
         wp_enqueue_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true);  
     }
 

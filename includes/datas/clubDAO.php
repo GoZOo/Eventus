@@ -73,10 +73,6 @@ class ClubDAO extends MasterDAO {
     /***************************
     ********** DELETE **********
     ****************************/
-    function deleteClubsNotIn($myClubsId){  
-        $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t1} WHERE id NOT IN ($myClubsId)", null));
-    }
-    
     function deleteClub($clubId){ 
         if ($clubId){
             $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t1} WHERE id=$clubId", null));

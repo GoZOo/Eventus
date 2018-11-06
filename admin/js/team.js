@@ -2,6 +2,7 @@
 changeSexe();
 
 jQuery('#club').on('change', ()=> {
+	jQuery('input[type="radio"]').prop('checked', false);
 	changeSexe();
 });
 

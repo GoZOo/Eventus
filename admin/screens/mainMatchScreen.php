@@ -25,9 +25,11 @@ class MainMatchScreen extends MasterScreen {
 	        <h1 class="wp-heading-inline">
 				<?php 
 					echo ($team->getName() ? $team->getName() : 'Nouvelle équipe').' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed());
-					$myMatchParent = MatchDAO::getInstance()->getAllMatchesParentsByTeamId($team->getId());	           
                 ?>                
 			</h1>
+			<?php 
+				$myMatchParent = MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
+			?>
 			<a href="<?php echo "admin.php?page=eventus&action=team&teamId=".$team->getId(); ?>" class="page-title-action">Équipe</a>
 			<?php  
                 echo $this->showNotice(); 
@@ -112,7 +114,7 @@ class MainMatchScreen extends MasterScreen {
 						?>
 						</table>
 						<?php
-						$myMatchSon = MatchDAO::getInstance()->getAllMatchesSonByTeamId($team->getId()); 
+						$myMatchSon = MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),1); 
 						?>
 						<br class="sonMatches" <?php if (!$myMatchSon) { echo "style=display:none;"; } ?> >
 						<h3 class="sonMatches" <?php if (!$myMatchSon) { echo "style=display:none;"; } ?> >Matchs fils :</h3>
@@ -204,7 +206,7 @@ class MainMatchScreen extends MasterScreen {
 								<th>Salle</th>
 							</tr>   	
 						<?php
-						$myMatchOther = MatchDAO::getInstance()->getAllMatchesOtherByTeamId($team->getId());
+						$myMatchOther = MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
 						if (!$myMatchOther){
 							$myMatchOther[] = new Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 						}

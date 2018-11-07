@@ -16,36 +16,10 @@ class MatchDAO extends MasterDAO {
     /**************************
     *********** GET ***********
     ***************************/
-    function getAllMatches(){  
-        $allMatches = [];
-        $teams = $this->wpdb->get_results("SELECT * FROM {$this->t2}");
-        foreach($teams as $row) { 
-            $allMatches[] = new Match(
-                $row->id, 
-                $row->matchDay,
-                $row->numMatch, 
-                $row->date, 
-                $row->hourRdv, 
-                $row->hourStart, 
-                $row->localTeam, 
-                $row->localTeamScore, 
-                $row->visitingTeam, 
-                $row->visitingTeamScore, 
-                $row->ext, 
-                $row->street, 
-                $row->city, 
-                $row->gym, 
-                $row->type, 
-                TeamDAO::getInstance()->getTeamById($row->idTeam), 
-                $this->getMatchById($row->idMatchRef)
-            );
-        }
-        return $allMatches;
-    }
-
+    //To be deleted
     function getMatchById($idMatch){
         if ($idMatch) {
-            $match = $this->wpdb->get_row("SELECT * FROM {$this->t2} WHERE id=$idMatch");
+            $match = $this->wpdb->get_row("SELECT * FROM {$this->t2} WHERE id=$idMatch");            
             return new Match(
                     $match->id, 
                     $match->matchDay,
@@ -71,43 +45,46 @@ class MatchDAO extends MasterDAO {
 
     function getAllMatchesByTeamId($idTeam){  
         $allMatches = [];
-        $teams = $this->wpdb->get_results("SELECT * FROM {$this->t2} WHERE idTeam=$idTeam;");
-        foreach($teams as $row) { 
-            $allMatches[] = new Match(
-                $row->id, 
-                $row->matchDay, 
-                $row->numMatch,
-                $row->date, 
-                $row->hourRdv, 
-                $row->hourStart, 
-                $row->localTeam, 
-                $row->localTeamScore, 
-                $row->visitingTeam, 
-                $row->visitingTeamScore, 
-                $row->ext, 
-                $row->street, 
-                $row->city, 
-                $row->gym, 
-                $row->type, 
-                TeamDAO::getInstance()->getTeamById($row->idTeam), 
-                $this->getMatchById($row->idMatchRef)
-            );
-        }
-        return $allMatches;
-    }
-
-    function getAllMatchesParentsByTeamId($idTeam){  
-        $allMatches = [];
         $teams = $this->wpdb->get_results("
-            SELECT * FROM {$this->t2} 
+            SELECT 
+                a.*, 
+                b.name as 'teamName',
+                b.url as 'teamUrl',
+                b.boy as 'teamBoy',
+                b.girl as 'teamGirl',
+                b.mixed as 'teamMixed',
+                b.position as 'teamPosition',
+                b.points as 'teamPoints',
+                b.time as 'teamTime',
+                b.img as 'teamImg',
+                b.clubId as 'clubId',
+                c.name as 'clubName', 
+                c.string as 'clubString', 
+                c.boy as 'clubBoy', 
+                c.girl as 'clubGirl', 
+                c.mixed as 'clubMixed', 
+                c.adress as 'clubAdress',
+                d.numMatch as 'refNumMatch',
+                d.matchDay as 'refMatchDay',
+                d.date as 'refDate',
+                d.hourRdv as 'refHourRdv',
+                d.hourStart as 'refHourStart',
+                d.localTeam as 'refLocalTeam',
+                d.localTeamScore as 'refLocalTeamScore',
+                d.visitingTeam as 'refVisitingTeam',
+                d.visitingTeamScore as 'refVisitingTeamScore',
+                d.ext as 'refExt',
+                d.street as 'refStreet',
+                d.city as 'refCity',
+                d.gym as 'refGym',
+                d.type as 'refType'
+            FROM {$this->t2} a 
+            LEFT JOIN {$this->t3} b ON a.idTeam = b.id 
+            LEFT JOIN {$this->t1} c ON b.clubId = c.id 
+            LEFT JOIN {$this->t2} d ON a.idMatchRef = b.id
             WHERE 
-                idTeam=$idTeam 
-                AND idMatchRef IS NULL 
-                AND matchDay IS NOT NULL 
-            ORDER BY 
-                matchDay;
-        ");
-        //ORDER BY CASE WHEN date IS NULL THEN 1 ELSE 0 END, date ASC, hourStart
+                a.idTeam=$idTeam"
+        );
         foreach($teams as $row) { 
             $allMatches[] = new Match(
                 $row->id, 
@@ -125,30 +102,124 @@ class MatchDAO extends MasterDAO {
                 $row->city, 
                 $row->gym, 
                 $row->type, 
-                TeamDAO::getInstance()->getTeamById($row->idTeam), 
-                $this->getMatchById($row->idMatchRef)
+                new Team(
+                    $row->idTeam,
+                    $row->teamName,
+                    $row->teamUrl,
+                    $row->teamBoy,
+                    $row->teamGirl,
+                    $row->teamMixed,
+                    $row->teamPosition,
+                    $row->teamPoints,
+                    $row->teamTime,
+                    $row->teamImg,
+                    new Club(
+                        $row->clubId,
+                        $row->clubName,
+                        $row->clubString,
+                        $row->clubBoy,
+                        $row->clubGirl,
+                        $row->clubMixed,
+                        $row->clubAdress
+                    )
+                ),
+                $row->idMatchRef ? 
+                    new Match(
+                        $row->idMatchRef, 
+                        $row->refMatchDay,
+                        $row->refNumMatch,
+                        $row->refDate, 
+                        $row->refHourRdv, 
+                        $row->refHourStart, 
+                        $row->refLocalTeam, 
+                        $row->refLocalTeamScore, 
+                        $row->refVisitingTeam, 
+                        $row->refVisitingTeamScore, 
+                        $row->refExt, 
+                        $row->refStreet, 
+                        $row->refCity, 
+                        $row->refGym, 
+                        $row->refType, 
+                        new Team(
+                            $row->idTeam,
+                            $row->teamName,
+                            $row->teamUrl,
+                            $row->teamBoy,
+                            $row->teamGirl,
+                            $row->teamMixed,
+                            $row->teamPosition,
+                            $row->teamPoints,
+                            $row->teamTime,
+                            $row->teamImg,
+                            new Club(
+                                $row->clubId,
+                                $row->clubName,
+                                $row->clubString,
+                                $row->clubBoy,
+                                $row->clubGirl,
+                                $row->clubMixed,
+                                $row->clubAdress
+                            )
+                        )
+                    ) : null
             );
         }
         return $allMatches;
     }
 
-    function getAllMatchesSonByTeamId($idTeam){  
+    function getAllMatchesByTeamIdAndType($idTeam, $type){  
         $allMatches = [];
         $teams = $this->wpdb->get_results("
-            SELECT * FROM {$this->t2} 
+            SELECT 
+                a.*, 
+                b.name as 'teamName',
+                b.url as 'teamUrl',
+                b.boy as 'teamBoy',
+                b.girl as 'teamGirl',
+                b.mixed as 'teamMixed',
+                b.position as 'teamPosition',
+                b.points as 'teamPoints',
+                b.time as 'teamTime',
+                b.img as 'teamImg',
+                b.clubId as 'clubId',
+                c.name as 'clubName', 
+                c.string as 'clubString', 
+                c.boy as 'clubBoy', 
+                c.girl as 'clubGirl', 
+                c.mixed as 'clubMixed', 
+                c.adress as 'clubAdress',
+                d.numMatch as 'refNumMatch',
+                d.matchDay as 'refMatchDay',
+                d.date as 'refDate',
+                d.hourRdv as 'refHourRdv',
+                d.hourStart as 'refHourStart',
+                d.localTeam as 'refLocalTeam',
+                d.localTeamScore as 'refLocalTeamScore',
+                d.visitingTeam as 'refVisitingTeam',
+                d.visitingTeamScore as 'refVisitingTeamScore',
+                d.ext as 'refExt',
+                d.street as 'refStreet',
+                d.city as 'refCity',
+                d.gym as 'refGym',
+                d.type as 'refType'
+            FROM {$this->t2} a 
+            LEFT JOIN {$this->t3} b ON a.idTeam = b.id 
+            LEFT JOIN {$this->t1} c ON b.clubId = c.id 
+            LEFT JOIN {$this->t2} d ON a.idMatchRef = b.id
             WHERE 
-                idTeam=$idTeam 
-                AND idMatchRef IS NOT NULL 
-                AND type = 1 
+                a.idTeam=$idTeam AND
+                a.type=$type
             ORDER BY 
-                matchDay;
+                a.matchDay,
+                CASE WHEN a.date IS NULL THEN 1 ELSE 0 END, 
+                a.date ASC, 
+                a.hourStart;
         ");
-        //ORDER BY CASE WHEN date IS NULL THEN 1 ELSE 0 END, date ASC, hourStart;
         foreach($teams as $row) { 
             $allMatches[] = new Match(
                 $row->id, 
                 $row->matchDay,
-                $row->numMatch, 
+                $row->numMatch,
                 $row->date, 
                 $row->hourRdv, 
                 $row->hourStart, 
@@ -161,108 +232,144 @@ class MatchDAO extends MasterDAO {
                 $row->city, 
                 $row->gym, 
                 $row->type, 
-                TeamDAO::getInstance()->getTeamById($row->idTeam), 
-                $this->getMatchById($row->idMatchRef)
+                new Team(
+                    $row->idTeam,
+                    $row->teamName,
+                    $row->teamUrl,
+                    $row->teamBoy,
+                    $row->teamGirl,
+                    $row->teamMixed,
+                    $row->teamPosition,
+                    $row->teamPoints,
+                    $row->teamTime,
+                    $row->teamImg,
+                    new Club(
+                        $row->clubId,
+                        $row->clubName,
+                        $row->clubString,
+                        $row->clubBoy,
+                        $row->clubGirl,
+                        $row->clubMixed,
+                        $row->clubAdress
+                    )
+                ),
+                $row->idMatchRef ? 
+                    new Match(
+                        $row->idMatchRef, 
+                        $row->refMatchDay,
+                        $row->refNumMatch,
+                        $row->refDate, 
+                        $row->refHourRdv, 
+                        $row->refHourStart, 
+                        $row->refLocalTeam, 
+                        $row->refLocalTeamScore, 
+                        $row->refVisitingTeam, 
+                        $row->refVisitingTeamScore, 
+                        $row->refExt, 
+                        $row->refStreet, 
+                        $row->refCity, 
+                        $row->refGym, 
+                        $row->refType, 
+                        new Team(
+                            $row->idTeam,
+                            $row->teamName,
+                            $row->teamUrl,
+                            $row->teamBoy,
+                            $row->teamGirl,
+                            $row->teamMixed,
+                            $row->teamPosition,
+                            $row->teamPoints,
+                            $row->teamTime,
+                            $row->teamImg,
+                            new Club(
+                                $row->clubId,
+                                $row->clubName,
+                                $row->clubString,
+                                $row->clubBoy,
+                                $row->clubGirl,
+                                $row->clubMixed,
+                                $row->clubAdress
+                            )
+                        )
+                    ) : null
             );
         }
         return $allMatches;
     }
 
-    function getAllMatchesOtherByTeamId($idTeam){  
-        $allMatches = [];
-        $teams = $this->wpdb->get_results("
-            SELECT * FROM {$this->t2} 
+
+    function getCloseMatchByTeamId($teamId, $close){  
+        $myMatch = $this->wpdb->get_row("
+            SELECT 
+                a.*, 
+                b.numMatch as 'refNumMatch',
+                b.matchDay as 'refMatchDay',
+                b.date as 'refDate',
+                b.hourRdv as 'refHourRdv',
+                b.hourStart as 'refHourStart',
+                b.localTeam as 'refLocalTeam',
+                b.localTeamScore as 'refLocalTeamScore',
+                b.visitingTeam as 'refVisitingTeam',
+                b.visitingTeamScore as 'refVisitingTeamScore',
+                b.ext as 'refExt',
+                b.street as 'refStreet',
+                b.city as 'refCity',
+                b.gym as 'refGym',
+                b.type as 'refType'
+            FROM {$this->t2} a 
+            LEFT JOIN {$this->t2} b ON a.idMatchRef = b.id
             WHERE 
-                idTeam=$idTeam 
-                AND idMatchRef IS NULL 
-                AND matchDay IS NULL 
-                AND type = 2 
+                a.idTeam=$teamId AND
+                a.date ". ($close=='next' ? '>=' : '<')." CURDATE()
             ORDER BY 
-                CASE WHEN date IS NULL THEN 1 ELSE 0 END, 
-                date ASC, hourStart;
-        ");
-        foreach($teams as $row) { 
-            $allMatches[] = new Match(
-                $row->id, 
-                $row->matchDay, 
-                $row->numMatch,
-                $row->date, 
-                $row->hourRdv, 
-                $row->hourStart, 
-                $row->localTeam, 
-                $row->localTeamScore, 
-                $row->visitingTeam, 
-                $row->visitingTeamScore, 
-                $row->ext, 
-                $row->street, 
-                $row->city, 
-                $row->gym, 
-                $row->type, 
-                TeamDAO::getInstance()->getTeamById($row->idTeam), 
-                $this->getMatchById($row->idMatchRef)
+                a.date ". ($close=='next' ? 'ASC' : 'DESC').", 
+                a.hourStart 
+            ASC LIMIT 1;
+        ");      
+        if (!$myMatch->idMatchRef){
+            return new Match(
+                $myMatch->id, 
+                $myMatch->matchDay, 
+                $myMatch->numMatch,
+                $myMatch->date, 
+                $myMatch->hourRdv, 
+                $myMatch->hourStart, 
+                $myMatch->localTeam, 
+                $myMatch->localTeamScore, 
+                $myMatch->visitingTeam, 
+                $myMatch->visitingTeamScore, 
+                $myMatch->ext, 
+                $myMatch->street, 
+                $myMatch->city, 
+                $myMatch->gym, 
+                $myMatch->type, 
+                null,
+                null
+            );
+        } else {
+            return new Match(
+                $myMatch->idMatchRef, 
+                $myMatch->refMatchDay,
+                $myMatch->refNumMatch,
+                $myMatch->refDate, 
+                $myMatch->refHourRdv, 
+                $myMatch->refHourStart, 
+                $myMatch->refLocalTeam, 
+                $myMatch->refLocalTeamScore, 
+                $myMatch->refVisitingTeam, 
+                $myMatch->refVisitingTeamScore, 
+                $myMatch->refExt, 
+                $myMatch->refStreet, 
+                $myMatch->refCity, 
+                $myMatch->refGym, 
+                $myMatch->refType, 
+                null,
+                null
             );
         }
-        return $allMatches;
+        return;     
     }
-
-    function getMatchByDayNumTeam($matchDay, $numMatch, $team){  
-        return $this->wpdb->get_row("SELECT id FROM {$this->t2} WHERE matchDay=$matchDay AND idTeam={$team->getId()} AND numMatch=$numMatch")->id;        
-    }
-
-    function getNextMatchByTeamId($teamId){  
-        $myMatch = $this->wpdb->get_row("SELECT * FROM {$this->t2} WHERE idTeam=$teamId AND date >= CURDATE() ORDER BY date, hourStart ASC LIMIT 1;");         
-        $mySonMatch = $this->wpdb->get_row("SELECT * FROM {$this->t2} WHERE idTeam=$teamId AND date >= CURDATE() AND idMatchRef={$myMatch->id} ORDER BY date, hourStart ASC LIMIT 1;");   
-        if ($mySonMatch){
-           $myMatch = $mySonMatch;
-        }
-        return new Match(
-                $myMatch->id, 
-                $myMatch->matchDay, 
-                $row->numMatch,
-                $myMatch->date, 
-                $myMatch->hourRdv, 
-                $myMatch->hourStart, 
-                $myMatch->localTeam, 
-                $myMatch->localTeamScore, 
-                $myMatch->visitingTeam, 
-                $myMatch->visitingTeamScore, 
-                $myMatch->ext, 
-                $myMatch->street, 
-                $myMatch->city, 
-                $myMatch->gym, 
-                $myMatch->type, 
-                null,
-                null
-            );      
-    }
-
-    function getLastMatchByTeamId($teamId){  
-        $myMatch = $this->wpdb->get_row("SELECT * FROM {$this->t2} WHERE idTeam=$teamId AND date < CURDATE() ORDER BY date DESC, hourStart DESC LIMIT 1;");         
-        $mySonMatch = $this->wpdb->get_row("SELECT * FROM {$this->t2} WHERE idTeam=$teamId AND date < CURDATE() AND idMatchRef={$myMatch->id} ORDER BY date DESC, hourStart DESC LIMIT 1;");   
-        if ($mySonMatch){
-           $myMatch = $mySonMatch;
-        }
-        return new Match(
-                $myMatch->id, 
-                $myMatch->matchDay, 
-                $row->numMatch,
-                $myMatch->date, 
-                $myMatch->hourRdv, 
-                $myMatch->hourStart, 
-                $myMatch->localTeam, 
-                $myMatch->localTeamScore, 
-                $myMatch->visitingTeam, 
-                $myMatch->visitingTeamScore, 
-                $myMatch->ext, 
-                $myMatch->street, 
-                $myMatch->city, 
-                $myMatch->gym, 
-                $myMatch->type, 
-                null,
-                null
-            );      
-    }
-
+    
     function getMatchesWithDate(){  
         $allMatches = [];
         $matches = $this->wpdb->get_results("
@@ -304,6 +411,11 @@ class MatchDAO extends MasterDAO {
         }
         return $allMatches;
     }
+
+    function getMatchByDayNumTeam($matchDay, $numMatch, $team){  
+        return $this->wpdb->get_row("SELECT id FROM {$this->t2} WHERE matchDay=$matchDay AND idTeam={$team->getId()} AND numMatch=$numMatch")->id;        
+    }
+
     function getInfosByTeamId($idTeam){  
         return $this->wpdb->get_row("SELECT a.id, a.clubId, count(b.id) as number FROM {$this->t3} a LEFT JOIN {$this->t2} b ON a.id=b.idTeam WHERE b.type IN (0,2) AND b.idTeam=$idTeam;");
     }

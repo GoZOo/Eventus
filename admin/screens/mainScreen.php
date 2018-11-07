@@ -45,7 +45,7 @@ class MainScreen extends MasterScreen {
 					<h2><?php echo $club->getName()?></h2>	 
 					<div>       				
 						<?php 
-							$allTeams = TeamDAO::getInstance()->getAllTeamsByClubOrderBySex($club);
+							$allTeams = TeamDAO::getInstance()->getAllTeamsByClubOrderByName($club);
 							if (!$allTeams) {?>
 								<p style="flex: auto;">Aucune équipe n'a été trouvée pour ce club...</p>
 							<?php

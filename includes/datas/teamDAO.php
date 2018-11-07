@@ -13,12 +13,29 @@ class TeamDAO extends MasterDAO {
     protected function __construct() {
         parent::__construct();
     }
+    
     /**************************
     *********** GET ***********
     ***************************/
     function getAllTeams(){  
-        $allTeams = [];
-        $teams = $this->wpdb->get_results("SELECT * FROM {$this->t3} ORDER BY name DESC");
+        $teams = $this->wpdb->get_results("
+            SELECT 
+                a.*, 
+                b.name as 'clubName', 
+                b.string as 'clubString', 
+                b.boy as 'clubBoy', 
+                b.girl as 'clubGirl', 
+                b.mixed as 'clubMixed', 
+                b.adress as 'clubAdress' 
+            FROM 
+                {$this->t3} a 
+            LEFT JOIN 
+                {$this->t1} b 
+            ON 
+                a.clubId = b.id 
+            ORDER BY 
+                a.name DESC 
+        ");
         foreach($teams as $row) { 
             $allTeams[] = new Team(
                 $row->id, 
@@ -31,13 +48,39 @@ class TeamDAO extends MasterDAO {
                 $row->points, 
                 $row->time, 
                 $row->img, 
-                ClubDAO::getInstance()->getClubById($row->clubId));
+                new Club(
+                    $row->clubId,
+                    $row->clubName,
+                    $row->clubString,
+                    $row->clubBoy,
+                    $row->clubGirl,
+                    $row->clubMixed,
+                    $row->clubAdress
+                )
+            );
         }
         return $allTeams;
     }
 
     function getTeamById($myTeamId){    
-        $row = $this->wpdb->get_row("SELECT * FROM {$this->t3} WHERE id=$myTeamId");
+        $row = $this->wpdb->get_row("
+            SELECT 
+                a.*, 
+                b.name as 'clubName', 
+                b.string as 'clubString', 
+                b.boy as 'clubBoy', 
+                b.girl as 'clubGirl', 
+                b.mixed as 'clubMixed', 
+                b.adress as 'clubAdress' 
+            FROM 
+                {$this->t3} a 
+            LEFT JOIN 
+                {$this->t1} b 
+            ON 
+                a.clubId = b.id 
+            WHERE 
+                a.id=$myTeamId
+        ");
         return new Team(
                 $row->id, 
                 $row->name, 
@@ -49,10 +92,19 @@ class TeamDAO extends MasterDAO {
                 $row->points, 
                 $row->time, 
                 $row->img, 
-                ClubDAO::getInstance()->getClubById($row->clubId)
+                new Club(
+                    $row->clubId,
+                    $row->clubName,
+                    $row->clubString,
+                    $row->clubBoy,
+                    $row->clubGirl,
+                    $row->clubMixed,
+                    $row->clubAdress
+                )
             );
     }
 
+    //A opti ?
     function getAllTeamsByClubAndSex($club, $sex){  
         $boy = $girl = $mixed = 0;
         if ($sex == "boy"){ 
@@ -62,19 +114,98 @@ class TeamDAO extends MasterDAO {
         } else if ($sex == "mixed"){
             $mixed = 1;
         } 
-        $allTeams = [];
-        $teams = $this->wpdb->get_results("SELECT * FROM {$this->t3} WHERE clubId={$club->getId()} AND boy=$boy AND girl=$girl AND mixed=$mixed");
+        $teams = $this->wpdb->get_results("
+            SELECT 
+                a.*, 
+                b.name as 'clubName', 
+                b.string as 'clubString', 
+                b.boy as 'clubBoy', 
+                b.girl as 'clubGirl', 
+                b.mixed as 'clubMixed', 
+                b.adress as 'clubAdress' 
+            FROM 
+                {$this->t3} a 
+            LEFT JOIN 
+                {$this->t1} b 
+            ON 
+                a.clubId = b.id 
+            WHERE 
+                a.clubId={$club->getId()} AND 
+                a.boy=$boy AND 
+                a.girl=$girl AND 
+                a.mixed=$mixed
+            ORDER BY 
+                a.name DESC 
+        ");
         foreach($teams as $row) { 
-            $allTeams[] = new Team($row->id, $row->name, $row->url, $row->boy, $row->girl, $row->mixed, $row->position, $row->points, $row->time, $row->img, ClubDAO::getInstance()->getClubById($row->clubId));
+            $allTeams[] = new Team(
+                $row->id, 
+                $row->name, 
+                $row->url, 
+                $row->boy, 
+                $row->girl, 
+                $row->mixed, 
+                $row->position, 
+                $row->points, 
+                $row->time, 
+                $row->img, 
+                new Club(
+                    $row->clubId,
+                    $row->clubName,
+                    $row->clubString,
+                    $row->clubBoy,
+                    $row->clubGirl,
+                    $row->clubMixed,
+                    $row->clubAdress
+                )
+            );
         }
         return $allTeams;
     }
 
-    function getAllTeamsByClubOrderBySex($club){  
-        $allTeams = [];
-        $teams = $this->wpdb->get_results("SELECT * FROM {$this->t3} WHERE clubId={$club->getId()} ORDER BY name DESC");
+    function getAllTeamsByClubOrderByName($club){ 
+        $teams = $this->wpdb->get_results("
+            SELECT 
+                a.*, 
+                b.name as 'clubName', 
+                b.string as 'clubString', 
+                b.boy as 'clubBoy', 
+                b.girl as 'clubGirl', 
+                b.mixed as 'clubMixed', 
+                b.adress as 'clubAdress' 
+            FROM 
+                {$this->t3} a 
+            LEFT JOIN 
+                {$this->t1} b 
+            ON 
+                a.clubId = b.id 
+            WHERE 
+                a.clubId={$club->getId()}
+            ORDER BY 
+                a.name DESC 
+        "); 
         foreach($teams as $row) { 
-            $allTeams[] = new Team($row->id, $row->name, $row->url, $row->boy, $row->girl, $row->mixed, $row->position, $row->points, $row->time, $row->img, ClubDAO::getInstance()->getClubById($row->clubId));
+            $allTeams[] = new Team(
+                $row->id, 
+                $row->name, 
+                $row->url, 
+                $row->boy, 
+                $row->girl, 
+                $row->mixed, 
+                $row->position, 
+                $row->points, 
+                $row->time, 
+                $row->img, 
+                new Club(
+                    $row->clubId,
+                    $row->clubName,
+                    $row->clubString,
+                    $row->clubBoy,
+                    $row->clubGirl,
+                    $row->clubMixed,
+                    $row->clubAdress
+                )
+            );
         }
         return $allTeams;
     }

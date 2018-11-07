@@ -54,27 +54,29 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 	                foreach ($sexes as $key => $sex) {
 	                    if (($sex == 'boy' && $club->getBoy()) || ($sex == 'girl' && $club->getGirl()) || ($sex == 'mixed' && $club->getMixed())) {
 	                        $allTeams = TeamDAO::getInstance()->getAllTeamsByClubAndSex($club, $sex);
-	                        $output  .= "<p class='sexe'>".$sexesDisplay[$key]." :</p>";
-	                        foreach ($allTeams as $team) {  
-	                            //$myMatch = MatchDAO::getInstance()->getNextMatchByTeamId($team->getId()); //wrong method : temporary when no matches
-	                            $myMatch = MatchDAO::getInstance()->getLastMatchByTeamId($team->getId());
-	                            if ($myMatch->getId()) {
-	                                $output  .= "<div class='resultat'>
-	                                    <div class='ligneEqDate'>
-	                                        <a href='".$team->getUrl()."' target='_blank'>".$team->getName()."</a>
-	                                        <p>".date_create_from_format('Y-m-d',$myMatch->getDate())->format('d/m')."</p>
-	                                    </div>
-	                                    <div class='equipe1'>
-	                                        <p>".$myMatch->getLocalTeamScore()."</p>
-	                                        <p style=''>".$myMatch->getLocalTeam()."</p>
-	                                    </div>
-	                                    <div class='equipe2'>
-	                                        <p>".$myMatch->getVisitingTeamScore()."</p>
-	                                        <p>".$myMatch->getVisitingTeam()."</p>
-	                                    </div>
-	                                </div>";
-	                            }                            
-	                        }  
+							$output  .= "<p class='sexe'>".$sexesDisplay[$key]." :</p>";
+							if ($allTeams) {
+								foreach ($allTeams as $team) {  
+									//$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "next"); //wrong method : temporary when no matches
+									$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last");
+									if ($myMatch->getId()) {
+										$output  .= "<div class='resultat'>
+											<div class='ligneEqDate'>
+												<a href='".$team->getUrl()."' target='_blank'>".$team->getName()."</a>
+												<p>".date_create_from_format('Y-m-d',$myMatch->getDate())->format('d/m')."</p>
+											</div>
+											<div class='equipe1'>
+												<p>".$myMatch->getLocalTeamScore()."</p>
+												<p style=''>".$myMatch->getLocalTeam()."</p>
+											</div>
+											<div class='equipe2'>
+												<p>".$myMatch->getVisitingTeamScore()."</p>
+												<p>".$myMatch->getVisitingTeam()."</p>
+											</div>
+										</div>";
+									}                            
+								} 
+							}	                         
 	                    }
 	                                 
 	                    

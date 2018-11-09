@@ -22,17 +22,17 @@
     function synchronizeMatch(){  
         if (get_option("eventus_mapapikey")) {
             if ($_POST['teamId']) {
-                updateMatch();
-                Finder::getInstance()->updateMatchesSync(TeamDAO::getInstance()->getTeamById($_POST['teamId']));
+                setUpdateMatch();
+                Finder::getInstance()->updateMatches(TeamDAO::getInstance()->getTeamById($_POST['teamId']));
             } else {
                 foreach (TeamDAO::getInstance()->getAllTeams() as $team) {
-                    Finder::getInstance()->updateMatchesSync($team);
+                    Finder::getInstance()->updateMatches($team);
                 }
             }
             if (!filesize(plugin_dir_path( __FILE__ ).'../../finder.log')) {
-                //wp_redirect( add_query_arg( 'message', 'succesSyncMatch',  wp_get_referer() ));
+                wp_redirect( add_query_arg( 'message', 'succesSyncMatch',  wp_get_referer() ));
             } else {
-                //wp_redirect( add_query_arg( 'message', 'warningSyncMatch',  wp_get_referer() ));
+                wp_redirect( add_query_arg( 'message', 'warningSyncMatch',  wp_get_referer() ));
             }    
         } else {
             wp_redirect( add_query_arg( 'message', 'noMapApiKey',  wp_get_referer() ));
@@ -49,10 +49,28 @@
     }
 
     function updateMatch(){
+    	setUpdateMatch();
+		wp_redirect( add_query_arg( 'message', 'succesUpMatch',  wp_get_referer() ));
+    }
+    
+    function updateHoursMatch(){
+        if (get_option("eventus_mapapikey")) {
+            setUpdateMatch();
+            MatchDAO::getInstance()->updateMatchesHours(Finder::setNewHoursRdv(MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId'])));
+            if (!filesize(plugin_dir_path( __FILE__ ).'../../finder.log')) {
+                wp_redirect( add_query_arg( 'message', 'succesUpHoursMatch',  wp_get_referer() ));
+            } else {
+                wp_redirect( add_query_arg( 'message', 'warningUpHoursMatch',  wp_get_referer() ));
+            }    
+        } else {
+            wp_redirect( add_query_arg( 'message', 'noMapApiKey',  wp_get_referer() ));
+        }  
+    }
+
+    function setUpdateMatch(){
     	$myTeam = TeamDAO::getInstance()->getTeamById($_POST['teamId']);
-        $nbrSonMatch = $_POST['nbrSonMatch'];   
        	$allMatches = [];
-        for($i=1; $i < $nbrSonMatch+1; $i++) { 
+        for($i=1; $i < $_POST['nbrSonMatch']+1; $i++) { 
             $allMatches[] = new Match(
             	$_POST['idSon'.$i] ? $_POST['idSon'.$i] : null, 
             	$_POST['matchDaySon'.$i] ? $_POST['matchDaySon'.$i] : null,
@@ -69,15 +87,14 @@
             	$_POST['citySon'.$i] ? $_POST['citySon'.$i] : null, 
             	$_POST['gymSon'.$i] ? $_POST['gymSon'.$i] : null,
             	1, 
-            	$myTeam,
+            	$_POST['teamId'],
             	$_POST['idMatchRefSon'.$i] ? $_POST['idMatchRefSon'.$i] : null
             );
         }	
         MatchDAO::getInstance()->updateMatchesScreen($allMatches, 1, TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  
 
-        $nbrOtherMatch = $_POST['nbrOtherMatch'];
        	$allMatches = [];
-        for($i=1; $i < $nbrOtherMatch+1; $i++) { 
+        for($i=1; $i < $_POST['nbrOtherMatch']+1; $i++) { 
             $allMatches[] = new Match(
             	$_POST['idOther'.$i] ? $_POST['idOther'.$i] : null, 
             	null,
@@ -94,26 +111,11 @@
             	$_POST['cityOther'.$i] ? $_POST['cityOther'.$i] : null, 
             	$_POST['gymOther'.$i] ? $_POST['gymOther'.$i] : null,
             	2, 
-            	$myTeam,
+            	$_POST['teamId'],
             	null
             );
-        }	
-        MatchDAO::getInstance()->updateMatchesScreen($allMatches, 2, TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  
-		wp_redirect( add_query_arg( 'message', 'succesUpMatch',  wp_get_referer() ));
-    }
-    
-    function updateHoursMatch(){
-        if (get_option("eventus_mapapikey")) {
-            updateMatch();
-            MatchDAO::getInstance()->updateMatchesHours(Finder::setNewHoursRdv(MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId'])));
-            if (!filesize(plugin_dir_path( __FILE__ ).'../../finder.log')) {
-                wp_redirect( add_query_arg( 'message', 'succesUpHoursMatch',  wp_get_referer() ));
-            } else {
-                wp_redirect( add_query_arg( 'message', 'warningUpHoursMatch',  wp_get_referer() ));
-            }    
-        } else {
-            wp_redirect( add_query_arg( 'message', 'noMapApiKey',  wp_get_referer() ));
-        }  
+        }
+        MatchDAO::getInstance()->updateMatchesScreen($allMatches, 2, TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  	
     }
     
     /**************************

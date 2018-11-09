@@ -16,33 +16,6 @@ class MatchDAO extends MasterDAO {
     /**************************
     *********** GET ***********
     ***************************/
-    //To be deleted
-    function getMatchById($idMatch){
-        if ($idMatch) {
-            $match = $this->wpdb->get_row("SELECT * FROM {$this->t2} WHERE id=$idMatch");            
-            return new Match(
-                    $match->id, 
-                    $match->matchDay,
-                    $row->numMatch, 
-                    $match->date, 
-                    $match->hourRdv, 
-                    $match->hourStart, 
-                    $match->localTeam, 
-                    $match->localTeamScore, 
-                    $match->visitingTeam, 
-                    $match->visitingTeamScore, 
-                    $match->ext, 
-                    $match->street, 
-                    $match->city, 
-                    $match->gym, 
-                    $row->type, 
-                    TeamDAO::getInstance()->getTeamById($match->idTeam), 
-                    $this->getMatchById($match->idMatchRef)
-                );
-        } 
-        return;
-    }
-
     function getAllMatchesByTeamId($idTeam){  
         $allMatches = [];
         $teams = $this->wpdb->get_results("
@@ -189,6 +162,7 @@ class MatchDAO extends MasterDAO {
                 a.match_date ASC, 
                 a.match_hourStart;
         ");
+        $allMatches = [];
         foreach($teams as $row) { 
             $allMatches[] = new Match(
                 $row->match_id, 
@@ -345,6 +319,7 @@ class MatchDAO extends MasterDAO {
         return;     
     }
     
+    //TODO les where/orderby sont basé uniquement sur les matchs parents...
     function getMatchesWithDate(){  
         $allMatches = [];
         $matches = $this->wpdb->get_results("
@@ -466,7 +441,9 @@ class MatchDAO extends MasterDAO {
     ********** UPDATE **********
     ****************************/
     function updateMatchesSync($allMatches){
+        $matchesToInsert = [];
         foreach($allMatches as $match) {
+            var_dump($match);
             $myId = $this->wpdb->get_row("
                 SELECT match_id 
                 FROM {$this->t2} 
@@ -474,8 +451,8 @@ class MatchDAO extends MasterDAO {
                     match_matchDay={$match->getMatchDay()} AND 
                     match_idTeam={$match->getTeam()->getId()} AND 
                     match_numMatch={$match->getNumMatch()}"
-            )->id;
-            echo $myId;
+            )->match_id;
+            var_dump($myId);
             if($myId){
                 $data = array(
                     'match_matchDay' => $match->getMatchDay(), 
@@ -495,12 +472,12 @@ class MatchDAO extends MasterDAO {
                     'match_idTeam' => $match->getTeam()->getId(),
                     'match_idMatchRef' => ($match->getMatchRef() ? $match->getMatchRef() : null)
                 );
-                $where = array('match_id' => $myId);
                 $this->wpdb->update("{$this->t2}", $data, $where);
             } else {
                 $matchesToInsert[] = $match;
             }
         }
+        //var_dump($matchesToInsert);
         $this->insertMatches($matchesToInsert);
     }
 
@@ -511,7 +488,7 @@ class MatchDAO extends MasterDAO {
             }            
         }
         //echo $matchesIdToDelete;
-        $this->deleteOtherMatchesNotIn(substr($matchesIdToDelete,0 , -2), $type, $teamId);
+        $this->deleteMatchesNotIn(substr($matchesIdToDelete,0 , -2), $type, $teamId);
 
         $matchesToInsert = [];
         foreach($allMatches as $match) {
@@ -533,7 +510,7 @@ class MatchDAO extends MasterDAO {
                     'match_city' => $match->getCity(),
                     'match_gym' => $match->getGym(),
                     'match_type' => $match->getType(), 
-                    'match_idTeam' => $match->getTeam()->getId(),
+                    'match_idTeam' => $match->getTeam(),
                     'match_idMatchRef' => ($match->getMatchRef() ? $match->getMatchRef() : null)
                 );
                 $where = array('match_id' => $match->getId());
@@ -580,7 +557,7 @@ class MatchDAO extends MasterDAO {
                     'match_city' => $match->getCity(),
                     'match_gym' => $match->getGym(),
                     'match_type' => $match->getType(), 
-                    'match_idTeam' => $match->getTeam()->getId(),
+                    'match_idTeam' => (is_object($match->getTeam()) ? $match->getTeam()->getId() : $match->getTeam()),
                     'match_idMatchRef' => ($match->getMatchRef() ? $match->getMatchRef() : null)
                 );
                 //var_dump($data);
@@ -592,8 +569,8 @@ class MatchDAO extends MasterDAO {
     /***************************
     ********** DELETE **********
     ****************************/
-    function deleteOtherMatchesNotIn($myMatchesId, $type, $teamId){  
-        echo "DELETE FROM {$this->t2} WHERE match_id NOT IN ($myMatchesId) AND match_type=$type AND match_idTeam=$teamId";
+    function deleteMatchesNotIn($myMatchesId, $type, $teamId){  
+        //echo "DELETE FROM {$this->t2} WHERE match_id NOT IN ($myMatchesId) AND match_type=$type AND match_idTeam=$teamId";
         if ($myMatchesId){
             $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE match_id NOT IN ($myMatchesId) AND match_type=$type AND match_idTeam=$teamId", null));
         } else {

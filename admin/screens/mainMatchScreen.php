@@ -135,59 +135,57 @@ class MainMatchScreen extends MasterScreen {
 							</tr>   	
 						<?php
 						$nbrSonMatch = 0;
-						if($myMatchSon)	{
-							foreach ($myMatchSon as $key => $match) {
-								$nbrSonMatch++;
-								?>
-								<tr class="<?php echo ($match->getMatchRef() ? $match->getMatchRef()->getId() : '') ?>">
-									<th>
-										<?php echo ($match->getMatchRef()->getId() ? $match->getMatchRef()->getId() : '') ?>
-									</th>		 		
-									<th>
-										<?php echo $match->getMatchDay() ?>
-									</th>
-									<td>
-										<input type='date' value="<?php echo $match->getDate() ?>" class='regular-text' data-name="dateSon">
-									</td>
-									<td>
-										<input type='time' value="<?php echo $match->getHourRdv() ?>" class='regular-text' data-name="hourRdvSon">
-									</td>						    
-									<td>
-										<input type='time' value="<?php echo $match->getHourStart() ?>" class='regular-text' data-name="hourStartSon">
-									</td>
-									<td>
-										<input type='text' value="<?php echo $match->getLocalTeam() ?>" class='regular-text' data-name="localTeamSon">
-									</td>
-									<td>
-										<input type='number' value="<?php echo $match->getLocalTeamScore() ?>" class='regular-text' data-name="localTeamScoreSon">
-									</td>
-									<td>
-										<input type='text' value="<?php echo $match->getVisitingTeam() ?>" class='regular-text' data-name="visitingTeamSon">
-									</td>
-									<td>
-										<input type='number' value="<?php echo $match->getVisitingTeamScore() ?>" class='regular-text' data-name="visitingTeamScoreSon">
-									</td>
-									<td>
-										<input type='text' value="<?php echo $match->getStreet() ?>" class='regular-text' data-name="streetSon">
-									</td>
-									<td>
-										<input type='text' value="<?php echo $match->getCity() ?>" class='regular-text' data-name="citySon">
-									</td>
-									<td>
-										<input type='text' value="<?php echo $match->getGym() ?>" class='regular-text' data-name="gymSon">
-									</td>
-									<td>
-										<button type='button' onclick='deleMatch(<?php echo $match->getMatchRef()->getId() ?>, "sonMatches")' class='button-primary' title="Supprimer le match">
-											<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../svg/del.svg'); ?>
-										</button>
-									</td>
-									<input type='hidden' value="<?php echo $match->getMatchDay() ?>" data-name="matchDaySon">
-									<input type='hidden' value="<?php echo $match->getNumMatch() ?>" data-name="numMatchSon">
-									<input type='hidden' value="<?php echo $match->getMatchRef()->getId() ?>" data-name="idMatchRefSon">
-									<input type='hidden' name='idSon<?php echo $nbrOtherMatch ?>' value="<?php echo $match->getId() ?>" data-name="idSon">
-								</tr>
-							<?php
-							}
+						foreach ($myMatchSon as $key => $match) {
+							$nbrSonMatch++;
+							?>
+							<tr class="<?php echo ($match->getMatchRef() ? $match->getMatchRef()->getId() : '') ?>">
+								<th>
+									<?php echo ($match->getMatchRef()->getId() ? $match->getMatchRef()->getId() : '') ?>
+								</th>		 		
+								<th>
+									<?php echo $match->getMatchDay() ?>
+								</th>
+								<td>
+									<input type='date' value="<?php echo $match->getDate() ?>" class='regular-text' data-name="dateSon">
+								</td>
+								<td>
+									<input type='time' value="<?php echo $match->getHourRdv() ?>" class='regular-text' data-name="hourRdvSon">
+								</td>						    
+								<td>
+									<input type='time' value="<?php echo $match->getHourStart() ?>" class='regular-text' data-name="hourStartSon">
+								</td>
+								<td>
+									<input type='text' value="<?php echo $match->getLocalTeam() ?>" class='regular-text' data-name="localTeamSon">
+								</td>
+								<td>
+									<input type='number' value="<?php echo $match->getLocalTeamScore() ?>" class='regular-text' data-name="localTeamScoreSon">
+								</td>
+								<td>
+									<input type='text' value="<?php echo $match->getVisitingTeam() ?>" class='regular-text' data-name="visitingTeamSon">
+								</td>
+								<td>
+									<input type='number' value="<?php echo $match->getVisitingTeamScore() ?>" class='regular-text' data-name="visitingTeamScoreSon">
+								</td>
+								<td>
+									<input type='text' value="<?php echo $match->getStreet() ?>" class='regular-text' data-name="streetSon">
+								</td>
+								<td>
+									<input type='text' value="<?php echo $match->getCity() ?>" class='regular-text' data-name="citySon">
+								</td>
+								<td>
+									<input type='text' value="<?php echo $match->getGym() ?>" class='regular-text' data-name="gymSon">
+								</td>
+								<td>
+									<button type='button' onclick='deleMatch(<?php echo $match->getMatchRef()->getId() ?>, "sonMatches")' class='button-primary' title="Supprimer le match">
+										<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../svg/del.svg'); ?>
+									</button>
+								</td>
+								<input type='hidden' value="<?php echo $match->getMatchDay() ?>" data-name="matchDaySon">
+								<input type='hidden' value="<?php echo $match->getNumMatch() ?>" data-name="numMatchSon">
+								<input type='hidden' value="<?php echo $match->getMatchRef()->getId() ?>" data-name="idMatchRefSon">
+								<input type='hidden' name='idSon<?php echo $nbrOtherMatch ?>' value="<?php echo $match->getId() ?>" data-name="idSon">
+							</tr>
+						<?php
 						}
 						?>	            	
 						</table>

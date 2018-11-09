@@ -191,12 +191,12 @@ class TeamDAO extends MasterDAO {
             SELECT 
                 a.team_id,
                 a.team_clubId,
-                count(b.id) as clubsNbr 
+                count(b.match_id) as matchsNbr 
             FROM {$this->t3} a 
-            LEFT JOIN {$this->t2} b ON a.team_id = b.idTeam 
+            LEFT JOIN {$this->t2} b ON a.team_id = b.match_idTeam 
             WHERE 
-                b.type IN (0,2) AND 
-                b.idTeam=$idTeam;
+                b.match_type IN (0,2) AND 
+                b.match_idTeam=$idTeam;
         ");
     }
 

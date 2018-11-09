@@ -78,7 +78,7 @@ class MainScreen extends MasterScreen {
 										 / Club ID : 
 										<b><?php echo $infos->team_clubId; ?></b>
 										 / Matchs : 
-										<b><?php echo $infos->clubsNbr ?></b>
+										<b><?php echo $infos->matchsNbr ?></b>
 									</div>
 								</div>
 								<?php

@@ -26,13 +26,13 @@ class ClubDAO extends MasterDAO {
         );
         foreach($clubs as $row) { 
             $allClubs[] = new Club(
-                $row->id, 
-                $row->name, 
-                $row->string, 
-                $row->boy, 
-                $row->girl, 
-                $row->mixed, 
-                $row->adress
+                $row->club_id, 
+                $row->club_name, 
+                $row->club_string, 
+                $row->club_boy, 
+                $row->club_girl, 
+                $row->club_mixed, 
+                $row->club_address
             );
         }
         return $allClubs;
@@ -46,29 +46,29 @@ class ClubDAO extends MasterDAO {
             WHERE 
                 id=$myClubId");
         return new Club(
-            $row->id, 
-            $row->name, 
-            $row->string, 
-            $row->boy, 
-            $row->girl, 
-            $row->mixed, 
-            $row->adress
+            $row->club_id, 
+            $row->club_name, 
+            $row->club_string, 
+            $row->club_boy, 
+            $row->club_girl, 
+            $row->club_mixed, 
+            $row->club_address
         );
     }
 
     function getInfosByClubId($idClub){  
         return $this->wpdb->get_row("
             SELECT 
-                a.id, 
-                count(b.id) as teams 
+                a.club_id, 
+                count(b.team_id) as teamsNbr 
             FROM 
                 {$this->t1} a 
             LEFT JOIN 
                 {$this->t3} b 
             ON 
-                a.id=b.clubId 
+                a.club_id = b.team_clubId 
             WHERE 
-                b.clubId=$idClub;");
+                b.team_clubId=$idClub;");
     }
     /***************************
     ********** UPDATE **********
@@ -76,14 +76,14 @@ class ClubDAO extends MasterDAO {
     function updateClub($club){    
         if ($club->getId()){
             $data = array(
-                'name' => $club->getName(), 
-                'string' => $club->getString(), 
-                'boy' => $club->getBoy(), 
-                'girl' => $club->getGirl(), 
-                'mixed' => $club->getMixed(), 
-                'adress' => $club->getAdress()
+                'club_name' => $club->getName(), 
+                'club_string' => $club->getString(), 
+                'club_boy' => $club->getBoy(), 
+                'club_girl' => $club->getGirl(), 
+                'club_mixed' => $club->getMixed(), 
+                'club_address' => $club->getAddress()
             );
-            $where = array('id' => $club->getId());
+            $where = array('club_id' => $club->getId());
             $this->wpdb->update("{$this->t1}", $data, $where);
         }
     }
@@ -94,12 +94,12 @@ class ClubDAO extends MasterDAO {
     function insertClub($club){
         if (!$club->getId()){            
             $data = array(
-                'name' => $club->getName(), 
-                'string' => $club->getString(), 
-                'boy' => $club->getBoy(), 
-                'girl' => $club->getGirl(), 
-                'mixed' => $club->getMixed(), 
-                'adress' => $club->getAdress()
+                'club_name' => $club->getName(), 
+                'club_string' => $club->getString(), 
+                'club_boy' => $club->getBoy(), 
+                'club_girl' => $club->getGirl(), 
+                'club_mixed' => $club->getMixed(), 
+                'club_address' => $club->getAddress()
             );
             $this->wpdb->insert("{$this->t1}", $data);
         }
@@ -115,7 +115,7 @@ class ClubDAO extends MasterDAO {
                 DELETE FROM 
                     {$this->t1} 
                 WHERE  
-                    id=$clubId", 
+                    club_id=$clubId", 
                 null)
             );
         } else {

@@ -6,16 +6,16 @@ class Club {
    private $boy;
    private $girl;
    private $mixed;
-   private $adress;
+   private $address;
 
-   public function __construct($id=null, $name, $string, $boy, $girl, $mixed, $adress) {
+   public function __construct($id=null, $name, $string, $boy, $girl, $mixed, $address) {
        $this->id = $id;
        $this->name = $name;
        $this->string = $string;
        $this->boy = $boy;
        $this->girl = $girl;
        $this->mixed = $mixed;
-       $this->adress = $adress;
+       $this->address = $address;
    }
 
     public function getId() {
@@ -72,12 +72,12 @@ class Club {
         return $this;
     }
 
-    public function getAdress() {
-        return $this->adress;
+    public function getaddress() {
+        return $this->address;
     }
 
-    public function setAdress($adress) {
-        $this->adress = $adress;
+    public function setaddress($address) {
+        $this->address = $address;
         return $this;
     }
 }

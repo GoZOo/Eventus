@@ -36,7 +36,7 @@ class MainTeamScreen extends MasterScreen {
             </h1> 
             <?php       
                 if ($team->getId()) { ?>
-                    <a href="<?php "admin.php?page=eventus&action=matchs&teamId=".$team->getId(); ?>"  class="page-title-action">Matchs</a> 
+                    <a href="<?php echo "admin.php?page=eventus&action=matchs&teamId=".$team->getId(); ?>"  class="page-title-action">Matchs</a> 
                 <?php
                 }
                 echo $this->showNotice(); 

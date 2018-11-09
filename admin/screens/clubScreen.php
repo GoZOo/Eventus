@@ -49,9 +49,9 @@ class ClubScreen extends MasterScreen {
 								<div class="card-footer text-muted">
 									<?php $infos = ClubDAO::getInstance()->getInfosByClubId($club->getId()); ?>
 									ID : 
-									<b><?php echo $infos->id; ?></b>	 
+									<b><?php echo $infos->club_id; ?></b>	 
 									/ Équipes : 
-									<b><?php echo $infos->teams; ?></b>
+									<b><?php echo $infos->teamsNbr; ?></b>
 								</div>
 							</div>
 							<?php

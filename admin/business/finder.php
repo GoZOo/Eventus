@@ -80,7 +80,7 @@ class Finder {
                     $html->clear();
                     curl_close($ch);  
                     $allMatches = $this->setNewHoursRdv($allMatches);
-                    MatchDAO::getInstance()->updateMatches($allMatches);
+                    MatchDAO::getInstance()->updateMatchesSync($allMatches);
                 }            
             }  
         }        
@@ -95,7 +95,7 @@ class Finder {
             }
         }
         if ($allAdresses){
-            $requestGoogleMap = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?key=".get_option("eventus_mapapikey")."&origins=".str_replace(" ","%20",$allMatches[0]->getTeam()->getClub()->getAdress())."&destinations=".$allAdresses),true);
+            $requestGoogleMap = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?key=".get_option("eventus_mapapikey")."&origins=".str_replace(" ","%20",$allMatches[0]->getTeam()->getClub()->getAddress())."&destinations=".$allAdresses),true);
             //var_dump($requestGoogleMap);
 
             $key = 0;

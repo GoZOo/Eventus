@@ -72,13 +72,13 @@ class MainScreen extends MasterScreen {
 										</button>
 									</div>
 									<div class="card-footer text-muted">
-										<?php $infos = MatchDAO::getInstance()->getInfosByTeamId($team->getId());?>
+										<?php $infos = TeamDAO::getInstance()->getInfosByTeamId($team->getId());?>
 										ID : 
-										<b><?php echo $infos->id; ?></b>										
+										<b><?php echo $infos->team_id; ?></b>										
 										 / Club ID : 
-										<b><?php echo $infos->clubId; ?></b>
+										<b><?php echo $infos->team_clubId; ?></b>
 										 / Matchs : 
-										<b><?php echo $infos->number ?></b>
+										<b><?php echo $infos->clubsNbr ?></b>
 									</div>
 								</div>
 								<?php

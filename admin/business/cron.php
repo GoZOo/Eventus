@@ -1,4 +1,5 @@
 <?php 
+//TODO FIX ME
 include_once plugin_dir_path( __FILE__ ).'includes/constants.php';
 include_once plugin_dir_path( __FILE__ ).'includes/masterTrait.php';
 include_once plugin_dir_path( __FILE__ ).'includes/entities/club.php';
@@ -22,6 +23,6 @@ include_once plugin_dir_path( __FILE__ ).'admin/business/postHandler.php';
 include_once plugin_dir_path( __FILE__ ).'admin/librairies/simple_html_dom.php';
 
 foreach (TeamDAO::getInstance()->getAllTeams() as $team) {
-    Finder::getInstance()->updateMatches($team);
+    Finder::getInstance()->updateMatchesSync($team);
 }
 ?>

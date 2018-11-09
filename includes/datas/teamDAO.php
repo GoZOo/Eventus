@@ -20,42 +20,36 @@ class TeamDAO extends MasterDAO {
     function getAllTeams(){  
         $teams = $this->wpdb->get_results("
             SELECT 
-                a.*, 
-                b.name as 'clubName', 
-                b.string as 'clubString', 
-                b.boy as 'clubBoy', 
-                b.girl as 'clubGirl', 
-                b.mixed as 'clubMixed', 
-                b.adress as 'clubAdress' 
+                *
             FROM 
                 {$this->t3} a 
             LEFT JOIN 
                 {$this->t1} b 
             ON 
-                a.clubId = b.id 
+                a.team_clubId = b.club_id 
             ORDER BY 
-                a.name DESC 
+                a.team_name DESC 
         ");
         foreach($teams as $row) { 
             $allTeams[] = new Team(
-                $row->id, 
-                $row->name, 
-                $row->url, 
-                $row->boy, 
-                $row->girl, 
-                $row->mixed, 
-                $row->position, 
-                $row->points, 
-                $row->time, 
-                $row->img, 
+                $row->team_id, 
+                $row->team_name, 
+                $row->team_url, 
+                $row->team_boy, 
+                $row->team_girl, 
+                $row->team_mixed, 
+                $row->team_position, 
+                $row->team_points, 
+                $row->team_time, 
+                $row->team_img, 
                 new Club(
-                    $row->clubId,
-                    $row->clubName,
-                    $row->clubString,
-                    $row->clubBoy,
-                    $row->clubGirl,
-                    $row->clubMixed,
-                    $row->clubAdress
+                    $row->club_id, 
+                    $row->club_name, 
+                    $row->club_string, 
+                    $row->club_boy, 
+                    $row->club_girl, 
+                    $row->club_mixed, 
+                    $row->club_address
                 )
             );
         }
@@ -65,41 +59,35 @@ class TeamDAO extends MasterDAO {
     function getTeamById($myTeamId){    
         $row = $this->wpdb->get_row("
             SELECT 
-                a.*, 
-                b.name as 'clubName', 
-                b.string as 'clubString', 
-                b.boy as 'clubBoy', 
-                b.girl as 'clubGirl', 
-                b.mixed as 'clubMixed', 
-                b.adress as 'clubAdress' 
+                *
             FROM 
                 {$this->t3} a 
             LEFT JOIN 
                 {$this->t1} b 
             ON 
-                a.clubId = b.id 
+                a.team_clubId = b.club_id 
             WHERE 
-                a.id=$myTeamId
+                a.team_id=$myTeamId
         ");
         return new Team(
-                $row->id, 
-                $row->name, 
-                $row->url, 
-                $row->boy, 
-                $row->girl, 
-                $row->mixed, 
-                $row->position, 
-                $row->points, 
-                $row->time, 
-                $row->img, 
+                $row->team_id, 
+                $row->team_name, 
+                $row->team_url, 
+                $row->team_boy, 
+                $row->team_girl, 
+                $row->team_mixed, 
+                $row->team_position, 
+                $row->team_points, 
+                $row->team_time, 
+                $row->team_img, 
                 new Club(
-                    $row->clubId,
-                    $row->clubName,
-                    $row->clubString,
-                    $row->clubBoy,
-                    $row->clubGirl,
-                    $row->clubMixed,
-                    $row->clubAdress
+                    $row->club_id, 
+                    $row->club_name, 
+                    $row->club_string, 
+                    $row->club_boy, 
+                    $row->club_girl, 
+                    $row->club_mixed, 
+                    $row->club_address
                 )
             );
     }
@@ -116,47 +104,41 @@ class TeamDAO extends MasterDAO {
         } 
         $teams = $this->wpdb->get_results("
             SELECT 
-                a.*, 
-                b.name as 'clubName', 
-                b.string as 'clubString', 
-                b.boy as 'clubBoy', 
-                b.girl as 'clubGirl', 
-                b.mixed as 'clubMixed', 
-                b.adress as 'clubAdress' 
+                *
             FROM 
                 {$this->t3} a 
             LEFT JOIN 
                 {$this->t1} b 
             ON 
-                a.clubId = b.id 
+                a.team_clubId = b.club_id 
             WHERE 
-                a.clubId={$club->getId()} AND 
-                a.boy=$boy AND 
-                a.girl=$girl AND 
-                a.mixed=$mixed
+                a.team_clubId={$club->getId()} AND 
+                a.team_boy=$boy AND 
+                a.team_girl=$girl AND 
+                a.team_mixed=$mixed
             ORDER BY 
-                a.name DESC 
+                a.team_name DESC 
         ");
         foreach($teams as $row) { 
             $allTeams[] = new Team(
-                $row->id, 
-                $row->name, 
-                $row->url, 
-                $row->boy, 
-                $row->girl, 
-                $row->mixed, 
-                $row->position, 
-                $row->points, 
-                $row->time, 
-                $row->img, 
+                $row->team_id, 
+                $row->team_name, 
+                $row->team_url, 
+                $row->team_boy, 
+                $row->team_girl, 
+                $row->team_mixed, 
+                $row->team_position, 
+                $row->team_points, 
+                $row->team_time, 
+                $row->team_img, 
                 new Club(
-                    $row->clubId,
-                    $row->clubName,
-                    $row->clubString,
-                    $row->clubBoy,
-                    $row->clubGirl,
-                    $row->clubMixed,
-                    $row->clubAdress
+                    $row->club_id, 
+                    $row->club_name, 
+                    $row->club_string, 
+                    $row->club_boy, 
+                    $row->club_girl, 
+                    $row->club_mixed, 
+                    $row->club_address
                 )
             );
         }
@@ -166,48 +148,56 @@ class TeamDAO extends MasterDAO {
     function getAllTeamsByClubOrderByName($club){ 
         $teams = $this->wpdb->get_results("
             SELECT 
-                a.*, 
-                b.name as 'clubName', 
-                b.string as 'clubString', 
-                b.boy as 'clubBoy', 
-                b.girl as 'clubGirl', 
-                b.mixed as 'clubMixed', 
-                b.adress as 'clubAdress' 
+                *
             FROM 
                 {$this->t3} a 
             LEFT JOIN 
                 {$this->t1} b 
             ON 
-                a.clubId = b.id 
+                a.team_clubId = b.club_id 
             WHERE 
-                a.clubId={$club->getId()}
+                a.team_clubId={$club->getId()}
             ORDER BY 
-                a.name DESC 
+                a.team_name DESC 
         "); 
         foreach($teams as $row) { 
             $allTeams[] = new Team(
-                $row->id, 
-                $row->name, 
-                $row->url, 
-                $row->boy, 
-                $row->girl, 
-                $row->mixed, 
-                $row->position, 
-                $row->points, 
-                $row->time, 
-                $row->img, 
+                $row->team_id, 
+                $row->team_name, 
+                $row->team_url, 
+                $row->team_boy, 
+                $row->team_girl, 
+                $row->team_mixed, 
+                $row->team_position, 
+                $row->team_points, 
+                $row->team_time, 
+                $row->team_img, 
                 new Club(
-                    $row->clubId,
-                    $row->clubName,
-                    $row->clubString,
-                    $row->clubBoy,
-                    $row->clubGirl,
-                    $row->clubMixed,
-                    $row->clubAdress
+                    $row->club_id, 
+                    $row->club_name, 
+                    $row->club_string, 
+                    $row->club_boy, 
+                    $row->club_girl, 
+                    $row->club_mixed, 
+                    $row->club_address
                 )
             );
         }
         return $allTeams;
+    }
+    //TODO update with new names
+    function getInfosByTeamId($idTeam){  
+        return $this->wpdb->get_row("
+            SELECT 
+                a.team_id,
+                a.team_clubId,
+                count(b.id) as clubsNbr 
+            FROM {$this->t3} a 
+            LEFT JOIN {$this->t2} b ON a.team_id = b.idTeam 
+            WHERE 
+                b.type IN (0,2) AND 
+                b.idTeam=$idTeam;
+        ");
     }
 
     /***************************
@@ -216,18 +206,18 @@ class TeamDAO extends MasterDAO {
     function updateTeam($team){    
         if ($team->getId()){
             $data = array(
-                'name' => $team->getName(), 
-                'url' => $team->getUrl(), 
-                'boy' => $team->getBoy(), 
-                'girl' => $team->getGirl(), 
-                'mixed' => $team->getMixed(), 
-                'position' => $team->getPosition(), 
-                'points' => $team->getPoints(),                      
-                'time' => $team->getTime(), 
-                'img' => $team->getImg(),  
-                'clubId' => $team->getClub()->getId()
+                'team_name' => $team->getName(), 
+                'team_url' => $team->getUrl(), 
+                'team_boy' => $team->getBoy(), 
+                'team_girl' => $team->getGirl(), 
+                'team_mixed' => $team->getMixed(), 
+                'team_position' => $team->getPosition(), 
+                'team_points' => $team->getPoints(),                      
+                'team_time' => $team->getTime(), 
+                'team_img' => $team->getImg(),  
+                'team_clubId' => $team->getClub()->getId()
             );
-            $where = array('id' => $team->getId());
+            $where = array('team_id' => $team->getId());
             $this->wpdb->update("{$this->t3}", $data, $where);
         }
     }
@@ -238,16 +228,16 @@ class TeamDAO extends MasterDAO {
     function insertTeam($team){
         if (!$team->getId()){
             $data = array(
-                'name' => $team->getName(), 
-                'url' => $team->getUrl(), 
-                'boy' => $team->getBoy(), 
-                'girl' => $team->getGirl(), 
-                'mixed' => $team->getMixed(), 
-                'position' => $team->getPosition(), 
-                'points' => $team->getPoints(),
-                'time' => $team->getTime(), 
-                'img' => $team->getImg(),    
-                'clubId' => $team->getClub()->getId()
+                'team_name' => $team->getName(), 
+                'team_url' => $team->getUrl(), 
+                'team_boy' => $team->getBoy(), 
+                'team_girl' => $team->getGirl(), 
+                'team_mixed' => $team->getMixed(), 
+                'team_position' => $team->getPosition(), 
+                'team_points' => $team->getPoints(),                      
+                'team_time' => $team->getTime(), 
+                'team_img' => $team->getImg(),  
+                'team_clubId' => $team->getClub()->getId()
             );
             $this->wpdb->insert("{$this->t3}", $data);
         }
@@ -259,7 +249,7 @@ class TeamDAO extends MasterDAO {
     ****************************/
     function deleteTeam($teamId){ 
         if ($teamId){
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3} WHERE id=$teamId", null));
+            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3} WHERE team_id=$teamId", null));
         } else {
             $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3}", null));
         }

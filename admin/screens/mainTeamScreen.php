@@ -1,9 +1,24 @@
 <?php
-
+/**
+* MainTeamScreen is a class use to manage admin screen
+*
+* @package  Admin/Screens
+* @access   public
+*/
 class MainTeamScreen extends MasterScreen {
+    /**
+    * @var int              $imgId      Store the id of the team's image
+    * @var MainTeamScreen   $_instance  Var use to store an instance
+    */
     private static $imgId = 0;
     private static $_instance;
 
+    /**
+    * Returns an instance of the object
+    *
+    * @return MainTeamScreen
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new MainTeamScreen();
@@ -16,6 +31,12 @@ class MainTeamScreen extends MasterScreen {
         add_action( 'admin_footer', array($this, 'media_selector_print_scripts') );
     }
 
+    /**
+    * Function to display the screen
+    *
+    * @return void
+    * @access public
+    */
     function display(){
         if (isset($_GET['teamId'])){  
             $team = TeamDAO::getInstance()->getTeamById($_GET['teamId']);
@@ -144,6 +165,12 @@ class MainTeamScreen extends MasterScreen {
         <?php
     }   
 
+    /**
+    * Function use to print script that allowed user to select an image
+    *
+    * @return void
+    * @access public
+    */
     function media_selector_print_scripts() {
         ?><script type='text/javascript'>
             jQuery( document ).ready( function( $ ) {

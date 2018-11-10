@@ -3,7 +3,12 @@
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
 }
-
+/**
+* EventusCirclePosPts is a class use add an element in avia constructor
+*
+* @package  Admin/Business/Shortcode
+* @access   public
+*/
 if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 	class EventusResults extends aviaShortcodeTemplate {
         use MasterTrait;
@@ -54,8 +59,8 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 	                foreach ($sexes as $key => $sex) {
 	                    if (($sex == 'boy' && $club->getBoy()) || ($sex == 'girl' && $club->getGirl()) || ($sex == 'mixed' && $club->getMixed())) {
 	                        $allTeams = TeamDAO::getInstance()->getAllTeamsByClubAndSex($club, $sex);
-							$output  .= "<p class='sexe'>".$sexesDisplay[$key]." :</p>";
 							if ($allTeams) {
+								$output  .= "<p class='sexe'>".$sexesDisplay[$key]." :</p>";
 								foreach ($allTeams as $team) {  
 									//$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "next"); //wrong method : temporary when no matches
 									$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last");

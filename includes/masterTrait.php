@@ -1,7 +1,21 @@
 <?php
-
+/**
+* MasterTrait is a trait use to help AviaShortcode
+*
+* @package  Includes
+* @access   public
+*/
 trait MasterTrait{
-    function getSexLabel2($boy, $girl, $mixed) {
+    /**
+    * Get sex label by a key
+    *
+    * @param string     Boy key
+    * @param string     Girl key
+    * @param string     Mixed key
+    * @return string    Label
+    * @access public
+    */
+    function getSexLabel($boy, $girl, $mixed) {
         if ($boy){
             return "Masculin";
         } else if ($girl) {
@@ -12,6 +26,13 @@ trait MasterTrait{
         return;
     }
 
+    /**
+    * Convert english string date to a french date
+    *
+    * @param string     English date
+    * @return string    French date
+    * @access public
+    */
     function toFrenchDate($myDate) {
         $english_days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
         $french_days = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');

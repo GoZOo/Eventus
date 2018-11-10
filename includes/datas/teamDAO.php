@@ -1,8 +1,22 @@
 <?php 
-
+/**
+* TeamDAO is a class use to manage acces to the Database to get Team objects
+*
+* @package  Includes/Datas
+* @access   public
+*/
 class TeamDAO extends MasterDAO {
+    /**
+    * @var Finder   $_instance  Var use to store an instance
+    */
     private static $_instance;
 
+    /**
+    * Returns an instance of the object
+    *
+    * @return TeamDAO
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new TeamDAO();
@@ -17,6 +31,12 @@ class TeamDAO extends MasterDAO {
     /**************************
     *********** GET ***********
     ***************************/
+    /**
+    * Return every teams
+    *
+    * @return Team[] All the teams that exist
+    * @access public
+    */
     function getAllTeams(){  
         $teams = $this->wpdb->get_results("
             SELECT 
@@ -56,6 +76,13 @@ class TeamDAO extends MasterDAO {
         return $allTeams;
     }
 
+    /**
+    * Return the team corresponding to an id
+    *
+    * @param int        Id of the team
+    * @return Team      Team that exist with the TeamId
+    * @access public
+    */
     function getTeamById($myTeamId){    
         $row = $this->wpdb->get_row("
             SELECT 
@@ -92,7 +119,15 @@ class TeamDAO extends MasterDAO {
             );
     }
 
-    //A opti ?
+    //TODO : optimisation ?
+    /**
+    * Return teams corresponding to a club and sex label
+    *
+    * @param Club       The club
+    * @param string     Sex label
+    * @return Team[]    All the teams corresponding
+    * @access public
+    */
     function getAllTeamsByClubAndSex($club, $sex){  
         $boy = $girl = $mixed = 0;
         if ($sex == "boy"){ 
@@ -145,6 +180,13 @@ class TeamDAO extends MasterDAO {
         return $allTeams;
     }
 
+    /**
+    * Return teams corresponding to a club order by name
+    *
+    * @param Club       The club
+    * @return Team[]    All the teams corresponding
+    * @access public
+    */
     function getAllTeamsByClubOrderByName($club){ 
         $teams = $this->wpdb->get_results("
             SELECT 
@@ -185,7 +227,14 @@ class TeamDAO extends MasterDAO {
         }
         return $allTeams;
     }
-    //TODO update with new names
+    
+    /**
+    * Return informations by team id
+    *
+    * @param int        Team id
+    * @return string[]  Informations
+    * @access public
+    */
     function getInfosByTeamId($idTeam){  
         return $this->wpdb->get_row("
             SELECT 
@@ -203,6 +252,13 @@ class TeamDAO extends MasterDAO {
     /***************************
     ********** UPDATE **********
     ****************************/
+    /**
+    * Update a team
+    *
+    * @param Team       Team to be updated
+    * @return void  
+    * @access public
+    */
     function updateTeam($team){    
         if ($team->getId()){
             $data = array(
@@ -225,6 +281,13 @@ class TeamDAO extends MasterDAO {
     /***************************
     ********** INSERT **********
     ****************************/
+    /**
+    * Insert a team
+    *
+    * @param Team       Team to be inserted
+    * @return int       Id of the team inserted      
+    * @access public
+    */
     function insertTeam($team){
         if (!$team->getId()){
             $data = array(
@@ -247,7 +310,14 @@ class TeamDAO extends MasterDAO {
     /***************************
     ********** DELETE **********
     ****************************/
-    function deleteTeam($teamId){ 
+    /**
+    * Delete a team
+    *
+    * @param int|null   Id of Team to be deleted
+    * @return void    
+    * @access public
+    */
+    function deleteTeam($teamId = null){ 
         if ($teamId){
             $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3} WHERE team_id=$teamId", null));
         } else {

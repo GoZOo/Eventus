@@ -1,22 +1,32 @@
 <?php 
+/**
+* Club is a class use to manage clubs
+*
+* @package  Includes/Entities
+* @access   public
+*/
 class Club {
-   private $id;
-   private $name;
-   private $string;
-   private $boy;
-   private $girl;
-   private $mixed;
-   private $address;
+    /**
+    * @var int|null $id         Id of the club
+    * @var string   $name       Name of the club
+    * @var string   $string     String that will be use to parse FFHB website
+    * @var bool     $boy        Do the club has boy team(s)?
+    * @var bool     $girl       Do the club has girl team(s)?
+    * @var bool     $mixed      Do the club has mixed team(s)?
+    * @var string   $address    Adress of the gym. Used to calculate hours rdv
+    */
 
-   public function __construct($id=null, $name, $string, $boy, $girl, $mixed, $address) {
-       $this->id = $id;
-       $this->name = $name;
-       $this->string = $string;
-       $this->boy = $boy;
-       $this->girl = $girl;
-       $this->mixed = $mixed;
-       $this->address = $address;
-   }
+    private $id, $name, $string, $boy, $girl, $mixed, $address;
+
+    public function __construct($id=null, $name, $string, $boy, $girl, $mixed, $address) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->string = $string;
+        $this->boy = $boy;
+        $this->girl = $girl;
+        $this->mixed = $mixed;
+        $this->address = $address;
+    }
 
     public function getId() {
         return $this->id;

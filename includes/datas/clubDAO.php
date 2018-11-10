@@ -1,8 +1,22 @@
 <?php 
-
+/**
+* ClubDAO is a class use to manage acces to the Database to get Club objects
+*
+* @package  Includes/Datas
+* @access   public
+*/
 class ClubDAO extends MasterDAO {
+    /**
+    * @var Finder   $_instance  Var use to store an instance
+    */
     private static $_instance;
 
+    /**
+    * Returns an instance of the object
+    *
+    * @return ClubDAO
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new ClubDAO();
@@ -17,6 +31,12 @@ class ClubDAO extends MasterDAO {
     /**************************
     *********** GET ***********
     ***************************/
+    /**
+    * Return every clubs
+    *
+    * @return Club[] All the clubs that exist
+    * @access public
+    */
     function getAllClubs(){    
         $allClubs = [];
         $clubs = $this->wpdb->get_results("
@@ -38,6 +58,13 @@ class ClubDAO extends MasterDAO {
         return $allClubs;
     }
 
+    /**
+    * Return the club corresponding to an id
+    *
+    * @param int        Id of the club
+    * @return Club      All the clubs that exist with the ClubId
+    * @access public
+    */
     function getClubById($myClubId){   
         $row = $this->wpdb->get_row("
             SELECT * 
@@ -56,6 +83,13 @@ class ClubDAO extends MasterDAO {
         );
     }
 
+    /**
+    * Return informations by club id
+    *
+    * @param int        club id
+    * @return string[]  Informations
+    * @access public
+    */
     function getInfosByClubId($idClub){  
         return $this->wpdb->get_row("
             SELECT 
@@ -73,6 +107,13 @@ class ClubDAO extends MasterDAO {
     /***************************
     ********** UPDATE **********
     ****************************/
+    /**
+    * Update a club
+    *
+    * @param Club       Club to be updated
+    * @return void  
+    * @access public
+    */
     function updateClub($club){    
         if ($club->getId()){
             $data = array(
@@ -91,6 +132,13 @@ class ClubDAO extends MasterDAO {
     /***************************
     ********** INSERT **********
     ****************************/
+    /**
+    * Insert a Club
+    *
+    * @param Club       Club to be inserted
+    * @return int       Id of the club inserted      
+    * @access public
+    */
     function insertClub($club){
         if (!$club->getId()){            
             $data = array(
@@ -109,7 +157,14 @@ class ClubDAO extends MasterDAO {
     /***************************
     ********** DELETE **********
     ****************************/
-    function deleteClub($clubId){ 
+    /**
+    * Delete a club
+    *
+    * @param int|null   Id of Club to be deleted
+    * @return void    
+    * @access public
+    */
+    function deleteClub($clubId = null){ 
         if ($clubId){
             $this->wpdb->query($this->wpdb->prepare("
                 DELETE FROM 

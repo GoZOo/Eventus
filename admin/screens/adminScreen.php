@@ -1,8 +1,22 @@
 <?php
-
+/**
+* AdminScreen is a class use to manage admin screen
+*
+* @package  Admin/Screens
+* @access   public
+*/
 class AdminScreen extends MasterScreen {
+    /**
+    * @var AdminScreen   $_instance  Var use to store an instance
+    */
     private static $_instance;
 
+    /**
+    * Returns an instance of the object
+    *
+    * @return AdminScreen
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new AdminScreen();
@@ -14,6 +28,12 @@ class AdminScreen extends MasterScreen {
 		wp_enqueue_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
 	}	
     
+    /**
+    * Function to display the screen
+    *
+    * @return void
+    * @access public
+    */
     function display(){
         ?>
         <div class='wrap'>

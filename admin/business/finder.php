@@ -1,8 +1,21 @@
 <?php 
-
+/**
+* Finder is a class that allows you to manage all synchronization actions of matches.
+*
+* @access   public
+*/
 class Finder {
+    /**
+    * @var Finder   $_instance  Var use to store an instance
+    */
     private static $_instance;
 
+    /**
+    * Returns an instance of the object
+    *
+    * @return Finder
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new Finder();
@@ -10,10 +23,15 @@ class Finder {
         return self::$_instance;
     }
 
-    private function __construct() {       
-        
-    }   
+    private function __construct() {}   
 
+    /**
+    * Synchronize matches by team with FFHB website informations
+    *
+    * @param Team   Team to update synchronize matches
+    * @return void
+    * @access public
+    */
     public function updateMatches($team){
         if ($team->getUrl()) {
             $ch = curl_init($team->getUrl());
@@ -86,7 +104,13 @@ class Finder {
         }        
     }
 
-    //Finder & postHandler
+    /**
+    * Update hours rdv of matches
+    *
+    * @param Match[]    Match to update hours rdv
+    * @return Match[]   Match with updated hours rdv
+    * @access public
+    */
     function setNewHoursRdv($allMatches){
         $allAdresses = "";
         foreach($allMatches as $match) {       
@@ -120,16 +144,36 @@ class Finder {
         return $allMatches;
     }    
 
-    //Finder & postHandler
+    /**
+    * Transform character with accent to characters without accents
+    *
+    * @param string    String to strip accents
+    * @return Match[]  String with accents strip 
+    * @access public
+    */
     function stripAccents($str) {
         return strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
     }
 
+    /**
+    * Add log in file log
+    *
+    * @param string    String of the log to be added
+    * @return void 
+    * @access private
+    */
     private function addLog($myLog){    
         date_default_timezone_set("Europe/Paris");
         file_put_contents(plugin_dir_path( __FILE__ ).'../../finder.log', "[".date("d/m/y H:i:s")."] ".$myLog."\n", FILE_APPEND);
     }
 
+    /**
+    * Transfom string to an UTF-8 string
+    *
+    * @param string     String to be updated
+    * @return string      String updated
+    * @access private
+    */
     private function getCleanString($myString){
         if ($myString[0] == " "){
             $myString = substr($myString, 1);

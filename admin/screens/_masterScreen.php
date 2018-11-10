@@ -1,11 +1,28 @@
 <?php
-
-abstract class MasterScreen {	
+/**
+* MasterScreen is a parent class for all Screen
+*
+* @package  Admin/Screens
+* @access   public
+*/
+abstract class MasterScreen {
+    /**
+    * Function to display the screen
+    *
+    * @return void
+    * @access public
+    */	
     public function display(){
         echo "<div class='wrap'><h1 class='wp-heading-inline'>Hello There</h1></div>";
         return;
     }
-
+    
+    /**
+    * Show notice when action post has been done
+    *
+    * @return string    The notice message
+    * @access protected
+    */
     protected function showNotice(){
         $notices = array(
             'succesSyncMatch'=>array(
@@ -83,6 +100,15 @@ abstract class MasterScreen {
         return;
     }
 
+    /**
+    * Get sex icon of a team
+    *
+    * @param bool       Is boy ?
+    * @param bool       Is girl ?
+    * @param bool       Is mixed ?
+    * @return string    The icon
+    * @access protected
+    */
     protected function getSexIco($boy, $girl, $mixed){
         if ($boy){
             return '<img draggable="false" class="emoji" alt="♂" src="https://s.w.org/images/core/emoji/11/svg/2642.svg">';
@@ -93,6 +119,16 @@ abstract class MasterScreen {
         }	
         return;
     }
+
+    /**
+    * Get sex icon of a club
+    *
+    * @param bool       Is boy ?
+    * @param bool       Is girl ?
+    * @param bool       Is mixed ?
+    * @return string    The icon(s)
+    * @access protected
+    */
     protected function getSexIcoClub($boy, $girl, $mixed){
         $return = [];
         if ($boy){

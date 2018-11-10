@@ -3,6 +3,12 @@
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
 }
+/**
+* EventusButtonResults is a class use add an element button in avia constructor
+*
+* @package  Admin/Business/Shortcode
+* @access   public
+*/
 
 if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplate')) {
 	class EventusButtonResults extends aviaShortcodeTemplate {
@@ -27,7 +33,7 @@ if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplat
 			);	
 	
 			foreach (TeamDAO::getInstance()->getAllTeams() as $team) {
-				$allTeamsDisplay[$team->getName()." ".$this->getSexLabel2($team->getBoy(), $team->getGirl(), $team->getMixed())." - ".$team->getClub()->getName()] = $team->getId();
+				$allTeamsDisplay[$team->getName()." ".$this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed())." - ".$team->getClub()->getName()] = $team->getId();
 			}		
 			
 			$this->elements = array(

@@ -1,8 +1,22 @@
 <?php 
-
+/**
+* MatchDAO is a class use to manage acces to the Database to get Match objects
+*
+* @package  Includes/Datas
+* @access   public
+*/
 class MatchDAO extends MasterDAO {
+    /**
+    * @var MatchDAO   $_instance  Var use to store an instance
+    */
     private static $_instance;
 
+    /**
+    * Returns an instance of the object
+    *
+    * @return MatchDAO
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new MatchDAO();
@@ -16,6 +30,13 @@ class MatchDAO extends MasterDAO {
     /**************************
     *********** GET ***********
     ***************************/
+    /**
+    * Return every matches by team Id
+    *
+    * @param int        Id of the team
+    * @return Match[]   All matches corresponding
+    * @access public
+    */
     function getAllMatchesByTeamId($idTeam){  
         $allMatches = [];
         $teams = $this->wpdb->get_results("
@@ -128,6 +149,14 @@ class MatchDAO extends MasterDAO {
     }
 
     //TODO les where/orderby sont basé uniquement sur les matchs parents...
+    /**
+    * Return every matches by team Id and type
+    *
+    * @param int        Id of the team
+    * @param int        Type of match : 0 = championship; 1 = son championship; 2 = other
+    * @return Match[]   All matches corresponding
+    * @access public
+    */
     function getAllMatchesByTeamIdAndType($idTeam, $type){  
         $teams = $this->wpdb->get_results("
             SELECT 
@@ -246,6 +275,14 @@ class MatchDAO extends MasterDAO {
     }
 
     //TODO les where/orderby sont basé uniquement sur les matchs parents...
+    /**
+    * Return closest match before of after today
+    *
+    * @param int        Id of the team
+    * @param string     Before or After : 'after'; 'before'
+    * @return Match     Match corresponding
+    * @access public
+    */
     function getCloseMatchByTeamId($teamId, $close){  
         $row = $this->wpdb->get_row("
             SELECT                 
@@ -320,6 +357,12 @@ class MatchDAO extends MasterDAO {
     }
     
     //TODO les where/orderby sont basé uniquement sur les matchs parents...
+    /**
+    * Return matches with a date
+    *
+    * @return Match[]     Match corresponding
+    * @access public
+    */
     function getMatchesWithDate(){  
         $allMatches = [];
         $matches = $this->wpdb->get_results("
@@ -440,10 +483,17 @@ class MatchDAO extends MasterDAO {
     /***************************
     ********** UPDATE **********
     ****************************/
+    /**
+    * Update matches when synchronization
+    *
+    * @param Match[]    Matches sync to be updated
+    * @return void      
+    * @access public
+    */
     function updateMatchesSync($allMatches){
         $matchesToInsert = [];
         foreach($allMatches as $match) {
-            var_dump($match);
+            //var_dump($match);
             $myId = $this->wpdb->get_row("
                 SELECT match_id 
                 FROM {$this->t2} 
@@ -452,7 +502,7 @@ class MatchDAO extends MasterDAO {
                     match_idTeam={$match->getTeam()->getId()} AND 
                     match_numMatch={$match->getNumMatch()}"
             )->match_id;
-            var_dump($myId);
+            //var_dump($myId);
             if($myId){
                 $data = array(
                     'match_matchDay' => $match->getMatchDay(), 
@@ -481,6 +531,15 @@ class MatchDAO extends MasterDAO {
         $this->insertMatches($matchesToInsert);
     }
 
+    /**
+    * Update matches when update from screen
+    *
+    * @param Match[]    Matches to updated
+    * @param string     Type of matches : 0 = championship; 1 = son championship; 2 = other
+    * @param int        Id of the team
+    * @return void      
+    * @access public
+    */
     function updateMatchesScreen($allMatches, $type, $teamId){
         foreach($allMatches as $matches) {
             if ($matches->getId()){
@@ -525,6 +584,13 @@ class MatchDAO extends MasterDAO {
         $this->insertMatches($matchesToInsert);
     }
 
+    /**
+    * Update matches when update only new hours rdv
+    *
+    * @param Match[]    Matches to updated
+    * @return void      
+    * @access public
+    */
     function updateMatchesHours($allMatches){
         foreach($allMatches as $match) { 
             //var_dump($match);
@@ -539,6 +605,13 @@ class MatchDAO extends MasterDAO {
     /***************************
     ********** INSERT **********
     ****************************/
+    /**
+    * Insert matches
+    *
+    * @param Matches[]  Matches to be inserted
+    * @return void    
+    * @access public
+    */
     function insertMatches($allMatches){
         foreach($allMatches as $match) {
             if (!$match->getId()){
@@ -569,6 +642,15 @@ class MatchDAO extends MasterDAO {
     /***************************
     ********** DELETE **********
     ****************************/
+    /**
+    * Delete matches not in a list of id, with a type and a team id
+    *
+    * @param int[]    Matches id to be deleted
+    * @param string   Type of matches : 0 = championship; 1 = son championship; 2 = other
+    * @param int      Id of the team
+    * @return void    
+    * @access public
+    */
     function deleteMatchesNotIn($myMatchesId, $type, $teamId){  
         //echo "DELETE FROM {$this->t2} WHERE match_id NOT IN ($myMatchesId) AND match_type=$type AND match_idTeam=$teamId";
         if ($myMatchesId){
@@ -577,7 +659,15 @@ class MatchDAO extends MasterDAO {
             $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE match_type=$type AND match_idTeam=$teamId", null));
         }
     }
-    function deleteMatches($teamId){  
+
+    /**
+    * Delete matches with a team id
+    *
+    * @param int|null   Id of Team to delete matches
+    * @return void    
+    * @access public
+    */
+    function deleteMatches($teamId = null){  
         if ($teamId){
             $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE match_idTeam=$teamId", null));
         } else {

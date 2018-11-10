@@ -217,6 +217,43 @@ body[class*="eventus"] .ico-loading:before {
 	  transform: rotate(360deg);
 	}
 }
+
+/* Tooltip  */
+.myTooltip {
+    position: relative;
+    display: inline-block;
+}
+.myTooltip .myTooltiptext {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+	border-radius: 6px;
+	font-size: 12px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: -5%;
+	right: -5%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.myTooltip .myTooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+.myTooltip:hover .myTooltiptext {
+    visibility: visible;
+    opacity: 1;
+} 
+
 /* Resultats Shortcode */
 .allClbus {	
 	width: 100%;

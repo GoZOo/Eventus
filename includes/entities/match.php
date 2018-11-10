@@ -1,42 +1,52 @@
 <?php 
-class Match {
-   private $id;
-   private $matchDay;
-   private $numMatch;
-   private $date;
-   private $hourRdv;
-   private $hourStart;
-   private $localTeam;
-   private $localTeamScore;
-   private $visitingTeam;
-   private $visitingTeamScore;
-   private $ext;
-   private $street;
-   private $city;
-   private $gym;
-   private $type; /* 0 = championship; 1 = son championship; 2 = other */
-   private $team;
-   private $matchRef;
+/**
+* Match is a class use to manage matches
+*
+* @package  Includes/Entities
+* @access   public
+*/
+class Match {  
+    /**
+    * @var int|null     $id                 Id of the match
+    * @var int|null     $matchDay           Day in championship
+    * @var int|null     $numMatch           Number match in a day 
+    * @var date|null    $date               Date of the match
+    * @var time|null    $hourRdv            Rdv match time
+    * @var time|null    $hourStart          Time match
+    * @var string       $localTeam          Name of the local team
+    * @var int|null     $localTeamScore     Score of the local team
+    * @var string       $visitingTeam       Name of the visiting team
+    * @var int|null     $visitingTeamScore  Score of the visiting team
+    * @var bool         $ext                Is the match at home?
+    * @var string|null  $street             Street of the match location
+    * @var string|null  $city               City of the match location
+    * @var string|null  $gym                Gym of the match location
+    * @var int          $type               Type of match : 0 = championship; 1 = son championship; 2 = other
+    * @var Team         $team               Team playing the match
+    * @var Match|null   $matchRef           Match ref if it's a son match
+    */
 
-   public function __construct($id=null, $matchDay, $numMatch, $date=null, $hourRdv=null, $hourStart=null, $localTeam, $localTeamScore=null, $visitingTeam, $visitingTeamScore=null, $ext=null, $street=null, $city=null, $gym=null, $type, $team, $matchRef=null) {
-       $this->id = $id;
-       $this->matchDay = $matchDay;
-       $this->numMatch = $numMatch;
-       $this->date = $date;
-       $this->hourRdv = $hourRdv;
-       $this->hourStart = $hourStart;
-       $this->localTeam = $localTeam;
-       $this->localTeamScore = $localTeamScore;
-       $this->visitingTeam = $visitingTeam;
-       $this->visitingTeamScore = $visitingTeamScore;
-       $this->ext = $ext;
-       $this->street = $street;
-       $this->city = $city;
-       $this->gym = $gym;
-       $this->type = $type;
-       $this->team = $team;
-       $this->matchRef = $matchRef;
-   }
+    private $id, $matchDay, $numMatch, $date, $hourRdv, $hourStart, $localTeam, $localTeamScore, $visitingTeam, $visitingTeamScore, $ext, $street, $city, $gym, $type, $team, $matchRef;
+
+    public function __construct($id=null, $matchDay, $numMatch, $date=null, $hourRdv=null, $hourStart=null, $localTeam, $localTeamScore=null, $visitingTeam, $visitingTeamScore=null, $ext=null, $street=null, $city=null, $gym=null, $type, $team, $matchRef=null) {
+        $this->id = $id;
+        $this->matchDay = $matchDay;
+        $this->numMatch = $numMatch;
+        $this->date = $date;
+        $this->hourRdv = $hourRdv;
+        $this->hourStart = $hourStart;
+        $this->localTeam = $localTeam;
+        $this->localTeamScore = $localTeamScore;
+        $this->visitingTeam = $visitingTeam;
+        $this->visitingTeamScore = $visitingTeamScore;
+        $this->ext = $ext;
+        $this->street = $street;
+        $this->city = $city;
+        $this->gym = $gym;
+        $this->type = $type;
+        $this->team = $team;
+        $this->matchRef = $matchRef;
+    }
 
     public function getId() {
         return $this->id;

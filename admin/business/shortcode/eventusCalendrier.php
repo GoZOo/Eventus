@@ -3,7 +3,12 @@
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
 }
-
+/**
+* EventusCalendrier is a class use add elements table in avia constructor
+*
+* @package  Admin/Business/Shortcode
+* @access   public
+*/
 if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')) {
 	class EventusCalendrier extends aviaShortcodeTemplate {
         use MasterTrait;
@@ -40,7 +45,7 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 	                $domTeam = $extTeam;
 	                $extTeam = $temp;
 	            }
-	            $domTeam = $match->getTeam()->getName()." ".$this->getSexLabel2($match->getTeam()->getBoy(), $match->getTeam()->getGirl(), $match->getTeam()->getMixed());
+	            $domTeam = $match->getTeam()->getName()." ".$this->getSexLabel($match->getTeam()->getBoy(), $match->getTeam()->getGirl(), $match->getTeam()->getMixed());
 	            
 	            if($key == 0){
 	                $arrays .= "[av_heading heading='".$this->toFrenchDate(date_create_from_format('Y-m-d', $match->getDate())->format('l d F Y'))."' tag='h2' style='' size='' subheading_active='' subheading_size='15' margin='' margin_sync='true' padding='10' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='av-jl3st843' custom_class='' admin_preview_bg=''][/av_heading]

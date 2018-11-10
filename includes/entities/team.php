@@ -1,30 +1,40 @@
 <?php 
-class Team {
-   private $id;
-   private $name;
-   private $url;
-   private $boy;
-   private $girl;
-   private $mixed;
-   private $position;
-   private $points;
-   private $time;
-   private $img;
-   private $club;
+/**
+* Team is a class use to manage teams
+*
+* @package  Includes/Entities
+* @access   public
+*/
+class Team {    
+    /**
+    * @var int|null     $id         Id of the team
+    * @var string       $name       Name of the team
+    * @var string|null  $url        Url of the FFHB website that contain result
+    * @var bool         $boy        Is the team a boy team?
+    * @var bool         $girl       Is the team agirl team?
+    * @var bool         $mixed      Is the team amixed team?
+    * @var int|null     $position   Position of the team in the classement
+    * @var int|null     $points     Points of the team in the classement
+    * @var int|null     $time       Time for the rdv before match start
+    * @var int|null     $img        Id of the photo of the team
+    * @var Club         $club       Club of the team
+    */
 
-   public function __construct($id=null, $name, $url, $boy, $girl, $mixed, $position, $points, $time, $img, $club) {
-      $this->id = $id;
-      $this->name = $name;
-      $this->url = $url;
-      $this->boy = $boy;
-      $this->girl = $girl;
-      $this->mixed = $mixed;
-      $this->position = $position;
-      $this->points = $points;
-      $this->time = $time;
-      $this->img = $img;
-      $this->club = $club;
-   }
+    private $id, $name, $url, $boy, $girl, $mixed, $position, $points, $time, $img, $club;
+
+    public function __construct($id=null, $name, $url, $boy, $girl, $mixed, $position, $points, $time, $img=null, $club) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->url = $url;
+        $this->boy = $boy;
+        $this->girl = $girl;
+        $this->mixed = $mixed;
+        $this->position = $position;
+        $this->points = $points;
+        $this->time = $time;
+        $this->img = $img;
+        $this->club = $club;
+    }
 
     public function getId() {
         return $this->id;

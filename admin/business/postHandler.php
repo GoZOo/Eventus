@@ -43,7 +43,8 @@
         if ($_POST['teamId']) {
     		MatchDAO::getInstance()->deleteMatches($_POST['teamId']);
     	} else {
-    		MatchDAO::getInstance()->deleteMatches(null);
+    		MatchDAO::getInstance()->deleteMatches();
+            Database::getInstance()->resetAutoIncr('matches');
     	}
 		wp_redirect( add_query_arg( 'message', 'succesDelMatch',  wp_get_referer() ));
     }
@@ -147,9 +148,9 @@
         if ($_POST['clubId']) {
             ClubDAO::getInstance()->deleteClub($_POST['clubId']); 
     	} else {
-            ClubDAO::getInstance()->deleteClub(null); 
-    	}
-        
+            ClubDAO::getInstance()->deleteClub(); 
+            Database::getInstance()->resetAutoIncr('clubs');
+    	}        
         wp_redirect( add_query_arg( 'message', 'succesDelClub', 'admin.php?page=eventus_club')); 
     }
     
@@ -168,7 +169,7 @@
         $team->setBoy(($_POST['sexe'] == "h" ? 1 : 0));
         $team->setGirl(($_POST['sexe'] == "f" ? 1 : 0));
         $team->setMixed(($_POST['sexe'] == "m" ? 1 : 0));
-        $team->setTime(($_POST['time'] ? $_POST['time'] : null));
+        $team->setTime(($_POST['time'] ? $_POST['time'] : 45));
         $team->setImg(($_POST['img'] ? $_POST['img'] : null));
         $team->setClub(ClubDAO::getInstance()->getClubById(($_POST['club'] ? $_POST['club'] : null)));
         if ($team->getId()) {
@@ -185,7 +186,8 @@
             TeamDAO::getInstance()->deleteTeam($_POST['teamId']); 
             wp_redirect( add_query_arg( 'message', 'succesDelTeam', 'admin.php?page=eventus')); 
     	} else {
-            TeamDAO::getInstance()->deleteTeam(null); 
+            TeamDAO::getInstance()->deleteTeam(); 
+            Database::getInstance()->resetAutoIncr('teams');
             wp_redirect( add_query_arg( 'message', 'succesDelTeams', 'admin.php?page=eventus')); 
     	}        
     }

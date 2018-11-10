@@ -1,8 +1,22 @@
 <?php
-
+/**
+* LogScreen is a class use to manage admin screen
+*
+* @package  Admin/Screens
+* @access   public
+*/
 class LogScreen extends MasterScreen {
+    /**
+    * @var LogScreen   $_instance  Var use to store an instance
+    */
     private static $_instance;
 
+    /**
+    * Returns an instance of the object
+    *
+    * @return LogScreen
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new LogScreen();
@@ -14,6 +28,12 @@ class LogScreen extends MasterScreen {
 		wp_enqueue_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
 	}	
     
+    /**
+    * Function to display the screen
+    *
+    * @return void
+    * @access public
+    */
     function display(){
         ?>
         <div class='wrap'>
@@ -36,7 +56,7 @@ class LogScreen extends MasterScreen {
                 </li>
             </ul>
             <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
-                <button class="button-primary ico ico-del" name="action" value="clearLog" class="button-primary" type="submit" onclick="return validate('Cette action est iréversible. Voulez-vous vraiment supprimer les logs ?')">Supprimer les logs</button>                
+                <button class="button-primary ico ico-del" name="action" value="clearLog" class="button-primary" type="submit" onclick="return validate('Cette action est iréversible. Voulez-vous vraiment supprimer les logs ?')">Effacer les logs</button>                
             </form>
         </div>
         <?php

@@ -1,8 +1,22 @@
 <?php
-
+/**
+* MainMatchScreen is a class use to manage admin screen
+*
+* @package  Admin/Screens
+* @access   public
+*/
 class MainMatchScreen extends MasterScreen {	
+	/**
+    * @var MainMatchScreen   $_instance  Var use to store an instance
+    */
 	private static $_instance;
 
+	/**
+    * Returns an instance of the object
+    *
+    * @return MainMatchScreen
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new MainMatchScreen();
@@ -12,6 +26,12 @@ class MainMatchScreen extends MasterScreen {
 
     private function __construct() {}
 
+	/**
+    * Function to display the screen
+    *
+    * @return void
+    * @access public
+    */
     function display(){    	
 		if (isset($_GET['teamId'])){ 
 			$team = TeamDAO::getInstance()->getTeamById($_GET['teamId']);
@@ -263,12 +283,25 @@ class MainMatchScreen extends MasterScreen {
 				<input type='hidden' name='teamId' value="<?php echo $team->getId(); ?>">	
 				<input type="hidden" name="path" value="http://<?php echo $_SERVER[HTTP_HOST], $_SERVER[REQUEST_URI]; ?>" >
 				<button type='button' onclick='addOtherMatch()' class='button-primary ico ico-add'>Ajouter un match</button>
-				<br><br>  
-                <button type="submit" name="action" value="majMatch" class="button-primary ico ico-save">Enregistrer les modifications</button>
-                <button type="submit" name="action" value="majHours" onclick="setLoading(this)" class="button-primary ico ico-time">Recalculer les horaires de RDV</button>
+				<br><br> 
+
+				<button type="submit" name="action" value="majMatch" class="button-primary ico ico-save">Enregistrer les modifications</button>	
+
+				<div class="myTooltip">
+					<button type="submit" name="action" value="majHours" onclick="setLoading(this)" class="button-primary ico ico-time">Recalculer les horaires de RDV</button>
+					<span class="myTooltiptext">Enregistre & mets à jour les horaires des matchs à venir à l'extérieur avec une adresse valide.</span>
+				</div>  
+				
 				<?php  if ($team->getUrl()) { ?>
+                <div class="myTooltip">
 					<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">Synchroniser les données des matchs</button>
+					<span class="myTooltiptext">Enregistre & synchronise les données des matchs avec le site de la Fédération.</span>
+				</div> 
 				<?php } ?>
+                
+				
+					
+				
 				<?php //<button type="submit" name="action" value="delMatch" class="button-primary ico ico-del"  onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger tous les matchs ?')" >Purger les matchs de l'équipe</button> ?>
 	        </form>
     	</div>

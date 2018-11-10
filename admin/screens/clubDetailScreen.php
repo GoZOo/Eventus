@@ -1,8 +1,22 @@
 <?php
-
+/**
+* ClubDetailScreen is a class use to manage admin screen
+*
+* @package  Admin/Screens
+* @access   public
+*/
 class ClubDetailScreen extends MasterScreen {
+    /**
+    * @var ClubDetailScreen   $_instance  Var use to store an instance
+    */
     private static $_instance;
 
+    /**
+    * Returns an instance of the object
+    *
+    * @return ClubDetailScreen
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new ClubDetailScreen();
@@ -14,6 +28,12 @@ class ClubDetailScreen extends MasterScreen {
         wp_enqueue_script('clubJs', plugin_dir_url( __FILE__ ).'/../../js/club.js', '', '', true); 
     }
 
+    /**
+    * Function to display the screen
+    *
+    * @return void
+    * @access public
+    */
     function display(){
         if (isset($_GET['clubId'])){  
             $club = ClubDAO::getInstance()->getClubById($_GET['clubId']);
@@ -108,10 +128,3 @@ class ClubDetailScreen extends MasterScreen {
 }
 
 ?>
-
-
-	           <?php /* <input id='totalClub' name='totalClub' type='hidden' value='<?php echo $i; ?>'>     
-	            <button type='button' onclick='addClub()' class='button-primary ico ico-add' id="ajouterClub" style="<?php if($i>=5) { echo 'display:none;'; } ?>" >Ajouter un club</button>
-				<button type='button' class='button-primary ico ico-del' id="supprClub" style="<?php if($i<=1) { echo 'display:none;'; } ?>"  onclick="let res = validate('Voulez-vous vraiment supprimer le club ?'); return res ? delClub() : false;" >Supprimer un club</button><br><br>
-				
-                <button type="submit" name="action" value="majClub" class="button-primary ico ico-save">Enregistrer les modifications</button> */ ?>

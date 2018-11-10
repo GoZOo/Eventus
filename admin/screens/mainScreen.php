@@ -1,8 +1,22 @@
 <?php
-
+/**
+* MainScreen is a class use to manage admin screen
+*
+* @package  Admin/Screens
+* @access   public
+*/
 class MainScreen extends MasterScreen {	
+	/**
+    * @var MainScreen   $_instance  Var use to store an instance
+    */
 	private static $_instance;
 
+	/**
+    * Returns an instance of the object
+    *
+    * @return MainScreen
+    * @access public
+    */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
             self::$_instance = new MainScreen();
@@ -16,6 +30,12 @@ class MainScreen extends MasterScreen {
 		wp_enqueue_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
 	}
 
+	/**
+    * Function to display the screen
+    *
+    * @return void
+    * @access public
+    */
     function display(){  
 		if (isset($_GET['action']) && $_GET['action']=="team") {
 			MainTeamScreen::getInstance()->display(); 
@@ -100,9 +120,13 @@ class MainScreen extends MasterScreen {
 			if (TeamDAO::getInstance()->getAllTeams()){ 
 				?>
 				<form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post" class="fakeForm">
-					<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">
-						Synchroniser les données des matchs
-					</button>	
+					<div class="myTooltip">
+						<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">
+							Synchroniser les données des matchs
+						</button>
+						<span class="myTooltiptext">Enregistre & synchronise les données des matchs avec le site de la Fédération.</span>
+					</div> 
+						
 				</form>	
 				<?php 
 			}

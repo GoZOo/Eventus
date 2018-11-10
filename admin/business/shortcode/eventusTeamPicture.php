@@ -3,7 +3,12 @@
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
 }
-
+/**
+* EventusCirclePosPts is a class use add an element image in avia constructor
+*
+* @package  Admin/Business/Shortcode
+* @access   public
+*/
 if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate')) {
 	class EventusTeamPicture extends aviaShortcodeTemplate {
         use MasterTrait;
@@ -27,7 +32,7 @@ if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate'
 			);	
 		
 			foreach (TeamDAO::getInstance()->getAllTeams() as $team) {
-				$allTeamsDisplay[$team->getName()." ".$this->getSexLabel2($team->getBoy(), $team->getGirl(), $team->getMixed())." - ".$team->getClub()->getName()] = $team->getId();
+				$allTeamsDisplay[$team->getName()." ".$this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed())." - ".$team->getClub()->getName()] = $team->getId();
 			}		
 			
 			global $_wp_additional_image_sizes;

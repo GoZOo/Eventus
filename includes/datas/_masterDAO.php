@@ -1,5 +1,10 @@
 <?php 
-
+/**
+* MasterDAO is a parent class for all DAOs
+*
+* @package  Includes/Datas
+* @access   public
+*/
 abstract class MasterDAO {
     protected function __construct() {
         $this->wpdb = $GLOBALS['wpdb'];

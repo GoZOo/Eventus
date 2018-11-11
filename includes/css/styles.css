@@ -53,7 +53,7 @@ body[class*="eventus"] .myCard .card-footer.text-muted{
 }
 
 body[class*="eventus"] form.fakeForm{
-	display: inline-block;
+	display: block;
 }
 body[class*="eventus"] form.fakeForm button:active{
 	vertical-align: inherit;
@@ -253,6 +253,16 @@ body[class*="eventus"] .ico-loading:before {
     visibility: visible;
     opacity: 1;
 } 
+.hiddenSubmit {
+	visibility:hidden!important;
+	width: 0!important;
+	height: 0!important;
+	padding: 0!important;	
+	margin: 0!important;
+	border: 0!important;
+	display: block!important;
+} 
+
 
 /* Resultats Shortcode */
 .allClbus {	

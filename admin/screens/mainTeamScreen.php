@@ -149,7 +149,9 @@ class MainTeamScreen extends MasterScreen {
                         </tbody>
                     </table> 
                 </div>
-				<input type='hidden' name='teamId' value="<?php echo $team->getId(); ?>">	
+                <input type='hidden' name='teamId' value="<?php echo $team->getId(); ?>">	
+                <input type="submit" name="action" value="majTeam" class="hiddenSubmit">
+                <br>
 
                 <?php if($team->getId()) { ?>
 	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus?page=eventus&action=team'">Ajouter une équipe</button>

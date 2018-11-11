@@ -31,6 +31,7 @@ class Finder {
     */
     public function updateMatches($team){
         if ($team->getUrl()) {
+            $allMatches = [];
             $ch = curl_init($team->getUrl());
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -43,7 +44,6 @@ class Finder {
                 if ($html->getElementById('ul#journeelist') == null ){
                     $this->addLog("Error Url (TeamId: ".$team->getId().") : Can't find match informations");
                 } else {
-                    $allMatches = [];
                     foreach($html->find('div.round tr') as $row) {
                         if ( strpos( strtolower($row), strtolower($team->getClub()->getString()) ) ){
                             $team->setPosition($row->find('td.num',0)->plaintext);
@@ -114,7 +114,7 @@ class Finder {
             }
         }
         if ($allAdresses){
-            $requestGoogleMap = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?key=".get_option("eventus_mapapikey")."&origins=".str_replace(" ","%20",$allMatches[0]->getTeam()->getClub()->getAddress())."&destinations=".$allAdresses),true);
+            $requestGoogleMap = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?key=".get_option("eventus_mapapikey")."&origins=".urlencode($allMatches[0]->getTeam()->getClub()->getAddress())."&destinations=".$allAdresses),true);
             //var_dump($requestGoogleMap);
             $key = 0;
             foreach($allMatches as $match) {

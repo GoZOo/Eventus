@@ -53,7 +53,7 @@ class MainScreen extends MasterScreen {
 				if (!$allClubs) { 
 					?>
 					<h2>Veuillez ajouter un club dans un premier temps...</h2>	
-					<button class="button-primary ico ico-add" onclick="location.href='admin.php?page=eventus_clubs'">
+					<button class="button-primary ico ico-add" onclick="location.href='admin.php?page=eventus_club&action=club'">
 						Ajouter un club
 					</button>
 					<?php

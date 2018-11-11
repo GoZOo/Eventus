@@ -112,6 +112,7 @@ class ClubDetailScreen extends MasterScreen {
 
                 </div>
 				<input type='hidden' name='clubId' value="<?php echo $club->getId(); ?>">	
+                <input type="submit" name="action" value="majClub" class="hiddenSubmit">
 
                 <?php if($club->getId()) { ?>
 	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus_club&action=club'">Ajouter un club</button>

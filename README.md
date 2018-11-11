@@ -8,6 +8,28 @@ Simply retrieve the project and drag it into the "wp-content/plugins/" folder of
 
 ## Updates
 
+### 2.3
+
+* Fix if there are no Enfold Theme
+* Fix check if at least one sex is selected on club before submit
+* Fix unselect sex on change club in creation team
+* Fix reset value auto increment when purge table
+* Fix url encoding for api map
+* Fix cron
+* Add link to club in team card
+* Add link to github in credits
+* Add htaccess to denied direct acces to php files 
+* Add tooltips on heavy load buttons
+* Add documentations on most of the files
+* Evo Club are now displayed in cards
+* Evo some files have changed name
+* Evo optimized displaying buttons choose sex and delete image 
+* Evo rename every columns in db with a corresponding prefix
+* Evo big change on DAOs. Now opti with joint request
+* Evo back end check on team & club submit
+* Evo you can now submit create/update team/club when press enter
+
+
 ### 2.2
 
 * Fix displaying of last match

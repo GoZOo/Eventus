@@ -99,7 +99,7 @@ abstract class MasterScreen {
             ), 
             'succesReset'=>array(
                 'state' => "success", 
-                'str'   => "Les plugin à bien été réinitialisé."
+                'str'   => "Le plugin à bien été réinitialisé."
             ), 
             'succesUpSet'=>array(
                 'state' => "success", 

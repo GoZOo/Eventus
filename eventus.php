@@ -2,7 +2,7 @@
 /* Plugin Name: Eventus
  * Plugin URI: 
  * Description: Useful plugin that allow you to manage handball teams results through FFHB website.
- * Version: 2.2
+ * Version: 2.3
  * Author: Kirian Caumes
  * Author URI: http://kiriancaumes.fr
  * License: 

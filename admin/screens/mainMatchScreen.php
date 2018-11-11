@@ -54,7 +54,7 @@ class MainMatchScreen extends MasterScreen {
 			<?php  
                 echo $this->showNotice(); 
             ?> 
-	        <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">   
+	        <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post" class="fakeForm">   
 				<h2>
 					<?php echo $team->getClub()->getName(); ?>
 				</h2>

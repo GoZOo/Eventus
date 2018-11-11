@@ -72,12 +72,12 @@ body[class*="eventus"] table.matchTable{
 body[class*="eventus"] table.matchTable tr:first-child{
     background: #d8d8d8;
 }
-body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(3), body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(4), body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(5),
-body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(3), body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(4), body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(5){
+body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(4), body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(5), body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(6),
+body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(4), body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(5), body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(6){
 	width: 1%;
 }
-body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(7), body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(9),
-body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(7), body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(9){
+body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(8), body[class*="eventus"] table.matchTable.parentMatches tr td:nth-child(10),
+body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(8), body[class*="eventus"] table.matchTable.sonMatches tr td:nth-child(10){
 	width: 4%;
 }
 body[class*="eventus"] table.matchTable.otherMatches tr td:nth-child(2), body[class*="eventus"] table.matchTable.otherMatches tr td:nth-child(3){

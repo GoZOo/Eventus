@@ -50,7 +50,8 @@ class Database extends MasterDAO {
 			CREATE TABLE {$this->t3} (
 				`team_id` int(11) NOT NULL AUTO_INCREMENT,
 				`team_name` varchar(255) NOT NULL,
-				`team_url` varchar(500) DEFAULT NULL,
+				`team_urlOne` varchar(500) DEFAULT NULL,
+				`team_urlTwo` varchar(500) DEFAULT NULL,
 				`team_boy` tinyint(1) NOT NULL,
 				`team_girl` tinyint(1) NOT NULL,
 				`team_mixed` tinyint(1) NOT NULL,
@@ -81,6 +82,7 @@ class Database extends MasterDAO {
 				`match_city` varchar(255) DEFAULT NULL,
 				`match_gym` varchar(255) DEFAULT NULL,
 				`match_type` int(1) NOT NULL,
+				`match_champ` int(1) DEFAULT NULL,				
 				`match_idTeam` int(11) NOT NULL,
 				`match_idMatchRef` int(11) DEFAULT NULL,
 				PRIMARY KEY (`match_id`),

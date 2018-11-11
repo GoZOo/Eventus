@@ -22,13 +22,14 @@ class Match {
     * @var string|null  $city               City of the match location
     * @var string|null  $gym                Gym of the match location
     * @var int          $type               Type of match : 0 = championship; 1 = son championship; 2 = other
+    * @var int          $champ              Numero of the corresponding championship
     * @var Team         $team               Team playing the match
     * @var Match|null   $matchRef           Match ref if it's a son match
     */
 
-    private $id, $matchDay, $numMatch, $date, $hourRdv, $hourStart, $localTeam, $localTeamScore, $visitingTeam, $visitingTeamScore, $ext, $street, $city, $gym, $type, $team, $matchRef;
+    private $id, $matchDay, $numMatch, $date, $hourRdv, $hourStart, $localTeam, $localTeamScore, $visitingTeam, $visitingTeamScore, $ext, $street, $city, $gym, $type, $champ, $team, $matchRef;
 
-    public function __construct($id=null, $matchDay, $numMatch, $date=null, $hourRdv=null, $hourStart=null, $localTeam, $localTeamScore=null, $visitingTeam, $visitingTeamScore=null, $ext=null, $street=null, $city=null, $gym=null, $type, $team, $matchRef=null) {
+    public function __construct($id=null, $matchDay, $numMatch, $date=null, $hourRdv=null, $hourStart=null, $localTeam, $localTeamScore=null, $visitingTeam, $visitingTeamScore=null, $ext=null, $street=null, $city=null, $gym=null, $type, $champ, $team, $matchRef=null) {
         $this->id = $id;
         $this->matchDay = $matchDay;
         $this->numMatch = $numMatch;
@@ -44,6 +45,7 @@ class Match {
         $this->city = $city;
         $this->gym = $gym;
         $this->type = $type;
+        $this->champ = $champ;
         $this->team = $team;
         $this->matchRef = $matchRef;
     }
@@ -180,6 +182,15 @@ class Match {
 
     public function setType($type) {
         $this->type = $type;
+        return $this;
+    }
+
+    public function getChamp() {
+        return $this->champ;
+    }
+
+    public function setChamp($champ) {
+        $this->champ = $champ;
         return $this;
     }
 

@@ -46,7 +46,7 @@ class MainTeamScreen extends MasterScreen {
                 return;
             }            
     	} else {
-            $team = new Team(null, "", "", 0, 0, 0, 0, 0, "", "", null);
+            $team = new Team(null, "", "", "", 0, 0, 0, 0, 0, "", "", null);
         }
 	    ?>
         <div class='wrap'>
@@ -118,15 +118,23 @@ class MainTeamScreen extends MasterScreen {
                                     <label for='nom'>Nom<span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='nom' id='nom' value='<?php echo stripcslashes($team->getName()) ?>' class='regular-text' type='text' required title="Nom" placeholder="Nom">
+                                    <input name='nom' id='nom' value='<?php echo $this->toProperText($team->getName()) ?>' class='regular-text' type='text' required title="Nom" placeholder="Nom">
                                 </td>
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label for='url' name="url">Lien des résultats du championnat</label>
+                                    <label for='urlOne' name="urlOne">Lien n°1 des résultats du championnat</label>
                                 </th>
                                 <td>
-                                    <input name='url' id='url' value='<?php echo stripcslashes($team->getUrl()) ?>' class='regular-text' type='url' title="Lien des résultats du championnat" placeholder="Lien des résultats du championnat">
+                                    <input name='urlOne' id='urlOne' value='<?php echo $this->toProperText($team->getUrlOne()) ?>' class='regular-text' type='url' title="Lien n°1 des résultats du championnat" placeholder="Lien n°2 des résultats du championnat">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope='row'>
+                                    <label for='urlTwo' name="urlTwo">Lien n°2 des résultats du championnat</label>
+                                </th>
+                                <td>
+                                    <input name='urlTwo' id='urlTwo' value='<?php echo $this->toProperText($team->getUrlTwo()) ?>' class='regular-text' type='url' title="Lien n°2 des résultats du championnat" placeholder="Lien n°2 des résultats du championnat">
                                 </td>
                             </tr>
                             <tr>

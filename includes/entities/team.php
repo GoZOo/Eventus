@@ -9,7 +9,8 @@ class Team {
     /**
     * @var int|null     $id         Id of the team
     * @var string       $name       Name of the team
-    * @var string|null  $url        Url of the FFHB website that contain result
+    * @var string|null  $urlOne     First url of the FFHB website that contain result
+    * @var string|null  $urlTwo     Second url of the FFHB website that contain result
     * @var bool         $boy        Is the team a boy team?
     * @var bool         $girl       Is the team agirl team?
     * @var bool         $mixed      Is the team amixed team?
@@ -20,12 +21,13 @@ class Team {
     * @var Club         $club       Club of the team
     */
 
-    private $id, $name, $url, $boy, $girl, $mixed, $position, $points, $time, $img, $club;
+    private $id, $name, $urlOne, $urlTwo, $boy, $girl, $mixed, $position, $points, $time, $img, $club;
 
-    public function __construct($id=null, $name, $url, $boy, $girl, $mixed, $position, $points, $time, $img=null, $club) {
+    public function __construct($id=null, $name, $urlOne, $urlTwo, $boy, $girl, $mixed, $position, $points, $time, $img=null, $club) {
         $this->id = $id;
         $this->name = $name;
-        $this->url = $url;
+        $this->urlOne = $urlOne;
+        $this->urlTwo = $urlTwo;
         $this->boy = $boy;
         $this->girl = $girl;
         $this->mixed = $mixed;
@@ -54,12 +56,21 @@ class Team {
         return $this;
     }
 
-    public function getUrl() {
-        return $this->url;
+    public function getUrlOne() {
+        return $this->urlOne;
     }
 
-    public function setUrl($url) {
-        $this->url = $url;
+    public function setUrlOne($urlOne) {
+        $this->urlOne = $urlOne;
+        return $this;
+    }
+
+    public function getUrlTwo() {
+        return $this->urlTwo;
+    }
+
+    public function setUrlTwo($urlTwo) {
+        $this->urlTwo = $urlTwo;
         return $this;
     }
 

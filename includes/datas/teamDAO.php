@@ -55,7 +55,8 @@ class TeamDAO extends MasterDAO {
             $allTeams[] = new Team(
                 $row->team_id, 
                 $row->team_name, 
-                $row->team_url, 
+                $row->team_urlOne, 
+                $row->team_urlTwo, 
                 $row->team_boy, 
                 $row->team_girl, 
                 $row->team_mixed, 
@@ -100,7 +101,8 @@ class TeamDAO extends MasterDAO {
         return new Team(
                 $row->team_id, 
                 $row->team_name, 
-                $row->team_url, 
+                $row->team_urlOne, 
+                $row->team_urlTwo, 
                 $row->team_boy, 
                 $row->team_girl, 
                 $row->team_mixed, 
@@ -160,7 +162,8 @@ class TeamDAO extends MasterDAO {
             $allTeams[] = new Team(
                 $row->team_id, 
                 $row->team_name, 
-                $row->team_url, 
+                $row->team_urlOne, 
+                $row->team_urlTwo,  
                 $row->team_boy, 
                 $row->team_girl, 
                 $row->team_mixed, 
@@ -209,7 +212,8 @@ class TeamDAO extends MasterDAO {
             $allTeams[] = new Team(
                 $row->team_id, 
                 $row->team_name, 
-                $row->team_url, 
+                $row->team_urlOne, 
+                $row->team_urlTwo, 
                 $row->team_boy, 
                 $row->team_girl, 
                 $row->team_mixed, 
@@ -266,7 +270,8 @@ class TeamDAO extends MasterDAO {
         if ($team->getId()){
             $data = array(
                 'team_name' => $team->getName(), 
-                'team_url' => $team->getUrl(), 
+                'team_urlOne' => $team->getUrlOne(), 
+                'team_urlTwo' => $team->getUrlTwo(), 
                 'team_boy' => $team->getBoy(), 
                 'team_girl' => $team->getGirl(), 
                 'team_mixed' => $team->getMixed(), 
@@ -295,7 +300,8 @@ class TeamDAO extends MasterDAO {
         if (!$team->getId()){
             $data = array(
                 'team_name' => $team->getName(), 
-                'team_url' => $team->getUrl(), 
+                'team_urlOne' => $team->getUrlOne(), 
+                'team_urlTwo' => $team->getUrlTwo(), 
                 'team_boy' => $team->getBoy(), 
                 'team_girl' => $team->getGirl(), 
                 'team_mixed' => $team->getMixed(), 

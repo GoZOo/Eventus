@@ -30,9 +30,26 @@ class Finder {
     * @access public
     */
     public function updateMatches($team){
-        if ($team->getUrl()) {
+        $turn = 0;
+        if ($team->getUrlOne()) {
+            $turn++;
+            if ($team->getUrlTwo()) {
+                $turn++;
+            }
+        }
+        for ($i=0; $i < $turn; $i++) { 
             $allMatches = [];
-            $ch = curl_init($team->getUrl());
+            switch ($i) {
+                case 0:
+                    $ch = curl_init($team->getUrlOne());
+                    break;
+                case 1:
+                    $ch = curl_init($team->getUrlTwo());
+                    break;                
+                default:
+                    $ch = null;
+                    break;
+            }
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_TIMEOUT, 10);
@@ -80,7 +97,8 @@ class Finder {
                                         $this->getCleanString($fullAdress[count($fullAdress)-3]) ? $this->getCleanString($fullAdress[count($fullAdress)-3]) : null, //street
                                         $this->getCleanString($fullAdress[count($fullAdress)-2]) ? $this->getCleanString($fullAdress[count($fullAdress)-2]) : null, //city
                                         $this->getCleanString($fullAdress[count($fullAdress)-4]) ? $this->getCleanString($fullAdress[count($fullAdress)-4]) : null, //gym
-                                        0,
+                                        0, //Type
+                                        $i+1, //Championship
                                         $team, //team
                                         null //matchRef
                                     );
@@ -93,11 +111,12 @@ class Finder {
                     }
                     $html->clear();
                     curl_close($ch);  
+                    //var_dump($allMatches);
                     $allMatches = $this->setNewHoursRdv($allMatches);
                     MatchDAO::getInstance()->updateMatchesSync($allMatches);
                 }            
-            }  
-        }        
+            } 
+        }      
     }
     /**
     * Update hours rdv of matches

@@ -63,6 +63,7 @@ class MainMatchScreen extends MasterScreen {
 						<table class='matchTable parentMatches' <?php if (!$myMatchParent) { echo "style=display:none;"; } ?>>
 							<tr>
 								<th>Id</th>
+								<th>Ch.</th>
 								<th>J.</th>
 								<th>Date</th>
 								<th>Heure<br>RDV</th>
@@ -81,6 +82,9 @@ class MainMatchScreen extends MasterScreen {
 							<tr class="<?php echo $match->getId() ?>">					 		
 								<th>
 									<?php echo $match->getId() ?>
+								</th>
+								<th>
+									<?php echo $match->getChamp() ?>
 								</th>			 		
 								<th>
 									<?php echo $match->getMatchDay() ?>
@@ -127,6 +131,7 @@ class MainMatchScreen extends MasterScreen {
 								</td>
 								<input type='hidden' value="<?php echo $match->getMatchDay() ?>" data-name="matchDaySon">
 								<input type='hidden' value="<?php echo $match->getNumMatch() ?>" data-name="numMatchSon">
+								<input type='hidden' value="<?php echo $match->getChamp() ?>" data-name="matchChampSon">
 								<input type='hidden' value="<?php echo $match->getId() ?>" data-name="idMatchRefSon">
 								<input type='hidden' value="<?php echo $match->getId() ?>" data-name="idSon">
 							</tr>
@@ -142,6 +147,7 @@ class MainMatchScreen extends MasterScreen {
 						<table class='matchTable sonMatches' <?php if (!$myMatchSon) { echo "style=display:none;"; } ?> >
 							<tr>
 								<th>Id<br>Orig.</th>
+								<th>Ch.</th>
 								<th>J.</th>
 								<th>Date</th>
 								<th>Heure<br>RDV</th>
@@ -162,7 +168,10 @@ class MainMatchScreen extends MasterScreen {
 							<tr class="<?php echo ($match->getMatchRef() ? $match->getMatchRef()->getId() : '') ?>">
 								<th>
 									<?php echo ($match->getMatchRef()->getId() ? $match->getMatchRef()->getId() : '') ?>
-								</th>		 		
+								</th>									
+								<th>
+									<?php echo $match->getChamp() ?>
+								</th>	 		
 								<th>
 									<?php echo $match->getMatchDay() ?>
 								</th>
@@ -203,6 +212,7 @@ class MainMatchScreen extends MasterScreen {
 								</td>
 								<input type='hidden' value="<?php echo $match->getMatchDay() ?>" data-name="matchDaySon">
 								<input type='hidden' value="<?php echo $match->getNumMatch() ?>" data-name="numMatchSon">
+								<input type='hidden' value="<?php echo $match->getChamp() ?>" data-name="matchChampSon">
 								<input type='hidden' value="<?php echo $match->getMatchRef()->getId() ?>" data-name="idMatchRefSon">
 								<input type='hidden' name='idSon<?php echo $nbrOtherMatch ?>' value="<?php echo $match->getId() ?>" data-name="idSon">
 							</tr>
@@ -229,7 +239,7 @@ class MainMatchScreen extends MasterScreen {
 						<?php
 						$myMatchOther = MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
 						if (!$myMatchOther){
-							$myMatchOther[] = new Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+							$myMatchOther[] = new Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 						}
 						$nbrOtherMatch = 1;
 						foreach ($myMatchOther as $match) {
@@ -293,7 +303,7 @@ class MainMatchScreen extends MasterScreen {
 					<span class="myTooltiptext">Enregistre & mets à jour les horaires des matchs à venir à l'extérieur avec une adresse valide.</span>
 				</div>  
 				
-				<?php  if ($team->getUrl()) { ?>
+				<?php  if ($team->getUrlOne()) { ?>
                 <div class="myTooltip">
 					<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">Synchroniser les données des matchs</button>
 					<span class="myTooltiptext">Enregistre & synchronise les données des matchs avec le site de la Fédération.</span>

@@ -88,6 +88,7 @@
             	$_POST['citySon'.$i] ? $_POST['citySon'.$i] : null, 
             	$_POST['gymSon'.$i] ? $_POST['gymSon'.$i] : null,
             	1, 
+            	$_POST['matchChampSon'.$i] ? $_POST['matchChampSon'.$i] : null,
             	$_POST['teamId'],
             	$_POST['idMatchRefSon'.$i] ? $_POST['idMatchRefSon'.$i] : null
             );
@@ -112,6 +113,7 @@
             	$_POST['cityOther'.$i] ? $_POST['cityOther'.$i] : null, 
             	$_POST['gymOther'.$i] ? $_POST['gymOther'.$i] : null,
             	2, 
+            	null,
             	$_POST['teamId'],
             	null
             );
@@ -173,7 +175,8 @@
             $team = new Team(null, "", "", 0, 0, 0, 0, 0, "", "", null);
         }        
         $team->setName(($_POST['nom'] ? $_POST['nom'] : null));
-        $team->setUrl(($_POST['url'] ? $_POST['url'] : null));
+        $team->setUrlOne(($_POST['urlOne'] ? $_POST['urlOne'] : null));
+        $team->setUrlTwo(($_POST['urlTwo'] ? $_POST['urlTwo'] : null));
         $team->setBoy(($_POST['sexe'] == "h" ? 1 : 0));
         $team->setGirl(($_POST['sexe'] == "f" ? 1 : 0));
         $team->setMixed(($_POST['sexe'] == "m" ? 1 : 0));

@@ -58,7 +58,8 @@ class MatchDAO extends MasterDAO {
                 d.match_street              as 'refMatch_street',
                 d.match_city                as 'refMatch_city',
                 d.match_gym                 as 'refMatch_gym',
-                d.match_type                as 'refMatch_type'
+                d.match_type                as 'refMatch_type',
+                d.match_champ               as 'refMatch_champ'
             FROM {$this->t2} a 
             LEFT JOIN {$this->t3} b ON a.match_idTeam = b.team_id 
             LEFT JOIN {$this->t1} c ON b.team_clubId = c.club_id 
@@ -82,11 +83,13 @@ class MatchDAO extends MasterDAO {
                 $row->match_street, 
                 $row->match_city, 
                 $row->match_gym, 
-                $row->match_type, 
+                $row->match_type,
+                $row->match_champ, 
                 new Team(
                     $row->team_id, 
                     $row->team_name, 
-                    $row->team_url, 
+                    $row->team_urlOne, 
+                    $row->team_urlTwo, 
                     $row->team_boy, 
                     $row->team_girl, 
                     $row->team_mixed, 
@@ -120,11 +123,13 @@ class MatchDAO extends MasterDAO {
                         $row->refMatch_street, 
                         $row->refMatch_city, 
                         $row->refMatch_gym, 
-                        $row->refMatch_type, 
+                        $row->refMatch_type,
+                        $row->refMatch_champ,  
                         new Team(
                             $row->team_id, 
                             $row->team_name, 
-                            $row->team_url, 
+                            $row->team_urlOne, 
+                            $row->team_urlTwo, 
                             $row->team_boy, 
                             $row->team_girl, 
                             $row->team_mixed, 
@@ -177,7 +182,8 @@ class MatchDAO extends MasterDAO {
                 d.match_street              as 'refMatch_street',
                 d.match_city                as 'refMatch_city',
                 d.match_gym                 as 'refMatch_gym',
-                d.match_type                as 'refMatch_type'
+                d.match_type                as 'refMatch_type',
+                d.match_champ               as 'refMatch_champ'
             FROM {$this->t2} a 
             LEFT JOIN {$this->t3} b ON a.match_idTeam = b.team_id 
             LEFT JOIN {$this->t1} c ON b.team_clubId = c.club_id 
@@ -186,10 +192,9 @@ class MatchDAO extends MasterDAO {
                 a.match_idTeam=$idTeam AND
                 a.match_type=$type
             ORDER BY 
-                a.match_matchDay,
-                CASE WHEN a.match_date IS NULL THEN 1 ELSE 0 END, 
-                a.match_date ASC, 
-                a.match_hourStart;
+                a.match_champ ASC,
+                a.match_matchDay ASC,
+                a.match_numMatch ASC
         ");
         $allMatches = [];
         foreach($teams as $row) { 
@@ -209,10 +214,12 @@ class MatchDAO extends MasterDAO {
                 $row->match_city, 
                 $row->match_gym, 
                 $row->match_type, 
+                $row->match_champ, 
                 new Team(
                     $row->team_id, 
                     $row->team_name, 
-                    $row->team_url, 
+                    $row->team_urlOne, 
+                    $row->team_urlTwo, 
                     $row->team_boy, 
                     $row->team_girl, 
                     $row->team_mixed, 
@@ -247,10 +254,12 @@ class MatchDAO extends MasterDAO {
                         $row->refMatch_city, 
                         $row->refMatch_gym, 
                         $row->refMatch_type, 
+                        $row->refMatch_champ,  
                         new Team(
                             $row->team_id, 
                             $row->team_name, 
-                            $row->team_url, 
+                            $row->team_urlOne, 
+                            $row->team_urlTwo, 
                             $row->team_boy, 
                             $row->team_girl, 
                             $row->team_mixed, 
@@ -301,7 +310,8 @@ class MatchDAO extends MasterDAO {
                 b.match_street              as 'refMatch_street',
                 b.match_city                as 'refMatch_city',
                 b.match_gym                 as 'refMatch_gym',
-                b.match_type                as 'refMatch_type'
+                b.match_type                as 'refMatch_type',
+                b.match_champ               as 'refMatch_champ'
             FROM {$this->t2} a 
             LEFT JOIN {$this->t2} b ON a.match_idMatchRef = b.match_id
             WHERE 
@@ -329,6 +339,7 @@ class MatchDAO extends MasterDAO {
                 $row->match_city, 
                 $row->match_gym, 
                 $row->match_type, 
+                $row->match_champ, 
                 null,
                 null
             );
@@ -349,6 +360,7 @@ class MatchDAO extends MasterDAO {
                 $row->refMatch_city, 
                 $row->refMatch_gym, 
                 $row->refMatch_type, 
+                $row->match_champ, 
                 null,
                 null
             );
@@ -384,7 +396,8 @@ class MatchDAO extends MasterDAO {
                 d.match_street              as 'refMatch_street',
                 d.match_city                as 'refMatch_city',
                 d.match_gym                 as 'refMatch_gym',
-                d.match_type                as 'refMatch_type'
+                d.match_type                as 'refMatch_type',
+                d.match_champ               as 'refMatch_champ'
             FROM {$this->t2} a 
             LEFT JOIN {$this->t3} b ON a.match_idTeam = b.team_id 
             LEFT JOIN {$this->t1} c ON b.team_clubId = c.club_id 
@@ -415,10 +428,12 @@ class MatchDAO extends MasterDAO {
                 $row->match_city, 
                 $row->match_gym, 
                 $row->match_type, 
+                $row->match_champ, 
                 new Team(
                     $row->team_id, 
                     $row->team_name, 
-                    $row->team_url, 
+                    $row->team_urlOne, 
+                    $row->team_urlTwo, 
                     $row->team_boy, 
                     $row->team_girl, 
                     $row->team_mixed, 
@@ -453,10 +468,12 @@ class MatchDAO extends MasterDAO {
                         $row->refMatch_city, 
                         $row->refMatch_gym, 
                         $row->refMatch_type, 
+                        $row->refMatch_champ,  
                         new Team(
                             $row->team_id, 
                             $row->team_name, 
-                            $row->team_url, 
+                            $row->team_urlOne, 
+                            $row->team_urlTwo, 
                             $row->team_boy, 
                             $row->team_girl, 
                             $row->team_mixed, 
@@ -500,7 +517,8 @@ class MatchDAO extends MasterDAO {
                 WHERE 
                     match_matchDay={$match->getMatchDay()} AND 
                     match_idTeam={$match->getTeam()->getId()} AND 
-                    match_numMatch={$match->getNumMatch()}"
+                    match_numMatch={$match->getNumMatch()} AND 
+                    match_champ={$match->getChamp()}"
             )->match_id;
             //var_dump($myId);
             if($myId){
@@ -519,6 +537,7 @@ class MatchDAO extends MasterDAO {
                     'match_city' => $match->getCity(),
                     'match_gym' => $match->getGym(),
                     'match_type' => $match->getType(), 
+                    'match_champ' => $match->getChamp(), 
                     'match_idTeam' => $match->getTeam()->getId(),
                     'match_idMatchRef' => ($match->getMatchRef() ? $match->getMatchRef() : null)
                 );
@@ -569,6 +588,7 @@ class MatchDAO extends MasterDAO {
                     'match_city' => $match->getCity(),
                     'match_gym' => $match->getGym(),
                     'match_type' => $match->getType(), 
+                    'match_champ' => $match->getChamp(), 
                     'match_idTeam' => $match->getTeam(),
                     'match_idMatchRef' => ($match->getMatchRef() ? $match->getMatchRef() : null)
                 );
@@ -629,7 +649,8 @@ class MatchDAO extends MasterDAO {
                     'match_street' => $match->getStreet(), 
                     'match_city' => $match->getCity(),
                     'match_gym' => $match->getGym(),
-                    'match_type' => $match->getType(), 
+                    'match_type' => $match->getType(),
+                    'match_champ' => $match->getChamp(),  
                     'match_idTeam' => (is_object($match->getTeam()) ? $match->getTeam()->getId() : $match->getTeam()),
                     'match_idMatchRef' => ($match->getMatchRef() ? $match->getMatchRef() : null)
                 );

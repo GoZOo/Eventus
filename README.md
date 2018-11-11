@@ -2,9 +2,36 @@
 
 Useful Wordpress plugin that allow you to manage handball teams results through FFHB website.
 
-## Installing
+## How to use
 
-Simply retrieve the project and drag it into the "wp-content/plugins/" folder of your wordpress site.
+### Installing
+
+Simply retrieve the project and drag it into the plugins folder of your WordPress site.
+
+```
+wp-content/plugins/
+```
+
+### Initialization
+
+You need to create a Club first.
+![newclub](https://user-images.githubusercontent.com/24525092/48315817-5fa44600-e5db-11e8-8275-1e912c395a84.png)
+
+Then, you can create a team with your link to FFHB's website results.
+![newteam](https://user-images.githubusercontent.com/24525092/48315818-5fa44600-e5db-11e8-9ef2-69d207388db8.png)
+
+You can now synchronize matches data.
+![showteams](https://user-images.githubusercontent.com/24525092/48315819-603cdc80-e5db-11e8-9682-01f315594fa1.png)
+
+### More 
+
+Do not forget to put your GoogleMap Matrix Distance Api Key in the settings page.
+
+This plugin has been created to work with Enfold Theme. So, if you do not have it, you will not be able to display information on your site. 
+
+Feel free to edit the project, so you can use it with your own theme.
+
+Most of the files are documented. So, you can give it an eye of you want to understand more.
 
 ## Updates
 

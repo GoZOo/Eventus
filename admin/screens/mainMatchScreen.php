@@ -94,13 +94,13 @@ class MainMatchScreen extends MasterScreen {
 									<input type='time' value="<?php echo $match->getHourStart() ?>" class='regular-text' disabled data-name="hourStartSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getLocalTeam() ?>" class='regular-text' disabled data-name="localTeamSon">
+									<input type='text' value="<?php echo $match->getLocalTeam() ?>" class='regular-text' disabled required data-name="localTeamSon" >
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getLocalTeamScore() ?>" class='regular-text' disabled data-name="localTeamScoreSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getVisitingTeam() ?>" class='regular-text' disabled data-name="visitingTeamSon">
+									<input type='text' value="<?php echo $match->getVisitingTeam() ?>" class='regular-text' disabled required data-name="visitingTeamSon">
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getVisitingTeamScore() ?>" class='regular-text' disabled data-name="visitingTeamScoreSon">
@@ -175,13 +175,13 @@ class MainMatchScreen extends MasterScreen {
 									<input type='time' value="<?php echo $match->getHourStart() ?>" class='regular-text' data-name="hourStartSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getLocalTeam() ?>" class='regular-text' data-name="localTeamSon">
+									<input type='text' value="<?php echo $match->getLocalTeam() ?>" class='regular-text' data-name="localTeamSon" required>
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getLocalTeamScore() ?>" class='regular-text' data-name="localTeamScoreSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getVisitingTeam() ?>" class='regular-text' data-name="visitingTeamSon">
+									<input type='text' value="<?php echo $match->getVisitingTeam() ?>" class='regular-text' data-name="visitingTeamSon" required>
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getVisitingTeamScore() ?>" class='regular-text' data-name="visitingTeamScoreSon">

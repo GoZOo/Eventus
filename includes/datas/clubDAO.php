@@ -71,7 +71,7 @@ class ClubDAO extends MasterDAO {
             FROM 
                 {$this->t1} 
             WHERE 
-                id=$myClubId");
+                club_id=$myClubId");
         return new Club(
             $row->club_id, 
             $row->club_name, 

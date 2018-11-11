@@ -50,6 +50,7 @@ class TeamDAO extends MasterDAO {
             ORDER BY 
                 a.team_name DESC 
         ");
+        $allTeams = [];
         foreach($teams as $row) { 
             $allTeams[] = new Team(
                 $row->team_id, 
@@ -154,6 +155,7 @@ class TeamDAO extends MasterDAO {
             ORDER BY 
                 a.team_name DESC 
         ");
+        $allTeams = [];
         foreach($teams as $row) { 
             $allTeams[] = new Team(
                 $row->team_id, 
@@ -202,6 +204,7 @@ class TeamDAO extends MasterDAO {
             ORDER BY 
                 a.team_name DESC 
         "); 
+        $allTeams = [];
         foreach($teams as $row) { 
             $allTeams[] = new Team(
                 $row->team_id, 

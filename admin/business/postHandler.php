@@ -70,9 +70,9 @@
 
     function setUpdateMatch(){
     	$myTeam = TeamDAO::getInstance()->getTeamById($_POST['teamId']);
-       	$allMatches = [];
+       	$allMatchesSon = [];
         for($i=1; $i < $_POST['nbrSonMatch']+1; $i++) { 
-            $allMatches[] = new Match(
+            $allMatchesSon[] = new Match(
             	$_POST['idSon'.$i] ? $_POST['idSon'.$i] : null, 
             	$_POST['matchDaySon'.$i] ? $_POST['matchDaySon'.$i] : null,
             	$_POST['numMatchSon'.$i] ? $_POST['numMatchSon'.$i] : null,
@@ -92,11 +92,11 @@
             	$_POST['idMatchRefSon'.$i] ? $_POST['idMatchRefSon'.$i] : null
             );
         }	
-        MatchDAO::getInstance()->updateMatchesScreen($allMatches, 1, TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  
+        MatchDAO::getInstance()->updateMatchesScreen($allMatchesSon, 1, TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId()); 
 
-       	$allMatches = [];
+       	$allMatchesOther = [];
         for($i=1; $i < $_POST['nbrOtherMatch']+1; $i++) { 
-            $allMatches[] = new Match(
+            $allMatchesOther[] = new Match(
             	$_POST['idOther'.$i] ? $_POST['idOther'.$i] : null, 
             	null,
             	null,
@@ -116,7 +116,7 @@
             	null
             );
         }
-        MatchDAO::getInstance()->updateMatchesScreen($allMatches, 2, TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  	
+        MatchDAO::getInstance()->updateMatchesScreen($allMatchesOther, 2, TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  
     }
     
     /**************************
@@ -133,15 +133,23 @@
         $club->setBoy(($_POST['h'] ? 1 : 0));
         $club->setGirl(($_POST['f'] ? 1 : 0));
         $club->setMixed(($_POST['m'] ? 1 : 0));
-        $club->setAdress(($_POST['adresse'] ? $_POST['adresse'] : null));
+        $club->setAddress(($_POST['adresse'] ? $_POST['adresse'] : null));
 
-        if ($club->getId()) {
-            ClubDAO::getInstance()->updateClub($club); 
-            wp_redirect( add_query_arg( 'message', 'succesUpClub',  wp_get_referer() )); 
-        } else {
-            $newId = ClubDAO::getInstance()->insertClub($club); 
-            wp_redirect( add_query_arg( 'message', 'succesNewClub', 'admin.php?page=eventus_club&action=club&clubId='.$newId )); 
-        }        
+        if($club->getName() && $club->getString() && $club->getAddress()){
+            if ($club->getId()) {
+                ClubDAO::getInstance()->updateClub($club); 
+                wp_redirect( add_query_arg( 'message', 'succesUpClub',  wp_get_referer() )); 
+            } else {
+                $newId = ClubDAO::getInstance()->insertClub($club); 
+                wp_redirect( add_query_arg( 'message', 'succesNewClub', 'admin.php?page=eventus_club&action=club&clubId='.$newId )); 
+            }  
+        } else {    
+            if ($club->getId()) {
+                wp_redirect( add_query_arg( 'message', 'errorUpClub',  wp_get_referer() )); 
+            } else {
+                wp_redirect( add_query_arg( 'message', 'errorNewClub',  wp_get_referer() )); 
+            }         
+        }            
     }
 
     function deleteClub(){
@@ -172,13 +180,23 @@
         $team->setTime(($_POST['time'] ? $_POST['time'] : 45));
         $team->setImg(($_POST['img'] ? $_POST['img'] : null));
         $team->setClub(ClubDAO::getInstance()->getClubById(($_POST['club'] ? $_POST['club'] : null)));
-        if ($team->getId()) {
-            TeamDAO::getInstance()->updateTeam($team); 
-            wp_redirect( add_query_arg( 'message', 'succesUpTeam',  wp_get_referer() )); 
-        } else {
-            $newId = TeamDAO::getInstance()->insertTeam($team); 
-            wp_redirect( add_query_arg( 'message', 'succesNewTeam', 'admin.php?page=eventus&action=team&teamId='.$newId )); 
-        }        
+            
+        
+        if($team->getName() && $team->getClub()){
+            if ($team->getId()) {
+                TeamDAO::getInstance()->updateTeam($team); 
+                wp_redirect( add_query_arg( 'message', 'succesUpTeam',  wp_get_referer() )); 
+            } else {
+                $newId = TeamDAO::getInstance()->insertTeam($team); 
+                wp_redirect( add_query_arg( 'message', 'succesNewTeam', 'admin.php?page=eventus&action=team&teamId='.$newId )); 
+            }
+        } else {    
+            if ($team->getId()) {
+                wp_redirect( add_query_arg( 'message', 'errorUpTeam',  wp_get_referer() )); 
+            } else {
+                wp_redirect( add_query_arg( 'message', 'errorNewTeam',  wp_get_referer() )); 
+            }         
+        } 
     }
 
     function deleteTeam(){

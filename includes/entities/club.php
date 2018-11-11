@@ -13,12 +13,12 @@ class Club {
     * @var bool     $boy        Do the club has boy team(s)?
     * @var bool     $girl       Do the club has girl team(s)?
     * @var bool     $mixed      Do the club has mixed team(s)?
-    * @var string   $address    Adress of the gym. Used to calculate hours rdv
+    * @var string   $address    Address of the gym. Used to calculate hours rdv
     */
 
     private $id, $name, $string, $boy, $girl, $mixed, $address;
 
-    public function __construct($id=null, $name, $string, $boy, $girl, $mixed, $address) {
+    public function __construct($id, $name, $string, $boy, $girl, $mixed, $address) {
         $this->id = $id;
         $this->name = $name;
         $this->string = $string;

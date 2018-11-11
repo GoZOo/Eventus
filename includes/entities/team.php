@@ -15,7 +15,7 @@ class Team {
     * @var bool         $mixed      Is the team amixed team?
     * @var int|null     $position   Position of the team in the classement
     * @var int|null     $points     Points of the team in the classement
-    * @var int|null     $time       Time for the rdv before match start
+    * @var int          $time       Time for the rdv before match start
     * @var int|null     $img        Id of the photo of the team
     * @var Club         $club       Club of the team
     */

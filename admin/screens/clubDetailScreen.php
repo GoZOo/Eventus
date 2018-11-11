@@ -82,7 +82,7 @@ class ClubDetailScreen extends MasterScreen {
                                     <label for='adresse' data-name="chaine">Adresse de la salle<span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='adresse' id='adresse' value='<?php echo stripcslashes($club->getAdress()) ?>' class='regular-text' type='text' required title="Adresse" placeholder="Adresse">
+                                    <input name='adresse' id='adresse' value='<?php echo stripcslashes($club->getAddress()) ?>' class='regular-text' type='text' required title="Adresse" placeholder="Adresse">
                                     <p class='description' id='tagline-description'>Adresse utilisé pour calculer les horaires de rdv des matchs</p>
                                 </td>
                             </tr>

@@ -56,7 +56,15 @@ abstract class MasterScreen {
             'succesNewTeam'=>array(
                 'state' => "success", 
                 'str'   => "L'équipe à bien été ajoutée."
-            ),  
+            ),    
+            'errorUpTeam'=>array(
+                'state' => "error", 
+                'str'   => "L'équipe n'a pas pu être modifié. Certains champs sont manquants."
+            ), 
+            'errorNewTeam'=>array(
+                'state' => "error", 
+                'str'   => "L'équipe n'a pas pu être ajouté. Certains champs sont manquants."
+            ), 
             'succesDelTeam'=>array(
                 'state' => "success", 
                 'str'   => "L'équipe à bien été supprimée."
@@ -71,8 +79,16 @@ abstract class MasterScreen {
             ),
             'succesNewClub'=>array(
                 'state' => "success", 
-                'str'   => "Le club à bien été ajoutée."
+                'str'   => "Le club à bien été ajouté."
             ),  
+            'errorUpClub'=>array(
+                'state' => "error", 
+                'str'   => "Le club n'a pas pu être modifié. Certains champs sont manquants."
+            ), 
+            'errorNewClub'=>array(
+                'state' => "error", 
+                'str'   => "Le club n'a pas pu être ajouté. Certains champs sont manquants."
+            ), 
             'succesDelClub'=>array(
                 'state' => "success", 
                 'str'   => "Le club a bien été supprimés."
@@ -83,7 +99,7 @@ abstract class MasterScreen {
             ), 
             'succesReset'=>array(
                 'state' => "success", 
-                'str'   => "Les plugin à bien été réinitialiser."
+                'str'   => "Les plugin à bien été réinitialisé."
             ), 
             'succesUpSet'=>array(
                 'state' => "success", 

@@ -35,6 +35,11 @@ Most of the files are documented. So, you can give it an eye of you want to unde
 
 ## Updates
 
+### 2.3.1
+
+* Fix escape some string with quotes, etc...
+* Fix positions notices
+
 ### 2.3
 
 * Fix if there are no Enfold Theme

@@ -48,9 +48,10 @@ class ClubDetailScreen extends MasterScreen {
         <div class='wrap'>
         	<h1 class="wp-heading-inline">
                 <?php 
-                    echo ($club->getName() ? $club->getName() : 'Nouveau club').' '.$this->getSexIcoClub($club->getBoy(), $club->getGirl(), $club->getMixed())         
+                    echo ($club->getName() ? $this->toProperText($club->getName()) : 'Nouveau club').' '.$this->getSexIcoClub($club->getBoy(), $club->getGirl(), $club->getMixed())         
                 ?>                
             </h1> 
+            <hr class="wp-header-end">
             <?php      
                 echo $this->showNotice(); 
             ?>
@@ -65,7 +66,7 @@ class ClubDetailScreen extends MasterScreen {
                                     <label for='nom' data-name="nom">Nom<span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='nom' id='nom' value='<?php echo stripcslashes($club->getName()) ?>' class='regular-text' type='text' required title="Nom" placeholder="Nom">
+                                    <input name='nom' id='nom' value="<?php echo $this->toProperText($club->getName()) ?>" class='regular-text' type='text' required title="Nom" placeholder="Nom">
                                 </td>
                             </tr>
                             <tr>
@@ -73,7 +74,7 @@ class ClubDetailScreen extends MasterScreen {
                                     <label for='chaine' data-name="chaine">Chaîne de caractères<span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='chaine' id='chaine' aria-describedby='tagline-description' value='<?php echo stripcslashes($club->getString()) ?>' class='regular-text' type='text' required title="Chaîne de caractères" placeholder="Chaîne de caractères">
+                                    <input name='chaine' id='chaine' aria-describedby='tagline-description' value='<?php echo $this->toProperText($club->getString()) ?>' class='regular-text' type='text' required title="Chaîne de caractères" placeholder="Chaîne de caractères">
                                     <p class='description' id='tagline-description'>Chaîne de caractères que l'algorithme vas chercher sur le site de la FFHB</p>
                                 </td>
                             </tr>
@@ -82,7 +83,7 @@ class ClubDetailScreen extends MasterScreen {
                                     <label for='adresse' data-name="chaine">Adresse de la salle<span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='adresse' id='adresse' value='<?php echo stripcslashes($club->getAddress()) ?>' class='regular-text' type='text' required title="Adresse" placeholder="Adresse">
+                                    <input name='adresse' id='adresse' value='<?php echo $this->toProperText($club->getAddress()) ?>' class='regular-text' type='text' required title="Adresse" placeholder="Adresse">
                                     <p class='description' id='tagline-description'>Adresse utilisé pour calculer les horaires de rdv des matchs</p>
                                 </td>
                             </tr>

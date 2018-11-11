@@ -38,6 +38,7 @@ class LogScreen extends MasterScreen {
         ?>
         <div class='wrap'>
             <h1 class="wp-heading-inline">Affichage des logs</h1>
+            <hr class="wp-header-end">
             <?php  
                 echo $this->showNotice(); 
             ?> 

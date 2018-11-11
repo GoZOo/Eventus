@@ -42,6 +42,7 @@ class ClubScreen extends MasterScreen {
 		?>
 		<div class="wrap">
 	        <h1 class="wp-heading-inline">Liste des Clubs</h1>
+			<hr class="wp-header-end">
 			<?php  
                 echo $this->showNotice(); 	        
 			$allClubs = ClubDAO::getInstance()->getAllClubs();
@@ -60,7 +61,7 @@ class ClubScreen extends MasterScreen {
 								<img class="card-img-top" alt="Team" src="<?php echo plugin_dir_url( __FILE__ ).'../../includes/img/team-default.png' ?>">
 								<div class="card-body">
 									<h5 class="card-title">
-										<?php echo stripcslashes($club->getName()).'<br>'.$this->getSexIcoClub($club->getBoy(), $club->getGirl(), $club->getMixed()); ?>
+										<?php echo $this->toProperText($club->getName()).'<br>'.$this->getSexIcoClub($club->getBoy(), $club->getGirl(), $club->getMixed()); ?>
 									</h5>
 									<button class="button-primary ico ico-club" onclick="location.href='<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$club->getId(); ?>'">
 										Club

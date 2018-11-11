@@ -44,19 +44,20 @@ class MainMatchScreen extends MasterScreen {
 		<div class="wrap">
 	        <h1 class="wp-heading-inline">
 				<?php 
-					echo ($team->getName() ? $team->getName() : 'Nouvelle équipe').' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed());
+					echo ($team->getName() ? $this->toProperText($team->getName()) : 'Nouvelle équipe').' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed());
                 ?>                
 			</h1>
 			<?php 
 				$myMatchParent = MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
 			?>
 			<a href="<?php echo "admin.php?page=eventus&action=team&teamId=".$team->getId(); ?>" class="page-title-action">Équipe</a>
+			<hr class="wp-header-end">
 			<?php  
                 echo $this->showNotice(); 
             ?> 
 	        <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post" class="fakeForm">   
 				<h2>
-					<?php echo $team->getClub()->getName(); ?>
+					<?php echo $this->toProperText($team->getClub()->getName()); ?>
 				</h2>
 					<div class="overflow">
 						<table class='matchTable parentMatches' <?php if (!$myMatchParent) { echo "style=display:none;"; } ?>>
@@ -94,25 +95,25 @@ class MainMatchScreen extends MasterScreen {
 									<input type='time' value="<?php echo $match->getHourStart() ?>" class='regular-text' disabled data-name="hourStartSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getLocalTeam() ?>" class='regular-text' disabled required data-name="localTeamSon" >
+									<input type='text' value="<?php echo $this->toProperText($match->getLocalTeam()) ?>" class='regular-text' disabled required data-name="localTeamSon" >
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getLocalTeamScore() ?>" class='regular-text' disabled data-name="localTeamScoreSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getVisitingTeam() ?>" class='regular-text' disabled required data-name="visitingTeamSon">
+									<input type='text' value="<?php echo $this->toProperText($match->getVisitingTeam()) ?>" class='regular-text' disabled required data-name="visitingTeamSon">
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getVisitingTeamScore() ?>" class='regular-text' disabled data-name="visitingTeamScoreSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getStreet() ?>" class='regular-text' disabled data-name="streetSon">
+									<input type='text' value="<?php echo $this->toProperText($match->getStreet()) ?>" class='regular-text' disabled data-name="streetSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getCity() ?>" class='regular-text' disabled data-name="citySon">
+									<input type='text' value="<?php echo $this->toProperText($match->getCity()) ?>" class='regular-text' disabled data-name="citySon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getGym() ?>" class='regular-text' disabled data-name="gymSon">
+									<input type='text' value="<?php echo $this->toProperText($match->getGym()) ?>" class='regular-text' disabled data-name="gymSon">
 								</td>
 								<td>
 									<button type='button' onclick='editMatch(<?php echo $match->getId() ?>)' class='button-primary' title="Editer le match">
@@ -175,25 +176,25 @@ class MainMatchScreen extends MasterScreen {
 									<input type='time' value="<?php echo $match->getHourStart() ?>" class='regular-text' data-name="hourStartSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getLocalTeam() ?>" class='regular-text' data-name="localTeamSon" required>
+									<input type='text' value="<?php echo $this->toProperText($match->getLocalTeam()) ?>" class='regular-text' data-name="localTeamSon" required>
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getLocalTeamScore() ?>" class='regular-text' data-name="localTeamScoreSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getVisitingTeam() ?>" class='regular-text' data-name="visitingTeamSon" required>
+									<input type='text' value="<?php echo $this->toProperText($match->getVisitingTeam()) ?>" class='regular-text' data-name="visitingTeamSon" required>
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getVisitingTeamScore() ?>" class='regular-text' data-name="visitingTeamScoreSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getStreet() ?>" class='regular-text' data-name="streetSon">
+									<input type='text' value="<?php echo $this->toProperText($match->getStreet()) ?>" class='regular-text' data-name="streetSon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getCity() ?>" class='regular-text' data-name="citySon">
+									<input type='text' value="<?php echo $this->toProperText($match->getCity()) ?>" class='regular-text' data-name="citySon">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getGym() ?>" class='regular-text' data-name="gymSon">
+									<input type='text' value="<?php echo $this->toProperText($match->getGym()) ?>" class='regular-text' data-name="gymSon">
 								</td>
 								<td>
 									<button type='button' onclick='deleMatch(<?php echo $match->getMatchRef()->getId() ?>, "sonMatches")' class='button-primary' title="Supprimer le match">
@@ -245,25 +246,25 @@ class MainMatchScreen extends MasterScreen {
 									<input type='time' value="<?php echo $match->getHourStart() ?>" class='regular-text' data-name="hourStartOther">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getLocalTeam() ?>" class='regular-text' data-name="localTeamOther">
+									<input type='text' value="<?php echo $this->toProperText($match->getLocalTeam()) ?>" class='regular-text' data-name="localTeamOther">
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getLocalTeamScore() ?>" class='regular-text' data-name="localTeamScoreOther">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getVisitingTeam() ?>" class='regular-text' data-name="visitingTeamOther">
+									<input type='text' value="<?php echo $this->toProperText($match->getVisitingTeam()) ?>" class='regular-text' data-name="visitingTeamOther">
 								</td>
 								<td>
 									<input type='number' value="<?php echo $match->getVisitingTeamScore() ?>" class='regular-text' data-name="visitingTeamScoreOther">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getStreet() ?>" class='regular-text' data-name="streetOther">
+									<input type='text' value="<?php echo $this->toProperText($match->getStreet()) ?>" class='regular-text' data-name="streetOther">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getCity() ?>" class='regular-text' data-name="cityOther">
+									<input type='text' value="<?php echo $this->toProperText($match->getCity()) ?>" class='regular-text' data-name="cityOther">
 								</td>
 								<td>
-									<input type='text' value="<?php echo $match->getGym() ?>" class='regular-text' data-name="gymOther">
+									<input type='text' value="<?php echo $this->toProperText($match->getGym()) ?>" class='regular-text' data-name="gymOther">
 								</td>
 								<td>
 									<button type='button' onclick="deleMatch('<?php if($match->getId()) { echo $match->getId(); } else { echo $tempId; } ?>', 'otherMatches')" class='button-primary' title="Supprimer le match">

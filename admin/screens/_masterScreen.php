@@ -158,6 +158,17 @@ abstract class MasterScreen {
         }	
         return implode("/", $return);
     }
+
+    /**
+    * Get escaped text without double anti slash and ready to be put in html
+    *
+    * @param string     Text to be modified
+    * @return string    The icon(s)
+    * @access protected
+    */
+    protected function toProperText($text){
+        return htmlspecialchars(stripcslashes($text));
+    }
 }
 
 ?>

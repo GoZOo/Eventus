@@ -46,7 +46,8 @@ class MainScreen extends MasterScreen {
 		}
 		?>
 		<div class="wrap">
-			<h1 class="wp-heading-inline">Liste des équipes</h1>	
+			<h1 class="wp-heading-inline">Liste des équipes</h1>
+			<hr class="wp-header-end">	
 			<?php  
                 echo $this->showNotice(); 
 				$allClubs = ClubDAO::getInstance()->getAllClubs();
@@ -62,7 +63,7 @@ class MainScreen extends MasterScreen {
 				foreach ($allClubs as $club) {
 			?>
 				<div class="teamList">
-					<h2><?php echo $club->getName()?></h2>	 
+					<h2><?php echo $this->toProperText($club->getName())?></h2>	 
 					<div>       				
 						<?php 
 							$allTeams = TeamDAO::getInstance()->getAllTeamsByClubOrderByName($club);
@@ -76,10 +77,10 @@ class MainScreen extends MasterScreen {
 									<?php echo $team->getImg() ? wp_get_attachment_image($team->getImg(), 'portfolio', false, ["class"=>"card-img-top", "alt"=>"Team"]) : ('<img class="card-img-top" alt="Team" src="'.plugin_dir_url( __FILE__ ).'../../includes/img/team-default.png'.'">'); ?>
 									<div class="card-body">
 										<h5 class="card-title">
-											<?php echo $team->getName().' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed()); ?>
+											<?php echo $this->toProperText($team->getName()).' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed()); ?>
 										</h5>
 										<p class="card-text">
-											<?php echo $club->getName() ?>
+											<?php echo $this->toProperText($club->getName()) ?>
 										</p>
 										<button class="button-primary ico ico-fight" onclick="location.href='<?php echo 'admin.php?page=eventus&action=matchs&teamId='.$team->getId(); ?>'">
 											Matchs

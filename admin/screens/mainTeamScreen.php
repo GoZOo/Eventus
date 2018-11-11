@@ -52,17 +52,18 @@ class MainTeamScreen extends MasterScreen {
         <div class='wrap'>
         	<h1 class="wp-heading-inline">
                 <?php 
-                    echo ($team->getName() ? $team->getName() : 'Nouvelle équipe').' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed())         
+                    echo ($team->getName() ? $this->toProperText($team->getName()) : 'Nouvelle équipe').' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed())         
                 ?>                
             </h1> 
             <?php       
                 if ($team->getId()) { ?>
                     <a href="<?php echo "admin.php?page=eventus&action=matchs&teamId=".$team->getId(); ?>"  class="page-title-action">Matchs</a> 
+                    <hr class="wp-header-end">
                 <?php
                 }
                 echo $this->showNotice(); 
             ?>
-            <h2><?php echo $team->getClub() ? $team->getClub()->getName() : ''; ?></h2>
+            <h2><?php echo $team->getClub() ? $this->toProperText($team->getClub()->getName()) : ''; ?></h2>
         	<form action="<?php echo admin_url( 'admin-post.php' ) ?>" method='post'>     
                 <div>
                     <table class='form-table'>
@@ -83,7 +84,7 @@ class MainTeamScreen extends MasterScreen {
                                                 data-girl="<?php echo $club->getGirl()?>" 
                                                 data-mixed="<?php echo $club->getMixed()?>"
                                             >
-                                            <?php echo $club->getName()?>
+                                            <?php echo $this->toProperText($club->getName())?>
                                             </option>
                                         <?php
                                         }

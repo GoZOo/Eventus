@@ -38,6 +38,7 @@ class AdminScreen extends MasterScreen {
         ?>
         <div class='wrap'>
             <h1 class="wp-heading-inline">Administration</h1>
+            <hr class="wp-header-end">
             <?php  
                 echo $this->showNotice(); 
             if(current_user_can('administrator')) {  

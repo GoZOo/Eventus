@@ -101,9 +101,6 @@ class MatchDAO extends MasterDAO {
                         $row->club_id, 
                         $row->club_name, 
                         $row->club_string, 
-                        $row->club_boy, 
-                        $row->club_girl, 
-                        $row->club_mixed, 
                         $row->club_address
                     )
                 ),
@@ -141,9 +138,6 @@ class MatchDAO extends MasterDAO {
                                 $row->club_id, 
                                 $row->club_name, 
                                 $row->club_string, 
-                                $row->club_boy, 
-                                $row->club_girl, 
-                                $row->club_mixed, 
                                 $row->club_address
                             )
                         )
@@ -231,9 +225,6 @@ class MatchDAO extends MasterDAO {
                         $row->club_id, 
                         $row->club_name, 
                         $row->club_string, 
-                        $row->club_boy, 
-                        $row->club_girl, 
-                        $row->club_mixed, 
                         $row->club_address
                     )
                 ),
@@ -271,9 +262,6 @@ class MatchDAO extends MasterDAO {
                                 $row->club_id, 
                                 $row->club_name, 
                                 $row->club_string, 
-                                $row->club_boy, 
-                                $row->club_girl, 
-                                $row->club_mixed, 
                                 $row->club_address
                             )
                         )
@@ -445,9 +433,6 @@ class MatchDAO extends MasterDAO {
                         $row->club_id, 
                         $row->club_name, 
                         $row->club_string, 
-                        $row->club_boy, 
-                        $row->club_girl, 
-                        $row->club_mixed, 
                         $row->club_address
                     )
                 ),
@@ -485,9 +470,6 @@ class MatchDAO extends MasterDAO {
                                 $row->club_id, 
                                 $row->club_name, 
                                 $row->club_string, 
-                                $row->club_boy, 
-                                $row->club_girl, 
-                                $row->club_mixed, 
                                 $row->club_address
                             )
                         )

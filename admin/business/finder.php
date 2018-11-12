@@ -61,19 +61,21 @@ class Finder {
                 if ($html->getElementById('ul#journeelist') == null ){
                     $this->addLog("Error Url (TeamId: ".$team->getId().") : Can't find match informations");
                 } else {
+                    if (strpos(mb_strtolower($output), mb_strtolower($team->getClub()->getString())) === false) {
+                        $this->addLog("Error String (TeamId: ".$team->getId().") : Can't find the string in matches list");
+                    }
                     foreach($html->find('div.round tr') as $row) {
-                        if ( strpos( strtolower($row), strtolower($team->getClub()->getString()) ) ){
+                        if ( strpos( mb_strtolower($row), mb_strtolower($team->getClub()->getString()) ) ){
                             $team->setPosition($row->find('td.num',0)->plaintext);
                             $team->setPoints($row->find('td.pts',0)->plaintext);
                         }
                     }
                     TeamDAO::getInstance()->updateTeam($team);
                     foreach($html->getElementById('ul#journeelist')->find('.touchcarousel-item') as $matchDay => $rows) {
-                        $clubFound = false;
                         $prevMatchDay = $matchDay;
                         $numMatch = 0;
                         foreach($rows->find('tr') as $row) {
-                            if ( strpos( strtolower($row->find('td.eq',0)), strtolower($team->getClub()->getString()) ) ){
+                            if ( strpos( mb_strtolower($row->find('td.eq',0)), mb_strtolower($team->getClub()->getString()) ) ){
                                 $clubFound = true;
                                 $fullAdress = explode("#/#", $row->find('td.info a',0)->attr['data-text-tooltip']);
                                 $fullDate = explode("<br>", $row->find('td.date',0)->innertext);
@@ -93,7 +95,7 @@ class Finder {
                                         $row->find('td.eq p',0)->find('strong',0)->plaintext ? $row->find('td.eq p',0)->find('strong',0)->plaintext : null, //localTeamScore
                                         $this->getCleanString(explode(" -  ", $row->find('td.eq p',1)->plaintext)[1]), //visitingTeam
                                         $row->find('td.eq p',1)->find('strong',0)->plaintext ? $row->find('td.eq p',1)->find('strong',0)->plaintext : null, //visitingTeamScore
-                                        strpos(strtolower($this->stripAccents(explode(" -  ", $row->find('td.eq p',0)->plaintext)[1])),strtolower($this->stripAccents($team->getClub()->getString()))) !== false ? 0 : 1, //ext
+                                        strpos(mb_strtolower($this->stripAccents(explode(" -  ", $row->find('td.eq p',0)->plaintext)[1])),mb_strtolower($this->stripAccents($team->getClub()->getString()))) !== false ? 0 : 1, //ext
                                         $this->getCleanString($fullAdress[count($fullAdress)-3]) ? $this->getCleanString($fullAdress[count($fullAdress)-3]) : null, //street
                                         $this->getCleanString($fullAdress[count($fullAdress)-2]) ? $this->getCleanString($fullAdress[count($fullAdress)-2]) : null, //city
                                         $this->getCleanString($fullAdress[count($fullAdress)-4]) ? $this->getCleanString($fullAdress[count($fullAdress)-4]) : null, //gym
@@ -105,9 +107,6 @@ class Finder {
                                 }                            
                             }                                        
                         }
-                        if (!$clubFound){
-                            $this->addLog("Error String (TeamId: ".$team->getId().") : Can't find the string in matches list");
-                        } 
                     }
                     $html->clear();
                     curl_close($ch);  

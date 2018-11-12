@@ -128,13 +128,10 @@
         if ($_POST['clubId']) {
             $club = ClubDAO::getInstance()->getClubById($_POST['clubId']);
         } else {
-            $club = new Club(null, "", "", 0, 0, 0, "");
+            $club = new Club(null, "", "", "");
         }        
         $club->setName(($_POST['nom'] ? $_POST['nom'] : ""));
         $club->setString(($_POST['chaine'] ? $_POST['chaine'] : ""));
-        $club->setBoy(($_POST['h'] ? 1 : 0));
-        $club->setGirl(($_POST['f'] ? 1 : 0));
-        $club->setMixed(($_POST['m'] ? 1 : 0));
         $club->setAddress(($_POST['adresse'] ? $_POST['adresse'] : null));
 
         if($club->getName() && $club->getString() && $club->getAddress()){
@@ -175,8 +172,13 @@
             $team = new Team(null, "", "", 0, 0, 0, 0, 0, "", "", null);
         }        
         $team->setName(($_POST['nom'] ? $_POST['nom'] : null));
-        $team->setUrlOne(($_POST['urlOne'] ? $_POST['urlOne'] : null));
-        $team->setUrlTwo(($_POST['urlTwo'] ? $_POST['urlTwo'] : null));
+        if ( $_POST['urlTwo'] && !$_POST['urlOne'] ) {
+            $team->setUrlOne($_POST['urlTwo']);
+            $team->setUrlTwo(null);
+        } else {
+            $team->setUrlOne(($_POST['urlOne'] ? $_POST['urlOne'] : null));
+            $team->setUrlTwo(($_POST['urlTwo'] ? $_POST['urlTwo'] : null));
+        }
         $team->setBoy(($_POST['sexe'] == "h" ? 1 : 0));
         $team->setGirl(($_POST['sexe'] == "f" ? 1 : 0));
         $team->setMixed(($_POST['sexe'] == "m" ? 1 : 0));

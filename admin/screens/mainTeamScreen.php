@@ -80,9 +80,6 @@ class MainTeamScreen extends MasterScreen {
                                             <option 
                                                 value="<?php echo $club->getId()?>" 
                                                 <?php if($team->getClub() && $team->getClub()->getId() == $club->getId()) { echo 'selected'; } ?>
-                                                data-boy="<?php echo $club->getBoy()?>" 
-                                                data-girl="<?php echo $club->getGirl()?>" 
-                                                data-mixed="<?php echo $club->getMixed()?>"
                                             >
                                             <?php echo $this->toProperText($club->getName())?>
                                             </option>
@@ -98,17 +95,17 @@ class MainTeamScreen extends MasterScreen {
                                 </th>
                                 <td>
                                     <label>
-                                        <input type="radio" value="h" name="sexe" title="Masculin" <?php echo ($team->getBoy() ? 'checked=\'1\'' : '').' '.($team->getClub() && !$team->getClub()->getBoy() ? ' disabled' : ''); ?> required/>
+                                        <input type="radio" value="h" name="sexe" title="Masculin" <?php echo ($team->getBoy() ? 'checked=\'1\'' : ''); ?> required/>
                                         Masculin
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" value="f" name="sexe" title="Féminin" <?php echo ($team->getGirl() ? 'checked=\'1\'' : '').' '.($team->getClub() && !$team->getClub()->getGirl() ? ' disabled' : ''); ?>/>
+                                        <input type="radio" value="f" name="sexe" title="Féminin" <?php echo ($team->getGirl() ? 'checked=\'1\'' : ''); ?>/>
                                         Féminin
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" value="m" name="sexe" title="Mixte" <?php echo ($team->getMixed() ? 'checked=\'1\'' : '').' '.($team->getClub() && !$team->getClub()->getMixed() ? ' disabled' : ''); ?>/>
+                                        <input type="radio" value="m" name="sexe" title="Mixte" <?php echo ($team->getMixed() ? 'checked=\'1\'' : ''); ?>/>
                                         Mixte
                                     </label>
                                 </td>
@@ -126,10 +123,10 @@ class MainTeamScreen extends MasterScreen {
                                     <label for='urlOne' name="urlOne">Lien n°1 des résultats du championnat</label>
                                 </th>
                                 <td>
-                                    <input name='urlOne' id='urlOne' value='<?php echo $this->toProperText($team->getUrlOne()) ?>' class='regular-text' type='url' title="Lien n°1 des résultats du championnat" placeholder="Lien n°2 des résultats du championnat">
+                                    <input name='urlOne' id='urlOne' value='<?php echo $this->toProperText($team->getUrlOne()) ?>' class='regular-text' type='url' title="Lien n°1 des résultats du championnat" placeholder="Lien n°1 des résultats du championnat">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr <?php echo !$team->getUrlOne() ? "style='display: none'" : ''?>>
                                 <th scope='row'>
                                     <label for='urlTwo' name="urlTwo">Lien n°2 des résultats du championnat</label>
                                 </th>
@@ -163,7 +160,7 @@ class MainTeamScreen extends MasterScreen {
                 <br>
 
                 <?php if($team->getId()) { ?>
-	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus?page=eventus&action=team'">Ajouter une équipe</button>
+	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus&action=team'">Ajouter une équipe</button>
                     <button type="submit" name="action" value="delTeam" class="button-primary ico ico-del" onclick="return validate(null)" >Supprimer l'équipe</button>           
                     <br />
                     

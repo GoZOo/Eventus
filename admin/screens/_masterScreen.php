@@ -135,30 +135,7 @@ abstract class MasterScreen {
         }	
         return;
     }
-
-    /**
-    * Get sex icon of a club
-    *
-    * @param bool       Is boy ?
-    * @param bool       Is girl ?
-    * @param bool       Is mixed ?
-    * @return string    The icon(s)
-    * @access protected
-    */
-    protected function getSexIcoClub($boy, $girl, $mixed){
-        $return = [];
-        if ($boy){
-            $return[] = '<img draggable="false" class="emoji" alt="♂" src="https://s.w.org/images/core/emoji/11/svg/2642.svg">';
-        } 
-        if ($girl){
-            $return[] = '<img draggable="false" class="emoji" alt="♀" src="https://s.w.org/images/core/emoji/11/svg/2640.svg">';
-        } 
-        if ($mixed){ 
-            $return[] = '<img draggable="false" class="emoji" alt="♂" src="https://s.w.org/images/core/emoji/11/svg/2642.svg"><img draggable="false" class="emoji" alt="♀" src="https://s.w.org/images/core/emoji/11/svg/2640.svg">';
-        }	
-        return implode("/", $return);
-    }
-
+    
     /**
     * Get escaped text without double anti slash and ready to be put in html
     *

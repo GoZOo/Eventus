@@ -19,7 +19,7 @@ if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplat
 			
 			$this->config['name']		= "Bouton Résultats";
 			$this->config['tab']		= "Eventus";
-			$this->config['icon']		= AviaBuilder::$path['imagesURL']."sc-button.png";
+			$this->config['icon']		= AviaBuilder::$path['imagesURL']."sc-buttonrow.png";
 			$this->config['order']		= 97;
 			$this->config['shortcode'] 	= 'eventus_button_results';
 			$this->config['tooltip'] 	= "Afficher un bouton contenant le liens des résultats";
@@ -67,11 +67,22 @@ if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplat
 	        $atts));
 	        
 			$myTeam = TeamDAO::getInstance()->getTeamById($teamid); 
-			$myUrl = $myTeam->getUrl();
-			$myUrl = str_replace("[", "&#91;", $myUrl);
-			$myUrl = str_replace("]", "&#93;", $myUrl);
+			// $myUrlOne = $myTeam->getUrlOne();
+			// $myUrlOne = str_replace("[", "&#91;", $myUrlOne);
+			// $myUrlOne = str_replace("]", "&#93;", $myUrlOne);
+			// $myUrlTwo = $myTeam->getUrlTwo();
+			// $myUrlTwo = str_replace("[", "&#91;", $myUrlTwo);
+			// $myUrlTwo = str_replace("]", "&#93;", $myUrlTwo);
+			
+			$sc = "[av_buttonrow alignment='center' button_spacing='5' button_spacing_unit='px' av_uid='av-r75dw' custom_class='' admin_preview_bg='']";
 
-	        return do_shortcode("[av_button label='Voir l’ensemble des résultats' link='manually,".$myUrl."' link_target='_blank' size='large' position='center' label_display='' icon_select='yes-right-icon' icon_hover='aviaTBicon_hover' icon='ue881' font='entypo-fontello' color='theme-color-highlight' custom_bg='#444444' custom_font='#ffffff' av_uid='av-jl3iw27j' admin_preview_bg='']");
+			$myTeam->getUrlOne() ? $sc .= "[av_buttonrow_item label='Voir l’ensemble des résultats' link='manually,".str_replace("]", "&#93;", str_replace("[", "&#91;", $myTeam->getUrlOne()))."' link_target='_blank' size='large' label_display='' icon_select='yes-right-icon' icon_hover='aviaTBaviaTBicon_hover' icon='ue889' font='entypo-fontello' color='theme-color' custom_bg='#444444' custom_font='#ffffff']" : '';	
+
+			$myTeam->getUrlTwo() ? $sc .= "[av_buttonrow_item label='Voir l’ensemble des résultats' link='manually,".str_replace("]", "&#93;", str_replace("[", "&#91;", $myTeam->getUrlTwo()))."' link_target='_blank' size='large' label_display='' icon_select='yes-right-icon' icon_hover='aviaTBaviaTBicon_hover' icon='ue889' font='entypo-fontello' color='theme-color' custom_bg='#444444' custom_font='#ffffff']" : '';
+
+			$sc .= "[/av_buttonrow]";
+
+			return do_shortcode($sc);
 	    }  
 	}
 }

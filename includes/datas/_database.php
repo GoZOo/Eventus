@@ -40,9 +40,6 @@ class Database extends MasterDAO {
 				`club_id` int(11) NOT NULL AUTO_INCREMENT,
 				`club_name` varchar(255) NOT NULL,
 				`club_string` varchar(255) NOT NULL,
-				`club_boy` tinyint(1) NOT NULL,
-				`club_girl` tinyint(1) NOT NULL,
-				`club_mixed` tinyint(1) NOT NULL,
 				`club_address` varchar(255) NOT NULL,
 				PRIMARY KEY (`club_id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -68,9 +68,6 @@ class TeamDAO extends MasterDAO {
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
-                    $row->club_boy, 
-                    $row->club_girl, 
-                    $row->club_mixed, 
                     $row->club_address
                 )
             );
@@ -114,9 +111,6 @@ class TeamDAO extends MasterDAO {
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
-                    $row->club_boy, 
-                    $row->club_girl, 
-                    $row->club_mixed, 
                     $row->club_address
                 )
             );
@@ -175,9 +169,6 @@ class TeamDAO extends MasterDAO {
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
-                    $row->club_boy, 
-                    $row->club_girl, 
-                    $row->club_mixed, 
                     $row->club_address
                 )
             );
@@ -204,8 +195,15 @@ class TeamDAO extends MasterDAO {
                 a.team_clubId = b.club_id 
             WHERE 
                 a.team_clubId={$club->getId()}
-            ORDER BY 
-                a.team_name DESC 
+            ORDER BY             
+                (CASE
+                    WHEN LOWER(a.team_name) LIKE '%senior%' THEN 1 
+                    WHEN LOWER(a.team_name) LIKE '-%' THEN 2  
+                    WHEN LOWER(a.team_name) LIKE '%ecole%' THEN 3  
+                    WHEN LOWER(a.team_name) LIKE '%mini%' THEN 4 
+                    WHEN LOWER(a.team_name) LIKE '%loisir%' THEN 5 
+                    ELSE 6 
+                END)
         "); 
         $allTeams = [];
         foreach($teams as $row) { 
@@ -225,9 +223,6 @@ class TeamDAO extends MasterDAO {
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
-                    $row->club_boy, 
-                    $row->club_girl, 
-                    $row->club_mixed, 
                     $row->club_address
                 )
             );

@@ -42,13 +42,13 @@ class ClubDetailScreen extends MasterScreen {
                 return;
             }            
     	} else {
-            $club = new Club(null, "", "", 0, 0, 0, "");
+            $club = new Club(null, "", "", "");
         }
 	    ?>
         <div class='wrap'>
         	<h1 class="wp-heading-inline">
                 <?php 
-                    echo ($club->getName() ? $this->toProperText($club->getName()) : 'Nouveau club').' '.$this->getSexIcoClub($club->getBoy(), $club->getGirl(), $club->getMixed())         
+                    echo ($club->getName() ? $this->toProperText($club->getName()) : 'Nouveau club');         
                 ?>                
             </h1> 
             <hr class="wp-header-end">
@@ -85,27 +85,6 @@ class ClubDetailScreen extends MasterScreen {
                                 <td>
                                     <input name='adresse' id='adresse' value='<?php echo $this->toProperText($club->getAddress()) ?>' class='regular-text' type='text' required title="Adresse" placeholder="Adresse">
                                     <p class='description' id='tagline-description'>Adresse utilisé pour calculer les horaires de rdv des matchs</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope='row'>
-                                    <label>Sexe(s)<span class="required">*</span></label>
-                                </th>
-                                <td>
-                                    <label>
-                                        <input type="checkbox" value="1" name="h" <?php if ($club->getBoy()){ echo "checked='1'"; } ?> title="Masculin" required/>
-                                        Masculin
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label>
-                                        <input type="checkbox" value="1" name="f" <?php if ($club->getGirl()){ echo "checked='1'"; } ?> title="Féminin" required/>
-                                        Féminin
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label>
-                                        <input type="checkbox" value="1" name="m" <?php if ($club->getMixed()){ echo "checked='1'"; } ?> title="Mixte" required/>
-                                        Mixte
-                                    </label>
                                 </td>
                             </tr>
                         </tbody>

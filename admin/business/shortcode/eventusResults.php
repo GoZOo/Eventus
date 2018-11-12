@@ -67,7 +67,7 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 									if ($myMatch->getId()) {
 										$output  .= "<div class='resultat'>
 											<div class='ligneEqDate'>
-												<a href='".$team->getUrl()."' target='_blank'>".$team->getName()."</a>
+												<a href='".($team->getUrlTwo() ? $team->getUrlTwo() : $team->getUrlOne())."' target='_blank'>".$team->getName()."</a>
 												<p>".date_create_from_format('Y-m-d',$myMatch->getDate())->format('d/m')."</p>
 											</div>
 											<div class='equipe1'>

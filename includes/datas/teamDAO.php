@@ -116,24 +116,15 @@ class TeamDAO extends MasterDAO {
             );
     }
 
-    //TODO : optimisation ?
     /**
-    * Return teams corresponding to a club and sex label
+    * Return teams corresponding to a club for match carousel
     *
     * @param Club       The club
     * @param string     Sex label
     * @return Team[]    All the teams corresponding
     * @access public
     */
-    function getAllTeamsByClubAndSex($club, $sex){  
-        $boy = $girl = $mixed = 0;
-        if ($sex == "boy"){ 
-            $boy = 1;
-        } else if ($sex == "girl"){
-            $girl = 1;
-        } else if ($sex == "mixed"){
-            $mixed = 1;
-        } 
+    function getAllTeamsByClubOrderBySex($club){  
         $teams = $this->wpdb->get_results("
             SELECT 
                 *
@@ -144,12 +135,19 @@ class TeamDAO extends MasterDAO {
             ON 
                 a.team_clubId = b.club_id 
             WHERE 
-                a.team_clubId={$club->getId()} AND 
-                a.team_boy=$boy AND 
-                a.team_girl=$girl AND 
-                a.team_mixed=$mixed
+                a.team_clubId={$club->getId()}
             ORDER BY 
-                a.team_name DESC 
+                a.team_boy=1 DESC, 
+                a.team_girl=1 DESC,
+                a.team_mixed=1 DESC,
+                (CASE
+                    WHEN LOWER(a.team_name) LIKE '%senior%' THEN 1 
+                    WHEN LOWER(a.team_name) LIKE '-%' THEN 2  
+                    WHEN LOWER(a.team_name) LIKE '%ecole%' THEN 3  
+                    WHEN LOWER(a.team_name) LIKE '%mini%' THEN 4 
+                    WHEN LOWER(a.team_name) LIKE '%loisir%' THEN 5 
+                    ELSE 6 
+                END)
         ");
         $allTeams = [];
         foreach($teams as $row) { 

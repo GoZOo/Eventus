@@ -40,53 +40,50 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 		function shortcode_handler($atts, $content = "", $shortcodename = "", $meta = "") {	
 			wp_enqueue_script( 'script', '../wp-content/plugins/eventus/public/js/shortcodeResults.js', '', '', true);
 
-			$sexes = array('boy', 'girl', 'mixed');
-	        $sexesDisplay = array('Masculin', 'Féminin', 'Mixte');
-	        $allClubs = ClubDAO::getInstance()->getAllClubs();
+			$allClubs = ClubDAO::getInstance()->getAllClubs();
+			
+			$output  = 
+			"<div class='allClbus'>";
 
-			$output = "";
-
-	        $i=0;
-	        $output  .= "<div class='allClbus'>";
-	        foreach ($allClubs as $club) {
-	            $output  .= "<div class='blockClub' style='right:-".$i++."00%'>";
-	                $output  .= "<div class='ligneNomSuivant'>";
-	                    $output  .= "<p>".$club->getName()."</p>";
-	                    if (sizeof($allClubs)>1) { 
-	                    	$output  .= "<button type='button' class='clubSuivant' >&#9658;&#9658;</button>";
-	                    } 
-	                $output  .= "</div>";
-	                foreach ($sexes as $key => $sex) {
-						$allTeams = TeamDAO::getInstance()->getAllTeamsByClubAndSex($club, $sex);
-						if ($allTeams) {
-							$output  .= "<p class='sexe'>".$sexesDisplay[$key]." :</p>";
-							foreach ($allTeams as $team) {  
-								//$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "next"); //wrong method : temporary when no matches
-								$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last");
-								if ($myMatch->getId()) {
-									$output  .= "<div class='resultat'>
-										<div class='ligneEqDate'>
-											<a href='".($team->getUrlTwo() ? $team->getUrlTwo() : $team->getUrlOne())."' target='_blank'>".$team->getName()."</a>
-											<p>".date_create_from_format('Y-m-d',$myMatch->getDate())->format('d/m')."</p>
-										</div>
-										<div class='equipe1'>
-											<p>".$myMatch->getLocalTeamScore()."</p>
-											<p style=''>".$myMatch->getLocalTeam()."</p>
-										</div>
-										<div class='equipe2'>
-											<p>".$myMatch->getVisitingTeamScore()."</p>
-											<p>".$myMatch->getVisitingTeam()."</p>
-										</div>
-									</div>";
-								}                            
-							}                        
-	                    }
-	                                 
-	                    
-	                } 
-	            $output  .= "</div>";  
+	        foreach ($allClubs as $i => $club) {
+				$output .= "
+					<div class='blockClub' style='right:-".$i++."00%'>
+						<div class='ligneNomSuivant'>
+							<p>".$club->getName()."</p>".
+							(sizeof($allClubs) > 1 ? "<button type='button' class='clubSuivant' >&#9658;&#9658;</button>" : "")."
+						</div>";
+				$allTeams = TeamDAO::getInstance()->getAllTeamsByClubOrderBySex($club);
+				$tempSex = "";
+				foreach ($allTeams as $team) { 
+					//$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "next"); //wrong method : temporary when no matches
+					$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last");
+					if ($myMatch->getId()) {
+						$newSex = $this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed());
+						$output .= ($tempSex != $newSex ? "<p class='sexe'>".$newSex." :</p>" : "");
+						$tempSex = $newSex;
+						$output .= "
+						<div class='resultat'>
+							<div class='ligneEqDate'>
+								<a href='".($team->getUrlTwo() ? $team->getUrlTwo() : $team->getUrlOne())."' target='_blank'>".$team->getName()."</a>
+								<p>".date_create_from_format('Y-m-d',$myMatch->getDate())->format('d/m')."</p>
+							</div>
+							<div class='equipe1'>
+								<p>".$myMatch->getLocalTeamScore()."</p>
+								<p style=''>".$myMatch->getLocalTeam()."</p>
+							</div>
+							<div class='equipe2'>
+								<p>".$myMatch->getVisitingTeamScore()."</p>
+								<p>".$myMatch->getVisitingTeam()."</p>
+							</div>
+						</div>";
+					}        
+	            } 
+				$output .= 
+					"</div>";  
 	        }
-	        $output  .= "</div>";
+			$output  .= 
+			"</div>";
+
 	        return $output;
 	    }  
 	}

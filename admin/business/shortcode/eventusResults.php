@@ -57,31 +57,29 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 	                    } 
 	                $output  .= "</div>";
 	                foreach ($sexes as $key => $sex) {
-	                    if (($sex == 'boy' && $club->getBoy()) || ($sex == 'girl' && $club->getGirl()) || ($sex == 'mixed' && $club->getMixed())) {
-	                        $allTeams = TeamDAO::getInstance()->getAllTeamsByClubAndSex($club, $sex);
-							if ($allTeams) {
-								$output  .= "<p class='sexe'>".$sexesDisplay[$key]." :</p>";
-								foreach ($allTeams as $team) {  
-									//$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "next"); //wrong method : temporary when no matches
-									$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last");
-									if ($myMatch->getId()) {
-										$output  .= "<div class='resultat'>
-											<div class='ligneEqDate'>
-												<a href='".($team->getUrlTwo() ? $team->getUrlTwo() : $team->getUrlOne())."' target='_blank'>".$team->getName()."</a>
-												<p>".date_create_from_format('Y-m-d',$myMatch->getDate())->format('d/m')."</p>
-											</div>
-											<div class='equipe1'>
-												<p>".$myMatch->getLocalTeamScore()."</p>
-												<p style=''>".$myMatch->getLocalTeam()."</p>
-											</div>
-											<div class='equipe2'>
-												<p>".$myMatch->getVisitingTeamScore()."</p>
-												<p>".$myMatch->getVisitingTeam()."</p>
-											</div>
-										</div>";
-									}                            
-								} 
-							}	                         
+						$allTeams = TeamDAO::getInstance()->getAllTeamsByClubAndSex($club, $sex);
+						if ($allTeams) {
+							$output  .= "<p class='sexe'>".$sexesDisplay[$key]." :</p>";
+							foreach ($allTeams as $team) {  
+								//$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "next"); //wrong method : temporary when no matches
+								$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last");
+								if ($myMatch->getId()) {
+									$output  .= "<div class='resultat'>
+										<div class='ligneEqDate'>
+											<a href='".($team->getUrlTwo() ? $team->getUrlTwo() : $team->getUrlOne())."' target='_blank'>".$team->getName()."</a>
+											<p>".date_create_from_format('Y-m-d',$myMatch->getDate())->format('d/m')."</p>
+										</div>
+										<div class='equipe1'>
+											<p>".$myMatch->getLocalTeamScore()."</p>
+											<p style=''>".$myMatch->getLocalTeam()."</p>
+										</div>
+										<div class='equipe2'>
+											<p>".$myMatch->getVisitingTeamScore()."</p>
+											<p>".$myMatch->getVisitingTeam()."</p>
+										</div>
+									</div>";
+								}                            
+							}                        
 	                    }
 	                                 
 	                    

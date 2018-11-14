@@ -128,11 +128,12 @@
         if ($_POST['clubId']) {
             $club = ClubDAO::getInstance()->getClubById($_POST['clubId']);
         } else {
-            $club = new Club(null, "", "", "");
+            $club = new Club(null, "", "", "", "");
         }        
         $club->setName(($_POST['nom'] ? $_POST['nom'] : ""));
         $club->setString(($_POST['chaine'] ? $_POST['chaine'] : ""));
         $club->setAddress(($_POST['adresse'] ? $_POST['adresse'] : null));
+        $club->setImg(($_POST['img'] ? $_POST['img'] : null));
 
         if($club->getName() && $club->getString() && $club->getAddress()){
             if ($club->getId()) {

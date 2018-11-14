@@ -29,7 +29,7 @@ class Match {
 
     private $id, $matchDay, $numMatch, $date, $hourRdv, $hourStart, $localTeam, $localTeamScore, $visitingTeam, $visitingTeamScore, $ext, $street, $city, $gym, $type, $champ, $team, $matchRef;
 
-    public function __construct($id=null, $matchDay, $numMatch, $date=null, $hourRdv=null, $hourStart=null, $localTeam, $localTeamScore=null, $visitingTeam, $visitingTeamScore=null, $ext=null, $street=null, $city=null, $gym=null, $type, $champ, $team, $matchRef=null) {
+    public function __construct($id, $matchDay, $numMatch, $date, $hourRdv, $hourStart, $localTeam, $localTeamScore, $visitingTeam, $visitingTeamScore, $ext, $street, $city, $gym, $type, $champ, $team, $matchRef) {
         $this->id = $id;
         $this->matchDay = $matchDay;
         $this->numMatch = $numMatch;

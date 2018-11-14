@@ -23,7 +23,7 @@ class Team {
 
     private $id, $name, $urlOne, $urlTwo, $boy, $girl, $mixed, $position, $points, $time, $img, $club;
 
-    public function __construct($id=null, $name, $urlOne, $urlTwo, $boy, $girl, $mixed, $position, $points, $time, $img=null, $club) {
+    public function __construct($id, $name, $urlOne, $urlTwo, $boy, $girl, $mixed, $position, $points, $time, $img, $club) {
         $this->id = $id;
         $this->name = $name;
         $this->urlOne = $urlOne;

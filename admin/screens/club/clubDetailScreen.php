@@ -24,8 +24,10 @@ class ClubDetailScreen extends MasterScreen {
         return self::$_instance;
     }
 		
-    private function __construct() {
-        wp_enqueue_script('clubJs', plugin_dir_url( __FILE__ ).'/../../js/club.js', '', '', true); 
+    protected function __construct() {
+        parent::__construct();
+        wp_enqueue_media();     
+		wp_enqueue_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../../js/uploadImg.js', '', '', true); 
     }
 
     /**
@@ -87,12 +89,23 @@ class ClubDetailScreen extends MasterScreen {
                                     <p class='description' id='tagline-description'>Adresse utilisé pour calculer les horaires de rdv des matchs</p>
                                 </td>
                             </tr>
+                            <tr>
+                                <th scope='row'>
+                                    <label for='img'>Image</label>
+                                </th>
+                                <td>                                 
+                                    <input id="upload_image_button" type="button" class="button" value="Sélectionnez une image" />
+                                    <input id="delete_image_button" type="button" class="button" value="Supprimer l'image" disabled/>
+                                    <input id='image_attachment_id' type='hidden' name='img' value='<?php echo $club->getImg() ?>'>
+                                </td>
+                            </tr>
                         </tbody>
                     </table> 
 
                 </div>
 				<input type='hidden' name='clubId' value="<?php echo $club->getId(); ?>">	
                 <input type="submit" name="action" value="majClub" class="hiddenSubmit">
+                <br>
 
                 <?php if($club->getId()) { ?>
 	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus_club&action=club'">Ajouter un club</button>

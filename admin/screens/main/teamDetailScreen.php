@@ -7,10 +7,8 @@
 */
 class MainTeamScreen extends MasterScreen {
     /**
-    * @var int              $imgId      Store the id of the team's image
     * @var MainTeamScreen   $_instance  Var use to store an instance
     */
-    private static $imgId = 0;
     private static $_instance;
 
     /**
@@ -26,9 +24,11 @@ class MainTeamScreen extends MasterScreen {
         return self::$_instance;
     }
 		
-    private function __construct() {  
+    protected function __construct() {  
+        parent::__construct();
         wp_enqueue_media();     
-        add_action( 'admin_footer', array($this, 'media_selector_print_scripts') );
+		wp_enqueue_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../../js/uploadImg.js', '', '', true); 
+    	wp_enqueue_script('teamJs', plugin_dir_url( __FILE__ ).'/../../../js/screens/teamDetailScreen.js', '', '', true); 
     }
 
     /**
@@ -40,7 +40,6 @@ class MainTeamScreen extends MasterScreen {
     function display(){
         if (isset($_GET['teamId'])){  
             $team = TeamDAO::getInstance()->getTeamById($_GET['teamId']);
-            MainTeamScreen::$imgId = $team->getImg();
             if (!$team->getId()) {
                 echo "<h2>Erreur : L'équipe n'a pas pu être trouvée...</h2>";
                 return;
@@ -144,12 +143,12 @@ class MainTeamScreen extends MasterScreen {
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label for='img'>Image par défaut</label>
+                                    <label for='img'>Image</label>
                                 </th>
                                 <td>                                 
                                     <input id="upload_image_button" type="button" class="button" value="Sélectionnez une image" />
                                     <input id="delete_image_button" type="button" class="button" value="Supprimer l'image" disabled/>
-                                    <input id='image_attachment_id' type='hidden' name='img' disabled value='<?php echo $team->getImg() ?>'>
+                                    <input id='image_attachment_id' type='hidden' name='img' value='<?php echo $team->getImg() ?>'>
                                 </td>
                             </tr>
                         </tbody>
@@ -171,62 +170,7 @@ class MainTeamScreen extends MasterScreen {
             </form>
         </div>
         <?php
-    }   
-
-    /**
-    * Function use to print script that allowed user to select an image
-    *
-    * @return void
-    * @access public
-    */
-    function media_selector_print_scripts() {
-        ?><script type='text/javascript'>
-            jQuery( document ).ready( function( $ ) {
-                // Uploading files
-                var file_frame;
-                var wp_media_post_id = wp.media.model.settings.post.id; // Store the old id
-                var set_to_post_id = <?php echo MainTeamScreen::$imgId ? MainTeamScreen::$imgId : 0; ?>; // Set this
-                jQuery('#upload_image_button').on('click', function( event ){
-                    event.preventDefault();
-                    // If the media frame already exists, reopen it.
-                    if ( file_frame ) {
-                        // Set the post ID to what we want
-                        file_frame.uploader.uploader.param( 'post_id', set_to_post_id );
-                        // Open frame
-                        file_frame.open();
-                        return;
-                    } else {
-                        // Set the wp.media post id so the uploader grabs the ID we want when initialised
-                        wp.media.model.settings.post.id = set_to_post_id;
-                    }
-                    // Create the media frame.
-                    file_frame = wp.media.frames.file_frame = wp.media({
-                        title: 'Sélectionnez l\'image par défaut de l\'équipe',
-                        button: {
-                            text: 'Utiliser cette image',
-                        },
-                        multiple: false	// Set to true to allow multiple files to be selected
-                    });
-                    // When an image is selected, run a callback.
-                    file_frame.on( 'select', function() {
-                        // We set multiple to false so only get one image from the uploader
-                        attachment = file_frame.state().get('selection').first().toJSON();
-                        // Do something with attachment.id and/or attachment.url here
-                        $( '#image-preview' ).attr( 'src', attachment.url ).css( 'width', 'auto' );
-                        $( '#image_attachment_id' ).val( attachment.id );
-                        // Restore the main post ID
-                        wp.media.model.settings.post.id = wp_media_post_id;
-                    });
-                        // Finally, open the modal
-                        file_frame.open();
-                });
-                // Restore the main ID when the add media button is pressed
-                jQuery( 'a.add_media' ).on( 'click', function() {
-                    wp.media.model.settings.post.id = wp_media_post_id;
-                });
-            });
-        </script><?php
-    }
+    }  
 }
 
 ?>

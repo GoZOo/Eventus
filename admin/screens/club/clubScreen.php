@@ -24,8 +24,8 @@ class ClubScreen extends MasterScreen {
         return self::$_instance;
     }
 		
-    private function __construct() {  
-        wp_enqueue_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true);  
+    protected function __construct() {  
+		parent::__construct();		
     }
 
 	/**
@@ -52,13 +52,13 @@ class ClubScreen extends MasterScreen {
 				<?php
 			}
 			?>
-				<div class="teamList">
+				<div class="eventusCardList">
 					<h2></h2>	 
 					<div>  
 					<?php 							
 						foreach ($allClubs as $club) { ?>
-							<div class="myCard myCardClub">
-								<img class="card-img-top" alt="Team" src="<?php echo plugin_dir_url( __FILE__ ).'../../includes/img/team-default.png' ?>">
+							<div class="eventusCard eventusCardClub">
+								<?php echo $club->getImg() ? wp_get_attachment_image($club->getImg(), 'portfolio', false, ["class"=>"card-img-top", "alt"=>"Club"]) : ('<img class="card-img-top" alt="Club" src="'.plugin_dir_url( __FILE__ ).'../../../includes/img/img-default.png'.'">'); ?>
 								<div class="card-body">
 									<h5 class="card-title">
 										<?php echo $this->toProperText($club->getName()); ?>

@@ -24,8 +24,8 @@ class LogScreen extends MasterScreen {
         return self::$_instance;
     }
 
-    private function __construct() {
-		wp_enqueue_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
+    protected function __construct() {
+		parent::__construct();
 	}	
     
     /**

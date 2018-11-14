@@ -11,15 +11,17 @@ class Club {
     * @var string   $name       Name of the club
     * @var string   $string     String that will be use to parse FFHB website
     * @var string   $address    Address of the gym. Used to calculate hours rdv
+    * @var int|null $img        Id of the photo of the club
     */
 
-    private $id, $name, $string, $address;
+    private $id, $name, $string, $address, $img;
 
-    public function __construct($id, $name, $string, $address) {
+    public function __construct($id, $name, $string, $address, $img) {
         $this->id = $id;
         $this->name = $name;
         $this->string = $string;
         $this->address = $address;
+        $this->img = $img;
     }
 
     public function getId() {
@@ -49,12 +51,21 @@ class Club {
         return $this;
     }
 
-    public function getaddress() {
+    public function getAddress() {
         return $this->address;
     }
 
-    public function setaddress($address) {
+    public function setAddress($address) {
         $this->address = $address;
+        return $this;
+    }
+
+    public function getImg() {
+        return $this->img;
+    }
+
+    public function setImg($img) {
+        $this->img = $img;
         return $this;
     }
 }

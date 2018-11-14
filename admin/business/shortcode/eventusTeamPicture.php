@@ -93,7 +93,7 @@ if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate'
 			$atts));
 			$myTeam = TeamDAO::getInstance()->getTeamById($teamid);
 			if (!$myTeam->getImg()) {
-				return do_shortcode("[av_image src='".plugin_dir_url( __FILE__ ).'../../../includes/img/team-default.png'."' attachment='' attachment_size='' align='center' styling='' hover='' link='' target='' caption='' font_size='' appearance='' overlay_opacity='0.4' overlay_color='#000000' overlay_text_color='#ffffff' copyright='' animation='no-animation' av_uid='' custom_class='' admin_preview_bg=''][/av_image]"); 
+				return do_shortcode("[av_image src='".plugin_dir_url( __FILE__ ).'../../../includes/img/img-default.png'."' attachment='' attachment_size='' align='center' styling='' hover='' link='' target='' caption='' font_size='' appearance='' overlay_opacity='0.4' overlay_color='#000000' overlay_text_color='#ffffff' copyright='' animation='no-animation' av_uid='' custom_class='' admin_preview_bg=''][/av_image]"); 
 			}
 		    return do_shortcode("[av_image src='".wp_get_attachment_image_src($myTeam->getImg(), $format)[0]."' attachment='".$myTeam->getImg()."' attachment_size='".$format."' align='center' styling='' hover='' link='' target='' caption='' font_size='' appearance='' overlay_opacity='0.4' overlay_color='#000000' overlay_text_color='#ffffff' copyright='' animation='no-animation' av_uid='' custom_class='' admin_preview_bg=''][/av_image]"); 
 	    }

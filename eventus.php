@@ -8,8 +8,6 @@
  * License: 
  */
 
-include_once plugin_dir_path( __FILE__ ).'includes/constants.php';
-include_once plugin_dir_path( __FILE__ ).'includes/masterTrait.php';
 include_once plugin_dir_path( __FILE__ ).'includes/entities/club.php';
 include_once plugin_dir_path( __FILE__ ).'includes/entities/match.php';
 include_once plugin_dir_path( __FILE__ ).'includes/entities/team.php';
@@ -19,14 +17,15 @@ include_once plugin_dir_path( __FILE__ ).'includes/datas/teamDAO.php';
 include_once plugin_dir_path( __FILE__ ).'includes/datas/clubDAO.php';
 include_once plugin_dir_path( __FILE__ ).'includes/datas/matchDAO.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/_masterScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/mainScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/mainTeamScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/mainMatchScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/clubScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/clubDetailScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/logScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/adminScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/main/mainScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/main/matchDetailScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/main/teamDetailScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/club/clubScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/club/clubDetailScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/log/logScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/screens/admin/adminScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/finder.php';
+include_once plugin_dir_path( __FILE__ ).'admin/business/masterTrait.php';
 if (file_exists ( get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php' )){
 	include_once get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
 }

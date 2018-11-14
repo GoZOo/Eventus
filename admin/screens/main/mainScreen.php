@@ -24,10 +24,8 @@ class MainScreen extends MasterScreen {
         return self::$_instance;
     }
 		
-    private function __construct() {  
-    	wp_enqueue_script('teamJs', plugin_dir_url( __FILE__ ).'/../../js/team.js', '', '', true); 
-    	wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../js/match.js', '', '', true); 
-		wp_enqueue_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
+    protected function __construct() {  
+		parent::__construct();
 	}
 
 	/**
@@ -62,7 +60,7 @@ class MainScreen extends MasterScreen {
 				}
 				foreach ($allClubs as $club) {
 			?>
-				<div class="teamList">
+				<div class="eventusCardList">
 					<h2><?php echo $this->toProperText($club->getName())?></h2>	 
 					<div>       				
 						<?php 
@@ -73,8 +71,8 @@ class MainScreen extends MasterScreen {
 							}
 							foreach ($allTeams as $team) { 
 								?>
-								<div class="myCard">
-									<?php echo $team->getImg() ? wp_get_attachment_image($team->getImg(), 'portfolio', false, ["class"=>"card-img-top", "alt"=>"Team"]) : ('<img class="card-img-top" alt="Team" src="'.plugin_dir_url( __FILE__ ).'../../includes/img/team-default.png'.'">'); ?>
+								<div class="eventusCard">
+									<?php echo $team->getImg() ? wp_get_attachment_image($team->getImg(), 'portfolio', false, ["class"=>"card-img-top", "alt"=>"Team"]) : ('<img class="card-img-top" alt="Team" src="'.plugin_dir_url( __FILE__ ).'../../../includes/img/img-default.png'.'">'); ?>
 									<div class="card-body">
 										<h5 class="card-title">
 											<?php echo $this->toProperText($team->getName()).' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed()); ?>
@@ -120,7 +118,7 @@ class MainScreen extends MasterScreen {
 			<?php 
 			if (TeamDAO::getInstance()->getAllTeams()){ 
 				?>
-				<form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post" class="fakeForm">
+				<form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
 					<div class="myTooltip">
 						<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">
 							Synchroniser les données des matchs
@@ -145,7 +143,7 @@ class MainScreen extends MasterScreen {
 			<?php
 			}
 			?>
-            <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post" class="fakeForm">
+            <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post" >
 				<button type="submit" name="action" value="delMatch" class="button-primary ico ico-del"  onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger tous les matchs ?')" >Purger tous les matchs </button>*/ ?>
 			</form>	
 		</div>

@@ -1,0 +1,85 @@
+/* Resultats Shortcode */
+.allClbus {	
+	width: 100%;
+	position: relative;
+	height: 1000px;
+	overflow: hidden;
+	color: black;
+}
+
+.allClbus .blockClub {
+	width: 100%;
+	position: absolute;
+	opacity: 1;
+	transition: .5s ease-in-out;
+}
+.allClbus .ligneNomSuivant{
+	display: flex;
+	justify-content: space-between;
+	margin: 0 0 15px 0;
+}
+.allClbus .ligneNomSuivant p{
+	margin: 0;
+	font-size: 1.3em;
+	text-transform: uppercase;
+}
+.allClbus .ligneNomSuivant button{
+	padding: 0 5px 1px 8px;
+	border-radius: 3px;
+	background-color: #e7e7e7;
+	color: black;
+	border: 2px solid #e7e7e7;
+	transition-duration: 0.4s;
+	text-decoration: none;
+	font-size: 16px;
+	cursor: pointer;
+	text-align: center;
+}
+.allClbus .ligneNomSuivant button:hover{
+	background-color: white;
+	color: black;
+	border: 2px solid #e7e7e7;
+}
+.allClbus .sexe {
+	font-weight: 600;
+	font-size: 1.1em;
+	margin: 0 0 .2em;
+}
+.allClbus .resultat{
+	margin: 0 0 15px 0;
+}
+.allClbus .resultat .ligneEqDate {
+	border-bottom: 2px solid #264782;
+	display: flex;
+	justify-content: space-between;
+	background: #0F3375;
+	padding: 2px 5px 0px 5px;
+	color: white;
+}
+.allClbus .resultat .ligneEqDate a {
+	box-shadow: none;
+}
+.allClbus .resultat .ligneEqDate a:hover {
+	box-shadow: none;
+	color: #fedf47;
+}
+.allClbus .resultat .ligneEqDate p {
+	margin: 0;
+}
+.allClbus .resultat div[class^="equipe"] {
+	border-bottom: 1px solid #eee;
+	display: flex;
+}
+.allClbus .resultat div[class^="equipe"] p:first-child {
+	margin: 0 5px 0 0;
+	min-width: 23px;
+	padding: 0 0 0 5px;
+}
+.allClbus .resultat div[class^="equipe"] p:last-child {
+	border-left: 1px solid #eee;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 0;
+	padding: 0 5px;
+}

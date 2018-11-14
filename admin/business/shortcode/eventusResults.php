@@ -38,7 +38,8 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 		 * @return string $output returns the modified html string 
 		 */
 		function shortcode_handler($atts, $content = "", $shortcodename = "", $meta = "") {	
-			wp_enqueue_script( 'script', '../wp-content/plugins/eventus/public/js/shortcodeResults.js', '', '', true);
+			wp_enqueue_script('scriptEventusResults', '../wp-content/plugins/eventus/public/js/eventusResults.js', '', '', true);
+			wp_enqueue_style('cssEventusResults', '../wp-content/plugins/eventus/public/css/eventusResults.css');
 
 			$allClubs = ClubDAO::getInstance()->getAllClubs();
 			

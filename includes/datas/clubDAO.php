@@ -49,7 +49,8 @@ class ClubDAO extends MasterDAO {
                 $row->club_id, 
                 $row->club_name, 
                 $row->club_string, 
-                $row->club_address
+                $row->club_address, 
+                $row->club_img
             );
         }
         return $allClubs;
@@ -73,7 +74,8 @@ class ClubDAO extends MasterDAO {
             $row->club_id, 
             $row->club_name, 
             $row->club_string, 
-            $row->club_address
+            $row->club_address, 
+            $row->club_img
         );
     }
 
@@ -113,7 +115,8 @@ class ClubDAO extends MasterDAO {
             $data = array(
                 'club_name' => $club->getName(), 
                 'club_string' => $club->getString(), 
-                'club_address' => $club->getAddress()
+                'club_address' => $club->getAddress(), 
+                'club_img' => $club->getImg()
             );
             $where = array('club_id' => $club->getId());
             $this->wpdb->update("{$this->t1}", $data, $where);
@@ -135,7 +138,8 @@ class ClubDAO extends MasterDAO {
             $data = array(
                 'club_name' => $club->getName(), 
                 'club_string' => $club->getString(), 
-                'club_address' => $club->getAddress()
+                'club_address' => $club->getAddress(), 
+                'club_img' => $club->getImg()
             );
             $this->wpdb->insert("{$this->t1}", $data);
         }

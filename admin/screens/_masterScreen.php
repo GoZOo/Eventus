@@ -5,7 +5,10 @@
 * @package  Admin/Screens
 * @access   public
 */
-abstract class MasterScreen {
+abstract class MasterScreen {    	
+    protected function __construct() {  
+		wp_enqueue_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
+	}
     /**
     * Function to display the screen
     *

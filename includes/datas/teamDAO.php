@@ -68,7 +68,8 @@ class TeamDAO extends MasterDAO {
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
-                    $row->club_address
+                    $row->club_address, 
+                    $row->club_img
                 )
             );
         }
@@ -111,7 +112,8 @@ class TeamDAO extends MasterDAO {
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
-                    $row->club_address
+                    $row->club_address, 
+                    $row->club_img
                 )
             );
     }
@@ -167,7 +169,8 @@ class TeamDAO extends MasterDAO {
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
-                    $row->club_address
+                    $row->club_address, 
+                    $row->club_img
                 )
             );
         }
@@ -221,7 +224,8 @@ class TeamDAO extends MasterDAO {
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
-                    $row->club_address
+                    $row->club_address, 
+                    $row->club_img
                 )
             );
         }

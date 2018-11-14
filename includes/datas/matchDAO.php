@@ -101,7 +101,8 @@ class MatchDAO extends MasterDAO {
                         $row->club_id, 
                         $row->club_name, 
                         $row->club_string, 
-                        $row->club_address
+                        $row->club_address, 
+                        $row->club_img
                     )
                 ),
                 $row->idMatchRef ? 
@@ -138,7 +139,8 @@ class MatchDAO extends MasterDAO {
                                 $row->club_id, 
                                 $row->club_name, 
                                 $row->club_string, 
-                                $row->club_address
+                                $row->club_address, 
+                                $row->club_img
                             )
                         )
                     ) : null
@@ -225,7 +227,8 @@ class MatchDAO extends MasterDAO {
                         $row->club_id, 
                         $row->club_name, 
                         $row->club_string, 
-                        $row->club_address
+                        $row->club_address, 
+                        $row->club_img
                     )
                 ),
                 $row->match_idMatchRef ? 
@@ -262,7 +265,8 @@ class MatchDAO extends MasterDAO {
                                 $row->club_id, 
                                 $row->club_name, 
                                 $row->club_string, 
-                                $row->club_address
+                                $row->club_address, 
+                                $row->club_img
                             )
                         )
                     ) : null
@@ -433,7 +437,8 @@ class MatchDAO extends MasterDAO {
                         $row->club_id, 
                         $row->club_name, 
                         $row->club_string, 
-                        $row->club_address
+                        $row->club_address, 
+                        $row->club_img
                     )
                 ),
                 $row->match_idMatchRef ? 
@@ -470,7 +475,8 @@ class MatchDAO extends MasterDAO {
                                 $row->club_id, 
                                 $row->club_name, 
                                 $row->club_string, 
-                                $row->club_address
+                                $row->club_address, 
+                                $row->club_img
                             )
                         )
                     ) : null

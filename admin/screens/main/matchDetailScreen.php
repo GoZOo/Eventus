@@ -24,7 +24,10 @@ class MainMatchScreen extends MasterScreen {
         return self::$_instance;
     }
 
-    private function __construct() {}
+    protected function __construct() {
+        parent::__construct();
+		wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../../js/screens/matchDetailScreen.js', '', '', true); 
+	}
 
 	/**
     * Function to display the screen
@@ -55,7 +58,7 @@ class MainMatchScreen extends MasterScreen {
 			<?php  
                 echo $this->showNotice(); 
             ?> 
-	        <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post" class="fakeForm">   
+	        <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">   
 				<h2>
 					<?php echo $this->toProperText($team->getClub()->getName()); ?>
 				</h2>
@@ -122,10 +125,10 @@ class MainMatchScreen extends MasterScreen {
 								<td>
 									<button type='button' onclick='editMatch(<?php echo $match->getId() ?>)' class='button-primary' title="Editer le match">
 										<div class="edit">
-											<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../svg/edit.svg'); ?>						    				
+											<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../../svg/edit.svg'); ?>						    				
 										</div>
 										<div class="delete" style="display:none;">
-											<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../svg/del.svg'); ?>
+											<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../../svg/del.svg'); ?>
 										</div>			                		
 									</button>
 								</td>
@@ -207,7 +210,7 @@ class MainMatchScreen extends MasterScreen {
 								</td>
 								<td>
 									<button type='button' onclick='deleMatch(<?php echo $match->getMatchRef()->getId() ?>, "sonMatches")' class='button-primary' title="Supprimer le match">
-										<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../svg/del.svg'); ?>
+										<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../../svg/del.svg'); ?>
 									</button>
 								</td>
 								<input type='hidden' value="<?php echo $match->getMatchDay() ?>" data-name="matchDaySon">
@@ -239,7 +242,7 @@ class MainMatchScreen extends MasterScreen {
 						<?php
 						$myMatchOther = MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
 						if (!$myMatchOther){
-							$myMatchOther[] = new Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+							$myMatchOther[] = new Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 						}
 						$nbrOtherMatch = 1;
 						foreach ($myMatchOther as $match) {
@@ -278,7 +281,7 @@ class MainMatchScreen extends MasterScreen {
 								</td>
 								<td>
 									<button type='button' onclick="deleMatch('<?php if($match->getId()) { echo $match->getId(); } else { echo $tempId; } ?>', 'otherMatches')" class='button-primary' title="Supprimer le match">
-										<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../svg/del.svg'); ?>
+										<?php echo file_get_contents(plugin_dir_path( __FILE__ ).'../../svg/del.svg'); ?>
 									</button>
 								</td>
 								<input type='hidden' name='idOther<?php echo $nbrOtherMatch ?>' value="<?php echo $match->getId() ?>" data-name="idOther">

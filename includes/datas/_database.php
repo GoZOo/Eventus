@@ -1,4 +1,7 @@
 <?php 
+
+namespace Eventus\Includes\Datas;
+
 /**
 * Databse is a class use to manage the database
 *

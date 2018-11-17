@@ -1,4 +1,8 @@
 <?php 
+
+namespace Eventus\Includes\Datas;
+use Eventus\Includes\Entities as Entities;
+
 /**
 * ClubDAO is a class use to manage acces to the Database to get Club objects
 *
@@ -45,7 +49,7 @@ class ClubDAO extends MasterDAO {
                 {$this->t1}"
         );
         foreach($clubs as $row) { 
-            $allClubs[] = new Club(
+            $allClubs[] = new Entities\Club(
                 $row->club_id, 
                 $row->club_name, 
                 $row->club_string, 
@@ -70,7 +74,7 @@ class ClubDAO extends MasterDAO {
                 {$this->t1} 
             WHERE 
                 club_id=$myClubId");
-        return new Club(
+        return new Entities\Club(
             $row->club_id, 
             $row->club_name, 
             $row->club_string, 

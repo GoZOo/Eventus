@@ -35,6 +35,20 @@ Most of the files are documented. So, you can give it an eye of you want to unde
 
 ## Updates
 
+### 2.4
+
+* Fix ButtonResults and ResultsCarousel with multiple links
+* Fix ResultsCarousel
+* Add you can now open in other tab button in admins pages
+* Add you can now select an image for a team
+* Add you can open restults in new tab thanks to a button
+* Add namespace in every files
+* Evo you can add two different results links to a team
+* Evo you can't no longer pick sexe(s) for clubs
+* Evo some files and repositories have changed
+* Evo selected image are now display in pickers
+* Evo lot of optimizations in multiple files (Finder, PostHandler, Screens, etc...)
+
 ### 2.3.1
 
 * Fix escape some string with quotes, etc...

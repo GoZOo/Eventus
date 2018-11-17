@@ -1,11 +1,15 @@
 <?php
+
+namespace Eventus\Admin\Screens\Log;
+use Eventus\Admin\Screens as Screens;
+
 /**
 * LogScreen is a class use to manage admin screen
 *
 * @package  Admin/Screens
 * @access   public
 */
-class LogScreen extends MasterScreen {
+class LogScreen extends Screens\MasterScreen {
     /**
     * @var LogScreen   $_instance  Var use to store an instance
     */
@@ -45,7 +49,7 @@ class LogScreen extends MasterScreen {
             <ul>
                 <li>
                 <?php
-                $content = file_get_contents(plugin_dir_path( __FILE__ ).'../../finder.log');
+                $content = file_get_contents(plugin_dir_path( __FILE__ ).'../../../finder.log');
                 if ($content) {
                     $content = str_replace("]", "]</b>", $content);
                     $content = str_replace("[", "<b>[", $content);

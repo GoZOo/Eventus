@@ -1,5 +1,7 @@
 <?php
 
+use Eventus\Includes\Datas as DAO;
+
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
 }
@@ -11,7 +13,7 @@ if (!defined('ABSPATH')) {  // Exit if accessed directly
 */
 if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 	class EventusResults extends aviaShortcodeTemplate {
-        use MasterTrait;
+        use TraitHelper;
 
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
@@ -41,7 +43,7 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 			wp_enqueue_script('scriptEventusResults', '../wp-content/plugins/eventus/public/js/eventusResults.js', '', '', true);
 			wp_enqueue_style('cssEventusResults', '../wp-content/plugins/eventus/public/css/eventusResults.css');
 
-			$allClubs = ClubDAO::getInstance()->getAllClubs();
+			$allClubs = DAO\ClubDAO::getInstance()->getAllClubs();
 			
 			$output  = 
 			"<div class='allClbus'>";
@@ -53,11 +55,11 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 							<p>".$club->getName()."</p>".
 							(sizeof($allClubs) > 1 ? "<button type='button' class='clubSuivant' >&#9658;&#9658;</button>" : "")."
 						</div>";
-				$allTeams = TeamDAO::getInstance()->getAllTeamsByClubOrderBySex($club);
+				$allTeams = DAO\TeamDAO::getInstance()->getAllTeamsByClubOrderBySex($club);
 				$tempSex = "";
 				foreach ($allTeams as $team) { 
 					//$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "next"); //wrong method : temporary when no matches
-					$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last");
+					$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last");
 					if ($myMatch->getId()) {
 						$newSex = $this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed());
 						$output .= ($tempSex != $newSex ? "<p class='sexe'>".$newSex." :</p>" : "");

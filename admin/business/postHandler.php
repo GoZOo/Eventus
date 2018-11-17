@@ -1,20 +1,53 @@
 <?php
-    add_action('admin_post_syncMatch', 'synchronizeMatch');
-    add_action('admin_post_delMatch', 'deleteMatch');
-    add_action('admin_post_majMatch', 'updateMatch');
-    add_action('admin_post_majHours', 'updateHoursMatch');
 
-    add_action('admin_post_majClub', 'updateClub');
-    add_action('admin_post_delClub', 'deleteClub');    
+namespace Eventus\Admin\Business;
+use Eventus\Includes\Datas as DAO;
+use Eventus\Includes\Entities as Entities;
 
-    add_action('admin_post_majTeam', 'updateTeam');
-    add_action('admin_post_delTeam', 'deleteTeam');
+/**
+* PostHandler is a class use to manage submit form
+*
+* @package  Admin/Business
+* @access   public
+*/
+class PostHandler {
+    /**
+    * @var PostHandler   $_instance  Var use to store an instance
+    */
+    private static $_instance;
 
-    add_action('admin_post_clearLog', 'deleteLog');  
+    /**
+    * Returns an instance of the object
+    *
+    * @return PostHandler
+    * @access public
+    */
+    public static function getInstance() {
+        if (is_null(self::$_instance)) {
+            self::$_instance = new PostHandler();
+        }
+        return self::$_instance;
+    }
 
-    add_action('admin_post_resetEventus', 'resetEventus');   
-
-    add_action('admin_post_majSettings', 'updateSettings');     
+    private function __construct() {
+        add_action('admin_post_syncMatch', array($this, 'synchronizeMatch'));
+        add_action('admin_post_delMatch', array($this, 'deleteMatch'));
+        add_action('admin_post_majMatch', array($this, 'updateMatch'));
+        add_action('admin_post_majHours', array($this, 'updateHoursMatch'));
+    
+        add_action('admin_post_majClub', array($this, 'updateClub'));
+        add_action('admin_post_delClub', array($this, 'deleteClub'));    
+    
+        add_action('admin_post_majTeam', array($this, 'updateTeam'));
+        add_action('admin_post_delTeam', array($this, 'deleteTeam'));
+    
+        add_action('admin_post_clearLog', array($this, 'deleteLog'));  
+    
+        add_action('admin_post_resetEventus', array($this, 'resetEventus'));   
+    
+        add_action('admin_post_majSettings', array($this, 'updateSettings'));     
+    }
+    
        
     /**************************
     ********** Match **********
@@ -22,10 +55,10 @@
     function synchronizeMatch(){  
         if (get_option("eventus_mapapikey")) {
             if ($_POST['teamId']) {
-                setUpdateMatch();
-                Finder::getInstance()->updateMatches(TeamDAO::getInstance()->getTeamById($_POST['teamId']));
+                PostHandler::getInstance()->setUpdateMatch();
+                Finder::getInstance()->updateMatches(DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']));
             } else {
-                foreach (TeamDAO::getInstance()->getAllTeams() as $team) {
+                foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
                     Finder::getInstance()->updateMatches($team);
                 }
             }
@@ -41,23 +74,23 @@
     
     function deleteMatch(){   
         if ($_POST['teamId']) {
-    		MatchDAO::getInstance()->deleteMatches($_POST['teamId']);
+    		DAO\MatchDAO::getInstance()->deleteMatches($_POST['teamId']);
     	} else {
-    		MatchDAO::getInstance()->deleteMatches();
-            Database::getInstance()->resetAutoIncr('matches');
+    		DAO\MatchDAO::getInstance()->deleteMatches();
+            DAO\Database::getInstance()->resetAutoIncr('matches');
     	}
 		wp_redirect( add_query_arg( 'message', 'succesDelMatch',  wp_get_referer() ));
     }
 
     function updateMatch(){
-    	setUpdateMatch();
+    	PostHandler::getInstance()->setUpdateMatch();
 		wp_redirect( add_query_arg( 'message', 'succesUpMatch',  wp_get_referer() ));
     }
     
     function updateHoursMatch(){
         if (get_option("eventus_mapapikey")) {
-            setUpdateMatch();
-            MatchDAO::getInstance()->updateMatchesHours(Finder::setNewHoursRdv(MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId'])));
+            PostHandler::getInstance()->setUpdateMatch();
+            DAO\MatchDAO::getInstance()->updateMatchesHours(Finder::setNewHoursRdv(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId'])));
             if (!filesize(plugin_dir_path( __FILE__ ).'../../finder.log')) {
                 wp_redirect( add_query_arg( 'message', 'succesUpHoursMatch',  wp_get_referer() ));
             } else {
@@ -69,10 +102,10 @@
     }
 
     function setUpdateMatch(){
-    	$myTeam = TeamDAO::getInstance()->getTeamById($_POST['teamId']);
+    	$myTeam = DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']);
        	$allMatchesSon = [];
         for($i=1; $i < $_POST['nbrSonMatch']+1; $i++) { 
-            $allMatchesSon[] = new Match(
+            $allMatchesSon[] = new Entities\Match(
             	$_POST['idSon'.$i] ? $_POST['idSon'.$i] : null, 
             	$_POST['matchDaySon'.$i] ? $_POST['matchDaySon'.$i] : null,
             	$_POST['numMatchSon'.$i] ? $_POST['numMatchSon'.$i] : null,
@@ -93,11 +126,11 @@
             	$_POST['idMatchRefSon'.$i] ? $_POST['idMatchRefSon'.$i] : null
             );
         }	
-        MatchDAO::getInstance()->updateMatchesScreen($allMatchesSon, 1, TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId()); 
+        DAO\MatchDAO::getInstance()->updateMatchesScreen($allMatchesSon, 1, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId()); 
 
        	$allMatchesOther = [];
         for($i=1; $i < $_POST['nbrOtherMatch']+1; $i++) { 
-            $allMatchesOther[] = new Match(
+            $allMatchesOther[] = new Entities\Match(
             	$_POST['idOther'.$i] ? $_POST['idOther'.$i] : null, 
             	null,
             	null,
@@ -118,7 +151,7 @@
             	null
             );
         }
-        MatchDAO::getInstance()->updateMatchesScreen($allMatchesOther, 2, TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  
+        DAO\MatchDAO::getInstance()->updateMatchesScreen($allMatchesOther, 2, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  
     }
     
     /**************************
@@ -126,9 +159,9 @@
     ***************************/
     function updateClub(){
         if ($_POST['clubId']) {
-            $club = ClubDAO::getInstance()->getClubById($_POST['clubId']);
+            $club = DAO\ClubDAO::getInstance()->getClubById($_POST['clubId']);
         } else {
-            $club = new Club(null, "", "", "", "");
+            $club = new Entities\Club(null, "", "", "", "");
         }        
         $club->setName(($_POST['nom'] ? $_POST['nom'] : ""));
         $club->setString(($_POST['chaine'] ? $_POST['chaine'] : ""));
@@ -137,10 +170,10 @@
 
         if($club->getName() && $club->getString() && $club->getAddress()){
             if ($club->getId()) {
-                ClubDAO::getInstance()->updateClub($club); 
+                DAO\ClubDAO::getInstance()->updateClub($club); 
                 wp_redirect( add_query_arg( 'message', 'succesUpClub',  wp_get_referer() )); 
             } else {
-                $newId = ClubDAO::getInstance()->insertClub($club); 
+                $newId = DAO\ClubDAO::getInstance()->insertClub($club); 
                 wp_redirect( add_query_arg( 'message', 'succesNewClub', 'admin.php?page=eventus_club&action=club&clubId='.$newId )); 
             }  
         } else {    
@@ -154,10 +187,10 @@
 
     function deleteClub(){
         if ($_POST['clubId']) {
-            ClubDAO::getInstance()->deleteClub($_POST['clubId']); 
+            DAO\ClubDAO::getInstance()->deleteClub($_POST['clubId']); 
     	} else {
-            ClubDAO::getInstance()->deleteClub(); 
-            Database::getInstance()->resetAutoIncr('clubs');
+            DAO\ClubDAO::getInstance()->deleteClub(); 
+            DAO\Database::getInstance()->resetAutoIncr('clubs');
     	}        
         wp_redirect( add_query_arg( 'message', 'succesDelClub', 'admin.php?page=eventus_club')); 
     }
@@ -168,9 +201,9 @@
     function updateTeam(){    
         $allTeams = [];
         if ($_POST['teamId']) {
-            $team = TeamDAO::getInstance()->getTeamById($_POST['teamId']);
+            $team = DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']);
         } else {
-            $team = new Team(null, "", "", 0, 0, 0, 0, 0, "", "", null);
+            $team = new Entities\Team(null, "", "", 0, 0, 0, 0, 0, "", "", null);
         }        
         $team->setName(($_POST['nom'] ? $_POST['nom'] : null));
         if ( $_POST['urlTwo'] && !$_POST['urlOne'] ) {
@@ -185,15 +218,15 @@
         $team->setMixed(($_POST['sexe'] == "m" ? 1 : 0));
         $team->setTime(($_POST['time'] ? $_POST['time'] : 45));
         $team->setImg(($_POST['img'] ? $_POST['img'] : null));
-        $team->setClub(ClubDAO::getInstance()->getClubById(($_POST['club'] ? $_POST['club'] : null)));
+        $team->setClub(DAO\ClubDAO::getInstance()->getClubById(($_POST['club'] ? $_POST['club'] : null)));
             
         
         if($team->getName() && $team->getClub()){
             if ($team->getId()) {
-                TeamDAO::getInstance()->updateTeam($team); 
+                DAO\TeamDAO::getInstance()->updateTeam($team); 
                 wp_redirect( add_query_arg( 'message', 'succesUpTeam',  wp_get_referer() )); 
             } else {
-                $newId = TeamDAO::getInstance()->insertTeam($team); 
+                $newId = DAO\TeamDAO::getInstance()->insertTeam($team); 
                 wp_redirect( add_query_arg( 'message', 'succesNewTeam', 'admin.php?page=eventus&action=team&teamId='.$newId )); 
             }
         } else {    
@@ -207,11 +240,11 @@
 
     function deleteTeam(){
         if ($_POST['teamId']) {
-            TeamDAO::getInstance()->deleteTeam($_POST['teamId']); 
+            DAO\TeamDAO::getInstance()->deleteTeam($_POST['teamId']); 
             wp_redirect( add_query_arg( 'message', 'succesDelTeam', 'admin.php?page=eventus')); 
     	} else {
-            TeamDAO::getInstance()->deleteTeam(); 
-            Database::getInstance()->resetAutoIncr('teams');
+            DAO\TeamDAO::getInstance()->deleteTeam(); 
+            DAO\Database::getInstance()->resetAutoIncr('teams');
             wp_redirect( add_query_arg( 'message', 'succesDelTeams', 'admin.php?page=eventus')); 
     	}        
     }
@@ -228,7 +261,7 @@
     ********* Eventus *********
     ***************************/
     function resetEventus(){
-        Database::getInstance()->resetTables();
+        DAO\Database::getInstance()->resetTables();
         delete_option('eventus_mapapikey');
         wp_redirect( add_query_arg( 'message', 'succesReset',  'admin.php?page=eventus' ));
     }
@@ -238,6 +271,6 @@
         wp_redirect( add_query_arg( 'message', 'succesUpSet',  wp_get_referer() ));
     }
 
-
+}
 
 ?>

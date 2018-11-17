@@ -1,11 +1,16 @@
 <?php
+
+namespace Eventus\Admin\Screens\Club;
+use Eventus\Admin\Screens as Screens;
+use Eventus\Includes\Datas as DAO;
+
 /**
 * ClubDetailScreen is a class use to manage admin screen
 *
 * @package  Admin/Screens
 * @access   public
 */
-class ClubDetailScreen extends MasterScreen {
+class ClubDetailScreen extends Screens\MasterScreen {
     /**
     * @var ClubDetailScreen   $_instance  Var use to store an instance
     */
@@ -38,7 +43,7 @@ class ClubDetailScreen extends MasterScreen {
     */
     function display(){
         if (isset($_GET['clubId'])){  
-            $club = ClubDAO::getInstance()->getClubById($_GET['clubId']);
+            $club = DAO\ClubDAO::getInstance()->getClubById($_GET['clubId']);
             if (!$club->getId()) {
                 echo "<h2>Erreur : Le club n'a pas pu être trouvé...</h2>";
                 return;

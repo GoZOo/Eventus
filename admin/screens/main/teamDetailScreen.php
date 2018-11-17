@@ -1,11 +1,17 @@
 <?php
+
+namespace Eventus\Admin\Screens\Main;
+use Eventus\Admin\Screens as Screens;
+use Eventus\Includes\Datas as DAO;
+use Eventus\Includes\Entities as Entities;
+
 /**
 * MainTeamScreen is a class use to manage admin screen
 *
 * @package  Admin/Screens
 * @access   public
 */
-class MainTeamScreen extends MasterScreen {
+class MainTeamScreen extends Screens\MasterScreen {
     /**
     * @var MainTeamScreen   $_instance  Var use to store an instance
     */
@@ -39,13 +45,13 @@ class MainTeamScreen extends MasterScreen {
     */
     function display(){
         if (isset($_GET['teamId'])){  
-            $team = TeamDAO::getInstance()->getTeamById($_GET['teamId']);
+            $team = DAO\TeamDAO::getInstance()->getTeamById($_GET['teamId']);
             if (!$team->getId()) {
                 echo "<h2>Erreur : L'équipe n'a pas pu être trouvée...</h2>";
                 return;
             }            
     	} else {
-            $team = new Team(null, "", "", "", 0, 0, 0, 0, 0, "", "", null);
+            $team = new Entities\Team(null, "", "", "", 0, 0, 0, 0, 0, "", "", null);
         }
 	    ?>
         <div class='wrap'>
@@ -74,7 +80,7 @@ class MainTeamScreen extends MasterScreen {
                                 <td>
                                 <select name="club" id='club'>
                                     <?php
-                                        $myClubs = ClubDAO::getInstance()->getAllClubs();
+                                        $myClubs = DAO\ClubDAO::getInstance()->getAllClubs();
                                         foreach ($myClubs as $key => $club) { ?>
                                             <option 
                                                 value="<?php echo $club->getId()?>" 
@@ -123,6 +129,7 @@ class MainTeamScreen extends MasterScreen {
                                 </th>
                                 <td>
                                     <input name='urlOne' id='urlOne' value='<?php echo $this->toProperText($team->getUrlOne()) ?>' class='regular-text' type='url' title="Lien n°1 des résultats du championnat" placeholder="Lien n°1 des résultats du championnat">
+                                    <button type='button' class='button-primary ico ico-link ico-no-text' onclick="window.open('<?php echo $this->toProperText($team->getUrlOne()) ?>', '_blank')"></button>
                                 </td>
                             </tr>
                             <tr <?php echo !$team->getUrlOne() ? "style='display: none'" : ''?>>
@@ -131,6 +138,7 @@ class MainTeamScreen extends MasterScreen {
                                 </th>
                                 <td>
                                     <input name='urlTwo' id='urlTwo' value='<?php echo $this->toProperText($team->getUrlTwo()) ?>' class='regular-text' type='url' title="Lien n°2 des résultats du championnat" placeholder="Lien n°2 des résultats du championnat">
+                                    <button type='button' class='button-primary ico ico-link ico-no-text' onclick="window.open('<?php echo $this->toProperText($team->getUrlOne()) ?>', '_blank')"></button>
                                 </td>
                             </tr>
                             <tr>

@@ -1,11 +1,17 @@
 <?php
+
+namespace Eventus\Admin\Screens\Main;
+use Eventus\Admin\Screens as Screens;
+use Eventus\Includes\Datas as DAO;
+use Eventus\Includes\Entities as Entities;
+
 /**
 * MainMatchScreen is a class use to manage admin screen
 *
 * @package  Admin/Screens
 * @access   public
 */
-class MainMatchScreen extends MasterScreen {	
+class MainMatchScreen extends Screens\MasterScreen {	
 	/**
     * @var MainMatchScreen   $_instance  Var use to store an instance
     */
@@ -37,7 +43,7 @@ class MainMatchScreen extends MasterScreen {
     */
     function display(){    	
 		if (isset($_GET['teamId'])){ 
-			$team = TeamDAO::getInstance()->getTeamById($_GET['teamId']);
+			$team = DAO\TeamDAO::getInstance()->getTeamById($_GET['teamId']);
 			if ($team->getId() == null){
 				echo "<h2>Erreur : L'équipe n'a pas pu être trouvée...</h2>";
 				return;
@@ -51,7 +57,7 @@ class MainMatchScreen extends MasterScreen {
                 ?>                
 			</h1>
 			<?php 
-				$myMatchParent = MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
+				$myMatchParent = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
 			?>
 			<a href="<?php echo "admin.php?page=eventus&action=team&teamId=".$team->getId(); ?>" class="page-title-action">Équipe</a>
 			<hr class="wp-header-end">
@@ -143,7 +149,7 @@ class MainMatchScreen extends MasterScreen {
 						?>
 						</table>
 						<?php
-						$myMatchSon = MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),1); 
+						$myMatchSon = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),1); 
 						?>
 						<br class="sonMatches" <?php if (!$myMatchSon) { echo "style=display:none;"; } ?> >
 						<h3 class="sonMatches" <?php if (!$myMatchSon) { echo "style=display:none;"; } ?> >Matchs fils :</h3>
@@ -240,9 +246,9 @@ class MainMatchScreen extends MasterScreen {
 								<th>Salle</th>
 							</tr>   	
 						<?php
-						$myMatchOther = MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
+						$myMatchOther = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
 						if (!$myMatchOther){
-							$myMatchOther[] = new Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+							$myMatchOther[] = new Entities\Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 						}
 						$nbrOtherMatch = 1;
 						foreach ($myMatchOther as $match) {

@@ -1,4 +1,7 @@
 <?php 
+
+namespace Eventus\Includes\Entities;
+
 /**
 * Team is a class use to manage teams
 *
@@ -23,7 +26,7 @@ class Team {
 
     private $id, $name, $urlOne, $urlTwo, $boy, $girl, $mixed, $position, $points, $time, $img, $club;
 
-    public function __construct($id, $name, $urlOne, $urlTwo, $boy, $girl, $mixed, $position, $points, $time, $img, $club) {
+    public function __construct($id=null, $name, $urlOne, $urlTwo, $boy, $girl, $mixed, $position, $points, $time, $img, $club=null) {
         $this->id = $id;
         $this->name = $name;
         $this->urlOne = $urlOne;

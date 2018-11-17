@@ -1,11 +1,16 @@
 <?php
+
+namespace Eventus\Admin\Screens\Main;
+use Eventus\Admin\Screens as Screens;
+use Eventus\Includes\Datas as DAO;
+
 /**
 * MainScreen is a class use to manage admin screen
 *
 * @package  Admin/Screens
 * @access   public
 */
-class MainScreen extends MasterScreen {	
+class MainScreen extends Screens\MasterScreen {	
 	/**
     * @var MainScreen   $_instance  Var use to store an instance
     */
@@ -48,7 +53,7 @@ class MainScreen extends MasterScreen {
 			<hr class="wp-header-end">	
 			<?php  
                 echo $this->showNotice(); 
-				$allClubs = ClubDAO::getInstance()->getAllClubs();
+				$allClubs = DAO\ClubDAO::getInstance()->getAllClubs();
 				if (!$allClubs) { 
 					?>
 					<h2>Veuillez ajouter un club dans un premier temps...</h2>	
@@ -64,7 +69,7 @@ class MainScreen extends MasterScreen {
 					<h2><?php echo $this->toProperText($club->getName())?></h2>	 
 					<div>       				
 						<?php 
-							$allTeams = TeamDAO::getInstance()->getAllTeamsByClubOrderByName($club);
+							$allTeams = DAO\TeamDAO::getInstance()->getAllTeamsByClubOrderByName($club);
 							if (!$allTeams) {?>
 								<p style="flex: auto;">Aucune équipe n'a été trouvée pour ce club...</p>
 							<?php
@@ -91,7 +96,7 @@ class MainScreen extends MasterScreen {
 										</button>
 									</div>
 									<div class="card-footer text-muted">
-										<?php $infos = TeamDAO::getInstance()->getInfosByTeamId($team->getId());?>
+										<?php $infos = DAO\TeamDAO::getInstance()->getInfosByTeamId($team->getId());?>
 										ID : 
 										<b><?php echo $infos->team_id; ?></b>										
 										 / Club ID : 
@@ -116,7 +121,7 @@ class MainScreen extends MasterScreen {
 			<br/><br/>
 
 			<?php 
-			if (TeamDAO::getInstance()->getAllTeams()){ 
+			if (DAO\TeamDAO::getInstance()->getAllTeams()){ 
 				?>
 				<form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
 					<div class="myTooltip">

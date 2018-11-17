@@ -1,5 +1,7 @@
 <?php
 
+use Eventus\Includes\Datas as DAO;
+
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
 }
@@ -11,7 +13,7 @@ if (!defined('ABSPATH')) {  // Exit if accessed directly
 */
 if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate')) {
 	class EventusTeamPicture extends aviaShortcodeTemplate {
-        use MasterTrait;
+        use TraitHelper;
 
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
@@ -31,7 +33,7 @@ if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate'
 				__("Fixed font size" , 'avia_framework') => AviaHtmlHelper::number_array(11,150,1, array(), "px", "", "")
 			);	
 		
-			foreach (TeamDAO::getInstance()->getAllTeams() as $team) {
+			foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
 				$allTeamsDisplay[$team->getName()." ".$this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed())." - ".$team->getClub()->getName()] = $team->getId();
 			}		
 			
@@ -45,12 +47,12 @@ if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate'
 					"type" 	=> "select",
 					"std" 	=> "0",
 					"subtype" => array(
+									"Extra large (1500x1500) - Recommended"=>'extra_large',
 									"Orignal" => 'full',
 									"Widget (36x36)"=>'widget',
 									"Square (180x180)"=>'square',
 									"Featured (1500x430)"=>'featured',
 									"Featured large (1500x630)"=>'featured_large',
-									"Extra large (1500x1500)"=>'extra_large',
 									"Portfolio (495x400)"=>'portfolio',
 									"Portfolio small (260x185)"=>'portfolio_small',
 									"Gallery (845x684)"=>'gallery',
@@ -91,7 +93,7 @@ if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate'
 	                'format' => ''
 	            ),
 			$atts));
-			$myTeam = TeamDAO::getInstance()->getTeamById($teamid);
+			$myTeam = DAO\TeamDAO::getInstance()->getTeamById($teamid);
 			if (!$myTeam->getImg()) {
 				return do_shortcode("[av_image src='".plugin_dir_url( __FILE__ ).'../../../includes/img/img-default.png'."' attachment='' attachment_size='' align='center' styling='' hover='' link='' target='' caption='' font_size='' appearance='' overlay_opacity='0.4' overlay_color='#000000' overlay_text_color='#ffffff' copyright='' animation='no-animation' av_uid='' custom_class='' admin_preview_bg=''][/av_image]"); 
 			}

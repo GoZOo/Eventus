@@ -1,4 +1,8 @@
 <?php 
+
+namespace Eventus\Includes\Datas;
+use Eventus\Includes\Entities as Entities;
+
 /**
 * TeamDAO is a class use to manage acces to the Database to get Team objects
 *
@@ -52,7 +56,7 @@ class TeamDAO extends MasterDAO {
         ");
         $allTeams = [];
         foreach($teams as $row) { 
-            $allTeams[] = new Team(
+            $allTeams[] = new Entities\Team(
                 $row->team_id, 
                 $row->team_name, 
                 $row->team_urlOne, 
@@ -64,7 +68,7 @@ class TeamDAO extends MasterDAO {
                 $row->team_points, 
                 $row->team_time, 
                 $row->team_img, 
-                new Club(
+                new Entities\Club(
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
@@ -96,7 +100,7 @@ class TeamDAO extends MasterDAO {
             WHERE 
                 a.team_id=$myTeamId
         ");
-        return new Team(
+        return new Entities\Team(
                 $row->team_id, 
                 $row->team_name, 
                 $row->team_urlOne, 
@@ -108,7 +112,7 @@ class TeamDAO extends MasterDAO {
                 $row->team_points, 
                 $row->team_time, 
                 $row->team_img, 
-                new Club(
+                new Entities\Club(
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
@@ -153,7 +157,7 @@ class TeamDAO extends MasterDAO {
         ");
         $allTeams = [];
         foreach($teams as $row) { 
-            $allTeams[] = new Team(
+            $allTeams[] = new Entities\Team(
                 $row->team_id, 
                 $row->team_name, 
                 $row->team_urlOne, 
@@ -165,7 +169,7 @@ class TeamDAO extends MasterDAO {
                 $row->team_points, 
                 $row->team_time, 
                 $row->team_img, 
-                new Club(
+                new Entities\Club(
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 
@@ -208,7 +212,7 @@ class TeamDAO extends MasterDAO {
         "); 
         $allTeams = [];
         foreach($teams as $row) { 
-            $allTeams[] = new Team(
+            $allTeams[] = new Entities\Team(
                 $row->team_id, 
                 $row->team_name, 
                 $row->team_urlOne, 
@@ -220,7 +224,7 @@ class TeamDAO extends MasterDAO {
                 $row->team_points, 
                 $row->team_time, 
                 $row->team_img, 
-                new Club(
+                new Entities\Club(
                     $row->club_id, 
                     $row->club_name, 
                     $row->club_string, 

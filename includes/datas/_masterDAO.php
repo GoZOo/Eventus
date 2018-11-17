@@ -1,4 +1,7 @@
 <?php 
+
+namespace Eventus\Includes\Datas;
+
 /**
 * MasterDAO is a parent class for all DAOs
 *

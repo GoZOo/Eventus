@@ -1,4 +1,5 @@
 <?php
+use Eventus\Includes\Datas as DAO;
 
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
@@ -12,7 +13,7 @@ if (!defined('ABSPATH')) {  // Exit if accessed directly
 
 if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplate')) {
 	class EventusButtonResults extends aviaShortcodeTemplate {
-        use MasterTrait;
+        use TraitHelper;
 
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
@@ -32,7 +33,7 @@ if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplat
 				__("Fixed font size" , 'avia_framework') => AviaHtmlHelper::number_array(11,150,1, array(), "px", "", "")
 			);	
 	
-			foreach (TeamDAO::getInstance()->getAllTeams() as $team) {
+			foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
 				$allTeamsDisplay[$team->getName()." ".$this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed())." - ".$team->getClub()->getName()] = $team->getId();
 			}		
 			
@@ -66,7 +67,7 @@ if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplat
 	            ),
 	        $atts));
 	        
-			$myTeam = TeamDAO::getInstance()->getTeamById($teamid); 
+			$myTeam = DAO\TeamDAO::getInstance()->getTeamById($teamid); 
 			// $myUrlOne = $myTeam->getUrlOne();
 			// $myUrlOne = str_replace("[", "&#91;", $myUrlOne);
 			// $myUrlOne = str_replace("]", "&#93;", $myUrlOne);

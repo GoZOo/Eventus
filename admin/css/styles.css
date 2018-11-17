@@ -137,7 +137,7 @@ body[class*="eventus"] .eventusCardList .eventusCard .card-footer.text-muted{
 
 /* helpers */
 body[class*="eventus"] form button:active{
-	vertical-align: inherit;
+	vertical-align: inherit!important;
 }
 
 /* icons */
@@ -145,6 +145,12 @@ body[class*="eventus"] button.ico {
 	position: relative!important;
 	padding-left: 25px;
 	margin-bottom: 5px;
+}
+body[class*="eventus"] button.ico-no-text {
+	padding-left: 0!important;
+	margin-bottom: 0!important;
+	width: 28px!important;
+	vertical-align: bottom!important;
 }
 body[class*="eventus"] .ico-save:before {
 	content: url('../../admin/svg/save.svg');
@@ -222,6 +228,13 @@ body[class*="eventus"] .ico-reset:before {
     top: 3.5px;
     left: 2px;
 	width: 19px;
+}
+body[class*="eventus"] .ico-link:before {
+	content: url('../../admin/svg/link.svg');
+    position: absolute;
+    top: 5px;
+	left: 4.4px;
+	width: 17px;
 }
 /* Loading button  */
 body[class*="eventus"] .ico-loading:before {

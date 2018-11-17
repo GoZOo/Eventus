@@ -1,11 +1,15 @@
 <?php
+
+namespace Eventus\Admin\Screens\Admin;
+use Eventus\Admin\Screens as Screens;
+
 /**
 * AdminScreen is a class use to manage admin screen
 *
 * @package  Admin/Screens
 * @access   public
 */
-class AdminScreen extends MasterScreen {
+class AdminScreen extends Screens\MasterScreen {
     /**
     * @var AdminScreen   $_instance  Var use to store an instance
     */

@@ -1,11 +1,16 @@
 <?php
+
+namespace Eventus\Admin\Screens\Club;
+use Eventus\Admin\Screens as Screens;
+use Eventus\Includes\Datas as DAO;
+
 /**
 * ClubScreen is a class use to manage admin screen
 *
 * @package  Admin/Screens
 * @access   public
 */
-class ClubScreen extends MasterScreen {	
+class ClubScreen extends Screens\MasterScreen {	
 	/**
     * @var ClubScreen   $_instance  Var use to store an instance
     */
@@ -45,7 +50,7 @@ class ClubScreen extends MasterScreen {
 			<hr class="wp-header-end">
 			<?php  
                 echo $this->showNotice(); 	        
-			$allClubs = ClubDAO::getInstance()->getAllClubs();
+			$allClubs = DAO\ClubDAO::getInstance()->getAllClubs();
 			if (!$allClubs){
 				?>
 				<h2>Veuillez ajouter un club dans un premier temps...</h2>	
@@ -68,7 +73,7 @@ class ClubScreen extends MasterScreen {
 									</button>
 								</div>
 								<div class="card-footer text-muted">
-									<?php $infos = ClubDAO::getInstance()->getInfosByClubId($club->getId()); ?>
+									<?php $infos = DAO\ClubDAO::getInstance()->getInfosByClubId($club->getId()); ?>
 									ID : 
 									<b><?php echo $infos->club_id; ?></b>	 
 									/ Équipes : 

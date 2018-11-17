@@ -1,4 +1,8 @@
 <?php 
+
+namespace Eventus\Includes\Datas;
+use Eventus\Includes\Entities as Entities;
+
 /**
 * MatchDAO is a class use to manage acces to the Database to get Match objects
 *
@@ -68,7 +72,7 @@ class MatchDAO extends MasterDAO {
                 a.match_idTeam=$idTeam"
         );
         foreach($teams as $row) { 
-            $allMatches[] = new Match(
+            $allMatches[] = new Entities\Match(
                 $row->match_id, 
                 $row->match_matchDay,
                 $row->match_numMatch,
@@ -85,7 +89,7 @@ class MatchDAO extends MasterDAO {
                 $row->match_gym, 
                 $row->match_type,
                 $row->match_champ, 
-                new Team(
+                new Entities\Team(
                     $row->team_id, 
                     $row->team_name, 
                     $row->team_urlOne, 
@@ -97,7 +101,7 @@ class MatchDAO extends MasterDAO {
                     $row->team_points, 
                     $row->team_time, 
                     $row->team_img, 
-                    new Club(
+                    new Entities\Club(
                         $row->club_id, 
                         $row->club_name, 
                         $row->club_string, 
@@ -106,7 +110,7 @@ class MatchDAO extends MasterDAO {
                     )
                 ),
                 $row->idMatchRef ? 
-                    new Match(
+                    new Entities\Match(
                         $row->refMatch_id, 
                         $row->refMatch_matchDay,
                         $row->refMatch_numMatch,
@@ -123,7 +127,7 @@ class MatchDAO extends MasterDAO {
                         $row->refMatch_gym, 
                         $row->refMatch_type,
                         $row->refMatch_champ,  
-                        new Team(
+                        new Entities\Team(
                             $row->team_id, 
                             $row->team_name, 
                             $row->team_urlOne, 
@@ -135,7 +139,7 @@ class MatchDAO extends MasterDAO {
                             $row->team_points, 
                             $row->team_time, 
                             $row->team_img, 
-                            new Club(
+                            new Entities\Club(
                                 $row->club_id, 
                                 $row->club_name, 
                                 $row->club_string, 
@@ -149,7 +153,6 @@ class MatchDAO extends MasterDAO {
         return $allMatches;
     }
 
-    //TODO les where/orderby sont basé uniquement sur les matchs parents...
     /**
     * Return every matches by team Id and type
     *
@@ -194,7 +197,7 @@ class MatchDAO extends MasterDAO {
         ");
         $allMatches = [];
         foreach($teams as $row) { 
-            $allMatches[] = new Match(
+            $allMatches[] = new Entities\Match(
                 $row->match_id, 
                 $row->match_matchDay,
                 $row->match_numMatch,
@@ -211,7 +214,7 @@ class MatchDAO extends MasterDAO {
                 $row->match_gym, 
                 $row->match_type, 
                 $row->match_champ, 
-                new Team(
+                new Entities\Team(
                     $row->team_id, 
                     $row->team_name, 
                     $row->team_urlOne, 
@@ -223,7 +226,7 @@ class MatchDAO extends MasterDAO {
                     $row->team_points, 
                     $row->team_time, 
                     $row->team_img, 
-                    new Club(
+                    new Entities\Club(
                         $row->club_id, 
                         $row->club_name, 
                         $row->club_string, 
@@ -232,7 +235,7 @@ class MatchDAO extends MasterDAO {
                     )
                 ),
                 $row->match_idMatchRef ? 
-                    new Match(
+                    new Entities\Match(
                         $row->refMatch_id, 
                         $row->refMatch_matchDay,
                         $row->refMatch_numMatch,
@@ -249,7 +252,7 @@ class MatchDAO extends MasterDAO {
                         $row->refMatch_gym, 
                         $row->refMatch_type, 
                         $row->refMatch_champ,  
-                        new Team(
+                        new Entities\Team(
                             $row->team_id, 
                             $row->team_name, 
                             $row->team_urlOne, 
@@ -261,7 +264,7 @@ class MatchDAO extends MasterDAO {
                             $row->team_points, 
                             $row->team_time, 
                             $row->team_img, 
-                            new Club(
+                            new Entities\Club(
                                 $row->club_id, 
                                 $row->club_name, 
                                 $row->club_string, 
@@ -275,7 +278,6 @@ class MatchDAO extends MasterDAO {
         return $allMatches;
     }
 
-    //TODO les where/orderby sont basé uniquement sur les matchs parents...
     /**
     * Return closest match before of after today
     *
@@ -286,83 +288,55 @@ class MatchDAO extends MasterDAO {
     */
     function getCloseMatchByTeamId($teamId, $close){  
         $row = $this->wpdb->get_row("
-            SELECT                 
-                a.*, 
-                b.match_id                  as 'refMatch_id',
-                b.match_numMatch            as 'refMatch_numMatch',
-                b.match_matchDay            as 'refMatch_matchDay',
-                b.match_date                as 'refMatch_date',
-                b.match_hourRdv             as 'refMatch_hourRdv',
-                b.match_hourStart           as 'refMatch_hourStart',
-                b.match_localTeam           as 'refMatch_localTeam',
-                b.match_localTeamScore      as 'refMatch_localTeamScore',
-                b.match_visitingTeam        as 'refMatch_visitingTeam',
-                b.match_visitingTeamScore   as 'refMatch_visitingTeamScore',
-                b.match_ext                 as 'refMatch_ext',
-                b.match_street              as 'refMatch_street',
-                b.match_city                as 'refMatch_city',
-                b.match_gym                 as 'refMatch_gym',
-                b.match_type                as 'refMatch_type',
-                b.match_champ               as 'refMatch_champ'
-            FROM {$this->t2} a 
-            LEFT JOIN {$this->t2} b ON a.match_idMatchRef = b.match_id
-            WHERE 
-                a.match_idTeam=$teamId AND
-                a.match_date ". ($close=='next' ? '>=' : '<')." CURDATE()
-            ORDER BY 
-                a.match_date ". ($close=='next' ? 'ASC' : 'DESC').", 
-                a.match_hourStart 
-            ASC LIMIT 1;
-        ");      
-        if (!$row->match_idMatchRef){
-            return new Match(
-                $row->match_id, 
-                $row->match_matchDay,
-                $row->match_numMatch,
-                $row->match_date, 
-                $row->match_hourRdv, 
-                $row->match_hourStart, 
-                $row->match_localTeam, 
-                $row->match_localTeamScore, 
-                $row->match_visitingTeam, 
-                $row->match_visitingTeamScore, 
-                $row->match_ext, 
-                $row->match_street, 
-                $row->match_city, 
-                $row->match_gym, 
-                $row->match_type, 
-                $row->match_champ, 
-                null,
-                null
-            );
-        } else {
-            return new Match(
-                $row->refMatch_id, 
-                $row->refMatch_matchDay,
-                $row->refMatch_numMatch,
-                $row->refMatch_date,
-                $row->refMatch_hourRdv, 
-                $row->refMatch_hourStart, 
-                $row->refMatch_localTeam, 
-                $row->refMatch_localTeamScore, 
-                $row->refMatch_visitingTeam, 
-                $row->refMatch_visitingTeamScore, 
-                $row->refMatch_ext, 
-                $row->refMatch_street, 
-                $row->refMatch_city, 
-                $row->refMatch_gym, 
-                $row->refMatch_type, 
-                $row->match_champ, 
-                null,
-                null
-            );
-        }
-        return;     
+        SELECT                 
+            a.*
+        FROM {$this->t2} a
+        WHERE              
+            a.match_idTeam=$teamId AND
+            a.match_date ". ($close=='next' ? '>=' : '<')." CURDATE()  AND
+            (
+                (
+                    a.match_type=0 AND
+                    (
+                        SELECT 
+                            z.match_id 
+                        FROM {$this->t2} z 
+                        WHERE 
+                            z.match_idMatchRef = a.match_id
+                    ) IS NULL                        
+                )
+                OR
+                a.match_type IN (1,2)
+            )           
+        ORDER BY 
+            a.match_date ". ($close=='next' ? 'ASC' : 'DESC').", 
+            a.match_hourStart ". ($close=='next' ? 'ASC' : 'DESC'). "
+        LIMIT 1;
+        ");     
+        return new Entities\Match(
+            $row->match_id, 
+            $row->match_matchDay,
+            $row->match_numMatch,
+            $row->match_date, 
+            $row->match_hourRdv, 
+            $row->match_hourStart, 
+            $row->match_localTeam, 
+            $row->match_localTeamScore, 
+            $row->match_visitingTeam, 
+            $row->match_visitingTeamScore, 
+            $row->match_ext, 
+            $row->match_street, 
+            $row->match_city, 
+            $row->match_gym, 
+            $row->match_type, 
+            $row->match_champ, 
+            null,
+            null
+        );          
     }
     
-    //TODO les where/orderby sont basé uniquement sur les matchs parents...
     /**
-    * Return matches with a date
+    * Return matches with a date for calender
     *
     * @return Match[]     Match corresponding
     * @access public
@@ -373,38 +347,34 @@ class MatchDAO extends MasterDAO {
             SELECT                 
                 a.*,            
                 b.*,            
-                c.*, 
-                d.match_id                  as 'refMatch_id',
-                d.match_numMatch            as 'refMatch_numMatch',
-                d.match_matchDay            as 'refMatch_matchDay',
-                d.match_date                as 'refMatch_date',
-                d.match_hourRdv             as 'refMatch_hourRdv',
-                d.match_hourStart           as 'refMatch_hourStart',
-                d.match_localTeam           as 'refMatch_localTeam',
-                d.match_localTeamScore      as 'refMatch_localTeamScore',
-                d.match_visitingTeam        as 'refMatch_visitingTeam',
-                d.match_visitingTeamScore   as 'refMatch_visitingTeamScore',
-                d.match_ext                 as 'refMatch_ext',
-                d.match_street              as 'refMatch_street',
-                d.match_city                as 'refMatch_city',
-                d.match_gym                 as 'refMatch_gym',
-                d.match_type                as 'refMatch_type',
-                d.match_champ               as 'refMatch_champ'
+                c.*
             FROM {$this->t2} a 
             LEFT JOIN {$this->t3} b ON a.match_idTeam = b.team_id 
             LEFT JOIN {$this->t1} c ON b.team_clubId = c.club_id 
-            LEFT JOIN {$this->t2} d ON a.match_idMatchRef = d.match_id
-            WHERE 
+            WHERE   
                 a.match_date IS NOT NULL AND 
-                a.match_type IN (0,2) AND
-                a.match_date > DATE_SUB(NOW(), INTERVAL 1 DAY)
+                a.match_date > DATE_SUB(NOW(), INTERVAL 1 DAY) AND
+                (
+                    (
+                        a.match_type=0 AND
+                        (
+                            SELECT 
+                                z.match_id 
+                            FROM {$this->t2} z 
+                            WHERE 
+                                z.match_idMatchRef = a.match_id
+                        ) IS NULL
+                                
+                    ) OR
+                    a.match_type IN (1,2)
+                )
             ORDER BY 
                 a.match_date, 
                 b.team_name asc,
                 a.match_numMatch asc;"
         );  
         foreach($matches as $row) { 
-            $allMatches[] = new Match(
+            $allMatches[] = new Entities\Match(
                 $row->match_id, 
                 $row->match_matchDay,
                 $row->match_numMatch,
@@ -421,7 +391,7 @@ class MatchDAO extends MasterDAO {
                 $row->match_gym, 
                 $row->match_type, 
                 $row->match_champ, 
-                new Team(
+                new Entities\Team(
                     $row->team_id, 
                     $row->team_name, 
                     $row->team_urlOne, 
@@ -433,7 +403,7 @@ class MatchDAO extends MasterDAO {
                     $row->team_points, 
                     $row->team_time, 
                     $row->team_img, 
-                    new Club(
+                    new Entities\Club(
                         $row->club_id, 
                         $row->club_name, 
                         $row->club_string, 
@@ -441,45 +411,7 @@ class MatchDAO extends MasterDAO {
                         $row->club_img
                     )
                 ),
-                $row->match_idMatchRef ? 
-                    new Match(
-                        $row->refMatch_id, 
-                        $row->refMatch_matchDay,
-                        $row->refMatch_numMatch,
-                        $row->refMatch_date,
-                        $row->refMatch_hourRdv, 
-                        $row->refMatch_hourStart, 
-                        $row->refMatch_localTeam, 
-                        $row->refMatch_localTeamScore, 
-                        $row->refMatch_visitingTeam, 
-                        $row->refMatch_visitingTeamScore, 
-                        $row->refMatch_ext, 
-                        $row->refMatch_street, 
-                        $row->refMatch_city, 
-                        $row->refMatch_gym, 
-                        $row->refMatch_type, 
-                        $row->refMatch_champ,  
-                        new Team(
-                            $row->team_id, 
-                            $row->team_name, 
-                            $row->team_urlOne, 
-                            $row->team_urlTwo, 
-                            $row->team_boy, 
-                            $row->team_girl, 
-                            $row->team_mixed, 
-                            $row->team_position, 
-                            $row->team_points, 
-                            $row->team_time, 
-                            $row->team_img, 
-                            new Club(
-                                $row->club_id, 
-                                $row->club_name, 
-                                $row->club_string, 
-                                $row->club_address, 
-                                $row->club_img
-                            )
-                        )
-                    ) : null
+                null
             );      
         }
         return $allMatches;
@@ -529,6 +461,8 @@ class MatchDAO extends MasterDAO {
                     'match_idTeam' => $match->getTeam()->getId(),
                     'match_idMatchRef' => ($match->getMatchRef() ? $match->getMatchRef() : null)
                 );
+                $where = array('match_id' => $myId);
+                //var_dump($data);
                 $this->wpdb->update("{$this->t2}", $data, $where);
             } else {
                 $matchesToInsert[] = $match;

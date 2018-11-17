@@ -2,11 +2,12 @@
 /* Plugin Name: Eventus
  * Plugin URI: 
  * Description: Useful plugin that allow you to manage handball teams results through FFHB website.
- * Version: 2.3
+ * Version: 2.4
  * Author: Kirian Caumes
  * Author URI: http://kiriancaumes.fr
  * License: 
  */
+namespace Eventus;
 
 include_once plugin_dir_path( __FILE__ ).'includes/entities/club.php';
 include_once plugin_dir_path( __FILE__ ).'includes/entities/match.php';
@@ -25,18 +26,19 @@ include_once plugin_dir_path( __FILE__ ).'admin/screens/club/clubDetailScreen.ph
 include_once plugin_dir_path( __FILE__ ).'admin/screens/log/logScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/admin/adminScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/finder.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/masterTrait.php';
-if (file_exists ( get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php' )){
-	include_once get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
-}
-include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusCalendrier.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusMatch.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusCirclePosPts.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusButtonResults.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusResults.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusTeamPicture.php';
+include_once plugin_dir_path( __FILE__ ).'admin/business/traitHelper.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/postHandler.php';
 include_once plugin_dir_path( __FILE__ ).'admin/librairies/simple_html_dom.php';
+
+if (file_exists(get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php')){
+	include_once get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusCalendrier.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusMatch.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusCirclePosPts.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusButtonResults.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusResults.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusTeamPicture.php';
+}
 
 class Eventus {	
     public function __construct() {	
@@ -47,7 +49,7 @@ class Eventus {
 		add_action('wp_dashboard_setup', array($this, 'dashboard'));
 
 		//Style
-		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ).'/includes/css/styles.css' ); 
+		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ).'/admin/css/styles.css' ); 
 
     	//Menu
 		add_action('admin_menu', array($this, 'menu'));	
@@ -57,6 +59,9 @@ class Eventus {
         register_activation_hook( __FILE__, array($this, 'createTables'));
 		register_deactivation_hook( __FILE__, array($this, 'deleteTables'));
 		register_uninstall_hook( __FILE__, array($this, 'deleteTables'));
+
+		//PostHandler
+		Admin\Business\PostHandler::getInstance();
     }
     function menu() {
     	$icon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(plugin_dir_path( __FILE__ ).'admin/svg/handball.svg'));
@@ -77,27 +82,27 @@ class Eventus {
 	}
 
 	function createTables() {
-		Database::getInstance()->createTables();
+		Includes\Datas\Database::getInstance()->createTables();
 	}
 
 	function deleteTables() {
-		Database::getInstance()->deleteTables();
+		Includes\Datas\Database::getInstance()->deleteTables();
 	}	
 
 	function callbackMain(){  
-        MainScreen::getInstance()->display(); 
+        Admin\Screens\Main\MainScreen::getInstance()->display(); 
 	}
 
 	function callbackClubs(){  
-        ClubScreen::getInstance()->display(); 
+		Admin\Screens\Club\ClubScreen::getInstance()->display(); 
 	}
 
 	function callbackLogs(){  
-        LogScreen::getInstance()->display(); 
+        Admin\Screens\Log\LogScreen::getInstance()->display(); 
 	}
 
 	function callbackAdmin(){  
-        AdminScreen::getInstance()->display(); 
+        Admin\Screens\Admin\AdminScreen::getInstance()->display(); 
 	}	
 
 	function callbackDashboard() { 
@@ -112,7 +117,7 @@ class Eventus {
 	    }	    
 	    ?>
 	    <form action="" method="post">
-	        <button style="margin-top: 10px;" name="clearLog" class="button-primary" >Clear les logs</button>
+	        <button style="margin-top: 10px;" name="clearLog" class="button-primary" >Effacer les logs</button>
 	    </form>
 	<?php	    
 	}

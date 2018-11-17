@@ -1,4 +1,7 @@
 <?php
+
+namespace Eventus\Admin\Screens;
+
 /**
 * MasterScreen is a parent class for all Screen
 *

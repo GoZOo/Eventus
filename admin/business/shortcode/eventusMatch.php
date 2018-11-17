@@ -1,5 +1,7 @@
 <?php
 
+use Eventus\Includes\Datas as DAO;
+
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
 }
@@ -11,7 +13,7 @@ if (!defined('ABSPATH')) {  // Exit if accessed directly
 */
 if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 	class EventusMatch extends aviaShortcodeTemplate {
-        use MasterTrait;
+        use TraitHelper;
 
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
@@ -31,7 +33,7 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 				__("Fixed font size" , 'avia_framework') => AviaHtmlHelper::number_array(11,150,1, array(), "px", "", "")
 			);	
 		
-			foreach (TeamDAO::getInstance()->getAllTeams() as $team) {
+			foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
 				$allTeamsDisplay[$team->getName()." ".$this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed())." - ".$team->getClub()->getName()] = $team->getId();
 			}		
 			
@@ -90,7 +92,7 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 
 	        if ($format == 0) {
 	        	if ($type == 0) {
-	        		$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
+	        		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
 	               	$title = 'Prochain match';
 
 			        if ($myMatch->getId()){
@@ -102,7 +104,7 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 			                $myMatch->getVisitingTeam();
 			        } 
 		        } else {
-		        	$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "last"); 
+		        	$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "last"); 
 		            $title = 'Dernier match';
 
 			        if ($myMatch->getId()){
@@ -120,7 +122,7 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 		        return do_shortcode("[av_heading heading='".$title."' tag='h2' style='blockquote modern-quote modern-centered' size='' subheading_active='subheading_below' subheading_size='15' margin='0' margin_sync='true' padding='' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='' admin_preview_bg='']".$stringDisplay."[/av_heading]");
 		    } else {
 		    	if ($type == 0) {
-		    		$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
+		    		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
 	               	$title = 'Prochain match';
 
 		    		if ($myMatch->getId()){
@@ -133,7 +135,7 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 			                str_replace(":", "H", $myMatch->getHourStart());
 			        } 
 		    	} else {
-		    		$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "last"); 
+		    		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "last"); 
 		            $title = 'Dernier match';
 
 		    		if ($myMatch->getId()){

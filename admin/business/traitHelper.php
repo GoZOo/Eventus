@@ -1,11 +1,11 @@
 <?php
 /**
-* MasterTrait is a trait use to help AviaShortcode
+* TraitHelper is a trait use to help AviaShortcode
 *
 * @package  Includes
 * @access   public
 */
-trait MasterTrait{
+trait TraitHelper{
     /**
     * Get sex label by a key
     *

@@ -1,4 +1,7 @@
 <?php 
+
+namespace Eventus\Includes\Entities;
+
 /**
 * Club is a class use to manage clubs
 *
@@ -16,7 +19,7 @@ class Club {
 
     private $id, $name, $string, $address, $img;
 
-    public function __construct($id, $name, $string, $address, $img) {
+    public function __construct($id=null, $name, $string, $address, $img=null) {
         $this->id = $id;
         $this->name = $name;
         $this->string = $string;

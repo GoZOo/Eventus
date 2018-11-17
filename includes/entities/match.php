@@ -1,4 +1,7 @@
 <?php 
+
+namespace Eventus\Includes\Entities;
+
 /**
 * Match is a class use to manage matches
 *
@@ -29,7 +32,7 @@ class Match {
 
     private $id, $matchDay, $numMatch, $date, $hourRdv, $hourStart, $localTeam, $localTeamScore, $visitingTeam, $visitingTeamScore, $ext, $street, $city, $gym, $type, $champ, $team, $matchRef;
 
-    public function __construct($id, $matchDay, $numMatch, $date, $hourRdv, $hourStart, $localTeam, $localTeamScore, $visitingTeam, $visitingTeamScore, $ext, $street, $city, $gym, $type, $champ, $team, $matchRef) {
+    public function __construct($id=null, $matchDay=null, $numMatch=null, $date=null, $hourRdv=null, $hourStart=null, $localTeam, $localTeamScore=null, $visitingTeam, $visitingTeamScore=null, $ext, $street=null, $city=null, $gym=null, $type, $champ, $team=null, $matchRef=null) {
         $this->id = $id;
         $this->matchDay = $matchDay;
         $this->numMatch = $numMatch;

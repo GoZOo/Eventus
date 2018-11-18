@@ -57,12 +57,12 @@ class MainTeamScreen extends Screens\MasterScreen {
         <div class='wrap'>
         	<h1 class="wp-heading-inline">
                 <?php 
-                    echo ($team->getName() ? $this->toProperText($team->getName()) : 'Nouvelle équipe').' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed())         
+                    echo ($team->getName() ? $this->toProperText($team->getName()) : _e('New team', 'eventus')).' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed())         
                 ?>                
             </h1> 
             <?php       
                 if ($team->getId()) { ?>
-                    <a href="<?php echo "admin.php?page=eventus&action=matchs&teamId=".$team->getId(); ?>"  class="page-title-action">Matchs</a> 
+                    <a href="<?php echo "admin.php?page=eventus&action=matchs&teamId=".$team->getId(); ?>"  class="page-title-action"><?php _e('Matches', 'eventus') ?></a> 
                     <hr class="wp-header-end">
                 <?php
                 }
@@ -75,7 +75,7 @@ class MainTeamScreen extends Screens\MasterScreen {
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    <label for="club">Club<span class="required">*</span></label>
+                                    <label for="club"><?php _e('Club', 'eventus') ?><span class="required">*</span></label>
                                 </th>
                                 <td>
                                 <select name="club" id='club'>
@@ -96,66 +96,66 @@ class MainTeamScreen extends Screens\MasterScreen {
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label>Sexe<span class="required">*</span></label>
+                                    <label><?php _e('Sex', 'eventus') ?><span class="required">*</span></label>
                                 </th>
                                 <td>
                                     <label>
-                                        <input type="radio" value="h" name="sexe" title="Masculin" <?php echo ($team->getBoy() ? 'checked=\'1\'' : ''); ?> required/>
-                                        Masculin
+                                        <input type="radio" value="h" name="sexe" title="<?php _e('Male', 'eventus') ?>" <?php echo ($team->getBoy() ? 'checked=\'1\'' : ''); ?> required/>
+                                        <?php _e('Male', 'eventus') ?>
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" value="f" name="sexe" title="Féminin" <?php echo ($team->getGirl() ? 'checked=\'1\'' : ''); ?>/>
-                                        Féminin
+                                        <input type="radio" value="f" name="sexe" title="<?php _e('Female', 'eventus') ?>" <?php echo ($team->getGirl() ? 'checked=\'1\'' : ''); ?>/>
+                                        <?php _e('Female', 'eventus') ?>                                        
                                     </label>
                                     &nbsp;&nbsp;
                                     <label>
-                                        <input type="radio" value="m" name="sexe" title="Mixte" <?php echo ($team->getMixed() ? 'checked=\'1\'' : ''); ?>/>
-                                        Mixte
+                                        <input type="radio" value="m" name="sexe" title="<?php _e('Mixed', 'eventus') ?>" <?php echo ($team->getMixed() ? 'checked=\'1\'' : ''); ?>/>
+                                        <?php _e('Mixed', 'eventus') ?>                                        
                                     </label>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label for='nom'>Nom<span class="required">*</span></label>
+                                    <label for='nom'><?php _e('Name', 'eventus') ?><span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='nom' id='nom' value='<?php echo $this->toProperText($team->getName()) ?>' class='regular-text' type='text' required title="Nom" placeholder="Nom">
+                                    <input name='nom' id='nom' value='<?php echo $this->toProperText($team->getName()) ?>' class='regular-text' type='text' required title="<?php _e('Name', 'eventus') ?>" placeholder="<?php _e('Name', 'eventus') ?>">
                                 </td>
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label for='urlOne' name="urlOne">Lien n°1 des résultats du championnat</label>
+                                    <label for='urlOne' name="urlOne"><?php _e('Link n°1 of the championship results', 'eventus') ?></label>
                                 </th>
                                 <td>
-                                    <input name='urlOne' id='urlOne' value='<?php echo $this->toProperText($team->getUrlOne()) ?>' class='regular-text' type='url' title="Lien n°1 des résultats du championnat" placeholder="Lien n°1 des résultats du championnat">
+                                    <input name='urlOne' id='urlOne' value='<?php echo $this->toProperText($team->getUrlOne()) ?>' class='regular-text' type='url' title="<?php _e('Link n°1 of the championship results', 'eventus') ?>" placeholder="<?php _e('Link n°1 of the championship results', 'eventus') ?>">
                                     <button type='button' class='button-primary ico ico-link ico-no-text' onclick="window.open('<?php echo $this->toProperText($team->getUrlOne()) ?>', '_blank')"></button>
                                 </td>
                             </tr>
                             <tr <?php echo !$team->getUrlOne() ? "style='display: none'" : ''?>>
                                 <th scope='row'>
-                                    <label for='urlTwo' name="urlTwo">Lien n°2 des résultats du championnat</label>
+                                    <label for='urlTwo' name="urlTwo"><?php _e('Link n°2 of the championship results', 'eventus') ?></label>
                                 </th>
                                 <td>
-                                    <input name='urlTwo' id='urlTwo' value='<?php echo $this->toProperText($team->getUrlTwo()) ?>' class='regular-text' type='url' title="Lien n°2 des résultats du championnat" placeholder="Lien n°2 des résultats du championnat">
+                                    <input name='urlTwo' id='urlTwo' value='<?php echo $this->toProperText($team->getUrlTwo()) ?>' class='regular-text' type='url' title="<?php _e('Link n°2 of the championship results', 'eventus') ?>" placeholder="<?php _e('Link n°2 of the championship results', 'eventus') ?>">
                                     <button type='button' class='button-primary ico ico-link ico-no-text' onclick="window.open('<?php echo $this->toProperText($team->getUrlOne()) ?>', '_blank')"></button>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label for='time'>Temps pour RDV d'avant match (en minutes)<span class="required">*</span></label>
+                                    <label for='time'><?php _e('Time for pre-match RDV (in minutes)', 'eventus') ?><span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='time' id='time' value='<?php echo ($team->getTime() ? stripcslashes($team->getTime()) : '45'); ?>' class='regular-text' type='number' min='0' required title="Temps pour RDV d'avant match (en minutes)" placeholder="Temps pour RDV d'avant match (en minutes)">
+                                    <input name='time' id='time' value='<?php echo ($team->getTime() ? stripcslashes($team->getTime()) : '45'); ?>' class='regular-text' type='number' min='0' required title="<?php _e('Time for pre-match RDV (in minutes)', 'eventus') ?>" placeholder="<?php _e('Time for pre-match RDV (in minutes)', 'eventus') ?>">
                                 </td>
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label for='img'>Image</label>
+                                    <label for='img'><?php _e('Image', 'eventus') ?></label>
                                 </th>
                                 <td>                                 
-                                    <input id="upload_image_button" type="button" class="button" value="Sélectionnez une image" />
-                                    <input id="delete_image_button" type="button" class="button" value="Supprimer l'image" disabled/>
+                                    <input id="upload_image_button" type="button" class="button" value="<?php _e('Select an image', 'eventus') ?>" />
+                                    <input id="delete_image_button" type="button" class="button" value="<?php _e('Delete the image', 'eventus') ?>" disabled/>
                                     <input id='image_attachment_id' type='hidden' name='img' value='<?php echo $team->getImg() ?>'>
                                 </td>
                             </tr>
@@ -167,14 +167,14 @@ class MainTeamScreen extends Screens\MasterScreen {
                 <br>
 
                 <?php if($team->getId()) { ?>
-	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus&action=team'">Ajouter une équipe</button>
-                    <button type="submit" name="action" value="delTeam" class="button-primary ico ico-del" onclick="return validate(null)" >Supprimer l'équipe</button>           
+	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus&action=team'"><?php _e('Add a team', 'eventus') ?></button>
+                    <button type="submit" name="action" value="delTeam" class="button-primary ico ico-del" onclick="return validate(null)" ><?php _e('Delete the team', 'eventus') ?></button>           
                     <br />
                     
                     <?php //<button type="submit" name="action" value="syncMatch" class="button-primary ico ico-sync">Synchroniser les données des matchs</button><button type="submit" name="action" value="delMatch" onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger les matchs de l\équipe ?')" class="button-primary ico ico-del">Purger les matchs de l'équipe</button> ?>
                 <?php } ?>
                 <br/>
-                <button type="submit" name="action" value="majTeam" class="button-primary ico ico-save">Enregistrer les modifications</button>
+                <button type="submit" name="action" value="majTeam" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>
             </form>
         </div>
         <?php

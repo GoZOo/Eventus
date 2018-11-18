@@ -1,6 +1,9 @@
 /***********************************
 ************* PAGE MAIN ************
 ************************************/
+body[class*="eventus"] .dern-synch{
+	margin-top: 0;
+}
 
 /***********************************
 ************* PAGE TEAM ************
@@ -71,9 +74,29 @@ body[class*="eventus"] .eventusCardList .eventusCardClub{
 ************************************/
 
 /***********************************
+********* WIDGET DASHBOARD *********
+************************************/
+#dashboard_eventus .inside {
+	padding-bottom: 0;
+}
+#dashboard_eventus hr{
+	margin-left: -12px;
+	width: calc(100% + 24px);
+	border-color: #eee;
+	height: 1px;
+	border-top: 0;
+}
+#dashboard_eventus .eventus-row{
+	display:flex;
+	justify-content:space-around;
+	padding: 12px 0 12px;
+	text-align: center;
+}
+
+/***********************************
 ************** COMMON **************
 ************************************/
-/* card & cars list */
+/* card & card list */
 body[class*="eventus"] .eventusCardList h2{
 	margin: 1em 0 .5em;
 }
@@ -141,7 +164,7 @@ body[class*="eventus"] form button:active{
 }
 
 /* icons */
-body[class*="eventus"] button.ico {
+body[class*="eventus"] button.ico, #dashboard_eventus button.ico {
 	position: relative!important;
 	padding-left: 25px;
 	margin-bottom: 5px;
@@ -173,7 +196,7 @@ body[class*="eventus"] .ico-del:before {
     left: 2px;
 	width: 20px;
 }
-body[class*="eventus"] .ico-sync:before {
+body[class*="eventus"] .ico-sync:before, #dashboard_eventus .ico-sync:before {
 	content: url('../../admin/svg/sync.svg');
     position: absolute;
     top: 4.5px;
@@ -187,7 +210,7 @@ body[class*="eventus"] .ico-time:before {
     left: 2px;
 	width: 20px;
 }
-body[class*="eventus"] .ico-team:before {
+body[class*="eventus"] .ico-team:before, #dashboard_eventus .ico-team:before {
 	content: url('../../admin/svg/team.svg');
     position: absolute;
     top: 3.5px;
@@ -201,7 +224,7 @@ body[class*="eventus"] .ico-fight:before {
     left: 2px;
 	width: 20px;
 }
-body[class*="eventus"] .ico-info:before {
+body[class*="eventus"] .ico-info:before, #dashboard_eventus .ico-info:before {
 	content: url('../../admin/svg/info.svg');
     position: absolute;
     top: 3.5px;
@@ -215,7 +238,7 @@ body[class*="eventus"] .ico-settings:before {
 	left: 3px;
 	width: 18px;
 }
-body[class*="eventus"] .ico-club:before {
+body[class*="eventus"] .ico-club:before, #dashboard_eventus  .ico-club:before {
 	content: url('../../admin/svg/club.svg');
     position: absolute;
     top: 3.5px;
@@ -237,7 +260,7 @@ body[class*="eventus"] .ico-link:before {
 	width: 17px;
 }
 /* Loading button  */
-body[class*="eventus"] .ico-loading:before {
+body[class*="eventus"] .ico-loading:before, #dashboard_eventus .ico-loading:before {
 	content: '';
 	position: absolute;
 	width: 13px;
@@ -260,11 +283,11 @@ body[class*="eventus"] .ico-loading:before {
 }
 
 /* Tooltip  */
-.myTooltip {
+body[class*="eventus"] .myTooltip, #dashboard_eventus .myTooltip {
     position: relative;
     display: inline-block;
 }
-.myTooltip .myTooltiptext {
+body[class*="eventus"] .myTooltip .myTooltiptext, #dashboard_eventus .myTooltip .myTooltiptext{
     visibility: hidden;
     background-color: #555;
     color: #fff;
@@ -280,7 +303,7 @@ body[class*="eventus"] .ico-loading:before {
     opacity: 0;
     transition: opacity 0.3s;
 }
-.myTooltip .myTooltiptext::after {
+body[class*="eventus"] .myTooltip .myTooltiptext::after, #dashboard_eventus .myTooltip .myTooltiptext::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -290,11 +313,11 @@ body[class*="eventus"] .ico-loading:before {
     border-style: solid;
     border-color: #555 transparent transparent transparent;
 }
-.myTooltip:hover .myTooltiptext {
+body[class*="eventus"] .myTooltip:hover .myTooltiptext, #dashboard_eventus .myTooltip:hover .myTooltiptext {
     visibility: visible;
     opacity: 1;
 } 
-.hiddenSubmit {
+body[class*="eventus"] .hiddenSubmit {
 	visibility:hidden!important;
 	width: 0!important;
 	height: 0!important;

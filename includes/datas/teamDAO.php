@@ -257,6 +257,20 @@ class TeamDAO extends MasterDAO {
         ");
     }
 
+    /**
+    * Return numbers of team
+    *
+    * @return string[]  Informations
+    * @access public
+    */
+    function getNumbersTeams(){  
+        return $this->wpdb->get_row("
+            SELECT 
+                count(DISTINCT team_id) as nbr_teams
+            FROM {$this->t3};
+        ");
+    }
+
     /***************************
     ********** UPDATE **********
     ****************************/

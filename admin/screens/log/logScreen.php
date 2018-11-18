@@ -41,7 +41,7 @@ class LogScreen extends Screens\MasterScreen {
     function display(){
         ?>
         <div class='wrap'>
-            <h1 class="wp-heading-inline">Affichage des logs</h1>
+            <h1 class="wp-heading-inline"><?php _e('Log display', 'eventus') ?></h1>
             <hr class="wp-header-end">
             <?php  
                 echo $this->showNotice(); 
@@ -55,13 +55,13 @@ class LogScreen extends Screens\MasterScreen {
                     $content = str_replace("[", "<b>[", $content);
                     echo str_replace( "\n", '</li><li>', $content ); 
                 } else {
-                    echo "<li>Aucun log à afficher</li>";
+                    echo "<li>".__('No log to display', 'eventus')."</li>";
                 }	    
                 ?>
                 </li>
             </ul>
             <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
-                <button class="button-primary ico ico-del" name="action" value="clearLog" class="button-primary" type="submit" onclick="return validate('Cette action est iréversible. Voulez-vous vraiment supprimer les logs ?')">Effacer les logs</button>                
+                <button class="button-primary ico ico-del" name="action" value="clearLog" class="button-primary" type="submit" onclick="return validate('<?php _e('This action is irreversible. Do you really want to delete the logs?', 'eventus') ?>')"><?php _e('Delete logs', 'eventus') ?></button>                
             </form>
         </div>
         <?php

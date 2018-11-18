@@ -19,7 +19,7 @@ abstract class MasterScreen {
     * @access public
     */	
     public function display(){
-        echo "<div class='wrap'><h1 class='wp-heading-inline'>Hello There</h1></div>";
+        echo "<div class='wrap'><h1 class='wp-heading-inline'>".__('Hello There', 'eventus')."</h1></div>";
         return;
     }
     
@@ -33,87 +33,87 @@ abstract class MasterScreen {
         $notices = array(
             'succesSyncMatch'=>array(
                 'state' => "success", 
-                'str'   => "Les données des matchs ont bien été synchronisées."
+                'str'   => __('The match data has been synchronized.', 'eventus')
             ), 
             'warningSyncMatch'=>array(
                 'state' => "warning", 
-                'str'   => "Les données des matchs ont bien été synchronisées, malgré des erreurs. Pour plus d'informations, consultez <a href=\"admin.php?page=eventus_logs\">les logs</a>"
+                'str'   => __('The match data was synchronized well, despite some errors. For more information, see ', 'eventus') . ' <a href=\"admin.php?page=eventus_logs\">' . __('the logs', 'eventus') .'</a>.'
             ),
             'succesDelMatch'=>array(
                 'state' => "success", 
-                'str'   => "Les matchs ont bien été supprimés."
+                'str'   => __('The matches have been deleted.', 'eventus')
             ), 
             'succesUpMatch'=>array(
                 'state' => "success", 
-                'str'   => "Les matchs ont bien été mis à jour."
+                'str'   => __('The matches have been updated.', 'eventus')
             ),  
             'succesUpHoursMatch'=>array(
                 'state' => "success", 
-                'str'   => "Les heures de rendez-vous ont bien été mises à jour."
+                'str'   => __('The appointment times have been updated.', 'eventus')
             ),   
             'warningUpHoursMatch'=>array(
                 'state' => "warning", 
-                'str'   => "Les heures de rendez-vous ont bien été mises à jour, malgré des erreurs. Pour plus d'informations, consultez <a href=\"admin.php?page=eventus_logs\">les logs</a>"
+                'str'   => __('The appointment times have been updated, despite some errors. For more information, see ', 'eventus') . ' <a href=\"admin.php?page=eventus_logs\">' . __('the logs', 'eventus') .'</a>'
             ),  
             'succesUpTeam'=>array(
                 'state' => "success", 
-                'str'   => "L'équipe à bien été mise à jour."
+                'str'   => __('The team has been well updated.', 'eventus')
             ), 
             'succesNewTeam'=>array(
                 'state' => "success", 
-                'str'   => "L'équipe à bien été ajoutée."
+                'str'   => __('The team has been added well.', 'eventus')
             ),    
             'errorUpTeam'=>array(
                 'state' => "error", 
-                'str'   => "L'équipe n'a pas pu être modifié. Certains champs sont manquants."
+                'str'   => __('The team could not be modified. Some fields are missing.', 'eventus')
             ), 
             'errorNewTeam'=>array(
                 'state' => "error", 
-                'str'   => "L'équipe n'a pas pu être ajouté. Certains champs sont manquants."
+                'str'   => __('The team could not be added. Some fields are missing.', 'eventus')
             ), 
             'succesDelTeam'=>array(
                 'state' => "success", 
-                'str'   => "L'équipe à bien été supprimée."
+                'str'   => __('The team has been removed.', 'eventus')
             ), 
             'succesDelTeams'=>array(
                 'state' => "success", 
-                'str'   => "Les équipes ont bien été supprimée."
+                'str'   => __('The teams have been deleted.', 'eventus')
             ),  
             'succesUpClub'=>array(
                 'state' => "success", 
-                'str'   => "Le club a bien été mis à jour."
+                'str'   => __('The club has been updated.', 'eventus')
             ),
             'succesNewClub'=>array(
                 'state' => "success", 
-                'str'   => "Le club à bien été ajouté."
+                'str'   => __('The club has been well added.', 'eventus')
             ),  
             'errorUpClub'=>array(
                 'state' => "error", 
-                'str'   => "Le club n'a pas pu être modifié. Certains champs sont manquants."
+                'str'   => __('The club could not be modified. Some fields are missing.', 'eventus')
             ), 
             'errorNewClub'=>array(
                 'state' => "error", 
-                'str'   => "Le club n'a pas pu être ajouté. Certains champs sont manquants."
+                'str'   => __('The club could not be added. Some fields are missing.', 'eventus')
             ), 
             'succesDelClub'=>array(
                 'state' => "success", 
-                'str'   => "Le club a bien été supprimés."
+                'str'   => __('The club has been deleted.', 'eventus')
             ), 
             'succesDelLog'=>array(
                 'state' => "success", 
-                'str'   => "Les logs ont bien été supprimés."
+                'str'   => __('The logs have been deleted.', 'eventus')
             ), 
             'succesReset'=>array(
                 'state' => "success", 
-                'str'   => "Le plugin à bien été réinitialisé."
+                'str'   => __('The plugin has been reset.', 'eventus')
             ), 
             'succesUpSet'=>array(
                 'state' => "success", 
-                'str'   => "Les paramètres ont bien été mis à jour."
+                'str'   => __('The parameters have been updated.', 'eventus')
             ),
             'noMapApiKey'=>array(
                 'state' => "error", 
-                'str'   => "Veuillez préciser votre clé Api Google Map dans <a href=\"admin.php?page=eventus_admin\">les paramètres</a>."
+                'str'   => __('Please specify your Google Map API key in', 'eventus') . ' <a href=\"admin.php?page=eventus_admin\">' . __('the parameters', 'eventus') .'</a>.'
             )
         );
         if ($_GET['message'] && $notices[$_GET['message']]) {

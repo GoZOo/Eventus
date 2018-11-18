@@ -46,14 +46,14 @@ class ClubScreen extends Screens\MasterScreen {
 		}
 		?>
 		<div class="wrap">
-	        <h1 class="wp-heading-inline">Liste des Clubs</h1>
+	        <h1 class="wp-heading-inline"><?php _e('List of Clubs', 'eventus') ?></h1>
 			<hr class="wp-header-end">
 			<?php  
                 echo $this->showNotice(); 	        
 			$allClubs = DAO\ClubDAO::getInstance()->getAllClubs();
 			if (!$allClubs){
 				?>
-				<h2>Veuillez ajouter un club dans un premier temps...</h2>	
+				<h2><?php _e('Please add a club first...', 'eventus') ?></h2>	
 				<?php
 			}
 			?>
@@ -69,14 +69,15 @@ class ClubScreen extends Screens\MasterScreen {
 										<?php echo $this->toProperText($club->getName()); ?>
 									</h5>
 									<button class="button-primary ico ico-club" onclick="location.href='<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$club->getId(); ?>'">
-										Club
+										<?php _e('Club', 'eventus') ?>
 									</button>
 								</div>
 								<div class="card-footer text-muted">
 									<?php $infos = DAO\ClubDAO::getInstance()->getInfosByClubId($club->getId()); ?>
-									ID : 
-									<b><?php echo $infos->club_id; ?></b>	 
-									/ Équipes : 
+									<?php _e('ID : ', 'eventus') ?>
+									<b><?php echo $infos->club_id; ?></b>
+									<?php _e('/ Teams : ', 'eventus') ?>	 
+									
 									<b><?php echo $infos->teamsNbr; ?></b>
 								</div>
 							</div>
@@ -85,7 +86,7 @@ class ClubScreen extends Screens\MasterScreen {
 						?>
 					</div>
 				</div>
-	            <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus_club&action=club'">Ajouter un club</button>
+	            <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus_club&action=club'"><?php _e('Add a club', 'eventus') ?></button>
     	</div>
 		<?php   
 	}

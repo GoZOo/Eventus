@@ -62,6 +62,8 @@ class PostHandler {
                     Finder::getInstance()->updateMatches($team);
                 }
             }
+            date_default_timezone_set("Europe/Paris");
+            update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
             if (!filesize(plugin_dir_path( __FILE__ ).'../../finder.log')) {
                 wp_redirect( add_query_arg( 'message', 'succesSyncMatch',  wp_get_referer() ));
             } else {
@@ -263,6 +265,7 @@ class PostHandler {
     function resetEventus(){
         DAO\Database::getInstance()->resetTables();
         delete_option('eventus_mapapikey');
+        delete_option('eventus_datetimesynch');
         wp_redirect( add_query_arg( 'message', 'succesReset',  'admin.php?page=eventus' ));
     }
 

@@ -104,6 +104,20 @@ class ClubDAO extends MasterDAO {
             WHERE 
                 b.team_clubId=$idClub;");
     }
+
+    /**
+    * Return numbers of club
+    *
+    * @return string[]  Informations
+    * @access public
+    */
+    function getNumbersClubs(){  
+        return $this->wpdb->get_row("
+            SELECT 
+                count(DISTINCT club_id) as nbr_clubs
+            FROM {$this->t1};
+        ");
+    }
     /***************************
     ********** UPDATE **********
     ****************************/

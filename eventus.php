@@ -28,20 +28,24 @@ include_once plugin_dir_path( __FILE__ ).'admin/screens/admin/adminScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/finder.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/traitHelper.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/postHandler.php';
+include_once plugin_dir_path( __FILE__ ).'admin/business/widgetDashboard.php';
 include_once plugin_dir_path( __FILE__ ).'admin/librairies/simple_html_dom.php';
 
 if (file_exists(get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php')){
 	include_once get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusCalendrier.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusMatch.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusCirclePosPts.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusButtonResults.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusResults.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/shortcode/eventusTeamPicture.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/calendar.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/match.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/circlePosPts.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/buttonResults.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/results.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/teamPicture.php';
 }
 
 class Eventus {	
     public function __construct() {	
+		//Translations
+		add_action('init', array($this, 'loadTranslation') );
+	
 		//Settings Link
 		add_filter( "plugin_action_links_".plugin_basename( __FILE__ ), array($this, 'settingsLink'));
 
@@ -65,15 +69,15 @@ class Eventus {
     }
     function menu() {
     	$icon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(plugin_dir_path( __FILE__ ).'admin/svg/handball.svg'));
-	    add_menu_page( 'Équipes & Résultats - Eventus', 'Eventus', 'manage_options', 'eventus', array($this, 'callbackMain'), $icon);
-	    add_submenu_page( 'eventus', 'Équipes & Résultats - Eventus', 'Equipes', 'manage_options', 'eventus');
-	    add_submenu_page( 'eventus', 'Clubs - Eventus', 'Clubs', 'manage_options', 'eventus_club', array($this, 'callbackClubs'));
-	    add_submenu_page( 'eventus', 'Logs - Eventus', 'Logs', 'manage_options', 'eventus_logs', array($this, 'callbackLogs'));
-	    add_submenu_page( 'eventus', 'Paramètres - Eventus', 'Paramètres', 'manage_options', 'eventus_admin', array($this, 'callbackAdmin'));
+	    add_menu_page( __('Teams & Results', 'eventus').' - Eventus', 'Eventus', 'manage_options', 'eventus', array($this, 'callbackMain'), $icon);
+	    add_submenu_page( 'eventus', __('Teams & Results', 'eventus').' - Eventus', __('Teams', 'eventus'), 'manage_options', 'eventus');
+	    add_submenu_page( 'eventus', __('Clubs', 'eventus').' - Eventus', __('Clubs', 'eventus'), 'manage_options', 'eventus_club', array($this, 'callbackClubs'));
+	    add_submenu_page( 'eventus', __('Logs', 'eventus').' - Eventus', __('Logs', 'eventus'), 'manage_options', 'eventus_logs', array($this, 'callbackLogs'));
+	    add_submenu_page( 'eventus', __('Settings', 'eventus').' - Eventus', __('Settings', 'eventus'), 'manage_options', 'eventus_admin', array($this, 'callbackAdmin'));
 	} 
 
 	function dashboard() {
-	    wp_add_dashboard_widget('dashboard_eventus', 'Eventus : erreur(s)', array($this, 'callbackDashboard'));  
+	    wp_add_dashboard_widget('dashboard_eventus',  'Eventus - '.__('Overview', 'eventus'), array($this, 'callbackDashboard'));  
 	}
 
 	function settingsLink( $links ) {
@@ -106,20 +110,12 @@ class Eventus {
 	}	
 
 	function callbackDashboard() { 
-	    if (isset($_POST['clearLog'])){
-	        file_put_contents(plugin_dir_path( __FILE__ ).'finder.log', '');
-		}
-		$content = file_get_contents(plugin_dir_path( __FILE__ ).'finder.log');
-	    if ($content) {
-	    	echo nl2br(htmlspecialchars($content));
-	    } else {
-	    	echo "Aucun log à afficher";
-	    }	    
-	    ?>
-	    <form action="" method="post">
-	        <button style="margin-top: 10px;" name="clearLog" class="button-primary" >Effacer les logs</button>
-	    </form>
-	<?php	    
+        Admin\Business\EventusWidgetDashboard::getInstance()->display(); 
+	}
+	
+	function loadTranslation(){
+		load_textdomain('eventus', plugin_dir_path( __FILE__ ).'lang/eventus-'.get_locale().'.mo' );
+		load_plugin_textdomain('eventus', false, plugin_dir_path( __FILE__ ).'lang' ); 
 	}
 }
 new Eventus();

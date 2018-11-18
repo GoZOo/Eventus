@@ -14,6 +14,7 @@ class Finder {
     * @var Finder   $_instance  Var use to store an instance
     */
     private static $_instance;
+    
     /**
     * Returns an instance of the object
     *
@@ -27,6 +28,7 @@ class Finder {
         return self::$_instance;
     }
     private function __construct() {}   
+
     /**
     * Synchronize matches by team with FFHB website informations
     *

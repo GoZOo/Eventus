@@ -16,11 +16,11 @@ jQuery("button.button-primary").on('mousedown', (e) => {
     if (e.which == 2 || e.which == 4) {
         e.preventDefault();
         let url = jQuery(e.currentTarget).attr('onclick');
-        console.log(url.indexOf("location.href"));
         if (url) {
             //Check if button change url or already open new tab
             if (url.indexOf("location.href") === 0){
-                url = location.protocol + '//' + location.host + location.pathname + url.substring(url.indexOf("?"), url.lastIndexOf("'"));
+                newPathname = location.pathname.replace("index.php", "admin.php");
+                url = location.protocol + '//' + location.host + newPathname + url.substring(url.indexOf("?"), url.lastIndexOf("'"));
                 window.open(url, '_blank');
             } else {
                 jQuery(e.currentTarget).click();

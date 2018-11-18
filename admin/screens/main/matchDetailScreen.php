@@ -45,7 +45,7 @@ class MainMatchScreen extends Screens\MasterScreen {
 		if (isset($_GET['teamId'])){ 
 			$team = DAO\TeamDAO::getInstance()->getTeamById($_GET['teamId']);
 			if ($team->getId() == null){
-				echo "<h2>Erreur : L'équipe n'a pas pu être trouvée...</h2>";
+				echo "<h2>".__('Error: The team could not be found....', 'eventus')."</h2>";
 				return;
 			}
 		}
@@ -53,13 +53,13 @@ class MainMatchScreen extends Screens\MasterScreen {
 		<div class="wrap">
 	        <h1 class="wp-heading-inline">
 				<?php 
-					echo ($team->getName() ? $this->toProperText($team->getName()) : 'Nouvelle équipe').' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed());
+					echo ($team->getName() ? $this->toProperText($team->getName()) :  __('New team', 'eventus')).' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed());
                 ?>                
 			</h1>
 			<?php 
 				$myMatchParent = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
 			?>
-			<a href="<?php echo "admin.php?page=eventus&action=team&teamId=".$team->getId(); ?>" class="page-title-action">Équipe</a>
+			<a href="<?php echo "admin.php?page=eventus&action=team&teamId=".$team->getId(); ?>" class="page-title-action"><?php _e('Team', 'eventus') ?></a>
 			<hr class="wp-header-end">
 			<?php  
                 echo $this->showNotice(); 
@@ -71,19 +71,19 @@ class MainMatchScreen extends Screens\MasterScreen {
 					<div class="overflow">
 						<table class='matchTable parentMatches' <?php if (!$myMatchParent) { echo "style=display:none;"; } ?>>
 							<tr>
-								<th>Id</th>
-								<th>Ch.</th>
-								<th>J.</th>
-								<th>Date</th>
-								<th>Heure<br>RDV</th>
-								<th>Heure<br>Match</th>
-								<th>Loc.<span class="required">*</span></th>
-								<th>Loc.<br>buts</th>
-								<th>Adv.<span class="required">*</span></th>
-								<th>Adv.<br>buts</th>
-								<th>Rue</th>
-								<th>Ville</th>
-								<th>Salle</th>
+								<th><?php _e('Id', 'eventus') ?></th>
+								<th><?php _e('Ch.', 'eventus') ?></th>
+								<th><?php _e('D.', 'eventus') ?></th>
+								<th><?php _e('Date', 'eventus') ?></th>
+								<th><?php _e('Time', 'eventus') ?><br><?php _e('RDV', 'eventus') ?></th>
+								<th><?php _e('Time', 'eventus') ?><br><?php _e('Match', 'eventus') ?></th>
+								<th><?php _e('Loc.', 'eventus') ?><span class="required">*</span></th>
+								<th><?php _e('Loc.', 'eventus') ?><br><?php _e('goals', 'eventus') ?></th>
+								<th><?php _e('Opp.', 'eventus') ?><span class="required">*</span></th>
+								<th><?php _e('Opp.', 'eventus') ?><br><?php _e('goals', 'eventus') ?></th>
+								<th><?php _e('Street', 'eventus') ?></th>
+								<th><?php _e('City', 'eventus') ?></th>
+								<th><?php _e('Gym', 'eventus') ?></th>
 							</tr>   	
 						<?php
 						foreach ($myMatchParent as $match) {
@@ -152,22 +152,22 @@ class MainMatchScreen extends Screens\MasterScreen {
 						$myMatchSon = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),1); 
 						?>
 						<br class="sonMatches" <?php if (!$myMatchSon) { echo "style=display:none;"; } ?> >
-						<h3 class="sonMatches" <?php if (!$myMatchSon) { echo "style=display:none;"; } ?> >Matchs fils :</h3>
+						<h3 class="sonMatches" <?php if (!$myMatchSon) { echo "style=display:none;"; } ?> ><?php _e('Son matches', 'eventus') ?></h3>
 						<table class='matchTable sonMatches' <?php if (!$myMatchSon) { echo "style=display:none;"; } ?> >
 							<tr>
-								<th>Id<br>Orig.</th>
-								<th>Ch.</th>
-								<th>J.</th>
-								<th>Date</th>
-								<th>Heure<br>RDV</th>
-								<th>Heure<br>Match</th>
-								<th>Loc.<span class="required">*</span></th>
-								<th>Loc.<br>buts</th>
-								<th>Adv.<span class="required">*</span></th>
-								<th>Adv.<br>buts</th>
-								<th>Rue</th>
-								<th>Ville</th>
-								<th>Salle</th>
+								<th><?php _e('Id', 'eventus') ?><br><?php _e('Orig.', 'eventus') ?></th>
+								<th><?php _e('Ch.', 'eventus') ?></th>
+								<th><?php _e('D.', 'eventus') ?></th>
+								<th><?php _e('Date', 'eventus') ?></th>
+								<th><?php _e('Time', 'eventus') ?><br><?php _e('RDV', 'eventus') ?></th>
+								<th><?php _e('Time', 'eventus') ?><br><?php _e('Match', 'eventus') ?></th>
+								<th><?php _e('Loc.', 'eventus') ?><span class="required">*</span></th>
+								<th><?php _e('Loc.', 'eventus') ?><br><?php _e('goals', 'eventus') ?></th>
+								<th><?php _e('Opp.', 'eventus') ?><span class="required">*</span></th>
+								<th><?php _e('Opp.', 'eventus') ?><br><?php _e('goals', 'eventus') ?></th>
+								<th><?php _e('Street', 'eventus') ?></th>
+								<th><?php _e('City', 'eventus') ?></th>
+								<th><?php _e('Gym', 'eventus') ?></th>
 							</tr>   	
 						<?php
 						$nbrSonMatch = 0;
@@ -231,19 +231,19 @@ class MainMatchScreen extends Screens\MasterScreen {
 						</table>
 						<input type="hidden" value="<?php echo $nbrSonMatch ?>" name="nbrSonMatch">
 						<br <?php if (!$myMatchParent) { echo "style=display:none;"; } ?>>
-						<h3 class="">Autre Matchs :</h3>
+						<h3 class=""><?php _e('Other matches', 'eventus') ?></h3>
 						<table class='matchTable otherMatches'>
 							<tr>
-								<th>Date</th>
-								<th>Heure<br>RDV</th>
-								<th>Heure<br>Match</th>
-								<th>Loc.<span class="required">*</span></th>
-								<th>Loc.<br>buts</th>
-								<th>Adv.<span class="required">*</span></th>
-								<th>Adv.<br>buts</th>
-								<th>Rue</th>
-								<th>Ville</th>
-								<th>Salle</th>
+								<th><?php _e('Date', 'eventus') ?></th>
+								<th><?php _e('Time', 'eventus') ?><br><?php _e('RDV', 'eventus') ?></th>
+								<th><?php _e('Time', 'eventus') ?><br><?php _e('Match', 'eventus') ?></th>
+								<th><?php _e('Loc.', 'eventus') ?><span class="required">*</span></th>
+								<th><?php _e('Loc.', 'eventus') ?><br><?php _e('goals', 'eventus') ?></th>
+								<th><?php _e('Opp.', 'eventus') ?><span class="required">*</span></th>
+								<th><?php _e('Opp.', 'eventus') ?><br><?php _e('goals', 'eventus') ?></th>
+								<th><?php _e('Street', 'eventus') ?></th>
+								<th><?php _e('City', 'eventus') ?></th>
+								<th><?php _e('Gym', 'eventus') ?></th>
 							</tr>   	
 						<?php
 						$myMatchOther = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
@@ -302,20 +302,20 @@ class MainMatchScreen extends Screens\MasterScreen {
                 <br><br>
 				<input type='hidden' name='teamId' value="<?php echo $team->getId(); ?>">	
 				<input type="hidden" name="path" value="http://<?php echo $_SERVER[HTTP_HOST], $_SERVER[REQUEST_URI]; ?>" >
-				<button type='button' onclick='addOtherMatch()' class='button-primary ico ico-add'>Ajouter un match</button>
+				<button type='button' onclick='addOtherMatch()' class='button-primary ico ico-add'><?php _e('Add a match', 'eventus') ?></button>
 				<br><br> 
 
-				<button type="submit" name="action" value="majMatch" class="button-primary ico ico-save">Enregistrer les modifications</button>	
+				<button type="submit" name="action" value="majMatch" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>	
 
 				<div class="myTooltip">
-					<button type="submit" name="action" value="majHours" onclick="setLoading(this)" class="button-primary ico ico-time">Recalculer les horaires de RDV</button>
-					<span class="myTooltiptext">Enregistre & mets à jour les horaires des matchs à venir à l'extérieur avec une adresse valide.</span>
+					<button type="submit" name="action" value="majHours" onclick="setLoading(this)" class="button-primary ico ico-time"><?php _e('Recalculate RDV schedules', 'eventus') ?></button>
+					<span class="myTooltiptext"><?php _e('Saves & updates schedules of upcoming outdoor games with a valid address.', 'eventus') ?></span>
 				</div>  
 				
 				<?php  if ($team->getUrlOne()) { ?>
                 <div class="myTooltip">
-					<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">Synchroniser les données des matchs</button>
-					<span class="myTooltiptext">Enregistre & synchronise les données des matchs avec le site de la Fédération.</span>
+					<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync"><?php _e('Synchronize match data', 'eventus') ?></button>
+					<span class="myTooltiptext"><?php _e('Saves & synchronizes match data with the Federation website.', 'eventus') ?></span>
 				</div> 
 				<?php } ?>
                 

@@ -45,7 +45,7 @@ class ClubDetailScreen extends Screens\MasterScreen {
         if (isset($_GET['clubId'])){  
             $club = DAO\ClubDAO::getInstance()->getClubById($_GET['clubId']);
             if (!$club->getId()) {
-                echo "<h2>Erreur : Le club n'a pas pu être trouvé...</h2>";
+                echo "<h2>".__('Error: The club could not be found...', 'eventus')."</h2>";
                 return;
             }            
     	} else {
@@ -55,7 +55,7 @@ class ClubDetailScreen extends Screens\MasterScreen {
         <div class='wrap'>
         	<h1 class="wp-heading-inline">
                 <?php 
-                    echo ($club->getName() ? $this->toProperText($club->getName()) : 'Nouveau club');         
+                    echo ($club->getName() ? $this->toProperText($club->getName()) : __('New club', 'eventus'));         
                 ?>                
             </h1> 
             <hr class="wp-header-end">
@@ -70,37 +70,37 @@ class ClubDetailScreen extends Screens\MasterScreen {
                         <tbody>
                             <tr>
                                 <th scope='row'>
-                                    <label for='nom' data-name="nom">Nom<span class="required">*</span></label>
+                                    <label for='nom'><?php _e('Name', 'eventus') ?><span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='nom' id='nom' value="<?php echo $this->toProperText($club->getName()) ?>" class='regular-text' type='text' required title="Nom" placeholder="Nom">
+                                    <input name='nom' id='nom' value="<?php echo $this->toProperText($club->getName()) ?>" class='regular-text' type='text' required title="<?php _e('Name', 'eventus') ?>" placeholder="<?php _e('Name', 'eventus') ?>">
                                 </td>
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label for='chaine' data-name="chaine">Chaîne de caractères<span class="required">*</span></label>
+                                    <label for='chaine'><?php _e('String', 'eventus') ?><span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='chaine' id='chaine' aria-describedby='tagline-description' value='<?php echo $this->toProperText($club->getString()) ?>' class='regular-text' type='text' required title="Chaîne de caractères" placeholder="Chaîne de caractères">
-                                    <p class='description' id='tagline-description'>Chaîne de caractères que l'algorithme vas chercher sur le site de la FFHB</p>
+                                    <input name='chaine' id='chaine' aria-describedby='tagline-description' value='<?php echo $this->toProperText($club->getString()) ?>' class='regular-text' type='text' required title="<?php _e('String', 'eventus') ?>" placeholder="<?php _e('String', 'eventus') ?>">
+                                    <p class='description' id='tagline-description'><?php _e('String that the algorithm will search on the FFHB website', 'eventus') ?></p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label for='adresse' data-name="chaine">Adresse de la salle<span class="required">*</span></label>
+                                    <label for='adresse' ><?php _e('Address of the gym', 'eventus') ?><span class="required">*</span></label>
                                 </th>
                                 <td>
-                                    <input name='adresse' id='adresse' value='<?php echo $this->toProperText($club->getAddress()) ?>' class='regular-text' type='text' required title="Adresse" placeholder="Adresse">
-                                    <p class='description' id='tagline-description'>Adresse utilisé pour calculer les horaires de rdv des matchs</p>
+                                    <input name='adresse' id='adresse' value='<?php echo $this->toProperText($club->getAddress()) ?>' class='regular-text' type='text' required title="<?php _e('Address', 'eventus') ?>" placeholder="<?php _e('Address', 'eventus') ?>">
+                                    <p class='description' id='tagline-description'><?php _e('Address used to calculate match rdv schedules', 'eventus') ?></p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope='row'>
-                                    <label for='img'>Image</label>
+                                    <label for='img'><?php _e('Image', 'eventus') ?></label>
                                 </th>
                                 <td>                                 
-                                    <input id="upload_image_button" type="button" class="button" value="Sélectionnez une image" />
-                                    <input id="delete_image_button" type="button" class="button" value="Supprimer l'image" disabled/>
+                                    <input id="upload_image_button" type="button" class="button" value="<?php _e('Select an image', 'eventus') ?>" />
+                                    <input id="delete_image_button" type="button" class="button" value="<?php _e('Delete the image', 'eventus') ?>" disabled/>
                                     <input id='image_attachment_id' type='hidden' name='img' value='<?php echo $club->getImg() ?>'>
                                 </td>
                             </tr>
@@ -113,13 +113,13 @@ class ClubDetailScreen extends Screens\MasterScreen {
                 <br>
 
                 <?php if($club->getId()) { ?>
-	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus_club&action=club'">Ajouter un club</button>
-                    <button type="submit" name="action" value="delClub" class="button-primary ico ico-del" onclick="return validate('Cette action est iréversible. Voulez-vous vraiment supprimer le club ?')" >Supprimer le club</button>           
+	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus_club&action=club'"><?php _e('Add a club', 'eventus') ?></button>
+                    <button type="submit" name="action" value="delClub" class="button-primary ico ico-del" onclick="return validate('<?php _e('This action is irreversible. Do you really want to delete the club?', 'eventus') ?>')" ><?php _e('Delete the club', 'eventus') ?></button>           
                     <br />
                     
                 <?php } ?>
                 <br/>
-                <button type="submit" name="action" value="majClub" class="button-primary ico ico-save">Enregistrer les modifications</button>
+                <button type="submit" name="action" value="majClub" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>
             </form>
         </div>
         <?php

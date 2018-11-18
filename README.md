@@ -31,7 +31,7 @@ This plugin has been created to work with Enfold Theme. So, if you do not have i
 
 Feel free to edit the project, so you can use it with your own theme.
 
-Most of the files are documented. So, you can give it an eye of you want to understand more.
+Most of the files are documented. So, you can give it an eye if you want to understand more.
 
 ## Updates
 
@@ -43,11 +43,13 @@ Most of the files are documented. So, you can give it an eye of you want to unde
 * Add you can now select an image for a team
 * Add you can open restults in new tab thanks to a button
 * Add namespace in every files
+* Add date of last synchronization of matches is saved in DB
 * Evo you can add two different results links to a team
 * Evo you can't no longer pick sexe(s) for clubs
 * Evo some files and repositories have changed
 * Evo selected image are now display in pickers
 * Evo lot of optimizations in multiple files (Finder, PostHandler, Screens, etc...)
+* Evo Widget Dashboard has been remade
 
 ### 2.3.1
 

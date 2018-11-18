@@ -49,16 +49,16 @@ class MainScreen extends Screens\MasterScreen {
 		}
 		?>
 		<div class="wrap">
-			<h1 class="wp-heading-inline">Liste des équipes</h1>
+			<h1 class="wp-heading-inline"><?php _e('List of teams', 'eventus') ?></h1>
 			<hr class="wp-header-end">	
 			<?php  
                 echo $this->showNotice(); 
 				$allClubs = DAO\ClubDAO::getInstance()->getAllClubs();
 				if (!$allClubs) { 
 					?>
-					<h2>Veuillez ajouter un club dans un premier temps...</h2>	
+					<h2><?php _e('Please add a club first...', 'eventus') ?></h2>	
 					<button class="button-primary ico ico-add" onclick="location.href='admin.php?page=eventus_club&action=club'">
-						Ajouter un club
+						<?php _e('Add a club', 'eventus') ?>						
 					</button>
 					<?php
 					return;
@@ -71,7 +71,7 @@ class MainScreen extends Screens\MasterScreen {
 						<?php 
 							$allTeams = DAO\TeamDAO::getInstance()->getAllTeamsByClubOrderByName($club);
 							if (!$allTeams) {?>
-								<p style="flex: auto;">Aucune équipe n'a été trouvée pour ce club...</p>
+								<p style="flex: auto;"><?php _e('No team has been found for this club...', 'eventus') ?></p>
 							<?php
 							}
 							foreach ($allTeams as $team) { 
@@ -86,22 +86,22 @@ class MainScreen extends Screens\MasterScreen {
 											<?php echo $this->toProperText($club->getName()) ?>
 										</p>
 										<button class="button-primary ico ico-fight" onclick="location.href='<?php echo 'admin.php?page=eventus&action=matchs&teamId='.$team->getId(); ?>'">
-											Matchs
+											<?php _e('Matches', 'eventus') ?>
 										</button>
 										<button class="button-primary ico ico-team" onclick="location.href='<?php echo 'admin.php?page=eventus&action=team&teamId='.$team->getId(); ?>'">
-											Équipe
+											<?php _e('Team', 'eventus') ?>
 										</button>
 										<button class="button-primary ico ico-club" onclick="location.href='<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$team->getClub()->getId(); ?>'">
-											Club
+											<?php _e('Club', 'eventus') ?>
 										</button>
 									</div>
 									<div class="card-footer text-muted">
 										<?php $infos = DAO\TeamDAO::getInstance()->getInfosByTeamId($team->getId());?>
-										ID : 
-										<b><?php echo $infos->team_id; ?></b>										
-										 / Club ID : 
+										<?php _e('ID : ', 'eventus') ?>
+										<b><?php echo $infos->team_id; ?></b>
+										<?php _e(' / Club ID : ', 'eventus') ?>		
 										<b><?php echo $infos->team_clubId; ?></b>
-										 / Matchs : 
+										<?php _e(' / Matches : ', 'eventus') ?>		
 										<b><?php echo $infos->matchsNbr ?></b>
 									</div>
 								</div>
@@ -116,7 +116,7 @@ class MainScreen extends Screens\MasterScreen {
 			<br>
 
 			<button class="button-primary ico ico-add" onclick="location.href='admin.php?page=eventus&action=team'">
-				Ajouter une équipe
+				<?php _e('Add a team', 'eventus') ?>		
 			</button>
 			<br/><br/>
 
@@ -126,10 +126,17 @@ class MainScreen extends Screens\MasterScreen {
 				<form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
 					<div class="myTooltip">
 						<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">
-							Synchroniser les données des matchs
+							<?php _e('Synchronize match data', 'eventus') ?>	
 						</button>
-						<span class="myTooltiptext">Enregistre & synchronise les données des matchs avec le site de la Fédération.</span>
+						<span class="myTooltiptext"><?php _e('Saves & synchronizes match data with the Federation website.', 'eventus') ?></span>
 					</div> 
+					<br>
+					<p class="dern-synch"><b><?php _e('Last. synch. : ', 'eventus') ?></b>
+                    <?php 
+                        $date = new \DateTime(get_option("eventus_datetimesynch")); 
+                        echo $date->format('d/m/Y à H:i:s');
+                    ?>
+               		</p>
 						
 				</form>	
 				<?php 

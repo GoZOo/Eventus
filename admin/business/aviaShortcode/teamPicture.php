@@ -18,12 +18,12 @@ if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate'
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
 			
-			$this->config['name']		= "Photo Équipe";
+			$this->config['name']		= __('Photo Team', 'eventus');
 			$this->config['tab']		= "Eventus";
 			$this->config['icon']		= AviaBuilder::$path['imagesURL']."sc-image.png";
 			$this->config['order']		= 95;
 			$this->config['shortcode'] 	= 'eventus_team_picture';
-			$this->config['tooltip'] 	= "Photo d'une Équipe";
+			$this->config['tooltip'] 	= __('Photo of a Team', 'eventus');
 		}	
 		 
 		function popup_elements() {
@@ -41,8 +41,8 @@ if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate'
 			
 			$this->elements = array(
 				array(	
-					"name" 	=> "Format de l'image",
-					"desc" 	=> "Sélectionnez un format",
+					"name" 	=> __('Image format', 'eventus'),
+					"desc" 	=> __('Select a format', 'eventus'),
 					"id" 	=> "format",
 					"type" 	=> "select",
 					"std" 	=> "0",
@@ -66,8 +66,8 @@ if (!class_exists( 'EventusTeamPicture') && class_exists('aviaShortcodeTemplate'
 								)
 					),					
 				 array(	
-					"name" 	=> "Équipe",
-					"desc" 	=> "Sélectionnez une équipe",
+					"name" 	=> __('Team', 'eventus'),
+					"desc" 	=> __('Select a team', 'eventus'),
 					"id" 	=> "teamid",
 					"type" 	=> "select",
 					"std" 	=> $allTeamsDisplay ? reset($allTeamsDisplay) : '',

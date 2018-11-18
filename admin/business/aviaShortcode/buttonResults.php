@@ -18,12 +18,12 @@ if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplat
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
 			
-			$this->config['name']		= "Bouton Résultats";
+			$this->config['name']		= __('Results button', 'eventus');  
 			$this->config['tab']		= "Eventus";
 			$this->config['icon']		= AviaBuilder::$path['imagesURL']."sc-buttonrow.png";
 			$this->config['order']		= 97;
 			$this->config['shortcode'] 	= 'eventus_button_results';
-			$this->config['tooltip'] 	= "Afficher un bouton contenant le liens des résultats";
+			$this->config['tooltip'] 	= __('Display a button containing the results links', 'eventus');
 		}
 		
 		function popup_elements() {
@@ -39,8 +39,8 @@ if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplat
 			
 			$this->elements = array(
 				 array(	
-					"name" 	=> "Équipe",
-					"desc" 	=> "Sélectionnez une équipe",
+					"name" 	=> __('Team', 'eventus'),
+					"desc" 	=> __('Select a team', 'eventus'),
 					"id" 	=> "teamid",
 					"type" 	=> "select",
 					"std" 	=> $allTeamsDisplay ? reset($allTeamsDisplay) : '',

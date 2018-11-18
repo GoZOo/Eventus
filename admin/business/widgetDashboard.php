@@ -29,7 +29,14 @@ class EventusWidgetDashboard {
     }
     private function __construct() {
 		wp_enqueue_style('styleEventus', WP_PLUGIN_URL.'/eventus/admin/css/styles.css'); 
-		wp_enqueue_script('jsEventus', WP_PLUGIN_URL.'/eventus/admin/js/common.js', '', '', true); 
+        wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
+        wp_localize_script('commonJs', 'translations', 
+            array(                
+                'defMessage' => __('This action is irreversible. Do you really want to delete the element?', 'eventus' ),
+                'loading' => __('Loading in progress....', 'eventus' )
+            )
+        );
+        wp_enqueue_script('commonJs');
     } 
       
     /**

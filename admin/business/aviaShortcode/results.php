@@ -18,12 +18,12 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
 			
-			$this->config['name']		= "Liste Résultats";
+			$this->config['name']		= __('Results List', 'eventus');
 			$this->config['tab']		= "Eventus";
 			$this->config['icon']		= AviaBuilder::$path['imagesURL']."sc-accordion.png";
 			$this->config['order']		= 95;
 			$this->config['shortcode'] 	= 'eventus_results';
-			$this->config['tooltip'] 	= "Afficher les résultats";
+			$this->config['tooltip'] 	= __('Display the results', 'eventus');
 		}
 		
 		function popup_elements() {

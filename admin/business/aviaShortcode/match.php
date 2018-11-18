@@ -18,12 +18,12 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
 			
-			$this->config['name']		= "Match";
+			$this->config['name']		= __('Matche', 'eventus');
 			$this->config['tab']		= "Eventus";
 			$this->config['icon']		= AviaBuilder::$path['imagesURL']."sc-heading.png";
 			$this->config['order']		= 99;
 			$this->config['shortcode'] 	= 'eventus_next_match';
-			$this->config['tooltip'] 	= "Afficher le prochain/dernier match";
+			$this->config['tooltip'] 	= __('Display next/last match', 'eventus');
 		}
 		
 		function popup_elements() {
@@ -39,26 +39,26 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 			
 			$this->elements = array(
 				array(	
-					"name" 	=> "Type du match à afficher",
-					"desc" 	=> "Sélectionnez un type",
+					"name" 	=> __('Display next/last match', 'eventus'), 
+					"desc" 	=> __('Select a type', 'eventus'),
 					"id" 	=> "type",
 					"type" 	=> "select",
 					"std" 	=> "0",
-					"subtype" => array("Prochain match"=>'0',"Dernier Match"=>'1')
+					"subtype" => array(__('Next match', 'eventus')=>'0',__('Last match', 'eventus')=>'1')
 					),
 
 				array(	
-					"name" 	=> "Format à afficher",
-					"desc" 	=> "Sélectionnez un format",
+					"name" 	=> __('Format to display', 'eventus'),
+					"desc" 	=> __('Select a format', 'eventus'),
 					"id" 	=> "format",
 					"type" 	=> "select",
 					"std" 	=> "0",
-					"subtype" => array("Lignes multiples"=>'0',"Deux lignes"=>'1')
+					"subtype" => array(__('Multiple lines', 'eventus')=>'0',__('Two lines', 'eventus')=>'1')
 					),
 					
 				 array(	
-					"name" 	=> "Équipe",
-					"desc" 	=> "Sélectionnez une équipe",
+					"name" 	=> __('Team', 'eventus'),
+					"desc" 	=> __('Select a team', 'eventus'),
 					"id" 	=> "teamid",
 					"type" 	=> "select",
 					"std" 	=> $allTeamsDisplay ? reset($allTeamsDisplay) : '',
@@ -88,12 +88,12 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 	        $atts));
 
     		
-    		$stringDisplay = $stringDisplay2 = "Aucun match disponible";
+    		$stringDisplay = $stringDisplay2 = __('No matches available', 'eventus');
 
 	        if ($format == 0) {
 	        	if ($type == 0) {
 	        		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
-	               	$title = 'Prochain match';
+	               	$title = __('Next match', 'eventus');
 
 			        if ($myMatch->getId()){
 			            $stringDisplay = 
@@ -105,7 +105,7 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 			        } 
 		        } else {
 		        	$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "last"); 
-		            $title = 'Dernier match';
+		            $title = __('Last match', 'eventus');
 
 			        if ($myMatch->getId()){
 			            $stringDisplay = 
@@ -123,7 +123,7 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 		    } else {
 		    	if ($type == 0) {
 		    		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
-	               	$title = 'Prochain match';
+	               	$title =  __('Next match', 'eventus');
 
 		    		if ($myMatch->getId()){
 			            $stringDisplay = 
@@ -136,7 +136,7 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 			        } 
 		    	} else {
 		    		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "last"); 
-		            $title = 'Dernier match';
+		            $title = __('Last match', 'eventus');
 
 		    		if ($myMatch->getId()){
 			            $stringDisplay = 

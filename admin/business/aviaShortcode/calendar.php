@@ -18,12 +18,12 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
 			
-			$this->config['name']		= "Calendrier Matchs";
+			$this->config['name']		= __('Match Calendar', 'eventus'); 
 			$this->config['tab']		= "Eventus";
 			$this->config['icon']		= AviaBuilder::$path['imagesURL']."sc-table.png";
 			$this->config['order']		= 96;
 			$this->config['shortcode'] 	= 'eventus_calendrier';
-			$this->config['tooltip'] 	= "Calendrier des Matchs";
+			$this->config['tooltip'] 	= __('Match Calendar', 'eventus');
 		}	
 		 
 		

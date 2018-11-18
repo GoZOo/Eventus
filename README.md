@@ -44,6 +44,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Add you can open restults in new tab thanks to a button
 * Add namespace in every files
 * Add date of last synchronization of matches is saved in DB
+* Add translations files with every strings translated
 * Evo you can add two different results links to a team
 * Evo you can't no longer pick sexe(s) for clubs
 * Evo some files and repositories have changed

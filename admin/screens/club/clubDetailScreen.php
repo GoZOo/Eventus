@@ -32,8 +32,15 @@ class ClubDetailScreen extends Screens\MasterScreen {
 		
     protected function __construct() {
         parent::__construct();
-        wp_enqueue_media();     
-		wp_enqueue_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../../js/uploadImg.js', '', '', true); 
+        wp_enqueue_media();    
+        wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../../js/uploadImg.js', '', '', true); 
+        wp_localize_script('upImgJs', 'translations', 
+            array(                
+                'selectAnImg' => __('Select the default team image', 'eventus' ),
+                'selectImg' => __('Use this image', 'eventus' )
+            )
+        );
+        wp_enqueue_script('upImgJs');
     }
 
     /**

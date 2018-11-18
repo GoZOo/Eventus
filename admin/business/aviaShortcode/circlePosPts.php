@@ -18,12 +18,12 @@ if (!class_exists( 'EventusCirclePosPts') && class_exists('aviaShortcodeTemplate
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';
 			
-			$this->config['name']		= "Position et Score";
+			$this->config['name']		= __('Position and Score', 'eventus'); 
 			$this->config['tab']		= "Eventus";
 			$this->config['icon']		= AviaBuilder::$path['imagesURL']."sc-icon.png";
 			$this->config['order']		= 98;
 			$this->config['shortcode'] 	= 'eventus_circle_pos_score';
-			$this->config['tooltip'] 	= "Afficher la position et le score";
+			$this->config['tooltip'] 	= __('Display position and score', 'eventus');
 		}
 		
 		function popup_elements() {
@@ -39,8 +39,8 @@ if (!class_exists( 'EventusCirclePosPts') && class_exists('aviaShortcodeTemplate
 			
 			$this->elements = array(
 				 array(	
-					"name" 	=> "Équipe",
-					"desc" 	=> "Sélectionnez une équipe",
+					"name" 	=> __('Team', 'eventus'),
+					"desc" 	=> __('Select a team', 'eventus'),
 					"id" 	=> "teamid",
 					"type" 	=> "select",
 					"std" 	=> $allTeamsDisplay ? reset($allTeamsDisplay) : '',

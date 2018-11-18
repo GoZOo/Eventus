@@ -10,7 +10,14 @@ namespace Eventus\Admin\Screens;
 */
 abstract class MasterScreen {    	
     protected function __construct() {  
-		wp_enqueue_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
+        wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
+        wp_localize_script('commonJs', 'translations', 
+            array(                
+                'defMessage' => __('This action is irreversible. Do you really want to delete the element?', 'eventus' ),
+                'loading' => __('Loading in progress....', 'eventus' )
+            )
+        );
+        wp_enqueue_script('commonJs');
 	}
     /**
     * Function to display the screen

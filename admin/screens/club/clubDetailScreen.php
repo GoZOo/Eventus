@@ -3,6 +3,7 @@
 namespace Eventus\Admin\Screens\Club;
 use Eventus\Admin\Screens as Screens;
 use Eventus\Includes\Datas as DAO;
+use Eventus\Includes\Entities as Entities;
 
 /**
 * ClubDetailScreen is a class use to manage admin screen
@@ -49,7 +50,7 @@ class ClubDetailScreen extends Screens\MasterScreen {
                 return;
             }            
     	} else {
-            $club = new Club(null, "", "", "");
+            $club = new Entities\Club(null, "", "", "");
         }
 	    ?>
         <div class='wrap'>

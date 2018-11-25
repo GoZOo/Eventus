@@ -287,6 +287,7 @@ class MatchDAO extends MasterDAO {
     * @access public
     */
     function getCloseMatchByTeamId($teamId, $close){  
+        var_dump($close);
         $row = $this->wpdb->get_row("
         SELECT                 
             a.*
@@ -307,12 +308,52 @@ class MatchDAO extends MasterDAO {
                 )
                 OR
                 a.match_type IN (1,2)
-            )           
+            ) 
+            ".($close !='next' ? '
+                AND
+                (
+                    a.match_localTeamScore IS NOT NULL OR
+                    a.match_visitingTeamScore IS NOT NULL
+                )' 
+            : '')."            
         ORDER BY 
             a.match_date ". ($close=='next' ? 'ASC' : 'DESC').", 
             a.match_hourStart ". ($close=='next' ? 'ASC' : 'DESC'). "
         LIMIT 1;
         ");     
+        var_dump("
+        SELECT                 
+            a.*
+        FROM {$this->t2} a
+        WHERE              
+            a.match_idTeam=$teamId AND
+            a.match_date ". ($close=='next' ? '>=' : '<')." CURDATE()  AND
+            (
+                (
+                    a.match_type=0 AND
+                    (
+                        SELECT 
+                            z.match_id 
+                        FROM {$this->t2} z 
+                        WHERE 
+                            z.match_idMatchRef = a.match_id
+                    ) IS NULL                        
+                )
+                OR
+                a.match_type IN (1,2)
+            ) 
+            ".($close=='next' ? '
+                AND
+                (
+                    a.match_localTeamScore IS NOT NULL OR
+                    a.match_visitingTeamScore IS NOT NULL
+                )' 
+            : '')."            
+        ORDER BY 
+            a.match_date ". ($close=='next' ? 'ASC' : 'DESC').", 
+            a.match_hourStart ". ($close=='next' ? 'ASC' : 'DESC'). "
+        LIMIT 1;
+        ");
         return new Entities\Match(
             $row->match_id, 
             $row->match_matchDay,

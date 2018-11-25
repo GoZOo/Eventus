@@ -39,6 +39,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 
 * Fix ButtonResults and ResultsCarousel with multiple links
 * Fix ResultsCarousel
+* Fix displaying only last match with results
 * Add you can now open in other tab button in admins pages
 * Add you can now select an image for a team
 * Add you can open restults in new tab thanks to a button

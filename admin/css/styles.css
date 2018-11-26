@@ -125,6 +125,7 @@ body[class*="eventus"] .eventusCardList .eventusCard .card-img-top{
 	border-top-left-radius: calc(.25rem - 1px);
 	border-top-right-radius: calc(.25rem - 1px);
 	height: auto;
+	min-height: 200px;
 	border-bottom: 1px solid rgba(0,0,0,.125);
 }
 body[class*="eventus"] .eventusCardList .eventusCard .card-body{

@@ -63,7 +63,7 @@ class ClubScreen extends Screens\MasterScreen {
 					<?php 							
 						foreach ($allClubs as $club) { ?>
 							<div class="eventusCard eventusCardClub">
-								<?php echo $club->getImg() ? wp_get_attachment_image($club->getImg(), 'portfolio', false, ["class"=>"card-img-top", "alt"=>"Club"]) : ('<img class="card-img-top" alt="Club" src="'.plugin_dir_url( __FILE__ ).'../../../includes/img/img-default.png'.'">'); ?>
+								<?php echo $club->getImg() ? ('<img class="card-img-top" alt="Club" src="'.wp_get_attachment_image_src($club->getImg(), 'medium')[0].'">') : ('<img class="card-img-top" alt="Club" src="'.plugin_dir_url( __FILE__ ).'../../../includes/img/img-default.png'.'">'); ?>
 								<div class="card-body">
 									<h5 class="card-title">
 										<?php echo $this->toProperText($club->getName()); ?>

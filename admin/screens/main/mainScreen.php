@@ -77,7 +77,7 @@ class MainScreen extends Screens\MasterScreen {
 							foreach ($allTeams as $team) { 
 								?>
 								<div class="eventusCard">
-									<?php echo $team->getImg() ? wp_get_attachment_image($team->getImg(), 'portfolio', false, ["class"=>"card-img-top", "alt"=>"Team"]) : ('<img class="card-img-top" alt="Team" src="'.plugin_dir_url( __FILE__ ).'../../../includes/img/img-default.png'.'">'); ?>
+									<?php echo $team->getImg() ? ('<img class="card-img-top" alt="Team" src="'.wp_get_attachment_image_src($team->getImg(), 'medium')[0].'">') : ('<img class="card-img-top" alt="Team" src="'.plugin_dir_url( __FILE__ ).'../../../includes/img/img-default.png'.'">'); ?>
 									<div class="card-body">
 										<h5 class="card-title">
 											<?php echo $this->toProperText($team->getName()).' '.$this->getSexIco($team->getBoy(), $team->getGirl(), $team->getMixed()); ?>

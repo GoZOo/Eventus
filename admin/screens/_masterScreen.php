@@ -44,7 +44,7 @@ abstract class MasterScreen {
             ), 
             'warningSyncMatch'=>array(
                 'state' => "warning", 
-                'str'   => __('The match data was synchronized well, despite some errors. For more information, see ', 'eventus') . ' <a href=\"admin.php?page=eventus_logs\">' . __('the logs', 'eventus') .'</a>.'
+                'str'   => __('The match data was synchronized well, despite some errors. For more information, see ', 'eventus') . ' <a href="admin.php?page=eventus_logs">' . __('the logs', 'eventus') .'</a>.'
             ),
             'succesDelMatch'=>array(
                 'state' => "success", 
@@ -60,7 +60,7 @@ abstract class MasterScreen {
             ),   
             'warningUpHoursMatch'=>array(
                 'state' => "warning", 
-                'str'   => __('The appointment times have been updated, despite some errors. For more information, see ', 'eventus') . ' <a href=\"admin.php?page=eventus_logs\">' . __('the logs', 'eventus') .'</a>'
+                'str'   => __('The appointment times have been updated, despite some errors. For more information, see ', 'eventus') . ' <a href="admin.php?page=eventus_logs">' . __('the logs', 'eventus') .'</a>'
             ),  
             'succesUpTeam'=>array(
                 'state' => "success", 
@@ -120,7 +120,7 @@ abstract class MasterScreen {
             ),
             'noMapApiKey'=>array(
                 'state' => "error", 
-                'str'   => __('Please specify your Google Map API key in', 'eventus') . ' <a href=\"admin.php?page=eventus_admin\">' . __('the parameters', 'eventus') .'</a>.'
+                'str'   => __('Please specify your Google Map API key in', 'eventus') . ' <a href="admin.php?page=eventus_admin">' . __('the parameters', 'eventus') .'</a>.'
             )
         );
         if ($_GET['message'] && $notices[$_GET['message']]) {

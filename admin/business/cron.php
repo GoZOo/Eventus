@@ -28,8 +28,9 @@ if (get_option("eventus_emailnotif")){
 		get_option("eventus_emailnotif"), 
 		"Eventus - Update ".date("d/m/Y H:i:s"), 
 		$message, 
-		"From: eventus@".$_SERVER['HTTP_HOST']. "\r\n" .
+		"From: Eventus - ".$_SERVER['HTTP_HOST']." <eventus@".$_SERVER['HTTP_HOST']. ">\r\n" .
 		"Reply-To: eventus@".$_SERVER['HTTP_HOST'] ."\r\n" .
+		"Content-Type: text/html; charset=UTF-8"."\r\n".
 		"X-Mailer: PHP/" . phpversion()
 	);
 }

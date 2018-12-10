@@ -17,6 +17,8 @@ include_once __DIR__ . '/../../../../../wp-config.php';
 foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
     Finder::getInstance()->updateMatches($team);
 }
+
+date_default_timezone_set("Europe/Paris");
 update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
 
 if (get_option("eventus_emailnotif")){

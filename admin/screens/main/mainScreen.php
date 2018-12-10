@@ -132,7 +132,8 @@ class MainScreen extends Screens\MasterScreen {
 					</div> 
 					<br>
 					<p class="dern-synch"><b><?php _e('Last. synch. : ', 'eventus') ?></b>
-                    <?php 
+					<?php 					
+						date_default_timezone_set("Europe/Paris");
                         $date = new \DateTime(get_option("eventus_datetimesynch")); 
                         echo $date->format('d/m/Y à H:i:s');
                     ?>

@@ -72,6 +72,7 @@ class EventusWidgetDashboard {
             <div>
                 <h3><b><?php _e('Last synchronization of matches: ', 'eventus') ?></b><br>
                     <?php 
+                        date_default_timezone_set("Europe/Paris");
                         $date = new \DateTime(get_option("eventus_datetimesynch")); 
                         echo $date->format('d/m/Y à H:i:s');
                     ?>

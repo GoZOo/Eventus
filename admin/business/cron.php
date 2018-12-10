@@ -22,8 +22,8 @@ date_default_timezone_set("Europe/Paris");
 update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
 
 if (get_option("eventus_emailnotif")){
-	$message = "<p>The update has been succesfully done with: <b>". count(file('../../finder.log')) ."</b> issue(s), the <b>".date("d/m/Y")."</b> at <b>".date("H:i:s")."</b>.</p>";
-	$content = explode("\n", file_get_contents('../../finder.log'));
+	$message = "<p>The update has been succesfully done with: <b>". count(file(__DIR__ . '/../../finder.log')) ."</b> issue(s), the <b>".date("d/m/Y")."</b> at <b>".date("H:i:s")."</b>.</p>";
+	$content = explode("\n", file_get_contents(__DIR__ . '/../../finder.log'));
 	($content ? array_pop($content) : '' );
 	$message .= ($content ? "<ul><li>".str_replace("[", "<b>[", str_replace("]", "]</b>", implode("</li><li>", $content)))."</ul>" : '');
 	mail(

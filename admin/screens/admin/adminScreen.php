@@ -60,6 +60,14 @@ class AdminScreen extends Screens\MasterScreen {
                                         <input name='mapApiKey' id='mapApiKey' value='<?php echo get_option("eventus_mapapikey");?>' class='regular-text' type='text' required title="<?php _e('API Key', 'eventus') ?>" placeholder="<?php _e('API Key', 'eventus') ?>">
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th scope='row'>
+                                        <label for='emailNotif'><?php _e('Notification email', 'eventus') ?><span class="required">*</span></label>
+                                    </th>
+                                    <td>
+                                        <input name='emailNotif' id='emailNotif' value='<?php echo get_option("eventus_emailnotif");?>' class='regular-text' type='email' required title="<?php _e('Notification email', 'eventus') ?>" placeholder="<?php _e('Notification email', 'eventus') ?>">
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

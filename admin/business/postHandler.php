@@ -266,11 +266,13 @@ class PostHandler {
         DAO\Database::getInstance()->resetTables();
         delete_option('eventus_mapapikey');
         delete_option('eventus_datetimesynch');
+        delete_option('eventus_emailnotif');
         wp_redirect( add_query_arg( 'message', 'succesReset',  'admin.php?page=eventus' ));
     }
 
     function updateSettings(){
         update_option('eventus_mapapikey', $_POST['mapApiKey'], false);
+        update_option('eventus_emailnotif', $_POST['emailNotif'], false);
         wp_redirect( add_query_arg( 'message', 'succesUpSet',  wp_get_referer() ));
     }
 

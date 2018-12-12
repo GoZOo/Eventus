@@ -145,7 +145,7 @@ class MainTeamScreen extends Screens\MasterScreen {
                                 </th>
                                 <td>
                                     <input name='urlTwo' id='urlTwo' value='<?php echo $this->toProperText($team->getUrlTwo()) ?>' class='regular-text' type='url' title="<?php _e('Link n°2 of the championship results', 'eventus') ?>" placeholder="<?php _e('Link n°2 of the championship results', 'eventus') ?>">
-                                    <button type='button' class='button-primary ico ico-link ico-no-text' onclick="window.open('<?php echo $this->toProperText($team->getUrlOne()) ?>', '_blank')"></button>
+                                    <button type='button' class='button-primary ico ico-link ico-no-text' onclick="window.open('<?php echo $this->toProperText($team->getUrlTwo()) ?>', '_blank')"></button>
                                 </td>
                             </tr>
                             <tr>

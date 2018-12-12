@@ -65,7 +65,7 @@ class AdminScreen extends Screens\MasterScreen {
                                         <label for='emailNotif'><?php _e('Notification email', 'eventus') ?><span class="required">*</span></label>
                                     </th>
                                     <td>
-                                        <input name='emailNotif' id='emailNotif' value='<?php echo get_option("eventus_emailnotif");?>' class='regular-text' type='email' required title="<?php _e('Notification email', 'eventus') ?>" placeholder="<?php _e('Notification email', 'eventus') ?>">
+                                        <input name='emailNotif' id='emailNotif' value='<?php echo get_option("eventus_emailnotif");?>' class='regular-text' type='email' title="<?php _e('Notification email', 'eventus') ?>" placeholder="<?php _e('Notification email', 'eventus') ?>">
                                     </td>
                                 </tr>
                             </tbody>

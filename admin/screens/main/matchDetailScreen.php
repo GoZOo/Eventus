@@ -301,7 +301,6 @@ class MainMatchScreen extends Screens\MasterScreen {
 	            	<input type="hidden" value="<?php echo $nbrOtherMatch-1 ?>" name="nbrOtherMatch">					  
                 <br><br>
 				<input type='hidden' name='teamId' value="<?php echo $team->getId(); ?>">	
-				<input type="hidden" name="path" value="http://<?php echo $_SERVER[HTTP_HOST], $_SERVER[REQUEST_URI]; ?>" >
 				<button type='button' onclick='addOtherMatch()' class='button-primary ico ico-add'><?php _e('Add a match', 'eventus') ?></button>
 				<br><br> 
 

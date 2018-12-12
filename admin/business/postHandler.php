@@ -107,12 +107,17 @@ class PostHandler {
     	$myTeam = DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']);
        	$allMatchesSon = [];
         for($i=1; $i < $_POST['nbrSonMatch']+1; $i++) { 
+            var_dump(date_create_from_format('H:i', $_POST['hourStartSon'.$i]));
             $allMatchesSon[] = new Entities\Match(
             	$_POST['idSon'.$i] ? $_POST['idSon'.$i] : null, 
             	$_POST['matchDaySon'.$i] ? $_POST['matchDaySon'.$i] : null,
             	$_POST['numMatchSon'.$i] ? $_POST['numMatchSon'.$i] : null,
             	$_POST['dateSon'.$i] ? $_POST['dateSon'.$i] : null, 
-            	$_POST['hourRdvSon'.$i]? $_POST['hourRdvSon'.$i] : null, 
+                $_POST['hourRdvSon'.$i] ? $_POST['hourRdvSon'.$i] : (
+                    $_POST['hourStartSon'.$i] ? 
+                    date_create_from_format('H:i', $_POST['hourStartSon'.$i])->modify('-'. $myTeam->getTime() .'minutes')->format('H:i:s') :
+                    null
+                ), 
             	$_POST['hourStartSon'.$i] ? $_POST['hourStartSon'.$i] : null, 
             	$_POST['localTeamSon'.$i] ? $_POST['localTeamSon'.$i] : null, 
             	$_POST['localTeamScoreSon'.$i] ? $_POST['localTeamScoreSon'.$i] : null,
@@ -137,8 +142,12 @@ class PostHandler {
             	null,
             	null,
             	$_POST['dateOther'.$i] ? $_POST['dateOther'.$i] : null, 
-            	$_POST['hourRdvOther'.$i]? $_POST['hourRdvOther'.$i] : null, 
-            	$_POST['hourStartOther'.$i] ? $_POST['hourStartOther'.$i] : null, 
+            	$_POST['hourRdvOther'.$i]? $_POST['hourRdvOther'.$i] :  (
+                    $_POST['hourStartOther'.$i] ? 
+                    date_create_from_format('H:i', $_POST['hourStartOther'.$i])->modify('-'. $myTeam->getTime() .'minutes')->format('H:i:s') :
+                    null
+                ), 
+            	$_POST['hourStartOther'.$i] ? $_POST['hourStartOther'.$i] : null,
             	$_POST['localTeamOther'.$i] ? $_POST['localTeamOther'.$i] : null, 
             	$_POST['localTeamScoreOther'.$i] ? $_POST['localTeamScoreOther'.$i] : null,
             	$_POST['visitingTeamOther'.$i] ? $_POST['visitingTeamOther'.$i] : null, 

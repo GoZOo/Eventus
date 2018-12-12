@@ -90,7 +90,7 @@ class Match {
     }
 
     public function getHourRdv() {
-        return explode(":", $this->hourRdv)[0].":".explode(":", $this->hourRdv)[1];
+        return $this->hourRdv ? explode(":", $this->hourRdv)[0].":".explode(":", $this->hourRdv)[1] : null;
     }
 
     public function setHourRdv($hourRdv) {
@@ -99,7 +99,7 @@ class Match {
     }
 
     public function getHourStart() {
-        return explode(":", $this->hourStart)[0].":".explode(":", $this->hourStart)[1];
+        return $this->hourStart ? explode(":", $this->hourStart)[0].":".explode(":", $this->hourStart)[1] : null;
     }
 
     public function setHourStart($hourStart) {

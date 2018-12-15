@@ -40,6 +40,9 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Fix ButtonResults and ResultsCarousel with multiple links
 * Fix ResultsCarousel
 * Fix displaying only last match with results
+* Fix cron is now usable (bind 'cron.php' to a cron job)
+* Fix hour rdv and matches are now set to NULL by default (instead of '00:00')
+* Fix second button url for teams
 * Add you can now open in other tab button in admins pages
 * Add you can now select an image for a team
 * Add you can open restults in new tab thanks to a button

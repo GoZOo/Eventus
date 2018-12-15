@@ -1,5 +1,6 @@
 <?php 
-
+// Example Cron Job :
+// 54 0,22 * * 0,1,3,5 php ./www/wp-content/plugins/eventus/admin/business/cron.php >/dev/null 2>&1
 namespace Eventus\Admin\Business;
 use Eventus\Includes\Datas as DAO;
 

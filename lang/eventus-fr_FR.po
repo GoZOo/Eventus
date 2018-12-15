@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Eventus\n"
-"POT-Creation-Date: 2018-12-10 19:18+0100\n"
-"PO-Revision-Date: 2018-12-10 19:19+0100\n"
+"POT-Creation-Date: 2018-12-15 12:48+0100\n"
+"PO-Revision-Date: 2018-12-15 12:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: Kirian Caumes\n"
 "Language: fr_FR\n"
@@ -232,7 +232,7 @@ msgid "November"
 msgstr "Novembre"
 
 #: admin/business/traitHelper.php:41
-msgid "Décember"
+msgid "December"
 msgstr "Décembre"
 
 #: admin/business/widgetDashboard.php:35 admin/screens/_masterScreen.php:16
@@ -281,12 +281,12 @@ msgid "Last synchronization of matches: "
 msgstr "Dernière synchronisation des matchs : "
 
 #: admin/business/widgetDashboard.php:82 admin/screens/main/mainScreen.php:129
-#: admin/screens/main/matchDetailScreen.php:317
+#: admin/screens/main/matchDetailScreen.php:316
 msgid "Synchronize match data"
 msgstr "Synchroniser les données des matchs"
 
 #: admin/business/widgetDashboard.php:83 admin/screens/main/mainScreen.php:131
-#: admin/screens/main/matchDetailScreen.php:318
+#: admin/screens/main/matchDetailScreen.php:317
 msgid "Saves & synchronizes match data with the Federation website."
 msgstr ""
 "Enregistre & synchronise les données des matchs avec le site de la "
@@ -433,7 +433,7 @@ msgstr "Adresse mail de notification"
 
 #: admin/screens/admin/adminScreen.php:74
 #: admin/screens/club/clubDetailScreen.php:130
-#: admin/screens/main/matchDetailScreen.php:308
+#: admin/screens/main/matchDetailScreen.php:307
 #: admin/screens/main/teamDetailScreen.php:184
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
@@ -740,15 +740,15 @@ msgstr "Orig."
 msgid "Other matches"
 msgstr "Autre Matchs"
 
-#: admin/screens/main/matchDetailScreen.php:305
+#: admin/screens/main/matchDetailScreen.php:304
 msgid "Add a match"
 msgstr "Ajouter un match"
 
-#: admin/screens/main/matchDetailScreen.php:311
+#: admin/screens/main/matchDetailScreen.php:310
 msgid "Recalculate RDV schedules"
 msgstr "Recalculer les horaires de RDV"
 
-#: admin/screens/main/matchDetailScreen.php:312
+#: admin/screens/main/matchDetailScreen.php:311
 msgid ""
 "Saves & updates schedules of upcoming outdoor games with a valid address."
 msgstr ""

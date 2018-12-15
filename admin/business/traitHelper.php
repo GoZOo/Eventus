@@ -37,8 +37,8 @@ trait TraitHelper{
         $english_days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
         $french_days = array( __('Monday', 'eventus'),  __('Tuesday', 'eventus'),  __('Wednesday', 'eventus'),  __('Thursday', 'eventus'),  __('Friday', 'eventus'),  __('Saturday', 'eventus'),  __('Sunday', 'eventus'));
 
-        $english_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Décember');
-        $french_months = array(__('January', 'eventus'),__('February', 'eventus'),__('March', 'eventus'),__('April', 'eventus'),__('May', 'eventus'),__('June', 'eventus'),__('July', 'eventus'),__('August', 'eventus'),__('September', 'eventus'),__('October', 'eventus'),__('November', 'eventus'),__('Décember', 'eventus'));
+        $english_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+        $french_months = array(__('January', 'eventus'),__('February', 'eventus'),__('March', 'eventus'),__('April', 'eventus'),__('May', 'eventus'),__('June', 'eventus'),__('July', 'eventus'),__('August', 'eventus'),__('September', 'eventus'),__('October', 'eventus'),__('November', 'eventus'),__('December', 'eventus'));
         $myDate = str_replace($english_months, $french_months, $myDate);
         return str_replace($english_days, $french_days, $myDate);
     }

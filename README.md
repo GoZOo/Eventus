@@ -35,6 +35,11 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 
 ## Updates
 
+### 2.4.1
+
+* Fix url site in cron with php7.2
+* Evo transform somes buttons to links
+
 ### 2.4
 
 * Fix ButtonResults and ResultsCarousel with multiple links

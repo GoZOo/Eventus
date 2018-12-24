@@ -23,7 +23,7 @@ date_default_timezone_set("Europe/Paris");
 update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
 
 if (get_option("eventus_emailnotif")){
-	$message = "<p>The update has been succesfully done with: <b>". count(file(__DIR__ . '/../../finder.log')) ."</b> issue(s), the <b>".date("d/m/Y")."</b> at <b>".date("H:i:s")."</b>.</p>";
+	$message = "<a href='".$_SERVER['SERVER_NAME']."/wp-admin/admin.php?page=eventus_logs'>Website's url</a><p>The update has been succesfully done with: <b>". count(file(__DIR__ . '/../../finder.log')) ."</b> issue(s), the <b>".date("d/m/Y")."</b> at <b>".date("H:i:s")."</b>.</p>";
 	$content = explode("\n", file_get_contents(__DIR__ . '/../../finder.log'));
 	($content ? array_pop($content) : '' );
 	$message .= ($content ? "<ul><li>".str_replace("[", "<b>[", str_replace("]", "]</b>", implode("</li><li>", $content)))."</ul>" : '');
@@ -31,8 +31,8 @@ if (get_option("eventus_emailnotif")){
 		get_option("eventus_emailnotif"), 
 		"Eventus - Update ".date("d/m/Y H:i:s"), 
 		$message, 
-		"From: Eventus - ".$_SERVER['HTTP_HOST']." <eventus@".$_SERVER['HTTP_HOST']. ">\r\n" .
-		"Reply-To: eventus@".$_SERVER['HTTP_HOST'] ."\r\n" .
+		"From: Eventus - ".$_SERVER['SERVER_NAME']." <eventus@".$_SERVER['SERVER_NAME']. ">\r\n" .
+		"Reply-To: eventus@".$_SERVER['SERVER_NAME'] ."\r\n" .
 		"Content-Type: text/html; charset=UTF-8"."\r\n".
 		"X-Mailer: PHP/" . phpversion()
 	);

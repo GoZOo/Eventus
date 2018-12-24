@@ -57,9 +57,9 @@ class MainScreen extends Screens\MasterScreen {
 				if (!$allClubs) { 
 					?>
 					<h2><?php _e('Please add a club first...', 'eventus') ?></h2>	
-					<button class="button-primary ico ico-add" onclick="location.href='admin.php?page=eventus_club&action=club'">
+					<a class="button-primary ico ico-add" href='admin.php?page=eventus_club&action=club'>
 						<?php _e('Add a club', 'eventus') ?>						
-					</button>
+					</a>
 					<?php
 					return;
 				}
@@ -85,15 +85,15 @@ class MainScreen extends Screens\MasterScreen {
 										<p class="card-text">
 											<?php echo $this->toProperText($club->getName()) ?>
 										</p>
-										<button class="button-primary ico ico-fight" onclick="location.href='<?php echo 'admin.php?page=eventus&action=matchs&teamId='.$team->getId(); ?>'">
+										<a class="button-primary ico ico-fight" href="<?php echo 'admin.php?page=eventus&action=matchs&teamId='.$team->getId(); ?>">
 											<?php _e('Matches', 'eventus') ?>
-										</button>
-										<button class="button-primary ico ico-team" onclick="location.href='<?php echo 'admin.php?page=eventus&action=team&teamId='.$team->getId(); ?>'">
+										</a>
+										<a class="button-primary ico ico-team" href="<?php echo 'admin.php?page=eventus&action=team&teamId='.$team->getId(); ?>">
 											<?php _e('Team', 'eventus') ?>
-										</button>
-										<button class="button-primary ico ico-club" onclick="location.href='<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$team->getClub()->getId(); ?>'">
+										</a>
+										<a class="button-primary ico ico-club" href="<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$team->getClub()->getId(); ?>">
 											<?php _e('Club', 'eventus') ?>
-										</button>
+										</a>
 									</div>
 									<div class="card-footer text-muted">
 										<?php $infos = DAO\TeamDAO::getInstance()->getInfosByTeamId($team->getId());?>
@@ -115,9 +115,9 @@ class MainScreen extends Screens\MasterScreen {
 			?>
 			<br>
 
-			<button class="button-primary ico ico-add" onclick="location.href='admin.php?page=eventus&action=team'">
+			<a class="button-primary ico ico-add" href="admin.php?page=eventus&action=team">
 				<?php _e('Add a team', 'eventus') ?>		
-			</button>
+			</a>
 			<br/><br/>
 
 			<?php 

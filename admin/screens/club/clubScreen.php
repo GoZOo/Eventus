@@ -68,9 +68,9 @@ class ClubScreen extends Screens\MasterScreen {
 									<h5 class="card-title">
 										<?php echo $this->toProperText($club->getName()); ?>
 									</h5>
-									<button class="button-primary ico ico-club" onclick="location.href='<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$club->getId(); ?>'">
+									<a class="button-primary ico ico-club" href='<?php echo 'admin.php?page=eventus_club&action=club&clubId='.$club->getId(); ?>'>
 										<?php _e('Club', 'eventus') ?>
-									</button>
+									</a>
 								</div>
 								<div class="card-footer text-muted">
 									<?php $infos = DAO\ClubDAO::getInstance()->getInfosByClubId($club->getId()); ?>
@@ -86,7 +86,7 @@ class ClubScreen extends Screens\MasterScreen {
 						?>
 					</div>
 				</div>
-	            <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus_club&action=club'"><?php _e('Add a club', 'eventus') ?></button>
+	            <a type='button' class='button-primary ico ico-add' href='admin.php?page=eventus_club&action=club'><?php _e('Add a club', 'eventus') ?></a>
     	</div>
 		<?php   
 	}

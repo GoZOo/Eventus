@@ -136,7 +136,7 @@ class MainTeamScreen extends Screens\MasterScreen {
                                 </th>
                                 <td>
                                     <input name='urlOne' id='urlOne' value='<?php echo $this->toProperText($team->getUrlOne()) ?>' class='regular-text' type='url' title="<?php _e('Link n°1 of the championship results', 'eventus') ?>" placeholder="<?php _e('Link n°1 of the championship results', 'eventus') ?>">
-                                    <button type='button' class='button-primary ico ico-link ico-no-text' onclick="window.open('<?php echo $this->toProperText($team->getUrlOne()) ?>', '_blank')"></button>
+                                    <a type='button' class='button-primary ico ico-link ico-no-text' href='<?php echo $this->toProperText($team->getUrlOne()) ?>' target='_blank'></a>
                                 </td>
                             </tr>
                             <tr <?php echo !$team->getUrlOne() ? "style='display: none'" : ''?>>
@@ -145,7 +145,7 @@ class MainTeamScreen extends Screens\MasterScreen {
                                 </th>
                                 <td>
                                     <input name='urlTwo' id='urlTwo' value='<?php echo $this->toProperText($team->getUrlTwo()) ?>' class='regular-text' type='url' title="<?php _e('Link n°2 of the championship results', 'eventus') ?>" placeholder="<?php _e('Link n°2 of the championship results', 'eventus') ?>">
-                                    <button type='button' class='button-primary ico ico-link ico-no-text' onclick="window.open('<?php echo $this->toProperText($team->getUrlTwo()) ?>', '_blank')"></button>
+                                    <a type='button' class='button-primary ico ico-link ico-no-text' href='<?php echo $this->toProperText($team->getUrlTwo()) ?>' target='_blank'></a>
                                 </td>
                             </tr>
                             <tr>
@@ -174,7 +174,7 @@ class MainTeamScreen extends Screens\MasterScreen {
                 <br>
 
                 <?php if($team->getId()) { ?>
-	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus&action=team'"><?php _e('Add a team', 'eventus') ?></button>
+	                <a type='button' class='button-primary ico ico-add' href='admin.php?page=eventus&action=team'><?php _e('Add a team', 'eventus') ?></a>
                     <button type="submit" name="action" value="delTeam" class="button-primary ico ico-del" onclick="return validate(null)" ><?php _e('Delete the team', 'eventus') ?></button>           
                     <br />
                     

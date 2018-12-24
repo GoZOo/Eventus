@@ -165,12 +165,12 @@ body[class*="eventus"] form button:active{
 }
 
 /* icons */
-body[class*="eventus"] button.ico, #dashboard_eventus button.ico {
+body[class*="eventus"] button.ico, #dashboard_eventus button.ico, body[class*="eventus"] a.ico, #dashboard_eventus a.ico {
 	position: relative!important;
 	padding-left: 25px;
 	margin-bottom: 5px;
 }
-body[class*="eventus"] button.ico-no-text {
+body[class*="eventus"] button.ico-no-text, body[class*="eventus"] a.ico-no-text {
 	padding-left: 0!important;
 	margin-bottom: 0!important;
 	width: 28px!important;

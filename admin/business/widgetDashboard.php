@@ -54,15 +54,15 @@ class EventusWidgetDashboard {
         <div class="eventus-row">
             <div>
                 <h3><b><?php _e('Team(s): ', 'eventus') ?><?php echo DAO\TeamDAO::getInstance()->getNumbersTeams()->nbr_teams; ?></b></h3>
-                <button class="button-primary ico ico-team" onclick="location.href='admin.php?page=eventus'"><?php _e('See the team(s)', 'eventus') ?></button>
+                <a class="button-primary ico ico-team" href='admin.php?page=eventus'><?php _e('See the team(s)', 'eventus') ?></a>
             </div> 
             <div>
                 <h3><b><?php _e('Club(s): ', 'eventus') ?><?php echo DAO\ClubDAO::getInstance()->getNumbersClubs()->nbr_clubs; ?></b></h3>
-                <button class="button-primary ico ico-club" onclick="location.href='admin.php?page=eventus_club'"><?php _e('See the club(s)', 'eventus') ?></button>
+                <a class="button-primary ico ico-club" href='admin.php?page=eventus_club'><?php _e('See the club(s)', 'eventus') ?></a>
             </div> 
             <div>
                 <h3><b><?php _e('Logs: ', 'eventus') ?><?php echo count(file(WP_PLUGIN_URL.'/eventus/finder.log')); ?></b></h3>
-                <button class="button-primary ico ico-info" onclick="location.href='admin.php?page=eventus_logs'"><?php _e('See the logs', 'eventus') ?></button>
+                <a class="button-primary ico ico-info" href='admin.php?page=eventus_logs'><?php _e('See the logs', 'eventus') ?></a>
             </div>
         </div>
         

@@ -121,7 +121,7 @@ class ClubDetailScreen extends Screens\MasterScreen {
                 <br>
 
                 <?php if($club->getId()) { ?>
-	                <button type='button' class='button-primary ico ico-add' onclick="location.href='admin.php?page=eventus_club&action=club'"><?php _e('Add a club', 'eventus') ?></button>
+	                <a type='button' class='button-primary ico ico-add' href='admin.php?page=eventus_club&action=club'><?php _e('Add a club', 'eventus') ?></a>
                     <button type="submit" name="action" value="delClub" class="button-primary ico ico-del" onclick="return validate('<?php _e('This action is irreversible. Do you really want to delete the club?', 'eventus') ?>')" ><?php _e('Delete the club', 'eventus') ?></button>           
                     <br />
                     

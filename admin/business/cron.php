@@ -31,7 +31,7 @@ if (get_option("eventus_emailnotif")){
 		get_option("eventus_emailnotif"), 
 		"Eventus - Update ".date("d/m/Y H:i:s"), 
 		$message, 
-		"From: Eventus - ".get_option("siteurl")." <eventus@".get_option("siteurl"). ">\r\n" .
+		"From: Eventus - ".parse_url(get_option("siteurl"))['host']." <eventus@".parse_url(get_option("siteurl"))['host']. ">\r\n" .
 		"Reply-To: eventus@".get_option("siteurl") ."\r\n" .
 		"Content-Type: text/html; charset=UTF-8"."\r\n".
 		"X-Mailer: PHP/" . phpversion()

@@ -36,6 +36,9 @@ if (get_option("eventus_emailnotif")){
 		"Content-Type: text/html; charset=UTF-8"."\r\n".
 		"X-Mailer: PHP/" . phpversion()
 	);
+	if (get_option("eventus_resetlog")) {
+		file_put_contents(__DIR__ .'/../../finder.log', '');  
+	}
 }
 
 ?> 

@@ -30,6 +30,7 @@ class AdminScreen extends Screens\MasterScreen {
 
     protected function __construct() {
 		parent::__construct();
+		wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../../js/screens/adminScreen.js', '', '', true); 
 	}	
     
     /**
@@ -66,6 +67,23 @@ class AdminScreen extends Screens\MasterScreen {
                                     </th>
                                     <td>
                                         <input name='emailNotif' id='emailNotif' value='<?php echo get_option("eventus_emailnotif");?>' class='regular-text' type='email' title="<?php _e('Notification email', 'eventus') ?>" placeholder="<?php _e('Notification email', 'eventus') ?>">
+                                        <p class='description' id='tagline-description'><?php _e('Leave blank if you do not want notifications.', 'eventus') ?></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope='row'>
+                                        <label><?php _e('Reset logs for each email sent', 'eventus') ?><span class="required">*</span></label>
+                                    </th>
+                                    <td>
+                                        <label>
+                                            <input type="radio" value="1" name="resetlog" title="<?php _e('Yes', 'eventus') ?>" <?php echo (get_option("eventus_resetlog") ? 'checked=\'1\'' : ''); ?> required/>
+                                            <?php _e('Yes', 'eventus') ?>
+                                        </label>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <input type="radio" value="0" name="resetlog" title="<?php _e('No', 'eventus') ?>" <?php echo (!get_option("eventus_resetlog") ? 'checked=\'1\'' : ''); ?>/>
+                                            <?php _e('No', 'eventus') ?>                                        
+                                        </label>
                                     </td>
                                 </tr>
                             </tbody>

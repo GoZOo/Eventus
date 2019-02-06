@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Eventus\n"
-"POT-Creation-Date: 2018-12-15 12:48+0100\n"
-"PO-Revision-Date: 2018-12-15 12:48+0100\n"
+"POT-Creation-Date: 2019-02-06 13:24+0100\n"
+"PO-Revision-Date: 2019-02-06 13:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: Kirian Caumes\n"
 "Language: fr_FR\n"
@@ -293,12 +293,12 @@ msgstr ""
 "Fédération."
 
 #: admin/business/widgetDashboard.php:96
-#: admin/screens/admin/adminScreen.php:108
+#: admin/screens/admin/adminScreen.php:126
 msgid "by"
 msgstr "par"
 
 #: admin/business/widgetDashboard.php:106
-#: admin/screens/admin/adminScreen.php:118
+#: admin/screens/admin/adminScreen.php:136
 msgid ""
 "In case of problems, several ways to contact me are available on my website "
 "or via my GitHub."
@@ -410,81 +410,99 @@ msgstr "Veuillez préciser votre clé Api Google Map dans"
 msgid "the parameters"
 msgstr "les paramètres"
 
-#: admin/screens/admin/adminScreen.php:44
+#: admin/screens/admin/adminScreen.php:45
 msgid "Administration"
 msgstr "Administration"
 
-#: admin/screens/admin/adminScreen.php:50
+#: admin/screens/admin/adminScreen.php:51
 msgid "Paramètres"
 msgstr "Paramètres"
 
-#: admin/screens/admin/adminScreen.php:57
+#: admin/screens/admin/adminScreen.php:58
 msgid "Google Map API Key"
 msgstr "Clé Api Google Map"
 
-#: admin/screens/admin/adminScreen.php:60
+#: admin/screens/admin/adminScreen.php:61
 msgid "API Key"
 msgstr "Clé Api"
 
-#: admin/screens/admin/adminScreen.php:65
-#: admin/screens/admin/adminScreen.php:68
+#: admin/screens/admin/adminScreen.php:66
+#: admin/screens/admin/adminScreen.php:69
 msgid "Notification email"
 msgstr "Adresse mail de notification"
 
-#: admin/screens/admin/adminScreen.php:74
+#: admin/screens/admin/adminScreen.php:70
+msgid "Leave blank if you do not want notifications."
+msgstr "Laissez vide si vous ne voulez pas de notifications."
+
+#: admin/screens/admin/adminScreen.php:75
+msgid "Reset logs for each email sent"
+msgstr "Réinitialiser les logs pour chaque e-mail envoyé"
+
+#: admin/screens/admin/adminScreen.php:79
+#: admin/screens/admin/adminScreen.php:80
+msgid "Yes"
+msgstr "Oui"
+
+#: admin/screens/admin/adminScreen.php:84
+#: admin/screens/admin/adminScreen.php:85
+msgid "No"
+msgstr "Non"
+
+#: admin/screens/admin/adminScreen.php:92
 #: admin/screens/club/clubDetailScreen.php:130
 #: admin/screens/main/matchDetailScreen.php:307
 #: admin/screens/main/teamDetailScreen.php:184
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: admin/screens/admin/adminScreen.php:81
+#: admin/screens/admin/adminScreen.php:99
 msgid "Reset actions "
 msgstr "Actions de réinitialisations "
 
-#: admin/screens/admin/adminScreen.php:84
+#: admin/screens/admin/adminScreen.php:102
 msgid ""
 "This action is irreversible. Do you really want to purge all the matches?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les matchs ?"
 
-#: admin/screens/admin/adminScreen.php:84
+#: admin/screens/admin/adminScreen.php:102
 msgid "Purge all matches"
 msgstr "Purger tous les matchs"
 
-#: admin/screens/admin/adminScreen.php:85
+#: admin/screens/admin/adminScreen.php:103
 msgid "This action is irreversible. Do you really want to purge all the teams?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger toutes les "
 "équipes ?"
 
-#: admin/screens/admin/adminScreen.php:85
+#: admin/screens/admin/adminScreen.php:103
 msgid "Purge all teams"
 msgstr "Purger toutes les équipes"
 
-#: admin/screens/admin/adminScreen.php:86
+#: admin/screens/admin/adminScreen.php:104
 msgid "This action is irreversible. Do you really want to purge all the clubs?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les clubs ?"
 
-#: admin/screens/admin/adminScreen.php:86
+#: admin/screens/admin/adminScreen.php:104
 msgid "Purge all clubs"
 msgstr "Purger tous les club"
 
-#: admin/screens/admin/adminScreen.php:87
+#: admin/screens/admin/adminScreen.php:105
 msgid "This action is irreversible. Do you really want to reset Eventus?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment réinitialiser Eventus ?"
 
-#: admin/screens/admin/adminScreen.php:87
+#: admin/screens/admin/adminScreen.php:105
 msgid "Reset Eventus"
 msgstr "Réinitialiser Eventus"
 
-#: admin/screens/admin/adminScreen.php:94
+#: admin/screens/admin/adminScreen.php:112
 msgid "You are not authorized to access this page."
 msgstr "Vous n'êtes pas autorisé à accéder à cette page."
 
-#: admin/screens/admin/adminScreen.php:104
+#: admin/screens/admin/adminScreen.php:122
 msgid "Credits"
 msgstr "Crédits"
 

@@ -66,6 +66,13 @@ class Finder {
                 curl_close($ch); 
                 continue;
             } 
+
+            //Check error with frawework TYPEO3
+            if (strpos(mb_strtolower($output), mb_strtolower("Oops, an error occurred!")) !== false ){
+                $this->addLog("Error Url (TeamId: ".$team->getId().") : Error on website");
+                curl_close($ch); 
+                continue;
+            }
             
             curl_close($ch); 
             $html = str_get_html($output);

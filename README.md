@@ -38,6 +38,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 ### 2.4.2
 
 * Add possibility to reset log for each notification mail send
+* Evo check error on framework's website 
 
 ### 2.4.1
 

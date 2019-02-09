@@ -282,6 +282,7 @@ class PostHandler {
     function updateSettings(){
         update_option('eventus_mapapikey', $_POST['mapApiKey'], false);
         update_option('eventus_emailnotif', $_POST['emailNotif'], false);
+        update_option('eventus_resetlog', $_POST['resetlog'], false);
         wp_redirect( add_query_arg( 'message', 'succesUpSet',  wp_get_referer() ));
     }
 

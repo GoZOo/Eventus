@@ -1,0 +1,10 @@
+[24/03/19 20:47:13] Error String (TeamId: 2) : Can't find the string in matches list
+[24/03/19 20:47:15] Error String (TeamId: 2) : Can't find the string in matches list
+[24/03/19 21:03:34] Error Url (TeamId: 2, TeamUrl :1 ,Error cUrl: 28) : Unable to access this page
+[24/03/19 21:03:49] Error Url (TeamId: 2, TeamUrl :1 ,Error cUrl: 28) : Unable to access this page
+[24/03/19 21:04:12] Error GoogleMap (TeamId: 2, MatchId: , matchDay: 19, Error Api: NOT_FOUND)
+[24/03/19 21:04:12] Error GoogleMap (TeamId: 2, MatchId: , matchDay: 21, Error Api: NOT_FOUND)
+[24/03/19 21:04:19] Error GoogleMap (TeamId: 2, MatchId: , matchDay: 19, Error Api: NOT_FOUND)
+[24/03/19 21:04:19] Error GoogleMap (TeamId: 2, MatchId: , matchDay: 21, Error Api: NOT_FOUND)
+[24/03/19 21:04:33] Error GoogleMap (TeamId: 2, MatchId: , matchDay: 19, Error Api: NOT_FOUND)
+[24/03/19 21:04:33] Error GoogleMap (TeamId: 2, MatchId: , matchDay: 21, Error Api: NOT_FOUND)

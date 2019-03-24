@@ -121,6 +121,14 @@ abstract class MasterScreen {
             'noMapApiKey'=>array(
                 'state' => "error", 
                 'str'   => __('Please specify your Google Map API key in', 'eventus') . ' <a href="admin.php?page=eventus_admin">' . __('the parameters', 'eventus') .'</a>.'
+            ),
+            'succesMultiIcs'=>array(
+                'state' => "success", 
+                'str'   => "Les calendriers ont bien été mise à jour."
+            ),
+            'succesOneIcs'=>array(
+                'state' => "success", 
+                'str'   => "Le calendrier a bien été mise à jour."
             )
         );
         if ($_GET['message'] && $notices[$_GET['message']]) {

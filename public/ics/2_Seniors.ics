@@ -1,0 +1,152 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 18:00 - Seniors Masculin
+DTSTART:20180915T190000
+SUMMARY:J.1 : Thouare Handball Club contre Fans Hb Ligne 2
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De St Roch / Pontchateau / Le Landas
+DESCRIPTION:Rdv : 18:30 - Seniors Masculin
+DTSTART:20180922T193000
+SUMMARY:J.2 : Pont-Chateau Handball 1 contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 20:00 - Seniors Masculin
+DTSTART:20181006T210000
+SUMMARY:J.3 : Thouare Handball Club contre Chabossiere Olympique Club Hb 2
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 20:00 - Seniors Masculin
+DTSTART:20181013T210000
+SUMMARY:J.4 : Thouare Handball Club contre Vertou Handball 2
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Rue Des Deportes / Reze / Evelyne Cretual
+DESCRIPTION:Rdv : 13:00 - Seniors Masculin
+DTSTART:20181021T140000
+SUMMARY:J.5 : Asb Reze Handball 3 contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 20:00 - Seniors Masculin
+DTSTART:20181110T210000
+SUMMARY:J.6 : Thouare Handball Club contre Al St Etienne De Montluc
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Place De L'edit De Nantes / Bouaye / Ormeaux
+DESCRIPTION:Rdv : 20:00 - Seniors Masculin
+DTSTART:20181117T210000
+SUMMARY:J.7 : Hbc Du Lac contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 19:15 - Seniors Masculin
+DTSTART:20181124T201500
+SUMMARY:J.8 : Thouare Handball Club contre Asc La Montagne
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Rue De La Liberation / Chateaubriant / Centre Municipal Des Sports
+DESCRIPTION:Rdv : 15:00 - Seniors Masculin
+DTSTART:20181209T160000
+SUMMARY:J.9 : Al Chateaubriant contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 18:30 - Seniors Masculin
+DTSTART:20190105T193000
+SUMMARY:J.10 : Thouare Handball Club contre Hbc Herblinois
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De Nort Sur Erdre / Nozay / La Chenaie
+DESCRIPTION:Rdv : 19:30 - Seniors Masculin
+DTSTART:20190119T203000
+SUMMARY:J.11 : Nozay Os Handball contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Rue Jules Verne / Ligne / Eugene Durand
+DESCRIPTION:Rdv : 20:00 - Seniors Masculin
+DTSTART:20190126T210000
+SUMMARY:J.12 : Fans Hb Ligne 2 contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 19:00 - Seniors Masculin
+DTSTART:20190209T200000
+SUMMARY:J.13 : Thouare Handball Club contre Pont-Chateau Handball 1
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Rue De La Corbardiere / Coueron / Pierre Moisan
+DESCRIPTION:Rdv : 20:00 - Seniors Masculin
+DTSTART:20190302T210000
+SUMMARY:J.14 : Chabossiere Olympique Club Hb 2 contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Alllée De La Vigne De Pâques / Vertou / Le Gymnase N°2 Du Complexe Sevre Et Maine
+DESCRIPTION:Rdv : 18:00 - Seniors Masculin
+DTSTART:20190309T190000
+SUMMARY:J.15 : Vertou Handball 2 contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 19:00 - Seniors Masculin
+DTSTART:20190316T200000
+SUMMARY:J.16 : Thouare Handball Club contre Asb Reze Handball 3
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Rue De La Guilletiere / St Etienne De Montluc / Complexe Sportif De Guerche
+DESCRIPTION:Rdv : 20:00 - Seniors Masculin
+DTSTART:20190323T210000
+SUMMARY:J.17 : Al St Etienne De Montluc contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 19:30 - Seniors Masculin
+DTSTART:20190330T203000
+SUMMARY:J.18 : Thouare Handball Club contre Hbc Du Lac
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:2  Rue De La Gaudiniere / La Montagne / Jules Ladoumegue
+DESCRIPTION:Rdv : 20:00 - Seniors Masculin
+DTSTART:20190427T210000
+SUMMARY:J.19 : Asc La Montagne contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 19:00 - Seniors Masculin
+DTSTART:20190504T200000
+SUMMARY:J.20 : Thouare Handball Club contre Al Chateaubriant
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Allee De La Bourgonniere / St Herblain / La Bourgonniere
+DESCRIPTION:Rdv : 18:00 - Seniors Masculin
+DTSTART:20190511T190000
+SUMMARY:J.21 : Hbc Herblinois contre Thouare Handball Club
+URL:localhost
+END:VEVENT
+END:VCALENDAR

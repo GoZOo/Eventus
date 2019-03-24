@@ -174,7 +174,7 @@ class MainTeamScreen extends Screens\MasterScreen {
                 <br>
 
                 <?php if($team->getId()) { ?>
-	                <a type='button' class='button-primary ico ico-add' href='admin.php?page=eventus&action=team'><?php _e('Add a team', 'eventus') ?></a>
+	                <!-- <a type='button' class='button-primary ico ico-add' href='admin.php?page=eventus&action=team'><?php _e('Add a team', 'eventus') ?></a> -->
                     <button type="submit" name="action" value="delTeam" class="button-primary ico ico-del" onclick="return validate(null)" ><?php _e('Delete the team', 'eventus') ?></button>           
                     <br />
                     

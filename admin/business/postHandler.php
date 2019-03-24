@@ -45,7 +45,9 @@ class PostHandler {
     
         add_action('admin_post_resetEventus', array($this, 'resetEventus'));   
     
-        add_action('admin_post_majSettings', array($this, 'updateSettings'));     
+        add_action('admin_post_majSettings', array($this, 'updateSettings'));         
+        
+        add_action('admin_post_majIcs', array($this, 'updateIcs'));    
     }
     
        
@@ -284,6 +286,21 @@ class PostHandler {
         update_option('eventus_emailnotif', $_POST['emailNotif'], false);
         update_option('eventus_resetlog', $_POST['resetlog'], false);
         wp_redirect( add_query_arg( 'message', 'succesUpSet',  wp_get_referer() ));
+    }
+
+    /**************************
+    ******** Calendar *********
+    ***************************/
+    function updateIcs(){
+        if ($_POST['teamId']) {
+            new \Ics(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId']));
+            wp_redirect( add_query_arg( 'message', 'succesOneIcs',  wp_get_referer() ));  
+    	} else {
+            foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
+                new \Ics(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($team->getId()));
+            }
+            wp_redirect( add_query_arg( 'message', 'succesMultiIcs',  wp_get_referer() ));  
+    	} 
     }
 
 }

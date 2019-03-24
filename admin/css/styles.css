@@ -260,6 +260,13 @@ body[class*="eventus"] .ico-link:before {
 	left: 4.4px;
 	width: 17px;
 }
+body[class*="eventus"] .ico-calendar:before {
+	content: url('../../admin/svg/calendar.svg');
+    position: absolute;
+    top: 5px;
+	left: 4.4px;
+	width: 17px;
+}
 /* Loading button  */
 body[class*="eventus"] .ico-loading:before, #dashboard_eventus .ico-loading:before {
 	content: '';

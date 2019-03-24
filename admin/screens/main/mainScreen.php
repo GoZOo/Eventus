@@ -130,6 +130,11 @@ class MainScreen extends Screens\MasterScreen {
 						</button>
 						<span class="myTooltiptext"><?php _e('Saves & synchronizes match data with the Federation website.', 'eventus') ?></span>
 					</div> 
+
+					<div class="myTooltip">
+						<button type="submit" name="action" value="majIcs" onclick="setLoading(this)" class="button-primary ico ico-calendar">Mettre à jour les calendriers</button>
+						<span class="myTooltiptext">Mets à jour tous les calendriers ICS des équipes</span>
+					</div>  
 					<br>
 					<p class="dern-synch"><b><?php _e('Last. synch. : ', 'eventus') ?></b>
 					<?php 					

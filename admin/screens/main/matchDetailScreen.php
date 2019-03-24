@@ -318,7 +318,10 @@ class MainMatchScreen extends Screens\MasterScreen {
 				</div> 
 				<?php } ?>
                 
-				
+				<div class="myTooltip">
+					<button type="submit" name="action" value="majIcs" onclick="setLoading(this)" class="button-primary ico ico-calendar">Mettre à jour le calendrier</button>
+					<span class="myTooltiptext">Mets à jour le calendrier ICS de l'équipe</span>
+				</div>  			
 					
 				
 				<?php //<button type="submit" name="action" value="delMatch" class="button-primary ico ico-del"  onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger tous les matchs ?')" >Purger les matchs de l'équipe</button> ?>

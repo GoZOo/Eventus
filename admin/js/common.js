@@ -4,7 +4,8 @@ function validate(string) {
 }
 //Add loading to button
 function setLoading(btn) {
-    jQuery('.wrap button').css({ 'pointer-events': 'none', 'cursor': 'not-allowed' });
+    jQuery('button').css({ 'pointer-events': 'none', 'cursor': 'not-allowed' });
+    jQuery('a').css({ 'pointer-events': 'none', 'cursor': 'not-allowed' });
     jQuery(btn).addClass('ico-loading');
     jQuery(btn).html(translations.loading);
     jQuery(btn).blur();

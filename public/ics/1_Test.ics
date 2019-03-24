@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 14:45 - Test Masculin
+DTSTART:20181111T153000
+SUMMARY:J.1 : Thouare Hbc contre St Nazaire Hb 1
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Allee Des Favrieres / La Chapelle Sur Erdre / La Coutanciere
+DESCRIPTION:Rdv : 10:15 - Test Masculin
+DTSTART:20181118T110000
+SUMMARY:J.2 : La Chapelaine contre Thouare Hbc
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 14:35 - Test Masculin
+DTSTART:20181125T152000
+SUMMARY:J.3 : Thouare Hbc contre Fans Hb Ligne
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Avenue Claude Antoine Peccot / Orvault / Choliere
+DESCRIPTION:Rdv : 13:15 - Test Masculin
+DTSTART:20181201T140000
+SUMMARY:J.4 : Handball Orvault contre Thouare Hbc
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 12:15 - Test Masculin
+DTSTART:20181216T130000
+SUMMARY:J.5 : Thouare Hbc contre St Sebastien Sud Loire Hb 1
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:Route De La Barre / Thouare Sur Loire / S O Du Complexe Sportif Multisalle
+DESCRIPTION:Rdv : 14:05 - Test Masculin
+DTSTART:20190112T145000
+SUMMARY:J.6 : Thouare Hbc contre Nantes Atlantique Hb -12A
+URL:localhost
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:21 Bis Av. Pierre De Coubertin / St Nazaire / Henri Fogel B
+DESCRIPTION:Rdv : 13:30 - Test Masculin
+DTSTART:20190202T141500
+SUMMARY:J.8 : St Nazaire Hb 1 contre Thouare Hbc
+URL:localhost
+END:VEVENT
+END:VCALENDAR

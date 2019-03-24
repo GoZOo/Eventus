@@ -89,17 +89,18 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 
     		
     		$stringDisplay = $stringDisplay2 = __('No matches available', 'eventus');
-
+				var_dump($format);
 	        if ($format == 0) {
 	        	if ($type == 0) {
 	        		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
 	               	$title = __('Next match', 'eventus');
+					   var_dump($myMatch);
 
 			        if ($myMatch->getId()){
 			            $stringDisplay = 
 			                $this->toFrenchDate(date_create_from_format('Y-m-d', $myMatch->getDate())->format('l d F Y'))." : ".
-			                str_replace(":", "H", $myMatch->getHourStart())." / ". 
-			                ($myMatch->getMatchDay() ? "Journée ".$myMatch->getMatchDay() :"")."<br>".
+			                str_replace(":", "H", $myMatch->getHourStart()). 
+			                ($myMatch->getMatchDay() ? " / Journée ".$myMatch->getMatchDay() :"")."<br>".
 			                $myMatch->getLocalTeam()." - ".
 			                $myMatch->getVisitingTeam();
 			        } 
@@ -110,8 +111,8 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 			        if ($myMatch->getId()){
 			            $stringDisplay = 
 			                $this->toFrenchDate(date_create_from_format('Y-m-d', $myMatch->getDate())->format('l d F Y'))." : ".
-			                str_replace(":", "H", $myMatch->getHourStart())." / ". 
-			                ($myMatch->getMatchDay() ? "Journée ".$myMatch->getMatchDay() :"") ."<br>".
+			                str_replace(":", "H", $myMatch->getHourStart()). 
+			                ($myMatch->getMatchDay() ? " / Journée ".$myMatch->getMatchDay() :"") ."<br>".
 			                $myMatch->getLocalTeam(). " : ".
 			                $myMatch->getLocalTeamScore()." - ".
 			                $myMatch->getVisitingTeamScore(). " : ".
@@ -127,9 +128,10 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 
 		    		if ($myMatch->getId()){
 			            $stringDisplay = 
-			                "<span style=\"color: white;\">".
-			                $myMatch->getLocalTeam()." -</span> ".
-			                $myMatch->getVisitingTeam();
+							$myMatch->getExt() ? 
+								"<span style=\"color: white;\">". $myMatch->getLocalTeam()." -</span> ". $myMatch->getVisitingTeam() 
+								:
+								$myMatch->getLocalTeam() . " - <span style=\"color: white;\">". $myMatch->getVisitingTeam() ." </span> ";
 			            $stringDisplay2 = 
 			                date_create_from_format('Y-m-d', $myMatch->getDate())->format('d/m/Y')." - ".
 			                str_replace(":", "H", $myMatch->getHourStart());
@@ -137,14 +139,13 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 		    	} else {
 		    		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "last"); 
 		            $title = __('Last match', 'eventus');
-
 		    		if ($myMatch->getId()){
-			            $stringDisplay = 
-			                "<span style=\"color: white;\">".
-			                $myMatch->getLocalTeam()." : ".
-			                $myMatch->getLocalTeamScore()." -</span> ".
-			                $myMatch->getVisitingTeamScore()." : ".
-			                $myMatch->getVisitingTeam();
+						$stringDisplay = 
+							$myMatch->getExt() ? 
+								"<span style=\"color: white;\">". $myMatch->getLocalTeam()." : ". $myMatch->getLocalTeamScore()." -</span> ". $myMatch->getVisitingTeamScore()." : ". $myMatch->getVisitingTeam() 
+								:
+								$myMatch->getLocalTeam()." : ". $myMatch->getLocalTeamScore()." - <span style=\"color: white;\">". $myMatch->getVisitingTeamScore()." : ". $myMatch->getVisitingTeam()." </span> ";
+			                
 			            $stringDisplay2 = 
 			                date_create_from_format('Y-m-d', $myMatch->getDate())->format('d/m/Y')." - ".
 			                str_replace(":", "H", $myMatch->getHourStart());

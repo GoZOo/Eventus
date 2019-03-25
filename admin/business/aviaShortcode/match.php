@@ -89,12 +89,10 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 
     		
     		$stringDisplay = $stringDisplay2 = __('No matches available', 'eventus');
-				var_dump($format);
 	        if ($format == 0) {
 	        	if ($type == 0) {
 	        		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
 	               	$title = __('Next match', 'eventus');
-					   var_dump($myMatch);
 
 			        if ($myMatch->getId()){
 			            $stringDisplay = 

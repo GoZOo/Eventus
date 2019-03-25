@@ -17,7 +17,7 @@ include_once __DIR__ . '/../../../../../wp-config.php';
 include_once __DIR__ . '/../../admin/business/ics.php';
 
 foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
-	// Finder::getInstance()->updateMatches($team);
+	Finder::getInstance()->updateMatches($team);
 	new \Ics(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($team->getId()));
 }
 

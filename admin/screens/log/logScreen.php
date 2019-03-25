@@ -49,7 +49,7 @@ class LogScreen extends Screens\MasterScreen {
             <ul>
                 <li>
                 <?php
-                $content = file_get_contents(plugin_dir_path( __FILE__ ).'../../../finder.log');
+                $content = @file_get_contents(plugin_dir_path( __FILE__ ).'../../../finder.log');
                 if ($content) {
                     $content = str_replace("]", "]</b>", $content);
                     $content = str_replace("[", "<b>[", $content);

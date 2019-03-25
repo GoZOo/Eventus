@@ -61,7 +61,7 @@ class EventusWidgetDashboard {
                 <a class="button-primary ico ico-club" href='admin.php?page=eventus_club'><?php _e('See the club(s)', 'eventus') ?></a>
             </div> 
             <div>
-                <h3><b><?php _e('Logs: ', 'eventus') ?><?php echo count(file(WP_PLUGIN_URL.'/eventus/finder.log')); ?></b></h3>
+                <h3><b><?php _e('Logs: ', 'eventus') ?><?php echo count(file_exists(WP_PLUGIN_URL.'/eventus/finder.log') ? file(WP_PLUGIN_URL.'/eventus/finder.log') : array()); ?></b></h3>
                 <a class="button-primary ico ico-info" href='admin.php?page=eventus_logs'><?php _e('See the logs', 'eventus') ?></a>
             </div>
         </div>

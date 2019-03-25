@@ -159,7 +159,7 @@ class Finder {
         }
         if ($allAdresses){
             $requestGoogleMap = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?key=".get_option("eventus_mapapikey")."&origins=".urlencode($allMatches[0]->getTeam()->getClub()->getAddress())."&destinations=".$allAdresses),true);
-            //var_dump($requestGoogleMap);
+            var_dump($requestGoogleMap);
             $key = 0;
             foreach($allMatches as $match) {
                 if ($match->getExt() && $match->getStreet() && $match->getCity() && date($match->getDate()) > date('Y-m-d') ) {

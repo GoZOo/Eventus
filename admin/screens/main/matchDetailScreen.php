@@ -304,27 +304,28 @@ class MainMatchScreen extends Screens\MasterScreen {
 				<button type='button' onclick='addOtherMatch()' class='button-primary ico ico-add'><?php _e('Add a match', 'eventus') ?></button>
 				<br><br> 
 
-				<button type="submit" name="action" value="majMatch" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>	
+				<button type="submit" name="action" value="eventus_majMatch" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>	
 
 				<div class="myTooltip">
-					<button type="submit" name="action" value="majHours" onclick="setLoading(this)" class="button-primary ico ico-time"><?php _e('Recalculate RDV schedules', 'eventus') ?></button>
+					<button type="submit" name="action" value="eventus_majHours" onclick="setLoading(this)" class="button-primary ico ico-time"><?php _e('Recalculate RDV schedules', 'eventus') ?></button>
 					<span class="myTooltiptext"><?php _e('Saves & updates schedules of upcoming outdoor games with a valid address.', 'eventus') ?></span>
 				</div>  
 				
 				<?php  if ($team->getUrlOne()) { ?>
                 <div class="myTooltip">
-					<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync"><?php _e('Synchronize match data', 'eventus') ?></button>
+					<button type="submit" name="action" value="eventus_syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync"><?php _e('Synchronize match data', 'eventus') ?></button>
 					<span class="myTooltiptext"><?php _e('Saves & synchronizes match data with the Federation website.', 'eventus') ?></span>
 				</div> 
 				<?php } ?>
                 
 				<div class="myTooltip">
-					<button type="submit" name="action" value="majIcs" onclick="setLoading(this)" class="button-primary ico ico-calendar">Mettre à jour le calendrier</button>
-					<span class="myTooltiptext">Mets à jour le calendrier ICS de l'équipe</span>
+					<button type="submit" name="action" value="eventus_majIcs" onclick="setLoading(this)" class="button-primary ico ico-calendar"><?php _e('Update the calendar', 'eventus') ?></button>
+					<span class="myTooltiptext"><?php _e('Update the team\'s ICS calendar', 'eventus') ?></span>
 				</div>  			
 					
-				
-				<?php //<button type="submit" name="action" value="delMatch" class="button-primary ico ico-del"  onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger tous les matchs ?')" >Purger les matchs de l'équipe</button> ?>
+				<?php //<button type="submit" name="action" value="eventus_delMatch" class="button-primary ico ico-del"  onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger tous les matchs ?')" >Purger les matchs de l'équipe</button>
+				//<button type="submit" name="action" value="eventus_delIcs" onclick="return validate() class="button-primary ico ico-del">Purger tous les calendriers</button>
+				?>
 	        </form>
     	</div>
     	<?php

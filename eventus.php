@@ -2,7 +2,7 @@
 /* Plugin Name: Eventus
  * Plugin URI: 
  * Description: Useful plugin that allow you to manage handball teams results through FFHB website.
- * Version: 2.4
+ * Version: 2.5
  * Author: Kirian Caumes
  * Author URI: http://kiriancaumes.fr
  * License: 
@@ -40,6 +40,7 @@ if (file_exists(get_template_directory().'/config-templatebuilder/avia-template-
 	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/buttonResults.php';
 	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/results.php';
 	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/teamPicture.php';
+	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/icsCalendar.php';	
 }
 
 class Eventus {	

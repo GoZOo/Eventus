@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Eventus\n"
-"POT-Creation-Date: 2019-02-06 13:24+0100\n"
-"PO-Revision-Date: 2019-02-06 13:26+0100\n"
+"POT-Creation-Date: 2019-03-25 10:56+0100\n"
+"PO-Revision-Date: 2019-03-25 10:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: Kirian Caumes\n"
 "Language: fr_FR\n"
@@ -27,6 +27,7 @@ msgstr "Afficher un bouton contenant le liens des résultats"
 
 #: admin/business/aviaShortcode/buttonResults.php:31
 #: admin/business/aviaShortcode/circlePosPts.php:31
+#: admin/business/aviaShortcode/icsCalendar.php:31
 #: admin/business/aviaShortcode/match.php:31
 #: admin/business/aviaShortcode/teamPicture.php:31
 msgid "Default Size"
@@ -34,6 +35,7 @@ msgstr ""
 
 #: admin/business/aviaShortcode/buttonResults.php:32
 #: admin/business/aviaShortcode/circlePosPts.php:32
+#: admin/business/aviaShortcode/icsCalendar.php:32
 #: admin/business/aviaShortcode/match.php:32
 #: admin/business/aviaShortcode/teamPicture.php:32
 msgid "Flexible font size (adjusts to screen width)"
@@ -41,6 +43,7 @@ msgstr ""
 
 #: admin/business/aviaShortcode/buttonResults.php:33
 #: admin/business/aviaShortcode/circlePosPts.php:33
+#: admin/business/aviaShortcode/icsCalendar.php:33
 #: admin/business/aviaShortcode/match.php:33
 #: admin/business/aviaShortcode/teamPicture.php:33
 msgid "Fixed font size"
@@ -48,6 +51,7 @@ msgstr ""
 
 #: admin/business/aviaShortcode/buttonResults.php:42
 #: admin/business/aviaShortcode/circlePosPts.php:42
+#: admin/business/aviaShortcode/icsCalendar.php:42
 #: admin/business/aviaShortcode/match.php:60
 #: admin/business/aviaShortcode/teamPicture.php:69
 #: admin/screens/main/mainScreen.php:92
@@ -57,6 +61,7 @@ msgstr "Équipe"
 
 #: admin/business/aviaShortcode/buttonResults.php:43
 #: admin/business/aviaShortcode/circlePosPts.php:43
+#: admin/business/aviaShortcode/icsCalendar.php:43
 #: admin/business/aviaShortcode/match.php:61
 #: admin/business/aviaShortcode/teamPicture.php:70
 msgid "Select a team"
@@ -75,6 +80,14 @@ msgstr "Position et Score"
 msgid "Display position and score"
 msgstr "Afficher la position et le score"
 
+#: admin/business/aviaShortcode/icsCalendar.php:90
+msgid "Download the calendar"
+msgstr "Télécharger le calendrier"
+
+#: admin/business/aviaShortcode/icsCalendar.php:91
+msgid "Copy the link of the calendar"
+msgstr "Copier le lien du calendrier"
+
 #: admin/business/aviaShortcode/match.php:21
 msgid "Matche"
 msgstr "Match"
@@ -90,13 +103,13 @@ msgstr "Sélectionnez un type"
 
 #: admin/business/aviaShortcode/match.php:47
 #: admin/business/aviaShortcode/match.php:96
-#: admin/business/aviaShortcode/match.php:126
+#: admin/business/aviaShortcode/match.php:127
 msgid "Next match"
 msgstr "Prochain match"
 
 #: admin/business/aviaShortcode/match.php:47
-#: admin/business/aviaShortcode/match.php:108
-#: admin/business/aviaShortcode/match.php:139
+#: admin/business/aviaShortcode/match.php:109
+#: admin/business/aviaShortcode/match.php:141
 msgid "Last match"
 msgstr "Dernier match"
 
@@ -293,12 +306,12 @@ msgstr ""
 "Fédération."
 
 #: admin/business/widgetDashboard.php:96
-#: admin/screens/admin/adminScreen.php:126
+#: admin/screens/admin/adminScreen.php:127
 msgid "by"
 msgstr "par"
 
 #: admin/business/widgetDashboard.php:106
-#: admin/screens/admin/adminScreen.php:136
+#: admin/screens/admin/adminScreen.php:137
 msgid ""
 "In case of problems, several ways to contact me are available on my website "
 "or via my GitHub."
@@ -462,47 +475,58 @@ msgstr "Actions de réinitialisations "
 
 #: admin/screens/admin/adminScreen.php:102
 msgid ""
+"This action is irreversible. Do you really want to purge all the calendars?"
+msgstr ""
+"Cette action est irréversible. Voulez-vous vraiment purger tous les "
+"calendriers  ?"
+
+#: admin/screens/admin/adminScreen.php:102
+msgid "Purge all calendars?"
+msgstr "Purger tous les calendriers"
+
+#: admin/screens/admin/adminScreen.php:103
+msgid ""
 "This action is irreversible. Do you really want to purge all the matches?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les matchs ?"
 
-#: admin/screens/admin/adminScreen.php:102
+#: admin/screens/admin/adminScreen.php:103
 msgid "Purge all matches"
 msgstr "Purger tous les matchs"
 
-#: admin/screens/admin/adminScreen.php:103
+#: admin/screens/admin/adminScreen.php:104
 msgid "This action is irreversible. Do you really want to purge all the teams?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger toutes les "
 "équipes ?"
 
-#: admin/screens/admin/adminScreen.php:103
+#: admin/screens/admin/adminScreen.php:104
 msgid "Purge all teams"
 msgstr "Purger toutes les équipes"
 
-#: admin/screens/admin/adminScreen.php:104
+#: admin/screens/admin/adminScreen.php:105
 msgid "This action is irreversible. Do you really want to purge all the clubs?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les clubs ?"
 
-#: admin/screens/admin/adminScreen.php:104
+#: admin/screens/admin/adminScreen.php:105
 msgid "Purge all clubs"
 msgstr "Purger tous les club"
 
-#: admin/screens/admin/adminScreen.php:105
+#: admin/screens/admin/adminScreen.php:106
 msgid "This action is irreversible. Do you really want to reset Eventus?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment réinitialiser Eventus ?"
 
-#: admin/screens/admin/adminScreen.php:105
+#: admin/screens/admin/adminScreen.php:106
 msgid "Reset Eventus"
 msgstr "Réinitialiser Eventus"
 
-#: admin/screens/admin/adminScreen.php:112
+#: admin/screens/admin/adminScreen.php:113
 msgid "You are not authorized to access this page."
 msgstr "Vous n'êtes pas autorisé à accéder à cette page."
 
-#: admin/screens/admin/adminScreen.php:122
+#: admin/screens/admin/adminScreen.php:123
 msgid "Credits"
 msgstr "Crédits"
 
@@ -646,7 +670,15 @@ msgstr " / Matchs : "
 msgid "Add a team"
 msgstr "Ajouter une équipe"
 
-#: admin/screens/main/mainScreen.php:134
+#: admin/screens/main/mainScreen.php:135
+msgid "Update calendars"
+msgstr "Mettre à jour les calendrier"
+
+#: admin/screens/main/mainScreen.php:136
+msgid "Update all ICS team calendars"
+msgstr "Mets à jour tous les calendriers ICS des équipes"
+
+#: admin/screens/main/mainScreen.php:139
 msgid "Last. synch. : "
 msgstr "Dern. synch. : "
 
@@ -773,6 +805,14 @@ msgstr ""
 "Enregistre & mets à jour les horaires des matchs à venir à l'extérieur avec "
 "une adresse valide."
 
+#: admin/screens/main/matchDetailScreen.php:322
+msgid "Update the calendar"
+msgstr "Mettre à jour le calendrier"
+
+#: admin/screens/main/matchDetailScreen.php:323
+msgid "Update the team's ICS calendar"
+msgstr "Mets à jour le calendrier ICS de l'équipe"
+
 #: admin/screens/main/teamDetailScreen.php:106
 msgid "Sex"
 msgstr "Sexe"
@@ -796,27 +836,27 @@ msgstr "Temps pour RDV d'avant match (en minutes)"
 msgid "Delete the team"
 msgstr "Supprimer l'équipe"
 
-#: eventus.php:72 eventus.php:73
+#: eventus.php:74 eventus.php:75
 msgid "Teams & Results"
 msgstr "Équipe & Résultats"
 
-#: eventus.php:73
+#: eventus.php:75
 msgid "Teams"
 msgstr "Équipe"
 
-#: eventus.php:74
+#: eventus.php:76
 msgid "Clubs"
 msgstr "Clubs"
 
-#: eventus.php:75
+#: eventus.php:77
 msgid "Logs"
 msgstr "Logs"
 
-#: eventus.php:76 eventus.php:84
+#: eventus.php:78 eventus.php:86
 msgid "Settings"
 msgstr "Paramètres"
 
-#: eventus.php:80
+#: eventus.php:82
 msgid "Overview"
 msgstr "Vue d'ensemble"
 

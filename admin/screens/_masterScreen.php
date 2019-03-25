@@ -129,6 +129,10 @@ abstract class MasterScreen {
             'succesOneIcs'=>array(
                 'state' => "success", 
                 'str'   => "Le calendrier a bien été mise à jour."
+            ),
+            'succesDelIcs'=>array(
+                'state' => "success", 
+                'str'   => "Les calendriers ont bien été supprimé."
             )
         );
         if ($_GET['message'] && $notices[$_GET['message']]) {

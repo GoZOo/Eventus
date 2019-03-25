@@ -61,7 +61,7 @@ class LogScreen extends Screens\MasterScreen {
                 </li>
             </ul>
             <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
-                <button class="button-primary ico ico-del" name="action" value="clearLog" class="button-primary" type="submit" onclick="return validate('<?php _e('This action is irreversible. Do you really want to delete the logs?', 'eventus') ?>')"><?php _e('Delete logs', 'eventus') ?></button>                
+                <button class="button-primary ico ico-del" name="action" value="eventus_clearLog" class="button-primary" type="submit" onclick="return validate('<?php _e('This action is irreversible. Do you really want to delete the logs?', 'eventus') ?>')"><?php _e('Delete logs', 'eventus') ?></button>                
             </form>
         </div>
         <?php

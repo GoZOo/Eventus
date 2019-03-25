@@ -35,6 +35,15 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 
 ## Updates
 
+### 2.5
+
+* Fix mail for cron seems to works again
+* Add calendar ICS for each teams
+* Add buttons to download or copy link for each ICS (Avia component)
+* Evo results shown in two rows : main club is in a different color
+* Evo remove some useless text for widget home
+* Evo none buttons/links can be clicked when button loading
+
 ### 2.4.2
 
 * Add possibility to reset log for each notification mail send

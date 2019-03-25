@@ -170,18 +170,18 @@ class MainTeamScreen extends Screens\MasterScreen {
                     </table> 
                 </div>
                 <input type='hidden' name='teamId' value="<?php echo $team->getId(); ?>">	
-                <input type="submit" name="action" value="majTeam" class="hiddenSubmit">
+                <input type="submit" name="action" value="eventus_majTeam" class="hiddenSubmit">
                 <br>
 
                 <?php if($team->getId()) { ?>
 	                <!-- <a type='button' class='button-primary ico ico-add' href='admin.php?page=eventus&action=team'><?php _e('Add a team', 'eventus') ?></a> -->
-                    <button type="submit" name="action" value="delTeam" class="button-primary ico ico-del" onclick="return validate(null)" ><?php _e('Delete the team', 'eventus') ?></button>           
+                    <button type="submit" name="action" value="eventus_delTeam" class="button-primary ico ico-del" onclick="return validate(null)" ><?php _e('Delete the team', 'eventus') ?></button>           
                     <br />
                     
-                    <?php //<button type="submit" name="action" value="syncMatch" class="button-primary ico ico-sync">Synchroniser les données des matchs</button><button type="submit" name="action" value="delMatch" onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger les matchs de l\équipe ?')" class="button-primary ico ico-del">Purger les matchs de l'équipe</button> ?>
+                    <?php //<button type="submit" name="action" value="eventus_syncMatch" class="button-primary ico ico-sync">Synchroniser les données des matchs</button><button type="submit" name="action" value="eventus_delMatch" onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger les matchs de l\équipe ?')" class="button-primary ico ico-del">Purger les matchs de l'équipe</button> ?>
                 <?php } ?>
                 <br/>
-                <button type="submit" name="action" value="majTeam" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>
+                <button type="submit" name="action" value="eventus_majTeam" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>
             </form>
         </div>
         <?php

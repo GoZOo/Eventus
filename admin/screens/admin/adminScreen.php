@@ -89,7 +89,7 @@ class AdminScreen extends Screens\MasterScreen {
                             </tbody>
                         </table>
                     </div>
-                    <button type="submit" name="action" value="majSettings" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>
+                    <button type="submit" name="action" value="eventus_majSettings" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>
                 </form>   
 
                 <br>
@@ -99,10 +99,11 @@ class AdminScreen extends Screens\MasterScreen {
                 <h2><?php _e('Reset actions ', 'eventus') ?><img draggable="false" class="emoji" alt="⚠" src="https://s.w.org/images/core/emoji/11/svg/26a0.svg"></h2>  
                 <br>     
                 <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
-                    <button type="submit" name="action" value="delMatch" onclick="return validate('<?php _e('This action is irreversible. Do you really want to purge all the matches?', 'eventus') ?>')" class="button-primary ico ico-del"><?php _e('Purge all matches', 'eventus') ?></button>
-                    <button type="submit" name="action" value="delTeam" onclick="return validate('<?php _e('This action is irreversible. Do you really want to purge all the teams?', 'eventus') ?>')" class="button-primary ico ico-del"><?php _e('Purge all teams', 'eventus') ?></button>
-                    <button type="submit" name="action" value="delClub" onclick="return validate('<?php _e('This action is irreversible. Do you really want to purge all the clubs?', 'eventus') ?>')" class="button-primary ico ico-del"><?php _e('Purge all clubs', 'eventus') ?></button>                
-                    <button type="submit" name="action" value="resetEventus" onclick="return validate('<?php _e('This action is irreversible. Do you really want to reset Eventus?', 'eventus') ?>')" class="button-primary ico ico-reset"><?php _e('Reset Eventus', 'eventus') ?></button>
+                    <button type="submit" name="action" value="eventus_delIcs" onclick="return validate('<?php _e('This action is irreversible. Do you really want to purge all the calendars?', 'eventus') ?>')" class="button-primary ico ico-del"><?php _e('Purge all calendars?', 'eventus') ?></button>
+                    <button type="submit" name="action" value="eventus_delMatch" onclick="return validate('<?php _e('This action is irreversible. Do you really want to purge all the matches?', 'eventus') ?>')" class="button-primary ico ico-del"><?php _e('Purge all matches', 'eventus') ?></button>
+                    <button type="submit" name="action" value="eventus_delTeam" onclick="return validate('<?php _e('This action is irreversible. Do you really want to purge all the teams?', 'eventus') ?>')" class="button-primary ico ico-del"><?php _e('Purge all teams', 'eventus') ?></button>
+                    <button type="submit" name="action" value="eventus_delClub" onclick="return validate('<?php _e('This action is irreversible. Do you really want to purge all the clubs?', 'eventus') ?>')" class="button-primary ico ico-del"><?php _e('Purge all clubs', 'eventus') ?></button>                
+                    <button type="submit" name="action" value="eventus_resetEventus" onclick="return validate('<?php _e('This action is irreversible. Do you really want to reset Eventus?', 'eventus') ?>')" class="button-primary ico ico-reset"><?php _e('Reset Eventus', 'eventus') ?></button>
                 </form>
 
                 

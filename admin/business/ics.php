@@ -23,14 +23,12 @@ class Ics
 
         if (count($this->events) > 0) {
             for ($p = 0; $p <= count($this->events) - 1; $p++) {
-                //echo '<br>p is:'.$p;
                 foreach ($this->events[$p] as $key => $val) {
                     $this->events[$p][$key] = $this->sanitize_val($val, $key);
                 }
             }
         }        
-        file_put_contents(plugin_dir_path( __FILE__ ).'../../public/ics/'.$matches[0]->getTeam()->getId().'_'.$matches[0]->getTeam()->getName().'.ics', $this->prepare());
-        // echo $this->prepare();
+        file_put_contents(plugin_dir_path( __FILE__ ).'../../public/ics/'.$matches[0]->getTeam()->getClub()->getName().'_'.$matches[0]->getTeam()->getName().'_'.$matches[0]->getTeam()->getId().'.ics', $this->prepare());
     }
 
     private function prepare() {
@@ -50,8 +48,6 @@ class Ics
             }
             $cp[] = 'END:VCALENDAR';
         }
-        // echo "<pre>";
-        // print_r($cp);
         return implode("\r\n", $cp);
     }
 
@@ -77,13 +73,3 @@ class Ics
         return preg_replace('/([,;])/', '\$1', $str);
     }
 }
-
-// header('Content-Type: text/calendar; charset=utf-8');
-// header('Content-Disposition: attachment; filename=calendrier_thbc.ics');
-
-
-
-// new IcsEvents($events);
-// echo $ics->prepare();
-// unset($ics);
- 

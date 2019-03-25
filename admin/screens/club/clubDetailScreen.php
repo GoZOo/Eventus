@@ -117,17 +117,17 @@ class ClubDetailScreen extends Screens\MasterScreen {
 
                 </div>
 				<input type='hidden' name='clubId' value="<?php echo $club->getId(); ?>">	
-                <input type="submit" name="action" value="majClub" class="hiddenSubmit">
+                <input type="submit" name="action" value="eventus_majClub" class="hiddenSubmit">
                 <br>
 
                 <?php if($club->getId()) { ?>
 	                <a type='button' class='button-primary ico ico-add' href='admin.php?page=eventus_club&action=club'><?php _e('Add a club', 'eventus') ?></a>
-                    <button type="submit" name="action" value="delClub" class="button-primary ico ico-del" onclick="return validate('<?php _e('This action is irreversible. Do you really want to delete the club?', 'eventus') ?>')" ><?php _e('Delete the club', 'eventus') ?></button>           
+                    <button type="submit" name="action" value="eventus_delClub" class="button-primary ico ico-del" onclick="return validate('<?php _e('This action is irreversible. Do you really want to delete the club?', 'eventus') ?>')" ><?php _e('Delete the club', 'eventus') ?></button>           
                     <br />
                     
                 <?php } ?>
                 <br/>
-                <button type="submit" name="action" value="majClub" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>
+                <button type="submit" name="action" value="eventus_majClub" class="button-primary ico ico-save"><?php _e('Save changes', 'eventus') ?></button>
             </form>
         </div>
         <?php

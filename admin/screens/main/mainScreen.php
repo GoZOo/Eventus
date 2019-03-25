@@ -125,15 +125,15 @@ class MainScreen extends Screens\MasterScreen {
 				?>
 				<form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
 					<div class="myTooltip">
-						<button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">
+						<button type="submit" name="action" value="eventus_syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">
 							<?php _e('Synchronize match data', 'eventus') ?>	
 						</button>
 						<span class="myTooltiptext"><?php _e('Saves & synchronizes match data with the Federation website.', 'eventus') ?></span>
 					</div> 
 
 					<div class="myTooltip">
-						<button type="submit" name="action" value="majIcs" onclick="setLoading(this)" class="button-primary ico ico-calendar">Mettre à jour les calendriers</button>
-						<span class="myTooltiptext">Mets à jour tous les calendriers ICS des équipes</span>
+						<button type="submit" name="action" value="eventus_majIcs" onclick="setLoading(this)" class="button-primary ico ico-calendar"><?php _e('Update calendars', 'eventus') ?>s</button>
+						<span class="myTooltiptext"><?php _e('Update all ICS team calendars', 'eventus') ?></span>
 					</div>  
 					<br>
 					<p class="dern-synch"><b><?php _e('Last. synch. : ', 'eventus') ?></b>
@@ -162,7 +162,7 @@ class MainScreen extends Screens\MasterScreen {
 			}
 			?>
             <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post" >
-				<button type="submit" name="action" value="delMatch" class="button-primary ico ico-del"  onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger tous les matchs ?')" >Purger tous les matchs </button>*/ ?>
+				<button type="submit" name="action" value="eventus_delMatch" class="button-primary ico ico-del"  onclick="return validate('Cette action est iréversible. Voulez-vous vraiment purger tous les matchs ?')" >Purger tous les matchs </button>*/ ?>
 			</form>	
 		</div>
 	<?php 

@@ -47,9 +47,9 @@ class EventusWidgetDashboard {
     */
     public function display(){
         ?>
-        <p><?php _e('Find below the information related to the management of Eventus teams and clubs.', 'eventus') ?></p>
+        <!-- <p><?php _e('Find below the information related to the management of Eventus teams and clubs.', 'eventus') ?></p> -->
 
-        <hr/>
+        <!-- <hr/> -->
 
         <div class="eventus-row">
             <div>
@@ -79,7 +79,7 @@ class EventusWidgetDashboard {
                 </h3>
                 <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">   
                     <div class="myTooltip">
-                        <button type="submit" name="action" value="syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync"><?php _e('Synchronize match data', 'eventus') ?></button>
+                        <button type="submit" name="action" value="eventus_syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync"><?php _e('Synchronize match data', 'eventus') ?></button>
                         <span class="myTooltiptext"><?php _e('Saves & synchronizes match data with the Federation website.', 'eventus') ?></span>
                     </div> 
                 </form>
@@ -102,9 +102,9 @@ class EventusWidgetDashboard {
                     GitHub
                 </a>
             </p>
-            </p>
+            <!-- </p>
                 <?php _e('In case of problems, several ways to contact me are available on my website or via my GitHub.', 'eventus') ?>                    
-            <p>  
+            <p>   -->
         </div>  
         <?php
     }

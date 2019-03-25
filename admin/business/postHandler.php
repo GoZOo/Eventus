@@ -30,24 +30,25 @@ class PostHandler {
     }
 
     private function __construct() {
-        add_action('admin_post_syncMatch', array($this, 'synchronizeMatch'));
-        add_action('admin_post_delMatch', array($this, 'deleteMatch'));
-        add_action('admin_post_majMatch', array($this, 'updateMatch'));
-        add_action('admin_post_majHours', array($this, 'updateHoursMatch'));
+        add_action('admin_post_eventus_syncMatch', array($this, 'synchronizeMatch'));
+        add_action('admin_post_eventus_delMatch', array($this, 'deleteMatch'));
+        add_action('admin_post_eventus_majMatch', array($this, 'updateMatch'));
+        add_action('admin_post_eventus_majHours', array($this, 'updateHoursMatch'));
     
-        add_action('admin_post_majClub', array($this, 'updateClub'));
-        add_action('admin_post_delClub', array($this, 'deleteClub'));    
+        add_action('admin_post_eventus_majClub', array($this, 'updateClub'));
+        add_action('admin_post_eventus_delClub', array($this, 'deleteClub'));    
     
-        add_action('admin_post_majTeam', array($this, 'updateTeam'));
-        add_action('admin_post_delTeam', array($this, 'deleteTeam'));
+        add_action('admin_post_eventus_majTeam', array($this, 'updateTeam'));
+        add_action('admin_post_eventus_delTeam', array($this, 'deleteTeam'));
     
-        add_action('admin_post_clearLog', array($this, 'deleteLog'));  
+        add_action('admin_post_eventus_clearLog', array($this, 'deleteLog'));  
     
-        add_action('admin_post_resetEventus', array($this, 'resetEventus'));   
+        add_action('admin_post_eventus_resetEventus', array($this, 'resetEventus'));   
     
-        add_action('admin_post_majSettings', array($this, 'updateSettings'));         
+        add_action('admin_post_eventus_majSettings', array($this, 'updateSettings'));         
         
-        add_action('admin_post_majIcs', array($this, 'updateIcs'));    
+        add_action('admin_post_eventus_majIcs', array($this, 'updateIcs'));    
+        add_action('admin_post_eventus_delIcs', array($this, 'deleteIcs'));    
     }
     
        
@@ -303,6 +304,18 @@ class PostHandler {
     	} 
     }
 
+    function deleteIcs(){
+        if ($_POST['teamId']) {
+            $team = DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']);
+            unlink(plugin_dir_path( __FILE__ ).'../../public/ics/'.$team->getClub()->getName().'_'.$team->getName().'_'.$team->getId().'.ics');            
+        } else {
+            $files = glob(plugin_dir_path( __FILE__ ).'../../public/ics/' . '*', GLOB_MARK ); //GLOB_MARK adds a slash to directories returned    
+            foreach( $files as $file ){
+                unlink( $file );
+            } 
+        }   
+        wp_redirect( add_query_arg( 'message', 'succesDelIcs',  wp_get_referer() ));       
+    }
 }
 
 ?>

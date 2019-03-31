@@ -37,6 +37,7 @@ class Ics {
                 }
             }
         } 
+        if (!file_exists(plugin_dir_path( __FILE__ ).'../../public/ics/')) mkdir(plugin_dir_path( __FILE__ ).'../../public/ics/', 0777, true);
         file_put_contents(
             plugin_dir_path( __FILE__ ).'../../public/ics/'.str_replace(' ', '_', $this->clubName .'_'.$this->teamName .'_'. $matches[0]->getTeam()->getId()).'.ics',
             $this->prepare()

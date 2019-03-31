@@ -2,6 +2,7 @@
 // Source https://gist.github.com/jakebellacera/635416
 class Ics {
     const DT_FORMAT = 'Ymd\THis';
+    const TIMEZONE = 'Europe/Paris';
     private $events;
     private $clubName;
     private $teamName;
@@ -56,7 +57,11 @@ class Ics {
             for ($p = 0; $p <= count($this->events) - 1; $p++) {
                 $cp[] = 'BEGIN:VEVENT';
                 foreach ($this->events[$p] as $key => $val) {
-                    $cp[] = strtoupper($key) . ':' . $val;
+                    if ($key == "dtstart" || $key == "dtend") {
+                        $cp[] = strtoupper($key) . ';TZID='.self::TIMEZONE.':' . $val;
+                    } else {
+                        $cp[] = strtoupper($key) . ':' . $val;
+                    }                    
                 }
                 $cp[] = 'END:VEVENT';
             }
@@ -81,14 +86,16 @@ class Ics {
         return $val;
     }
 
-    private function format_timestamp($timestamp) {
-		$dt = new DateTime($timestamp, new DateTimeZone('Europe/Paris'));
+    private function format_timestamp($timestamp) {        
+        $dt = new DateTime($timestamp, new DateTimeZone(self::TIMEZONE));
+        date_default_timezone_set("UTC");
 		return $dt->format(self::DT_FORMAT);
 	}
 
 	private function format_timestamp_end($timestamp) {
-		$dt = new DateTime($timestamp, new DateTimeZone('Europe/Paris'));
+		$dt = new DateTime($timestamp, new DateTimeZone(self::TIMEZONE));
         $dt->modify('+1 hour +30 minutes');
+        date_default_timezone_set("UTC");
 		return $dt->format(self::DT_FORMAT);
     }
     

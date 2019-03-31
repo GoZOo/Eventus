@@ -68,11 +68,11 @@ class Ics {
         switch ($key) {
             case 'dtstamp':
             	break;
+            case 'dtstart':
+                $val = $this->format_timestamp($val);
+                break;
             case 'dtend':                
 	        	$val = $this->format_timestamp_end($val);
-                break;
-            case 'dtstart':
-	        	$val = $this->format_timestamp($val);
                 break;
             default:
                 $val = $this->escape_string($val);
@@ -81,17 +81,13 @@ class Ics {
     }
 
     private function format_timestamp($timestamp) {
-		$dt = new DateTime($timestamp);
-		$dt->setTimezone(new DateTimeZone('Europe/Paris'));
-		var_dump($dt->format(self::DT_FORMAT));
+		$dt = new DateTime($timestamp, new DateTimeZone('Europe/Paris'));
 		return $dt->format(self::DT_FORMAT);
 	}
 
 	private function format_timestamp_end($timestamp) {
-		$dt = new DateTime($timestamp);
-		$dt->setTimezone(new DateTimeZone('Europe/Paris'));
-        $dt->modify('+1 hour');
-        $dt->modify('+30 minutes');
+		$dt = new DateTime($timestamp, new DateTimeZone('Europe/Paris'));
+        $dt->modify('+1 hour +30 minutes');
 		return $dt->format(self::DT_FORMAT);
     }
     

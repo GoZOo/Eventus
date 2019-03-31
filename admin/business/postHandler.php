@@ -293,6 +293,7 @@ class PostHandler {
     ******** Calendar *********
     ***************************/
     function updateIcs(){
+        if (!file_exists(plugin_dir_path( __FILE__ ).'../../public/ics')) mkdir(plugin_dir_path( __FILE__ ).'../../public/ics', 0777, true);
         if ($_POST['teamId']) {
             new \Ics(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId']));
             wp_redirect( add_query_arg( 'message', 'succesOneIcs',  wp_get_referer() ));  

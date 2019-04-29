@@ -18,7 +18,7 @@ include_once __DIR__ . '/../../admin/business/ics.php';
 
 foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
 	Finder::getInstance()->updateMatches($team);
-	new \Ics(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($team->getId()));
+	\Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($teams[$i]->getId()));
 }
 
 date_default_timezone_set("Europe/Paris");

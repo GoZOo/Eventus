@@ -79,17 +79,17 @@ class PostHandler {
     
     function deleteMatch(){   
         if ($_POST['teamId']) {
-    		DAO\MatchDAO::getInstance()->deleteMatches($_POST['teamId']);
-    	} else {
-    		DAO\MatchDAO::getInstance()->deleteMatches();
+            DAO\MatchDAO::getInstance()->deleteMatches($_POST['teamId']);
+        } else {
+            DAO\MatchDAO::getInstance()->deleteMatches();
             DAO\Database::getInstance()->resetAutoIncr('matches');
-    	}
-		wp_redirect( add_query_arg( 'message', 'succesDelMatch',  wp_get_referer() ));
+        }
+        wp_redirect( add_query_arg( 'message', 'succesDelMatch',  wp_get_referer() ));
     }
 
     function updateMatch(){
-    	PostHandler::getInstance()->setUpdateMatch();
-		wp_redirect( add_query_arg( 'message', 'succesUpMatch',  wp_get_referer() ));
+        PostHandler::getInstance()->setUpdateMatch();
+        wp_redirect( add_query_arg( 'message', 'succesUpMatch',  wp_get_referer() ));
     }
     
     function updateHoursMatch(){
@@ -107,62 +107,62 @@ class PostHandler {
     }
 
     function setUpdateMatch(){
-    	$myTeam = DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']);
-       	$allMatchesSon = [];
+        $myTeam = DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']);
+        $allMatchesSon = [];
         for($i=1; $i < $_POST['nbrSonMatch']+1; $i++) { 
             var_dump(date_create_from_format('H:i', $_POST['hourStartSon'.$i]));
             $allMatchesSon[] = new Entities\Match(
-            	$_POST['idSon'.$i] ? $_POST['idSon'.$i] : null, 
-            	$_POST['matchDaySon'.$i] ? $_POST['matchDaySon'.$i] : null,
-            	$_POST['numMatchSon'.$i] ? $_POST['numMatchSon'.$i] : null,
-            	$_POST['dateSon'.$i] ? $_POST['dateSon'.$i] : null, 
+                $_POST['idSon'.$i] ? $_POST['idSon'.$i] : null, 
+                $_POST['matchDaySon'.$i] ? $_POST['matchDaySon'.$i] : null,
+                $_POST['numMatchSon'.$i] ? $_POST['numMatchSon'.$i] : null,
+                $_POST['dateSon'.$i] ? $_POST['dateSon'.$i] : null, 
                 $_POST['hourRdvSon'.$i] ? $_POST['hourRdvSon'.$i] : (
                     $_POST['hourStartSon'.$i] ? 
                     date_create_from_format('H:i', $_POST['hourStartSon'.$i])->modify('-'. $myTeam->getTime() .'minutes')->format('H:i:s') :
                     null
                 ), 
-            	$_POST['hourStartSon'.$i] ? $_POST['hourStartSon'.$i] : null, 
-            	$_POST['localTeamSon'.$i] ? $_POST['localTeamSon'.$i] : null, 
-            	$_POST['localTeamScoreSon'.$i] ? $_POST['localTeamScoreSon'.$i] : null,
-            	$_POST['visitingTeamSon'.$i] ? $_POST['visitingTeamSon'.$i] : null, 
-            	$_POST['visitingTeamScoreSon'.$i] ? $_POST['visitingTeamScoreSon'.$i] : null, 
-            	strpos(strtolower(Finder::stripAccents($_POST['localTeamSon'.$i])),strtolower(Finder::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
-            	$_POST['streetSon'.$i] ? $_POST['streetSon'.$i] : null, 
-            	$_POST['citySon'.$i] ? $_POST['citySon'.$i] : null, 
-            	$_POST['gymSon'.$i] ? $_POST['gymSon'.$i] : null,
-            	1, 
-            	$_POST['matchChampSon'.$i] ? $_POST['matchChampSon'.$i] : null,
-            	$_POST['teamId'],
-            	$_POST['idMatchRefSon'.$i] ? $_POST['idMatchRefSon'.$i] : null
+                $_POST['hourStartSon'.$i] ? $_POST['hourStartSon'.$i] : null, 
+                $_POST['localTeamSon'.$i] ? $_POST['localTeamSon'.$i] : null, 
+                $_POST['localTeamScoreSon'.$i] ? $_POST['localTeamScoreSon'.$i] : null,
+                $_POST['visitingTeamSon'.$i] ? $_POST['visitingTeamSon'.$i] : null, 
+                $_POST['visitingTeamScoreSon'.$i] ? $_POST['visitingTeamScoreSon'.$i] : null, 
+                strpos(strtolower(Finder::stripAccents($_POST['localTeamSon'.$i])),strtolower(Finder::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
+                $_POST['streetSon'.$i] ? $_POST['streetSon'.$i] : null, 
+                $_POST['citySon'.$i] ? $_POST['citySon'.$i] : null, 
+                $_POST['gymSon'.$i] ? $_POST['gymSon'.$i] : null,
+                1, 
+                $_POST['matchChampSon'.$i] ? $_POST['matchChampSon'.$i] : null,
+                $_POST['teamId'],
+                $_POST['idMatchRefSon'.$i] ? $_POST['idMatchRefSon'.$i] : null
             );
-        }	
+        }   
         DAO\MatchDAO::getInstance()->updateMatchesScreen($allMatchesSon, 1, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId()); 
 
-       	$allMatchesOther = [];
+        $allMatchesOther = [];
         for($i=1; $i < $_POST['nbrOtherMatch']+1; $i++) { 
             $allMatchesOther[] = new Entities\Match(
-            	$_POST['idOther'.$i] ? $_POST['idOther'.$i] : null, 
-            	null,
-            	null,
-            	$_POST['dateOther'.$i] ? $_POST['dateOther'.$i] : null, 
-            	$_POST['hourRdvOther'.$i]? $_POST['hourRdvOther'.$i] :  (
+                $_POST['idOther'.$i] ? $_POST['idOther'.$i] : null, 
+                null,
+                null,
+                $_POST['dateOther'.$i] ? $_POST['dateOther'.$i] : null, 
+                $_POST['hourRdvOther'.$i]? $_POST['hourRdvOther'.$i] :  (
                     $_POST['hourStartOther'.$i] ? 
                     date_create_from_format('H:i', $_POST['hourStartOther'.$i])->modify('-'. $myTeam->getTime() .'minutes')->format('H:i:s') :
                     null
                 ), 
-            	$_POST['hourStartOther'.$i] ? $_POST['hourStartOther'.$i] : null,
-            	$_POST['localTeamOther'.$i] ? $_POST['localTeamOther'.$i] : null, 
-            	$_POST['localTeamScoreOther'.$i] ? $_POST['localTeamScoreOther'.$i] : null,
-            	$_POST['visitingTeamOther'.$i] ? $_POST['visitingTeamOther'.$i] : null, 
-            	$_POST['visitingTeamScoreOther'.$i] ? $_POST['visitingTeamScoreOther'.$i] : null, 
-            	strpos(strtolower(Finder::stripAccents($_POST['localTeamOther'.$i])),strtolower(Finder::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
-            	$_POST['streetOther'.$i] ? $_POST['streetOther'.$i] : null, 
-            	$_POST['cityOther'.$i] ? $_POST['cityOther'.$i] : null, 
-            	$_POST['gymOther'.$i] ? $_POST['gymOther'.$i] : null,
-            	2, 
-            	null,
-            	$_POST['teamId'],
-            	null
+                $_POST['hourStartOther'.$i] ? $_POST['hourStartOther'.$i] : null,
+                $_POST['localTeamOther'.$i] ? $_POST['localTeamOther'.$i] : null, 
+                $_POST['localTeamScoreOther'.$i] ? $_POST['localTeamScoreOther'.$i] : null,
+                $_POST['visitingTeamOther'.$i] ? $_POST['visitingTeamOther'.$i] : null, 
+                $_POST['visitingTeamScoreOther'.$i] ? $_POST['visitingTeamScoreOther'.$i] : null, 
+                strpos(strtolower(Finder::stripAccents($_POST['localTeamOther'.$i])),strtolower(Finder::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
+                $_POST['streetOther'.$i] ? $_POST['streetOther'.$i] : null, 
+                $_POST['cityOther'.$i] ? $_POST['cityOther'.$i] : null, 
+                $_POST['gymOther'.$i] ? $_POST['gymOther'.$i] : null,
+                2, 
+                null,
+                $_POST['teamId'],
+                null
             );
         }
         DAO\MatchDAO::getInstance()->updateMatchesScreen($allMatchesOther, 2, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  
@@ -202,10 +202,10 @@ class PostHandler {
     function deleteClub(){
         if ($_POST['clubId']) {
             DAO\ClubDAO::getInstance()->deleteClub($_POST['clubId']); 
-    	} else {
+        } else {
             DAO\ClubDAO::getInstance()->deleteClub(); 
             DAO\Database::getInstance()->resetAutoIncr('clubs');
-    	}        
+        }        
         wp_redirect( add_query_arg( 'message', 'succesDelClub', 'admin.php?page=eventus_club')); 
     }
     
@@ -256,11 +256,11 @@ class PostHandler {
         if ($_POST['teamId']) {
             DAO\TeamDAO::getInstance()->deleteTeam($_POST['teamId']); 
             wp_redirect( add_query_arg( 'message', 'succesDelTeam', 'admin.php?page=eventus')); 
-    	} else {
+        } else {
             DAO\TeamDAO::getInstance()->deleteTeam(); 
             DAO\Database::getInstance()->resetAutoIncr('teams');
             wp_redirect( add_query_arg( 'message', 'succesDelTeams', 'admin.php?page=eventus')); 
-    	}        
+        }        
     }
     
     /**************************
@@ -295,14 +295,14 @@ class PostHandler {
     function updateIcs(){
         if (!file_exists(plugin_dir_path( __FILE__ ).'../../public/ics')) mkdir(plugin_dir_path( __FILE__ ).'../../public/ics', 0777, true);
         if ($_POST['teamId']) {
-            new \Ics(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId']));
+            \Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId']));
             wp_redirect( add_query_arg( 'message', 'succesOneIcs',  wp_get_referer() ));  
-    	} else {
+        } else {
             foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
-                new \Ics(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($team->getId()));
+                \Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($team->getId()));
             }
             wp_redirect( add_query_arg( 'message', 'succesMultiIcs',  wp_get_referer() ));  
-    	} 
+        } 
     }
 
     function deleteIcs(){

@@ -35,7 +35,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 
 ## Updates
 
-### 2.5
+### 2.5 - Calendar Update
 
 * Fix mail for cron seems to works again
 * Add calendar ICS for each teams
@@ -54,7 +54,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Fix url site in cron with php7.2
 * Evo transform somes buttons to links
 
-### 2.4
+### 2.4 - Translations Update
 
 * Fix ButtonResults and ResultsCarousel with multiple links
 * Fix ResultsCarousel
@@ -80,7 +80,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Fix escape some string with quotes, etc...
 * Fix positions notices
 
-### 2.3
+### 2.3 - BackEnd Improvement Update
 
 * Fix if there are no Enfold Theme
 * Fix check if at least one sex is selected on club before submit
@@ -102,7 +102,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Evo you can now submit create/update team/club when press enter
 
 
-### 2.2
+### 2.2 - (Massive) BackEnd Update
 
 * Fix displaying of last match
 * Fix displaying of match in calendar : show only the ones greater than yesterday
@@ -138,15 +138,17 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Evo class Master doesn't exist anymore
 * Evo you can't sync match if the team has no url
 
-### 2.1.1 (not available on this github)
+### 2.1.1* 
 * Improve visual elements
 
-### 2.1 (not available on this github)
+### 2.1* - Avia Constructor Update
 * Add Avia Builder Element
 * Delete widget results
 
-### 2.0 (not available on this github)
+### 2.0* - Birth of Eventus
 * Plugin recast and new name "Eventus"
  
-### 1.0 (not available on this github)
+### 1.0* - Resultat Match
 * First and deprecated version named "Resultat Match"
+
+*not available on this github

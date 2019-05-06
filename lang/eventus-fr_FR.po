@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Eventus\n"
-"POT-Creation-Date: 2019-03-25 10:56+0100\n"
-"PO-Revision-Date: 2019-03-25 10:59+0100\n"
+"POT-Creation-Date: 2019-05-06 09:04+0200\n"
+"PO-Revision-Date: 2019-05-06 09:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: Kirian Caumes\n"
 "Language: fr_FR\n"
@@ -53,7 +53,7 @@ msgstr ""
 #: admin/business/aviaShortcode/circlePosPts.php:42
 #: admin/business/aviaShortcode/icsCalendar.php:42
 #: admin/business/aviaShortcode/match.php:60
-#: admin/business/aviaShortcode/teamPicture.php:69
+#: admin/business/aviaShortcode/teamPicture.php:69 admin/business/ics.php:24
 #: admin/screens/main/mainScreen.php:92
 #: admin/screens/main/matchDetailScreen.php:62
 msgid "Team"
@@ -80,13 +80,13 @@ msgstr "Position et Score"
 msgid "Display position and score"
 msgstr "Afficher la position et le score"
 
-#: admin/business/aviaShortcode/icsCalendar.php:90
-msgid "Download the calendar"
-msgstr "Télécharger le calendrier"
+#: admin/business/aviaShortcode/icsCalendar.php:93
+msgid "Download the calendar (ICS)"
+msgstr "Télécharger le calendrier (ICS)"
 
-#: admin/business/aviaShortcode/icsCalendar.php:91
-msgid "Copy the link of the calendar"
-msgstr "Copier le lien du calendrier"
+#: admin/business/aviaShortcode/icsCalendar.php:94
+msgid "Copy the link of the calendar (ICS)"
+msgstr "Copier le lien du calendrier (ICS)"
 
 #: admin/business/aviaShortcode/match.php:21
 msgid "Matche"
@@ -102,14 +102,14 @@ msgid "Select a type"
 msgstr "Sélectionnez un type"
 
 #: admin/business/aviaShortcode/match.php:47
-#: admin/business/aviaShortcode/match.php:96
-#: admin/business/aviaShortcode/match.php:127
+#: admin/business/aviaShortcode/match.php:95
+#: admin/business/aviaShortcode/match.php:125
 msgid "Next match"
 msgstr "Prochain match"
 
 #: admin/business/aviaShortcode/match.php:47
-#: admin/business/aviaShortcode/match.php:109
-#: admin/business/aviaShortcode/match.php:141
+#: admin/business/aviaShortcode/match.php:107
+#: admin/business/aviaShortcode/match.php:139
 msgid "Last match"
 msgstr "Dernier match"
 
@@ -154,23 +154,36 @@ msgstr "Photo d'une Équipe"
 msgid "Image format"
 msgstr "Format de l'image"
 
-#: admin/business/traitHelper.php:20
+#: admin/business/ics.php:19
+msgid "at"
+msgstr "à"
+
+#: admin/business/ics.php:23
+msgid "Hall"
+msgstr "Salle"
+
+#: admin/business/ics.php:25 admin/business/traitHelper.php:20
 #: admin/screens/main/teamDetailScreen.php:110
 #: admin/screens/main/teamDetailScreen.php:111
 msgid "Male"
 msgstr "Masculin"
 
-#: admin/business/traitHelper.php:22
+#: admin/business/ics.php:25 admin/business/traitHelper.php:22
 #: admin/screens/main/teamDetailScreen.php:115
 #: admin/screens/main/teamDetailScreen.php:116
 msgid "Female"
 msgstr "Féminin"
 
-#: admin/business/traitHelper.php:24
+#: admin/business/ics.php:25 admin/business/traitHelper.php:24
 #: admin/screens/main/teamDetailScreen.php:120
 #: admin/screens/main/teamDetailScreen.php:121
 msgid "Mixed"
 msgstr "Mixte"
+
+#: admin/business/ics.php:29 admin/screens/main/matchDetailScreen.php:76
+#: admin/screens/main/matchDetailScreen.php:160
+msgid "D."
+msgstr "J."
 
 #: admin/business/traitHelper.php:38
 msgid "Monday"
@@ -700,11 +713,6 @@ msgstr "Id"
 #: admin/screens/main/matchDetailScreen.php:159
 msgid "Ch."
 msgstr "Ch."
-
-#: admin/screens/main/matchDetailScreen.php:76
-#: admin/screens/main/matchDetailScreen.php:160
-msgid "D."
-msgstr "J."
 
 #: admin/screens/main/matchDetailScreen.php:77
 #: admin/screens/main/matchDetailScreen.php:161

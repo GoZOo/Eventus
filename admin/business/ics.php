@@ -16,17 +16,17 @@ class Ics {
             foreach ($matches as $key => $match){
                 if ($match->getDate() && $match->getHourStart()){
                     self::$events[] = array(
-                        'location' => implode(" à ", array(($match->getStreet() ? $match->getStreet() : ""), ($match->getCity() ? $match->getCity() : ""))),
+                        'location' => implode(" ".__('at', 'eventus')." ", array(($match->getStreet() ? $match->getStreet() : ""), ($match->getCity() ? $match->getCity() : ""))),
                         'description' =>  
                             ($match->getLocalTeamScore() && $match->getVisitingTeamScore() ? "Score : " . $match->getLocalTeamScore() ." - ". $match->getVisitingTeamScore() . " ". self::getState($match) . "\\n" : '' ). 
                             ($match->getHourRdv() ? "RDV : " . $match->getHourRdv() ."\\n" : '' ). 
-                            ($match->getGym() ? "Salle : " . $match->getGym() ."\\n" : '' ). 
-                            ($match->getTeam()->getName() ? "Équipe : " . $match->getTeam()->getName() ." " . 
-                                ($match->getTeam()->getBoy() ? 'Masculin' : '') . ($match->getTeam()->getGirl() ? 'Féminin' : '') . ($match->getTeam()->getMixed() ? 'Mixte' : '') 
+                            ($match->getGym() ? __('Hall', 'eventus')." : " . $match->getGym() ."\\n" : '' ). 
+                            ($match->getTeam()->getName() ? __('Team', 'eventus')." : " . $match->getTeam()->getName() ." " . 
+                                ($match->getTeam()->getBoy() ? __('Male', 'eventus') : '') . ($match->getTeam()->getGirl() ? __('Female', 'eventus') : '') . ($match->getTeam()->getMixed() ? __('Mixed', 'eventus') : '') 
                             : '' ),
                         'dtstart' => ($match->getDate() && $match->getHourStart() ? $match->getDate(). ' ' . $match->getHourStart() : ''),
                         'dtend' => ($match->getDate() && $match->getHourStart() ? $match->getDate(). ' ' . $match->getHourStart() : ''),
-                        'summary' => ($match->getMatchDay() ? "J.".$match->getMatchDay(). " : "  : '') . $match->getLocalTeam() . " vs. " .$match->getVisitingTeam(),  
+                        'summary' => ($match->getMatchDay() ? __('D.', 'eventus').$match->getMatchDay(). " : "  : '') . $match->getLocalTeam() . " vs. " .$match->getVisitingTeam(), 
                         'url' => $url
                     );
                 }            

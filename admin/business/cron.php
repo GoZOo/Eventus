@@ -16,19 +16,22 @@ include_once __DIR__ . '/../../admin/librairies/simple_html_dom.php';
 include_once __DIR__ . '/../../../../../wp-config.php';
 include_once __DIR__ . '/../../admin/business/ics.php';
 
+date_default_timezone_set("Europe/Paris");
+update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
+
 foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
 	Finder::getInstance()->updateMatches($team);
 	\Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($teams[$i]->getId()));
 }
 
-date_default_timezone_set("Europe/Paris");
-update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
 
+echo get_option("eventus_emailnotif");
 if (get_option("eventus_emailnotif")){
 	$message = "<a href='".get_option("siteurl")."/wp-admin/admin.php?page=eventus_logs'>Website's url</a><p>The update has been succesfully done with: <b>". count(file_exists(__DIR__ . '/../../finder.log') ? file(__DIR__ . '/../../finder.log') : array()) ."</b> issue(s), the <b>".date("d/m/Y")."</b> at <b>".date("H:i:s")."</b>.</p>";
 	$content = explode("\n", @file_get_contents(__DIR__ . '/../../finder.log'));
 	($content ? array_pop($content) : '' );
 	$message .= ($content ? "<ul><li>".str_replace("[", "<b>[", str_replace("]", "]</b>", implode("</li><li>", $content)))."</ul>" : '');
+	echo $message;
 	mail(
 		get_option("eventus_emailnotif"), 
 		"Eventus - Update ".date("d/m/Y H:i:s"), 

@@ -22,7 +22,7 @@ if (!class_exists( 'EventusIcsCalender') && class_exists('aviaShortcodeTemplate'
 			$this->config['tab']		= "Eventus";
 			$this->config['icon']		= AviaBuilder::$path['imagesURL']."sc-icon_box.png";
 			$this->config['order']		= 94;
-			$this->config['shortcode'] 	= 'eventus_button_results';
+			$this->config['shortcode'] 	= 'eventus_button_results_ics';
 			$this->config['tooltip'] 	= 'Affiche le lien vers le calendrier ICS';
 		}
 		
@@ -67,30 +67,34 @@ if (!class_exists( 'EventusIcsCalender') && class_exists('aviaShortcodeTemplate'
 	            ),
 			$atts));
 			$team = DAO\TeamDAO::getInstance()->getTeamById($teamid);
+			$path = get_site_url().'/wp-content/plugins/eventus/public/ics/' . str_replace(' ', '_',$team->getClub()->getName()).'_'.str_replace(' ', '_',$team->getName()).'_'.str_replace(' ', '_',$team->getId()).'.ics';
 			$js = "<script>
-				window.onload = () => {
-					document.getElementsByClassName('rowIcs')[0].getElementsByTagName('a')[1].removeAttribute('href')
-					document.getElementsByClassName('rowIcs')[0].getElementsByTagName('a')[1].style.cursor = 'pointer'
-					document.getElementsByClassName('rowIcs')[0].getElementsByTagName('a')[1].addEventListener('click', 
-						() => {
-							let dummy = document.createElement('input');
-							document.body.appendChild(dummy);
-							dummy.setAttribute('value', '".get_site_url().'/wp-content/plugins/eventus/public/ics/' . $team->getClub()->getName().'_'.$team->getName().'_'.$team->getId().'.ics'."');
-							dummy.select();
-							document.execCommand('copy');
-							document.body.removeChild(dummy);
-						}
-					);
-				}				
+				document.addEventListener('DOMContentLoaded', 
+					() => {
+						document.getElementsByClassName('rowIcs')[0].getElementsByTagName('a')[1].removeAttribute('href')
+						document.getElementsByClassName('rowIcs')[0].getElementsByTagName('a')[1].style.cursor = 'pointer'
+						document.getElementsByClassName('rowIcs')[0].getElementsByTagName('a')[1].addEventListener('click', 
+							() => {
+								document.getElementById('succes-copy-ics').style.display = 'block'
+								let dummy = document.createElement('input');
+								document.body.appendChild(dummy);
+								dummy.setAttribute('value', '".$path."');
+								dummy.select();
+								document.execCommand('copy');
+								document.body.removeChild(dummy);
+							}
+						)
+					}
+				)				
 			</script>";
 			
 			$sc = 
 				"[av_buttonrow alignment='center' button_spacing='5' button_spacing_unit='px' av_uid='av-r75dw' custom_class='' admin_preview_bg='' custom_class='rowIcs']
-				 [av_buttonrow_item label='".__('Download the calendar', 'eventus')."' link='manually,".get_site_url().'/wp-content/plugins/eventus/public/ics/' . $team->getClub()->getName().'_'.$team->getName().'_'.$team->getId().'.ics'."' link_target='' size='large' label_display='' icon_select='yes-right-icon' icon_hover='aviaTBaviaTBicon_hover' icon='ue82d' font='entypo-fontello' color='theme-color' custom_bg='#444444' custom_font='#ffffff']
-				 [av_buttonrow_item label='".__('Copy the link of the calendar', 'eventus')."' size='large' label_display='' icon_select='yes-right-icon' icon_hover='aviaTBaviaTBicon_hover' icon='ue822' font='entypo-fontello' color='theme-color' custom_bg='#444444' custom_font='#ffffff']
+				 [av_buttonrow_item label='".__('Download the calendar (ICS)', 'eventus')."' link='manually,".$path."' link_target='' size='large' label_display='' icon_select='yes-right-icon' icon_hover='aviaTBaviaTBicon_hover' icon='ue82d' font='entypo-fontello' color='theme-color' custom_bg='#444444' custom_font='#ffffff']
+				 [av_buttonrow_item label='".__('Copy the link of the calendar (ICS)', 'eventus')."' size='large' label_display='' icon_select='yes-right-icon' icon_hover='aviaTBaviaTBicon_hover' icon='ue822' font='entypo-fontello' color='theme-color' custom_bg='#444444' custom_font='#ffffff']
 				 [/av_buttonrow]";
 			
-			return $js . do_shortcode($sc);
+			return $js . do_shortcode($sc)."<p id='succes-copy-ics' style='text-align:center;display:none;margin: 0.85em 0 0;'>Le lien à été copié</p>";
 	    }  
 	}
 }

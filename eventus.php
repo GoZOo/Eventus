@@ -26,8 +26,8 @@ include_once plugin_dir_path( __FILE__ ).'admin/screens/club/clubDetailScreen.ph
 include_once plugin_dir_path( __FILE__ ).'admin/screens/log/logScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/screens/admin/adminScreen.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/finder.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/ics.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/traitHelper.php';
+include_once plugin_dir_path( __FILE__ ).'admin/business/ics.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/postHandler.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/widgetDashboard.php';
 include_once plugin_dir_path( __FILE__ ).'admin/librairies/simple_html_dom.php';

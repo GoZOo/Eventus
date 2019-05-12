@@ -2,7 +2,7 @@
 /**
 * TraitHelper is a trait use to help AviaShortcode
 *
-* @package  Includes
+* @package  Admin/Business
 * @access   public
 */
 trait TraitHelper{

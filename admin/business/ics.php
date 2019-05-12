@@ -1,6 +1,16 @@
 <?php
 // Source https://gist.github.com/jakebellacera/635416
+// namespace Eventus\Admin\Business;
+
+/**
+* ICS is a class use to generate ics calendars
+*
+* @package  Includes
+* @access   public
+*/
+
 class Ics {
+    use TraitHelper;
     const DT_FORMAT = 'Ymd\THis';
     const TIMEZONE = 'Europe/Paris';
     private static $events;
@@ -22,7 +32,7 @@ class Ics {
                             ($match->getHourRdv() ? "RDV : " . $match->getHourRdv() ."\\n" : '' ). 
                             ($match->getGym() ? __('Hall', 'eventus')." : " . $match->getGym() ."\\n" : '' ). 
                             ($match->getTeam()->getName() ? __('Team', 'eventus')." : " . $match->getTeam()->getName() ." " . 
-                                ($match->getTeam()->getBoy() ? __('Male', 'eventus') : '') . ($match->getTeam()->getGirl() ? __('Female', 'eventus') : '') . ($match->getTeam()->getMixed() ? __('Mixed', 'eventus') : '') 
+                                self::getSexLabel($match->getTeam()->getBoy(), $match->getTeam()->getGirl(), $match->getTeam()->getMixed())
                             : '' ),
                         'dtstart' => ($match->getDate() && $match->getHourStart() ? $match->getDate(). ' ' . $match->getHourStart() : ''),
                         'dtend' => ($match->getDate() && $match->getHourStart() ? $match->getDate(). ' ' . $match->getHourStart() : ''),

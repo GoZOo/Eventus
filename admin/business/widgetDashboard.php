@@ -7,6 +7,7 @@ use Eventus\Includes\Entities as Entities;
 /**
 * FinEventusWidgetDashboard is a class that add a widget element to Wordpress dashboard's
 *
+* @package  Admin/Business
 * @access   public
 */
 class EventusWidgetDashboard {

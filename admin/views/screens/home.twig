@@ -1,0 +1,81 @@
+<div class='wrap'>
+    <h1 class="wp-heading-inline">{{ _e('List of teams', 'eventus') }}</h1>
+    <hr class="wp-header-end">
+    {{ notice }} 
+        {% if not clubs %}
+            <h2>{{ _e('Please add a club first...', 'eventus') }}</h2>	
+            <a class="button-primary ico ico-add" href='admin.php?page=eventus_club&action=club'>
+                {{ _e('Add a club', 'eventus') }}						
+            </a>
+        {% endif %}
+        {% for club in clubs %}
+            <div class="eventusCardList">
+                <h2>{{ club.detail.getName()|toProperText }}</h2>	 
+                <div>   
+                    {% if not club.teams %}   
+                        <p style="flex: auto;">{{ _e('No team has been found for this club...', 'eventus') }}</p>
+                    {% endif %}
+                    {% for team in club.teams %}
+                        <div class="eventusCard">  
+                            <img class="card-img-top" alt="Team" src={{ team.img }} />   
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {{ team.detail.getName()|toProperText }} {{ getSexIco(team.detail.getBoy(),team.detail.getGirl(),team.detail.getMixed) }}
+                                </h5>
+                                <p class="card-text">
+                                    {{ club.detail.getName()|toProperText }}
+                                </p>
+                                <a class="button-primary ico ico-fight" href="admin.php?page=eventus&action=matchs&teamId={{ team.detail.getId() }}">
+                                    {{ _e('Matches', 'eventus') }}
+                                </a>
+                                <a class="button-primary ico ico-team" href="admin.php?page=eventus&action=team&teamId={{ team.detail.getId() }}">
+                                    {{ _e('Team', 'eventus') }}
+                                </a>
+                                <a class="button-primary ico ico-club" href="admin.php?page=eventus_club&action=club&clubId={{ team.detail.getClub().getId() }}">
+                                    {{ _e('Club', 'eventus') }}
+                                </a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                {{ _e('ID : ', 'eventus') }}
+                                <b>{{ team.infos.team_id }}</b>
+                                {{ _e(' / Club ID : ', 'eventus') }}		
+                                <b>{{ team.infos.team_clubId }}</b>
+                                {{ _e(' / Matches : ', 'eventus') }}		
+                                <b>{{ team.infos.matchsNbr }}</b>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div> 
+        {% endfor %}
+    <br>
+
+    <a class="button-primary ico ico-add" href="admin.php?page=eventus&action=team">
+        {{ _e('Add a team', 'eventus') }}		
+    </a>
+    <br/><br/>
+
+    {% if teams %}
+        <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
+            <div class="myTooltip">
+                <button type="submit" name="action" value="eventus_syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">
+                    {{ _e('Synchronize match data', 'eventus') }}	
+                </button>
+                <span class="myTooltiptext">{{ _e('Saves & synchronizes match data with the Federation website.', 'eventus') }}</span>
+            </div> 
+
+            <div class="myTooltip">
+                <button type="submit" name="action" value="eventus_majIcs" onclick="setLoading(this)" class="button-primary ico ico-calendar">
+                    {{ _e('Update calendars', 'eventus') }}
+                </button>
+                <span class="myTooltiptext">{{ _e('Update all ICS team calendars', 'eventus') }}</span>
+            </div>  
+            <br>
+            <p class="dern-synch">
+                <b>{{ _e('Last. synch. : ', 'eventus') }}</b>
+                {{ lastSync|date('d/m/Y à H:i:s') }}
+            </p>
+                
+        </form>	
+    {% endif %}	
+</div>

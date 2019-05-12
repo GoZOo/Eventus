@@ -1,0 +1,178 @@
+{% extends "_base.twig" %}
+
+{% block wrap %}
+    <h1 class="wp-heading-inline">
+        {% if team.getName() %}
+            {{ team.getName()|toProperText }}
+            {{ getSexIco(team.getBoy(),team.getGirl(),team.getMixed) }}
+        {% else %}
+            {{ _e('New team', 'eventus') }} 
+        {% endif %}             
+    </h1> 
+    {% if team.getId() %}
+        <a href="admin.php?page=eventus&action=matchs&teamId={{ team.getId() }}"  class="page-title-action">
+            {{ _e('Matches', 'eventus') }}
+        </a> 
+        <hr class="wp-header-end">
+    {% endif %}
+    {{ notice }} 
+    <h2>{% if team.getClub() %} {{ team.getClub().getName()|toProperText }} {% endif %}</h2>
+    <form action="{{ adminPostUrl }}" method='post'>     
+        <div>
+            <table class='form-table'>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <label for="club">{{ _e('Club', 'eventus') }}<span class="required">*</span></label>
+                        </th>
+                        <td>
+                        <select name="club" id='club'>
+                            {% for club in clubs %}
+                                <option 
+                                    value="{{ club.getId()}}" 
+                                    {% if team.getClub() and team.getClub().getId() == club.getId() %} selected {% endif %}
+                                >
+                                    {{ club.getName() }}
+                                </option>                                
+                            {% endfor %}
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label>{{ _e('Sex', 'eventus') }}<span class="required">*</span></label>
+                        </th>
+                        <td>
+                            <label>
+                                <input 
+                                    type="radio" 
+                                    value="h" 
+                                    name="sexe"
+                                    title="{{ _e('Male', 'eventus') }}" 
+                                    {% if team.getBoy() %} checked='1' {% endif %}
+                                    required
+                                />
+                                {{ _e('Male', 'eventus') }}
+                            </label>
+                            &nbsp;&nbsp;
+                            <label>
+                                <input 
+                                    type="radio" 
+                                    value="f" 
+                                    name="sexe" 
+                                    title="{{ _e('Female', 'eventus') }}" 
+                                    {% if team.getGirl() %} checked='1' {% endif %}
+                                />
+                                {{ _e('Female', 'eventus') }}                                        
+                            </label>
+                            &nbsp;&nbsp;
+                            <label>
+                                <input 
+                                    type="radio" 
+                                    value="m" 
+                                    name="sexe" 
+                                    title="{{ _e('Mixed', 'eventus') }}" 
+                                    {% if team.getMixed() %} checked='1' {% endif %}
+                                />
+                                {{ _e('Mixed', 'eventus') }}                                        
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label for='nom'>{{ _e('Name', 'eventus') }}<span class="required">*</span></label>
+                        </th>
+                        <td>
+                            <input 
+                                name='nom' 
+                                id='nom' 
+                                value='{{ team.getName()|toProperText }}' 
+                                class='regular-text' 
+                                type='text' 
+                                required 
+                                title="{{ _e('Name', 'eventus') }}" 
+                                placeholder="{{ _e('Name', 'eventus') }}"
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label for='urlOne' name="urlOne">{{ _e('Link n°1 of the championship results', 'eventus') }}</label>
+                        </th>
+                        <td>
+                            <input 
+                                name='urlOne' 
+                                id='urlOne' 
+                                value='{{ team.getUrlOne()|toProperText }}' 
+                                class='regular-text'
+                                type='url' 
+                                title="{{ _e('Link n°1 of the championship results', 'eventus') }}" 
+                                placeholder="{{ _e('Link n°1 of the championship results', 'eventus') }}"
+                            >
+                            <a type='button' class='button-primary ico ico-link ico-no-text' href='{{ team.getUrlOne()|toProperText }}' target='_blank'></a>
+                        </td>
+                    </tr>
+                    <tr {% if not team.getUrlOne() %} "style='display: none'" {% endif %}>
+                        <th scope='row'>
+                            <label for='urlTwo' name="urlTwo">{{ _e('Link n°2 of the championship results', 'eventus') }}</label>
+                        </th>
+                        <td>
+                            <input 
+                                name='urlTwo' 
+                                id='urlTwo' 
+                                value='{{ team.getUrlTwo()|toProperText }}' 
+                                class='regular-text' 
+                                type='url' 
+                                title="{{ _e('Link n°2 of the championship results', 'eventus') }}" 
+                                placeholder="{{ _e('Link n°2 of the championship results', 'eventus') }}"
+                            >
+                            <a type='button' class='button-primary ico ico-link ico-no-text' href='{{ team.getUrlTwo()|toProperText }}' target='_blank'></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label for='time'>{{ _e('Time for pre-match RDV (in minutes)', 'eventus') }}<span class="required">*</span></label>
+                        </th>
+                        <td>
+                            <input 
+                                name='time' 
+                                id='time' 
+                                value="{% if team.getTime() %}{{ team.getTime() }}{% else %}45{% endif %}"
+                                class='regular-text' 
+                                type='number' 
+                                min='0' 
+                                required 
+                                title="{{ _e('Time for pre-match RDV (in minutes)', 'eventus') }}" 
+                                placeholder="{{ _e('Time for pre-match RDV (in minutes)', 'eventus') }}"
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label for='img'>{{ _e('Image', 'eventus') }}</label>
+                        </th>
+                        <td>                                 
+                            <input id="upload_image_button" type="button" class="button" value="{{ _e('Select an image', 'eventus') }}" />
+                            <input id="delete_image_button" type="button" class="button" value="{{ _e('Delete the image', 'eventus') }}" disabled/>
+                            <input id='image_attachment_id' type='hidden' name='img' value='{{ team.getImg() }}'>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+        <input type='hidden' name='teamId' value="{{ team.getId() }}">	
+        <input type="submit" name="action" value="eventus_majTeam" class="hiddenSubmit">
+        <br>
+
+        {% if team.getId() %}
+            <button type="submit" name="action" value="eventus_delTeam" class="button-primary ico ico-del" onclick="return validate(null)" >
+                {{ _e('Delete the team', 'eventus') }}
+            </button>  
+            <br />
+        {% endif %}
+        <br/>
+        <button type="submit" name="action" value="eventus_majTeam" class="button-primary ico ico-save">
+            {{ _e('Save changes', 'eventus') }}
+        </button>
+    </form>
+{% endblock %}

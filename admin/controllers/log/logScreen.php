@@ -9,7 +9,7 @@ use Eventus\Admin\Screens as Screens;
 * @package  Admin/Screens
 * @access   public
 */
-class LogScreen extends Screens\MasterScreen {
+class LogScreen {
     /**
     * @var LogScreen   $_instance  Var use to store an instance
     */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventus\Admin\Screens;
+namespace Eventus\Admin\Controllers;
 
 /**
 * MasterScreen is a parent class for all Screen
@@ -8,7 +8,7 @@ namespace Eventus\Admin\Screens;
 * @package  Admin/Screens
 * @access   public
 */
-abstract class MasterScreen {    	
+abstract class MasterController {  
     protected function __construct() {  
         wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
         wp_localize_script('commonJs', 'translations', 
@@ -18,7 +18,18 @@ abstract class MasterScreen {
             )
         );
         wp_enqueue_script('commonJs');
-	}
+
+        \Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../views/screens/';
+        $this->$context = \Timber\Timber::get_context();
+        $this->$context['notice'] = $this->showNotice();
+        $this->$context['isAdmin'] = current_user_can('administrator');
+        $this->$context['adminPostUrl'] = admin_url('admin-post.php');
+    }
+
+    protected function render($template){   
+        \Timber\Timber::render($template, $this->$context);
+    } 
+
     /**
     * Function to display the screen
     *
@@ -139,37 +150,6 @@ abstract class MasterScreen {
             return '<div class="notice notice-'.$notices[$_GET['message']]['state'].' is-dismissible"><p><strong>'.$notices[$_GET['message']]['str'].'</strong></p></div>'; 
         }
         return;
-    }
-
-    /**
-    * Get sex icon of a team
-    *
-    * @param bool       Is boy ?
-    * @param bool       Is girl ?
-    * @param bool       Is mixed ?
-    * @return string    The icon
-    * @access protected
-    */
-    protected function getSexIco($boy, $girl, $mixed){
-        if ($boy){
-            return '<img draggable="false" class="emoji" alt="♂" src="https://s.w.org/images/core/emoji/11/svg/2642.svg">';
-        } else if ($girl){
-            return '<img draggable="false" class="emoji" alt="♀" src="https://s.w.org/images/core/emoji/11/svg/2640.svg">';
-        } else if ($mixed){ 
-            return '<img draggable="false" class="emoji" alt="♂" src="https://s.w.org/images/core/emoji/11/svg/2642.svg"><img draggable="false" class="emoji" alt="♀" src="https://s.w.org/images/core/emoji/11/svg/2640.svg">';
-        }	
-        return;
-    }
-    
-    /**
-    * Get escaped text without double anti slash and ready to be put in html
-    *
-    * @param string     Text to be modified
-    * @return string    The icon(s)
-    * @access protected
-    */
-    protected function toProperText($text){
-        return htmlspecialchars(stripcslashes($text));
     }
 }
 

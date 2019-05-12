@@ -4,6 +4,7 @@
 namespace Eventus\Admin\Business;
 use Eventus\Includes\Datas as DAO;
 
+include_once __DIR__ . '/.../../vendor/autoload.php';
 include_once __DIR__ . '/../../includes/entities/club.php';
 include_once __DIR__ . '/../../includes/entities/match.php';
 include_once __DIR__ . '/../../includes/entities/team.php';
@@ -12,7 +13,6 @@ include_once __DIR__ . '/../../includes/datas/teamDAO.php';
 include_once __DIR__ . '/../../includes/datas/clubDAO.php';
 include_once __DIR__ . '/../../includes/datas/matchDAO.php';
 include_once __DIR__ . '/../../admin/business/finder.php';
-include_once __DIR__ . '/../../admin/librairies/simple_html_dom.php';
 include_once __DIR__ . '/../../../../../wp-config.php';
 include_once __DIR__ . '/../../admin/business/ics.php';
 

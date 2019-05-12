@@ -3,6 +3,7 @@
 namespace Eventus\Admin\Business;
 use Eventus\Includes\Datas as DAO;
 use Eventus\Includes\Entities as Entities;
+use Sunra\PhpSimple\HtmlDomParser;
 
 /**
 * Finder is a class that allows you to manage all synchronization actions of matches.
@@ -75,7 +76,7 @@ class Finder {
             }
             
             curl_close($ch); 
-            $html = str_get_html($output);
+            $html = HtmlDomParser::str_get_html($output);
 
             //Update teams infos
             if (strpos(mb_strtolower($output), mb_strtolower($team->getClub()->getString())) === false) {

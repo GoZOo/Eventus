@@ -10,7 +10,7 @@ use Eventus\Includes\Datas as DAO;
 * @package  Admin/Screens
 * @access   public
 */
-class ClubScreen extends Screens\MasterScreen {	
+class ClubScreen   {	
 	/**
     * @var ClubScreen   $_instance  Var use to store an instance
     */

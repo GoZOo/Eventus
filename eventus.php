@@ -9,6 +9,8 @@
  */
 namespace Eventus;
 
+require_once plugin_dir_path( __FILE__ ).'vendor/autoload.php';
+
 include_once plugin_dir_path( __FILE__ ).'includes/entities/club.php';
 include_once plugin_dir_path( __FILE__ ).'includes/entities/match.php';
 include_once plugin_dir_path( __FILE__ ).'includes/entities/team.php';
@@ -17,20 +19,20 @@ include_once plugin_dir_path( __FILE__ ).'includes/datas/_database.php';
 include_once plugin_dir_path( __FILE__ ).'includes/datas/teamDAO.php';
 include_once plugin_dir_path( __FILE__ ).'includes/datas/clubDAO.php';
 include_once plugin_dir_path( __FILE__ ).'includes/datas/matchDAO.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/_masterScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/main/mainScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/main/matchDetailScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/main/teamDetailScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/club/clubScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/club/clubDetailScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/log/logScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/screens/admin/adminScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/controllers/_masterController.php';
+include_once plugin_dir_path( __FILE__ ).'admin/controllers/HomeController.php';
+// include_once plugin_dir_path( __FILE__ ).'admin/controllers/matchDetailScreen.php';
+// include_once plugin_dir_path( __FILE__ ).'admin/controllers/teamDetailScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/controllers/club/clubScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/controllers/club/clubDetailScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/controllers/log/logScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/controllers/settingsController.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/finder.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/traitHelper.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/ics.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/postHandler.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/widgetDashboard.php';
-include_once plugin_dir_path( __FILE__ ).'admin/librairies/simple_html_dom.php';
+include_once plugin_dir_path( __FILE__ ).'admin/business/twig.php';
 
 if (file_exists(get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php')){
 	include_once get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
@@ -44,7 +46,7 @@ if (file_exists(get_template_directory().'/config-templatebuilder/avia-template-
 }
 
 class Eventus {	
-    public function __construct() {	
+    public function __construct() {
 		//Translations
 		add_action('init', array($this, 'loadTranslation') );
 	
@@ -68,7 +70,11 @@ class Eventus {
 
 		//PostHandler
 		Admin\Business\PostHandler::getInstance();
-    }
+
+		//Twig settings		
+		new Admin\Business\Twig;
+	}
+
     function menu() {
     	$icon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(plugin_dir_path( __FILE__ ).'admin/svg/handball.svg'));
 	    add_menu_page( __('Teams & Results', 'eventus').' - Eventus', 'Eventus', 'manage_options', 'eventus', array($this, 'callbackMain'), $icon);
@@ -96,7 +102,7 @@ class Eventus {
 	}	
 
 	function callbackMain(){  
-        Admin\Screens\Main\MainScreen::getInstance()->display(); 
+        new Admin\Controllers\HomeController; 
 	}
 
 	function callbackClubs(){  
@@ -108,7 +114,7 @@ class Eventus {
 	}
 
 	function callbackAdmin(){  
-        Admin\Screens\Admin\AdminScreen::getInstance()->display(); 
+        new Admin\Controllers\SettingsController; 
 	}	
 
 	function callbackDashboard() { 

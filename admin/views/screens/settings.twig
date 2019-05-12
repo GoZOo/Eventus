@@ -1,0 +1,170 @@
+<div class='wrap'>
+    <h1 class="wp-heading-inline">{{ _e('Administration', 'eventus') }}</h1>
+    <hr class="wp-header-end">
+    {{ notice }} 
+    {% if isAdmin %}
+        <h2>{{ _e('Paramètres', 'eventus') }}</h2>  
+        <form action={{ adminPostUrl }} method='post'>     
+            <div>
+                <table class='form-table'>
+                    <tbody>
+                        <tr>
+                            <th scope='row'>
+                                <label for='mapApiKey'>{{ _e('Google Map API Key', 'eventus') }}<span class="required">*</span></label>
+                            </th>
+                            <td>
+                                <input 
+                                    name='mapApiKey'
+                                    id='mapApiKey'
+                                    class='regular-text'
+                                    type='text'
+                                    required
+                                    title={{ _e('API Key', 'eventus') }}
+                                    placeholder={{ _e('API Key', 'eventus') }}
+                                    value={{ options.apikey }}
+                                >
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>
+                                <label for='emailNotif'>{{  _e('Notification email', 'eventus') }}<span class="required">*</span></label>
+                            </th>
+                            <td>
+                                <input 
+                                    name='emailNotif' 
+                                    id='emailNotif' 
+                                    class='regular-text' 
+                                    type='email' 
+                                    title={{ _e('Notification email', 'eventus') }}
+                                    placeholder={{ _e('Notification email', 'eventus') }}
+                                    value={{ options.emailnotif }}
+                                >
+                                <p class='description' id='tagline-description'>{{ _e('Leave blank if you do not want notifications.', 'eventus') }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>
+                                <label>{{  _e('Reset logs for each email sent', 'eventus') }}<span class="required">*</span></label>
+                            </th>
+                            <td>
+                                <label>
+                                    <input 
+                                        type="radio" 
+                                        value="1" 
+                                        name="resetlog" 
+                                        title={{  _e('Yes', 'eventus') }}
+                                        {% if options.resetlog %} checked='1' {% endif %}
+                                        required
+                                    />
+                                    {{ _e('Yes', 'eventus') }}
+                                </label>
+                                &nbsp;&nbsp;
+                                <label>
+                                    <input 
+                                        type="radio" 
+                                        value="0" 
+                                        name="resetlog" 
+                                        title={{ _e('No', 'eventus') }}
+                                        {% if not options.resetlog %} checked='1' {% endif %}
+                                    />
+                                    {{ _e('No', 'eventus') }}                                       
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button 
+                type="submit" 
+                name="action" 
+                value="eventus_majSettings" 
+                class="button-primary ico ico-save"
+            >
+            {{ _e('Save changes', 'eventus') }}
+            </button>
+        </form>   
+
+        <br>
+        <hr/>
+        <br>
+
+        <h2>{{ _e('Reset actions ', 'eventus') }}<img draggable="false" class="emoji" alt="⚠" src="https://s.w.org/images/core/emoji/11/svg/26a0.svg"></h2>  
+        <br>     
+        <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
+            <button 
+                type="submit" 
+                name="action" 
+                value="eventus_delIcs" 
+                onclick="return validate('{{ _e('This action is irreversible. Do you really want to purge all the calendars?', 'eventus') }}')" 
+                class="button-primary ico ico-del"
+            >
+            {{ _e('Purge all calendars?', 'eventus') }}
+            </button>
+
+            <button 
+                type="submit" 
+                name="action" 
+                value="eventus_delMatch" 
+                onclick="return validate('{{ _e('This action is irreversible. Do you really want to purge all the matches?', 'eventus') }}')" 
+                class="button-primary ico ico-del"
+            >
+            {{ _e('Purge all matches', 'eventus') }}
+            </button>
+
+            <button 
+                type="submit" 
+                name="action" 
+                value="eventus_delTeam" 
+                onclick="return validate('{{ _e('This action is irreversible. Do you really want to purge all the teams?', 'eventus') }}')" 
+                class="button-primary ico ico-del"
+                >
+            {{ _e('Purge all teams', 'eventus') }}
+            </button>
+
+            <button 
+                type="submit" 
+                name="action" 
+                value="eventus_delClub" 
+                onclick="return validate('{{ _e('This action is irreversible. Do you really want to purge all the clubs?', 'eventus') }}')" 
+                class="button-primary ico ico-del"
+            >
+            {{  _e('Purge all clubs', 'eventus') }}
+            </button>  
+
+            <button 
+                type="submit" 
+                name="action" 
+                value="eventus_resetEventus" 
+                onclick="return validate('{{ _e('This action is irreversible. Do you really want to reset Eventus?', 'eventus') }}')" 
+                class="button-primary ico ico-reset"
+            >
+            {{ _e('Reset Eventus', 'eventus') }}
+            </button>
+        </form>
+
+        
+    {% else %}
+        <p>{{ _e('You are not authorized to access this page.', 'eventus') }}</p>
+    {% endif %}
+
+    <br>
+    <hr>
+    <br>
+
+    <h3>{{ _e('Credits', 'eventus') }}</h3>  
+        <p>
+            <b>{{ pluginData.Name }}</b>
+            (v. <b>{{ pluginData.Version }}</b>) 
+            {{ _e('by', 'eventus') }} 
+            <a target="_blank" href={{ pluginData.AuthorURI }}>
+                {{ pluginData.AuthorName }}
+            </a>
+                - 
+            <a target="_blank" href="https://github.com/KirianCaumes/eventus">
+                GitHub
+            </a>
+        </p>
+        </p>
+            {{ _e('In case of problems, several ways to contact me are available on my website or via my GitHub.', 'eventus') }}                   
+        <p>
+</div>

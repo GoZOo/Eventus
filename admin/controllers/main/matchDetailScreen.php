@@ -11,7 +11,7 @@ use Eventus\Includes\Entities as Entities;
 * @package  Admin/Screens
 * @access   public
 */
-class MainMatchScreen extends Screens\MasterScreen {	
+class MainMatchScreen {	
 	/**
     * @var MainMatchScreen   $_instance  Var use to store an instance
     */

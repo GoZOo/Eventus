@@ -8,7 +8,9 @@ namespace Eventus\Admin\Controllers;
 * @package  Admin/Screens
 * @access   public
 */
-abstract class MasterController {  
+abstract class MasterController { 
+    protected $context; 
+
     protected function __construct() {  
         wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
         wp_localize_script('commonJs', 'translations', 
@@ -20,14 +22,14 @@ abstract class MasterController {
         wp_enqueue_script('commonJs');
 
         \Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../views/screens/';
-        $this->$context = \Timber\Timber::get_context();
-        $this->$context['notice'] = $this->showNotice();
-        $this->$context['isAdmin'] = current_user_can('administrator');
-        $this->$context['adminPostUrl'] = admin_url('admin-post.php');
+        $this->context = \Timber\Timber::get_context();
+        $this->context['notice'] = $this->showNotice();
+        $this->context['isAdmin'] = current_user_can('administrator');
+        $this->context['adminPostUrl'] = admin_url('admin-post.php');
     }
 
     protected function render($template){   
-        \Timber\Timber::render($template, $this->$context);
+        \Timber\Timber::render($template.".twig", $this->context);
     } 
 
     /**
@@ -36,7 +38,7 @@ abstract class MasterController {
     * @return void
     * @access public
     */	
-    public function display(){
+    protected function display(){
         echo "<div class='wrap'><h1 class='wp-heading-inline'>".__('Hello There', 'eventus')."</h1></div>";
         return;
     }

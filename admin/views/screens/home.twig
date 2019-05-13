@@ -1,4 +1,6 @@
-<div class='wrap'>
+{% extends "_base.twig" %}
+
+{% block wrap %}
     <h1 class="wp-heading-inline">{{ _e('List of teams', 'eventus') }}</h1>
     <hr class="wp-header-end">
     {{ notice }} 
@@ -17,7 +19,7 @@
                     {% endif %}
                     {% for team in club.teams %}
                         <div class="eventusCard">  
-                            <img class="card-img-top" alt="Team" src={{ team.img }} />   
+                            <img class="card-img-top" alt="Team" src="{{ team.img }}" />   
                             <div class="card-body">
                                 <h5 class="card-title">
                                     {{ team.detail.getName()|toProperText }} {{ getSexIco(team.detail.getBoy(),team.detail.getGirl(),team.detail.getMixed) }}
@@ -56,7 +58,7 @@
     <br/><br/>
 
     {% if teams %}
-        <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
+        <form action={{ adminPostUrl }} method="post">
             <div class="myTooltip">
                 <button type="submit" name="action" value="eventus_syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">
                     {{ _e('Synchronize match data', 'eventus') }}	
@@ -78,4 +80,4 @@
                 
         </form>	
     {% endif %}	
-</div>
+{% endblock %}

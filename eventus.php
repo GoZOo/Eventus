@@ -21,11 +21,8 @@ include_once plugin_dir_path( __FILE__ ).'includes/datas/clubDAO.php';
 include_once plugin_dir_path( __FILE__ ).'includes/datas/matchDAO.php';
 include_once plugin_dir_path( __FILE__ ).'admin/controllers/_masterController.php';
 include_once plugin_dir_path( __FILE__ ).'admin/controllers/HomeController.php';
-// include_once plugin_dir_path( __FILE__ ).'admin/controllers/matchDetailScreen.php';
-// include_once plugin_dir_path( __FILE__ ).'admin/controllers/teamDetailScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/controllers/club/clubScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/controllers/club/clubDetailScreen.php';
-include_once plugin_dir_path( __FILE__ ).'admin/controllers/log/logScreen.php';
+include_once plugin_dir_path( __FILE__ ).'admin/controllers/clubController.php';
+include_once plugin_dir_path( __FILE__ ).'admin/controllers/logController.php';
 include_once plugin_dir_path( __FILE__ ).'admin/controllers/settingsController.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/finder.php';
 include_once plugin_dir_path( __FILE__ ).'admin/business/traitHelper.php';
@@ -106,11 +103,11 @@ class Eventus {
 	}
 
 	function callbackClubs(){  
-		Admin\Screens\Club\ClubScreen::getInstance()->display(); 
+        new Admin\Controllers\ClubController; 
 	}
 
 	function callbackLogs(){  
-        Admin\Screens\Log\LogScreen::getInstance()->display(); 
+        new Admin\Controllers\LogController; 
 	}
 
 	function callbackAdmin(){  

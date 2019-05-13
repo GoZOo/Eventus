@@ -1,4 +1,6 @@
-<div class='wrap'>
+{% extends "_base.twig" %}
+
+{% block wrap %}
     <h1 class="wp-heading-inline">{{ _e('Administration', 'eventus') }}</h1>
     <hr class="wp-header-end">
     {{ notice }} 
@@ -164,7 +166,7 @@
                 GitHub
             </a>
         </p>
-        </p>
-            {{ _e('In case of problems, several ways to contact me are available on my website or via my GitHub.', 'eventus') }}                   
         <p>
-</div>
+            {{ _e('In case of problems, several ways to contact me are available on my website or via my GitHub.', 'eventus') }}                   
+        </p>
+{% endblock %}

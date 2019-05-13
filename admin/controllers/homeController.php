@@ -2,6 +2,7 @@
 
 namespace Eventus\Admin\Controllers;
 use Eventus\Includes\Datas as DAO;
+use Eventus\Includes\Entities as Entities;
 
 /**
 * HomeController is a class use to manage admin screen
@@ -15,7 +16,7 @@ class HomeController extends MasterController {
 
 		if (isset($_GET['action']) && $_GET['action']=="team") {
 			wp_enqueue_media();     
-			wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../../js/uploadImg.js', '', '', true); 
+			wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../js/uploadImg.js', '', '', true); 
 			wp_localize_script('upImgJs', 'translations', 
 				array(                
 					'selectAnImg' => __('Select the default team image', 'eventus' ),
@@ -23,9 +24,12 @@ class HomeController extends MasterController {
 				)
 			);
 			wp_enqueue_script('upImgJs');
-			wp_enqueue_script('teamJs', plugin_dir_url( __FILE__ ).'/../../../js/screens/teamDetailScreen.js', '', '', true); 
+			wp_enqueue_script('teamJs', plugin_dir_url( __FILE__ ).'/../../js/screens/teamDetailScreen.js', '', '', true); 
+			
 			$this->displayTeam();
 		} else if(isset($_GET['action']) && $_GET['action']=="matchs"){
+			wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../js/screens/matchDetailScreen.js', '', '', true); 
+
 			$this->displayMatches();
 		} else {
 			$this->displayIndex();
@@ -43,16 +47,12 @@ class HomeController extends MasterController {
             $team = new Entities\Team(null, "", "", "", 0, 0, 0, 0, 0, "", "", null);
 		}
 			
-		$this->$context['team'] = $team;
-		$this->$context['clubs'] = DAO\ClubDAO::getInstance()->getAllClubs();
-        $this->render('team.twig');	
+		$this->context['team'] = $team;
+		$this->context['clubs'] = DAO\ClubDAO::getInstance()->getAllClubs();
+        $this->render('team');	
 	}
 
-	private function displayMatches(){
-		
-	}
-
-    private function displayIndex(){ 
+	private function displayIndex(){ 
 		$allClubs = [];
 		foreach (DAO\ClubDAO::getInstance()->getAllClubs() as $club) {
 			$allTeams = [];
@@ -67,11 +67,30 @@ class HomeController extends MasterController {
 			}	
 			array_push($allClubs, [ 'detail' => $club, 'teams' => $allTeams]);		
 		}		
-		$this->$context['clubs'] = $allClubs;
-		$this->$context['teams'] = DAO\TeamDAO::getInstance()->getAllTeams();
-		$this->$context['lastSync'] = get_option("eventus_datetimesynch");
+		$this->context['clubs'] = $allClubs;
+		$this->context['teams'] = DAO\TeamDAO::getInstance()->getAllTeams();
+		$this->context['lastSync'] = get_option("eventus_datetimesynch");
 
-        $this->render('home.twig');		
+        $this->render('home');		
 	}
+
+	
+	private function displayMatches(){
+		$team = DAO\TeamDAO::getInstance()->getTeamById($_GET['teamId']);
+		$this->context['team'] = $team;
+		$this->context['myMatchParent'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
+		$this->context['myMatchSon'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),1); 
+		$myMatchOther = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
+		if (!$myMatchOther) $myMatchOther[] = new Entities\Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		$this->context['myMatchOther'] = $myMatchOther; 
+
+		$this->context['icons'] = [
+			'edit' => file_get_contents(plugin_dir_path( __FILE__ ).'../svg/edit.svg'),
+			'del' => file_get_contents(plugin_dir_path( __FILE__ ).'../svg/del.svg')
+		];
+        $this->render('matches');		
+	}
+
+
 }
 ?>

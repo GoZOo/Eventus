@@ -1,0 +1,28 @@
+{% extends "_base.twig" %}
+
+{% block wrap %}
+    <h1 class="wp-heading-inline">{{ _e('Log display', 'eventus') }}</h1>
+    <hr class="wp-header-end">
+    {{ notice }} 
+    <ul>
+        <li>
+            {% if content %}
+                {{ content }}
+            {% else %}
+                {{ _e('No log to display', 'eventus') }}
+            {% endif %}
+        </li>
+    </ul>
+    <form action={{ adminPostUrl }} method="post">
+        <button 
+            class="button-primary ico ico-del" 
+            name="action" 
+            value="eventus_clearLog" 
+            class="button-primary" 
+            type="submit" 
+            onclick="return validate('<?php _e('This action is irreversible. Do you really want to delete the logs?', 'eventus') ?>')"
+        >
+            {{ _e('Delete logs', 'eventus') }}
+        </button>                
+    </form>
+{% endblock %}

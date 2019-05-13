@@ -1,0 +1,268 @@
+{% extends "_base.twig" %}
+
+{% block wrap %}
+    <h1 class="wp-heading-inline">
+        {% if team.getName() %}
+            {{ team.getName()|toProperText }}
+            {{ getSexIco(team.getBoy(),team.getGirl(),team.getMixed) }}
+        {% else %}
+            {{ _e('New team', 'eventus') }}
+        {% endif %}
+    </h1>
+    {% if not team %}
+        <h2>{{ _e('Error: The team could not be found....', 'eventus') }}</h2>
+    {% else %}
+        <a class="page-title-action" href="admin.php?page=eventus&action=team&teamId={{ team.getId() }}">
+            {{ _e('Team', 'eventus') }}
+        </a>
+        <hr class="wp-header-end">
+        {{ notice }}
+        <form action="{{ adminPostUrl }}" method="post">
+            <h2>{{ team.getClub().getName()|toProperText }}</h2>
+            <div class="overflow">
+                <table class='matchTable parentMatches' {% if not myMatchParent %} style="display:none;" {% endif %}>
+                    <tr>
+                        <th>{{ _e('Id', 'eventus') }}</th>
+                        <th>{{ _e('Ch.', 'eventus') }}</th>
+                        <th>{{ _e('D.', 'eventus') }}</th>
+                        <th>{{ _e('Date', 'eventus') }}</th>
+                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('RDV', 'eventus') }}</th>
+                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('Match', 'eventus') }}</th>
+                        <th>{{ _e('Loc.', 'eventus') }}<span class="required">*</span>
+                        </th>
+                        <th>{{ _e('Loc.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                        <th>{{ _e('Opp.', 'eventus') }}<span class="required">*</span>
+                        </th>
+                        <th>{{ _e('Opp.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                        <th>{{ _e('Street', 'eventus') }}</th>
+                        <th>{{ _e('City', 'eventus') }}</th>
+                        <th>{{ _e('Gym', 'eventus') }}</th>
+                    </tr>
+                    {% for match in myMatchParent %}
+                        <tr class={{ match.getId() }}>
+                            <th>
+                                {{ match.getId() }}
+                            </th>
+                            <th>
+                                {{ match.getChamp() }}
+                            </th>
+                            <th>
+                                {{ match.getMatchDay() }}
+                            </th>
+                            <td>
+                                <input type='date' value="{{ match.getDate() }}" class='regular-text' disabled data-name="dateSon">
+                            </td>
+                            <td>
+                                <input type='time' value="{{ match.getHourRdv() }}" class='regular-text' disabled data-name="hourRdvSon">
+                            </td>
+                            <td>
+                                <input type='time' value="{{ match.getHourStart() }}" class='regular-text' disabled data-name="hourStartSon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getLocalTeam()|toProperText }}" class='regular-text' disabled required data-name="localTeamSon">
+                            </td>
+                            <td>
+                                <input type='number' value="{{ match.getLocalTeamScore() }}" class='regular-text' disabled data-name="localTeamScoreSon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getVisitingTeam()|toProperText }}" class='regular-text' disabled required data-name="visitingTeamSon">
+                            </td>
+                            <td>
+                                <input type='number' value="{{ match.getVisitingTeamScore() }}" class='regular-text' disabled data-name="visitingTeamScoreSon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getStreet()|toProperText }}" class='regular-text' disabled data-name="streetSon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getCity()|toProperText }}" class='regular-text' disabled data-name="citySon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getGym()|toProperText }}" class='regular-text' disabled data-name="gymSon">
+                            </td>
+                            <td>
+                                <button class='button-primary' onclick='editMatch({{ match.getId() }})' title="Editer le match" type='button'>
+                                    <div class="edit">
+                                        {{ icons.edit }}
+                                    </div>
+                                    <div class="delete" style="display:none;">
+                                        {{ icons.del }}
+                                    </div>
+                                </button>
+                            </td>
+                            <input type='hidden' value="{{ match.getMatchDay() }}" data-name="matchDaySon">
+                            <input type='hidden' value="{{ match.getNumMatch() }}>" data-name="numMatchSon">
+                            <input type='hidden' value="{{ match.getChamp() }}" data-name="matchChampSon">
+                            <input type='hidden' value="{{ match.getId() }}" data-name="idMatchRefSon">
+                            <input type='hidden' value="{{ match.getId() }}" data-name="idSon">
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <br class="sonMatches" {% if not myMatchSon %} style="display:none;" {% endif %}>
+                <h3 class="sonMatches" {% if not myMatchSon %} style="display:none;" {% endif %}>{{ _e('Son matches', 'eventus') }}</h3>
+                <table class='matchTable sonMatches' {% if not myMatchSon %} style="display:none;" {% endif %}>
+                    <tr>
+                        <th>{{ _e('Id', 'eventus') }}<br>{{ _e('Orig.', 'eventus') }}</th>
+                        <th>{{ _e('Ch.', 'eventus') }}</th>
+                        <th>{{ _e('D.', 'eventus') }}</th>
+                        <th>{{ _e('Date', 'eventus') }}</th>
+                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('RDV', 'eventus') }}</th>
+                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('Match', 'eventus') }}</th>
+                        <th>{{ _e('Loc.', 'eventus') }}<span class="required">*</span>
+                        </th>
+                        <th>{{ _e('Loc.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                        <th>{{ _e('Opp.', 'eventus') }}<span class="required">*</span>
+                        </th>
+                        <th>{{ _e('Opp.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                        <th>{{ _e('Street', 'eventus') }}</th>
+                        <th>{{ _e('City', 'eventus') }}</th>
+                        <th>{{ _e('Gym', 'eventus') }}</th>
+                    </tr>
+                    {% for match in myMatchSon %}
+                        <tr class="<?php echo ($match->getMatchRef() ? $match->getMatchRef()->getId() : '') ?>">
+                            <th>
+                                {% if  match.getMatchRef().getId() %}
+                                    {{ match.getMatchRef().getId() }}
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ match.getChamp() }}
+                            </th>
+                            <th>
+                                {{ match.getMatchDay() }}
+                            </th>
+                            <td>
+                                <input type='date' value="{{ match.getDate() }}" class='regular-text' data-name="dateSon">
+                            </td>
+                            <td>
+                                <input type='time' value="{{ match.getHourRdv() }}" class='regular-text' data-name="hourRdvSon">
+                            </td>
+                            <td>
+                                <input type='time' value="{{ match.getHourStart() }}" class='regular-text' data-name="hourStartSon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getLocalTeam()|toProperText }}" class='regular-text' data-name="localTeamSon" required>
+                            </td>
+                            <td>
+                                <input type='number' value="{{ match.getLocalTeamScore() }}" class='regular-text' data-name="localTeamScoreSon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getVisitingTeam()|toProperText }}" class='regular-text' data-name="visitingTeamSon" required>
+                            </td>
+                            <td>
+                                <input type='number' value="{{ match.getVisitingTeamScore() }}" class='regular-text' data-name="visitingTeamScoreSon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getStreet()|toProperText }}" class='regular-text' data-name="streetSon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getCity()|toProperText }}" class='regular-text' data-name="citySon">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getGym()|toProperText }}" class='regular-text' data-name="gymSon">
+                            </td>
+                            <td>
+                                <button class='button-primary' onclick='deleMatch({{ match.getMatchRef().getId() }}, "sonMatches")' title="Supprimer le match" type='button'>
+                                    {{ icons.del }}
+                                </button>
+                            </td>
+                            <input type='hidden' value="{{ match.getMatchDay() }}" data-name="matchDaySon">
+                            <input type='hidden' value="{{ match.getNumMatch() }}" data-name="numMatchSon">
+                            <input type='hidden' value="{{ match.getChamp() }}" data-name="matchChampSon">
+                            <input type='hidden' value="{{ match.getMatchRef().getId() }}" data-name="idMatchRefSon">
+                            <input type='hidden' name='idSon{{ nbrOtherMatch }}' value="{{ match.getId() }}" data-name="idSon">
+                        </tr>
+                    {% endfor %}
+                </table>
+                <input type="hidden" value="{{ nbrSonMatch|length }}" name="nbrSonMatch">
+                
+                <br {% if not myMatchParent %} style="display:none;" {% endif %}>
+                <h3 class="">{{ _e('Other matches', 'eventus') }}</h3>
+                <table class='matchTable otherMatches'>
+                    <tr>
+                        <th>{{ _e('Date', 'eventus') }}</th>
+                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('RDV', 'eventus') }}</th>
+                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('Match', 'eventus') }}</th>
+                        <th>{{ _e('Loc.', 'eventus') }}<span class="required">*</span>
+                        </th>
+                        <th>{{ _e('Loc.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                        <th>{{ _e('Opp.', 'eventus') }}<span class="required">*</span>
+                        </th>
+                        <th>{{ _e('Opp.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                        <th>{{ _e('Street', 'eventus') }}</th>
+                        <th>{{ _e('City', 'eventus') }}</th>
+                        <th>{{ _e('Gym', 'eventus') }}</th>
+                    </tr>
+                    {% for match in myMatchOther %}
+                        {% set tempId = generateId %}
+                        <tr class="{% if match.getId() %}{{match.getId()}}{% else %}{{tempId}}{% endif %}">
+                            <td>
+                                <input type='date' value="{{ match.getDate() }}" class='regular-text' data-name="dateOther">
+                            </td>
+                            <td>
+                                <input type='time' value="{{ match.getHourRdv() }}" class='regular-text' data-name="hourRdvOther">
+                            </td>
+                            <td>
+                                <input type='time' value="{{ match.getHourStart() }}" class='regular-text' data-name="hourStartOther">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getLocalTeam()|toProperText }}" class='regular-text' data-name="localTeamOther">
+                            </td>
+                            <td>
+                                <input type='number' value="{{ match.getgetLocalTeamScoreDate() }}" class='regular-text' data-name="localTeamScoreOther">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getVisitingTeam()|toProperText }}" class='regular-text' data-name="visitingTeamOther">
+                            </td>
+                            <td>
+                                <input type='number' value="{{ match.getVisitingTeamScore() }}" class='regular-text' data-name="visitingTeamScoreOther">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getStreet()|toProperText }}" class='regular-text' data-name="streetOther">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getCity()|toProperText }}" class='regular-text' data-name="cityOther">
+                            </td>
+                            <td>
+                                <input type='text' value="{{ match.getGym()|toProperText }}" class='regular-text' data-name="gymOther">
+                            </td>
+                            <td>
+                                <button class='button-primary' onclick="deleMatch('{% if match.getId() %}{{match.getId()}}{% else %}{{tempId}}{% endif %}', 'otherMatches')" title="Supprimer le match" type='button'>
+                                    {{ icons.del }}
+                                </button>
+                            </td>
+                            <input type='hidden' name='idOther{{nbrOtherMatch|length}}' value="{{ match.getId() }}" data-name="idOther">
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <input type="hidden" value="{{nbrOtherMatch|length - 1 }}" name="nbrOtherMatch">
+            <br><br>
+            <input type='hidden' name='teamId' value="{{ team.getId() }}">
+            <button class='button-primary ico ico-add' onclick='addOtherMatch()' type='button'>{{ _e('Add a match', 'eventus') }}</button>
+            <br><br>
+
+            <button class="button-primary ico ico-save" name="action" type="submit" value="eventus_majMatch">{{ _e('Save changes', 'eventus') }}</button>
+
+            <div class="myTooltip">
+                <button class="button-primary ico ico-time" name="action" onclick="setLoading(this)" type="submit" value="eventus_majHours">{{ _e('Recalculate RDV schedules', 'eventus') }}</button>
+                <span class="myTooltiptext">{{ _e('Saves & updates schedules of upcoming outdoor games with a valid address.', 'eventus') }}</span>
+            </div>
+
+            {% if team.getUrlOne() %}
+                <div class="myTooltip">
+                    <button class="button-primary ico ico-sync" name="action" onclick="setLoading(this)" type="submit" value="eventus_syncMatch">{{ _e('Synchronize match data', 'eventus') }}</button>
+                    <span class="myTooltiptext">{{ _e('Saves & synchronizes match data with the Federation website.', 'eventus') }}</span>
+                </div>
+            {% endif %}
+            
+
+            <div class="myTooltip">
+                <button class="button-primary ico ico-calendar" name="action" onclick="setLoading(this)" type="submit" value="eventus_majIcs">{{ _e('Update the calendar', 'eventus') }}</button>
+                <span class="myTooltiptext">{{ _e('Update the team\'s ICS calendar', 'eventus') }}</span>
+            </div>  			
+                        
+                    
+        </form>
+    {% endif %}
+{% endblock %}

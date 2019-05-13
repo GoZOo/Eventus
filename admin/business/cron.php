@@ -2,16 +2,16 @@
 // Example Cron Job :
 // 54 0,22 * * 0,1,3,5 php ./www/wp-content/plugins/eventus/admin/business/cron.php >/dev/null 2>&1
 namespace Eventus\Admin\Business;
-use Eventus\Includes\Datas as DAO;
+use Eventus\Includes\DAO as DAO;
 
 include_once __DIR__ . '/.../../vendor/autoload.php';
-include_once __DIR__ . '/../../includes/entities/club.php';
-include_once __DIR__ . '/../../includes/entities/match.php';
-include_once __DIR__ . '/../../includes/entities/team.php';
-include_once __DIR__ . '/../../includes/datas/_masterDAO.php';
-include_once __DIR__ . '/../../includes/datas/teamDAO.php';
-include_once __DIR__ . '/../../includes/datas/clubDAO.php';
-include_once __DIR__ . '/../../includes/datas/matchDAO.php';
+include_once __DIR__ . '/../../includes/DTO/club.php';
+include_once __DIR__ . '/../../includes/DTO/match.php';
+include_once __DIR__ . '/../../includes/DTO/team.php';
+include_once __DIR__ . '/../../includes/DAO/_masterDAO.php';
+include_once __DIR__ . '/../../includes/DAO/teamDAO.php';
+include_once __DIR__ . '/../../includes/DAO/clubDAO.php';
+include_once __DIR__ . '/../../includes/DAO/matchDAO.php';
 include_once __DIR__ . '/../../admin/business/finder.php';
 include_once __DIR__ . '/../../../../../wp-config.php';
 include_once __DIR__ . '/../../admin/business/ics.php';

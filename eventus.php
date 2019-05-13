@@ -11,14 +11,14 @@ namespace Eventus;
 
 require_once plugin_dir_path( __FILE__ ).'vendor/autoload.php';
 
-include_once plugin_dir_path( __FILE__ ).'includes/entities/club.php';
-include_once plugin_dir_path( __FILE__ ).'includes/entities/match.php';
-include_once plugin_dir_path( __FILE__ ).'includes/entities/team.php';
-include_once plugin_dir_path( __FILE__ ).'includes/datas/_masterDAO.php';
-include_once plugin_dir_path( __FILE__ ).'includes/datas/_database.php';
-include_once plugin_dir_path( __FILE__ ).'includes/datas/teamDAO.php';
-include_once plugin_dir_path( __FILE__ ).'includes/datas/clubDAO.php';
-include_once plugin_dir_path( __FILE__ ).'includes/datas/matchDAO.php';
+include_once plugin_dir_path( __FILE__ ).'includes/DTO/club.php';
+include_once plugin_dir_path( __FILE__ ).'includes/DTO/match.php';
+include_once plugin_dir_path( __FILE__ ).'includes/DTO/team.php';
+include_once plugin_dir_path( __FILE__ ).'includes/DAO/_masterDAO.php';
+include_once plugin_dir_path( __FILE__ ).'includes/DAO/_database.php';
+include_once plugin_dir_path( __FILE__ ).'includes/DAO/teamDAO.php';
+include_once plugin_dir_path( __FILE__ ).'includes/DAO/clubDAO.php';
+include_once plugin_dir_path( __FILE__ ).'includes/DAO/matchDAO.php';
 include_once plugin_dir_path( __FILE__ ).'admin/controllers/_masterController.php';
 include_once plugin_dir_path( __FILE__ ).'admin/controllers/HomeController.php';
 include_once plugin_dir_path( __FILE__ ).'admin/controllers/clubController.php';
@@ -54,7 +54,7 @@ class Eventus {
 		add_action('wp_dashboard_setup', array($this, 'dashboard'));
 
 		//Style
-		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ).'/admin/css/styles.css' ); 
+		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ).'/admin/views/css/styles.css' ); 
 
     	//Menu
 		add_action('admin_menu', array($this, 'menu'));	
@@ -73,7 +73,7 @@ class Eventus {
 	}
 
     function menu() {
-    	$icon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(plugin_dir_path( __FILE__ ).'admin/svg/handball.svg'));
+    	$icon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(plugin_dir_path( __FILE__ ).'admin/views/svg/handball.svg'));
 	    add_menu_page( __('Teams & Results', 'eventus').' - Eventus', 'Eventus', 'manage_options', 'eventus', array($this, 'callbackMain'), $icon);
 	    add_submenu_page( 'eventus', __('Teams & Results', 'eventus').' - Eventus', __('Teams', 'eventus'), 'manage_options', 'eventus');
 	    add_submenu_page( 'eventus', __('Clubs', 'eventus').' - Eventus', __('Clubs', 'eventus'), 'manage_options', 'eventus_club', array($this, 'callbackClubs'));
@@ -91,11 +91,11 @@ class Eventus {
 	}
 
 	function createTables() {
-		Includes\Datas\Database::getInstance()->createTables();
+		Includes\DAO\Database::getInstance()->createTables();
 	}
 
 	function deleteTables() {
-		Includes\Datas\Database::getInstance()->deleteTables();
+		Includes\DAO\Database::getInstance()->deleteTables();
 	}	
 
 	function callbackMain(){  

@@ -13,6 +13,7 @@
     {% if not club.getId() and not isNew %}
         <h2>{{ _e('Error: The club could not be found...', 'eventus') }}</h2>
     {% else %}
+        <h2></h2>
         <form action="{{ adminPostUrl }}" method="post">
             <div>
                 <table class='form-table'>

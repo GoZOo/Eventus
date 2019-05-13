@@ -1,5 +1,5 @@
 <?php
-use Eventus\Includes\Datas as DAO;
+use Eventus\Includes\DAO as DAO;
 
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  

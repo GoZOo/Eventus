@@ -1,8 +1,8 @@
 <?php
 
 namespace Eventus\Admin\Controllers;
-use Eventus\Includes\Datas as DAO;
-use Eventus\Includes\Entities as Entities;
+use Eventus\Includes\DAO as DAO;
+use Eventus\Includes\DTO as Entities;
 
 /**
 * ClubScreen is a class use to manage admin screen

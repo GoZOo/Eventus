@@ -1,8 +1,8 @@
 <?php 
 
 namespace Eventus\Admin\Business;
-use Eventus\Includes\Datas as DAO;
-use Eventus\Includes\Entities as Entities;
+use Eventus\Includes\DAO as DAO;
+use Eventus\Includes\DTO as Entities;
 use Sunra\PhpSimple\HtmlDomParser;
 
 /**

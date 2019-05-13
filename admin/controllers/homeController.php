@@ -1,8 +1,8 @@
 <?php
 
 namespace Eventus\Admin\Controllers;
-use Eventus\Includes\Datas as DAO;
-use Eventus\Includes\Entities as Entities;
+use Eventus\Includes\DAO as DAO;
+use Eventus\Includes\DTO as Entities;
 
 /**
 * HomeController is a class use to manage admin screen
@@ -85,8 +85,8 @@ class HomeController extends MasterController {
 		$this->context['myMatchOther'] = $myMatchOther; 
 
 		$this->context['icons'] = [
-			'edit' => file_get_contents(plugin_dir_path( __FILE__ ).'../svg/edit.svg'),
-			'del' => file_get_contents(plugin_dir_path( __FILE__ ).'../svg/del.svg')
+			'edit' => file_get_contents(plugin_dir_path( __FILE__ ).'../views/svg/edit.svg'),
+			'del' => file_get_contents(plugin_dir_path( __FILE__ ).'../views/svg/del.svg')
 		];
         $this->render('matches');		
 	}

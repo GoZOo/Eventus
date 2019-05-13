@@ -1,7 +1,7 @@
 <?php 
 
 namespace Eventus\Admin\Business;
-use Eventus\Includes\Datas as DAO;
+use Eventus\Includes\DAO as DAO;
 
 /**
 * FinEventusWidgetDashboard is a class that add a widget element to Wordpress dashboard's
@@ -28,8 +28,8 @@ class EventusWidgetDashboard {
         return self::$_instance;
     }
     private function __construct() {
-		wp_enqueue_style('styleEventus', WP_PLUGIN_URL.'/eventus/admin/css/styles.css'); 
-        wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
+		wp_enqueue_style('styleEventus', WP_PLUGIN_URL.'/eventus/admin/views/css/styles.css'); 
+        wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../views/js/common.js', '', '', true); 
         wp_localize_script('commonJs', 'translations', 
             array(                
                 'defMessage' => __('This action is irreversible. Do you really want to delete the element?', 'eventus' ),

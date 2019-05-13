@@ -277,6 +277,7 @@ class PostHandler {
         delete_option('eventus_mapapikey');
         delete_option('eventus_datetimesynch');
         delete_option('eventus_emailnotif');
+        delete_option('eventus_season');
         wp_redirect( add_query_arg( 'message', 'succesReset',  'admin.php?page=eventus' ));
     }
 
@@ -284,6 +285,7 @@ class PostHandler {
         update_option('eventus_mapapikey', $_POST['mapApiKey'], false);
         update_option('eventus_emailnotif', $_POST['emailNotif'], false);
         update_option('eventus_resetlog', $_POST['resetlog'], false);
+        update_option('eventus_season', $_POST['season'], false);
         wp_redirect( add_query_arg( 'message', 'succesUpSet',  wp_get_referer() ));
     }
 

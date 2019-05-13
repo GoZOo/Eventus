@@ -26,16 +26,16 @@
                             <label for="club">{{ _e('Club', 'eventus') }}<span class="required">*</span></label>
                         </th>
                         <td>
-                        <select name="club" id='club'>
-                            {% for club in clubs %}
-                                <option 
-                                    value="{{ club.getId()}}" 
-                                    {% if team.getClub() and team.getClub().getId() == club.getId() %} selected {% endif %}
-                                >
-                                    {{ club.getName() }}
-                                </option>                                
-                            {% endfor %}
-                        </select>
+                            <select name="club" id='club'>
+                                {% for club in clubs %}
+                                    <option 
+                                        value="{{ club.getId()}}" 
+                                        {% if team.getClub() and team.getClub().getId() == club.getId() %} selected {% endif %}
+                                    >
+                                        {{ club.getName() }}
+                                    </option>                                
+                                {% endfor %}
+                            </select>
                         </td>
                     </tr>
                     <tr>

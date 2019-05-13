@@ -21,7 +21,8 @@ class SettingsController extends MasterController {
         $this->context['options'] = [ 
             'apikey' => get_option("eventus_mapapikey"),
             'emailnotif' => get_option("eventus_emailnotif"),
-            'resetlog' => get_option("eventus_resetlog")
+            'resetlog' => get_option("eventus_resetlog"),
+            'season' => get_option("eventus_season")
         ];
         $this->context['pluginData'] = get_plugin_data(WP_PLUGIN_DIR.'/eventus/eventus.php');
 

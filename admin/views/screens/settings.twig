@@ -73,6 +73,23 @@
                                 </label>
                             </td>
                         </tr>
+                        <tr>
+                            <th scope='row'>
+                                <label>Saison en cours<span class="required">*</span></label>
+                            </th>
+                            <td>
+                                <select name="season" id='season'>
+                                    {% for i in 2035..2000 %}
+                                        <option 
+                                            value="{{ i }} - {{ i + 1 }}" 
+                                            {% if options.season == i ~ " - " ~ (i + 1) %} selected {% endif %}
+                                        >
+                                            {{ i }} - {{ i + 1 }}
+                                        </option>                                
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

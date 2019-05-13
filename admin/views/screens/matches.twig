@@ -90,7 +90,7 @@
                                 </button>
                             </td>
                             <input type='hidden' value="{{ match.getMatchDay() }}" data-name="matchDaySon">
-                            <input type='hidden' value="{{ match.getNumMatch() }}>" data-name="numMatchSon">
+                            <input type='hidden' value="{{ match.getNumMatch() }}" data-name="numMatchSon">
                             <input type='hidden' value="{{ match.getChamp() }}" data-name="matchChampSon">
                             <input type='hidden' value="{{ match.getId() }}" data-name="idMatchRefSon">
                             <input type='hidden' value="{{ match.getId() }}" data-name="idSon">
@@ -119,7 +119,7 @@
                         <th>{{ _e('Gym', 'eventus') }}</th>
                     </tr>
                     {% for match in myMatchSon %}
-                        <tr class="<?php echo ($match->getMatchRef() ? $match->getMatchRef()->getId() : '') ?>">
+                        <tr class="{% if match.getMatchRef() %}{{ match.getMatchRef().getId() }}{% endif %}">
                             <th>
                                 {% if  match.getMatchRef().getId() %}
                                     {{ match.getMatchRef().getId() }}
@@ -170,11 +170,10 @@
                             <input type='hidden' value="{{ match.getNumMatch() }}" data-name="numMatchSon">
                             <input type='hidden' value="{{ match.getChamp() }}" data-name="matchChampSon">
                             <input type='hidden' value="{{ match.getMatchRef().getId() }}" data-name="idMatchRefSon">
-                            <input type='hidden' name='idSon{{ nbrOtherMatch }}' value="{{ match.getId() }}" data-name="idSon">
+                            <input type='hidden' name='idSon{{ match.getId() }}' value="{{ match.getId() }}" data-name="idSon">
                         </tr>
                     {% endfor %}
                 </table>
-                <input type="hidden" value="{{ nbrSonMatch|length }}" name="nbrSonMatch">
                 
                 <br {% if not myMatchParent %} style="display:none;" {% endif %}>
                 <h3 class="">{{ _e('Other matches', 'eventus') }}</h3>
@@ -231,12 +230,11 @@
                                     {{ icons.del }}
                                 </button>
                             </td>
-                            <input type='hidden' name='idOther{{nbrOtherMatch|length}}' value="{{ match.getId() }}" data-name="idOther">
+                            <input type='hidden'>
                         </tr>
                     {% endfor %}
                 </table>
             </div>
-            <input type="hidden" value="{{nbrOtherMatch|length - 1 }}" name="nbrOtherMatch">
             <br><br>
             <input type='hidden' name='teamId' value="{{ team.getId() }}">
             <button class='button-primary ico ico-add' onclick='addOtherMatch()' type='button'>{{ _e('Add a match', 'eventus') }}</button>

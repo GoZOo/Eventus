@@ -109,56 +109,55 @@ class PostHandler {
     function setUpdateMatch(){
         $myTeam = DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']);
         $allMatchesSon = [];
-        for($i=1; $i < $_POST['nbrSonMatch']+1; $i++) { 
-            var_dump(date_create_from_format('H:i', $_POST['hourStartSon'.$i]));
+        foreach ($_POST['sonMatches'] as $sonMatch) {
             $allMatchesSon[] = new Entities\Match(
-                $_POST['idSon'.$i] ? $_POST['idSon'.$i] : null, 
-                $_POST['matchDaySon'.$i] ? $_POST['matchDaySon'.$i] : null,
-                $_POST['numMatchSon'.$i] ? $_POST['numMatchSon'.$i] : null,
-                $_POST['dateSon'.$i] ? $_POST['dateSon'.$i] : null, 
-                $_POST['hourRdvSon'.$i] ? $_POST['hourRdvSon'.$i] : (
-                    $_POST['hourStartSon'.$i] ? 
-                    date_create_from_format('H:i', $_POST['hourStartSon'.$i])->modify('-'. $myTeam->getTime() .'minutes')->format('H:i:s') :
+                $sonMatch['idSon'] ? $sonMatch['idSon'] : null, 
+                $sonMatch['matchDaySon'] ? $sonMatch['matchDaySon'] : null,
+                $sonMatch['numMatchSon'] ? $sonMatch['numMatchSon'] : null,
+                $sonMatch['dateSon'] ? $sonMatch['dateSon'] : null, 
+                $sonMatch['hourRdvSon'] ? $sonMatch['hourRdvSon'] : (
+                    $sonMatch['hourStartSon'] ? 
+                    date_create_from_format('H:i', $sonMatch['hourStartSon'])->modify('-'. $myTeam->getTime() .'minutes')->format('H:i:s') :
                     null
                 ), 
-                $_POST['hourStartSon'.$i] ? $_POST['hourStartSon'.$i] : null, 
-                $_POST['localTeamSon'.$i] ? $_POST['localTeamSon'.$i] : null, 
-                $_POST['localTeamScoreSon'.$i] ? $_POST['localTeamScoreSon'.$i] : null,
-                $_POST['visitingTeamSon'.$i] ? $_POST['visitingTeamSon'.$i] : null, 
-                $_POST['visitingTeamScoreSon'.$i] ? $_POST['visitingTeamScoreSon'.$i] : null, 
-                strpos(strtolower(Finder::stripAccents($_POST['localTeamSon'.$i])),strtolower(Finder::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
-                $_POST['streetSon'.$i] ? $_POST['streetSon'.$i] : null, 
-                $_POST['citySon'.$i] ? $_POST['citySon'.$i] : null, 
-                $_POST['gymSon'.$i] ? $_POST['gymSon'.$i] : null,
+                $sonMatch['hourStartSon'] ? $sonMatch['hourStartSon'] : null, 
+                $sonMatch['localTeamSon'] ? $sonMatch['localTeamSon'] : null, 
+                $sonMatch['localTeamScoreSon'] ? $sonMatch['localTeamScoreSon'] : null,
+                $sonMatch['visitingTeamSon'] ? $sonMatch['visitingTeamSon'] : null, 
+                $sonMatch['visitingTeamScoreSon'] ? $sonMatch['visitingTeamScoreSon'] : null, 
+                strpos(strtolower(Finder::stripAccents($sonMatch['localTeamSon'])),strtolower(Finder::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
+                $sonMatch['streetSon'] ? $sonMatch['streetSon'] : null, 
+                $sonMatch['citySon'] ? $sonMatch['citySon'] : null, 
+                $sonMatch['gymSon'] ? $sonMatch['gymSon'] : null,
                 1, 
-                $_POST['matchChampSon'.$i] ? $_POST['matchChampSon'.$i] : null,
+                $sonMatch['matchChampSon'] ? $sonMatch['matchChampSon'] : null,
                 $_POST['teamId'],
-                $_POST['idMatchRefSon'.$i] ? $_POST['idMatchRefSon'.$i] : null
+                $sonMatch['idMatchRefSon'] ? $sonMatch['idMatchRefSon'] : null
             );
-        }   
+        } 
         DAO\MatchDAO::getInstance()->updateMatchesScreen($allMatchesSon, 1, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId()); 
 
         $allMatchesOther = [];
-        for($i=1; $i < $_POST['nbrOtherMatch']+1; $i++) { 
+        foreach ($_POST['otherMatches'] as $otherMatch) {
             $allMatchesOther[] = new Entities\Match(
-                $_POST['idOther'.$i] ? $_POST['idOther'.$i] : null, 
+                $otherMatch['idOther'] ? $otherMatch['idOther'] : null, 
                 null,
                 null,
-                $_POST['dateOther'.$i] ? $_POST['dateOther'.$i] : null, 
-                $_POST['hourRdvOther'.$i]? $_POST['hourRdvOther'.$i] :  (
-                    $_POST['hourStartOther'.$i] ? 
-                    date_create_from_format('H:i', $_POST['hourStartOther'.$i])->modify('-'. $myTeam->getTime() .'minutes')->format('H:i:s') :
+                $otherMatch['dateOther'] ? $otherMatch['dateOther'] : null, 
+                $otherMatch['hourRdvOther']? $otherMatch['hourRdvOther'] :  (
+                    $otherMatch['hourStartOther'] ? 
+                    date_create_from_format('H:i', $otherMatch['hourStartOther'])->modify('-'. $myTeam->getTime() .'minutes')->format('H:i:s') :
                     null
                 ), 
-                $_POST['hourStartOther'.$i] ? $_POST['hourStartOther'.$i] : null,
-                $_POST['localTeamOther'.$i] ? $_POST['localTeamOther'.$i] : null, 
-                $_POST['localTeamScoreOther'.$i] ? $_POST['localTeamScoreOther'.$i] : null,
-                $_POST['visitingTeamOther'.$i] ? $_POST['visitingTeamOther'.$i] : null, 
-                $_POST['visitingTeamScoreOther'.$i] ? $_POST['visitingTeamScoreOther'.$i] : null, 
-                strpos(strtolower(Finder::stripAccents($_POST['localTeamOther'.$i])),strtolower(Finder::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
-                $_POST['streetOther'.$i] ? $_POST['streetOther'.$i] : null, 
-                $_POST['cityOther'.$i] ? $_POST['cityOther'.$i] : null, 
-                $_POST['gymOther'.$i] ? $_POST['gymOther'.$i] : null,
+                $otherMatch['hourStartOther'] ? $otherMatch['hourStartOther'] : null,
+                $otherMatch['localTeamOther'] ? $otherMatch['localTeamOther'] : null, 
+                $otherMatch['localTeamScoreOther'] ? $otherMatch['localTeamScoreOther'] : null,
+                $otherMatch['visitingTeamOther'] ? $otherMatch['visitingTeamOther'] : null, 
+                $otherMatch['visitingTeamScoreOther'] ? $otherMatch['visitingTeamScoreOther'] : null, 
+                strpos(strtolower(Finder::stripAccents($otherMatch['localTeamOther'])),strtolower(Finder::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
+                $otherMatch['streetOther'] ? $otherMatch['streetOther'] : null, 
+                $otherMatch['cityOther'] ? $otherMatch['cityOther'] : null, 
+                $otherMatch['gymOther'] ? $otherMatch['gymOther'] : null,
                 2, 
                 null,
                 $_POST['teamId'],
@@ -212,8 +211,7 @@ class PostHandler {
     /**************************
     *********** Team ***********
     ***************************/
-    function updateTeam(){    
-        $allTeams = [];
+    function updateTeam(){  
         if ($_POST['teamId']) {
             $team = DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']);
         } else {

@@ -8,6 +8,7 @@ use Sunra\PhpSimple\HtmlDomParser;
 /**
 * Finder is a class that allows you to manage all synchronization actions of matches.
 *
+* @package  Admin/Business
 * @access   public
 */
 class Finder {

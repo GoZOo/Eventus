@@ -2,7 +2,6 @@
 
 namespace Eventus\Admin\Business;
 use Eventus\Includes\Datas as DAO;
-use Eventus\Includes\Entities as Entities;
 
 /**
 * FinEventusWidgetDashboard is a class that add a widget element to Wordpress dashboard's

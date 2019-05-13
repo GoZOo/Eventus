@@ -1,5 +1,8 @@
+//Init rows
 updateRow("sonMatches");
 updateRow("otherMatches");
+
+//Init : hide button te create child son if it already exist
 for (var i = 0; i < jQuery("table.parentMatches tr").length; i++) {
 	for (var j = 0; j < jQuery("table.sonMatches tr").length; j++) {
 		if (jQuery("table.parentMatches tr:eq(" + i + ")").attr("class") == jQuery("table.sonMatches tr:eq(" + j + ")").attr("class")) {
@@ -10,21 +13,30 @@ for (var i = 0; i < jQuery("table.parentMatches tr").length; i++) {
 
 /* Add new Son match */
 function editMatch(id) {
+	//Display son match
 	jQuery('.sonMatches').css('display', 'block');
 	jQuery('br.sonMatches').css('display', 'inline-block');
 
+	//Clone match
 	jQuery("table.sonMatches").append(jQuery("table.parentMatches ." + id).clone());
 
+	//Erease id element
 	jQuery('table.sonMatches tr:last-child input[data-name="idSon"]').each(function (i, el) {
 		jQuery(el).attr("value", "");
 	});
+
+	//Element can be edited 
 	jQuery('table.sonMatches tr:last-child td input').each(function (i, el) {
 		jQuery(el).removeAttr("disabled");
 	});
+
+	//Set actions
 	jQuery('table.sonMatches tr:last-child td button').each(function (i, el) {
 		jQuery(el).attr("title", "Supprimer le match");
 		jQuery(el).attr("onclick", 'deleMatch(' + id + ', "sonMatches")');
 	});
+
+	//Switch button to display
 	jQuery('table.sonMatches tr:last-child td button div').each(function (i, el) {
 		if (jQuery(el).hasClass("edit")) {
 			jQuery(el).css("display", "none");
@@ -33,18 +45,15 @@ function editMatch(id) {
 			jQuery(el).css("display", "inline-block");
 		}
 	});
-
+	
+	//Hide button to create a new son match
 	jQuery("table.parentMatches ." + id + " button").css("display", "none");
-
-	jQuery("input[name='nbrSonMatch']").attr("value", parseInt(jQuery("input[name='nbrSonMatch']").attr("value")) + 1);
 
 	updateRow("sonMatches");
 }
 
 /* Add new Other match */
 function addOtherMatch() {
-	jQuery("input[name='nbrOtherMatch']").attr("value", parseInt(jQuery("input[name='nbrOtherMatch']").attr("value")) + 1);
-
 	var tempId = Math.random().toString(36).substr(2, 9);
 
 	jQuery("table.otherMatches").append(jQuery("table.otherMatches tr:eq(1)").clone());
@@ -66,7 +75,6 @@ function addOtherMatch() {
 /* Del Son/Other match */
 function deleMatch(id, type) {
 	if (type == "sonMatches") {
-		jQuery("input[name='nbrSonMatch']").attr("value", parseInt(jQuery("input[name='nbrSonMatch']").attr("value")) - 1);
 
 		jQuery('table.sonMatches .' + id).remove();
 
@@ -78,7 +86,6 @@ function deleMatch(id, type) {
 
 		updateRow("sonMatches");
 	} else if (type == "otherMatches") {
-		jQuery("input[name='nbrOtherMatch']").attr("value", parseInt(jQuery("input[name='nbrOtherMatch']").attr("value")) - 1);
 
 		if (jQuery('table.otherMatches tr').length == 2) {
 			jQuery('table.otherMatches tr input').each(function (i, el) {
@@ -90,18 +97,14 @@ function deleMatch(id, type) {
 
 		updateRow("otherMatches");
 	}
-
 }
 
 /* Update Son/Other match */
 function updateRow(type) {
-	for (var i = 0; i < jQuery('table.' + type + ' tr').length; i++) {
-		for (var k = 0; k < jQuery("table." + type + " tr:eq(" + i + ") > [data-name]").length; k++) {
-			jQuery("table." + type + " tr:eq(" + i + ") > [data-name]:eq(" + k + ")").attr('name', jQuery("table." + type + " tr:eq(" + i + ") > [data-name]:eq(" + k + ")").attr("data-name") + i);
-		}
-		for (var j = 0; j < jQuery('table.' + type + ' tr:eq(' + i + ') td').length; j++) {
-			jQuery("table." + type + " tr:eq(" + i + ") td:eq(" + j + ") [data-name]").attr('name', jQuery("table." + type + " tr:eq(" + i + ") td:eq(" + j + ") [data-name]").attr("data-name") + i);
-		}
-	}
+	[...document.querySelectorAll(`table.${type} tr`)].map((x,i) => {	
+		[...x.querySelectorAll('[data-name]')].map(z => {
+			z.setAttribute('name', `${type}[${i}][${z.getAttribute('data-name')}]`)
+		})
+	})
 }
 

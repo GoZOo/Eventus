@@ -1,22 +1,28 @@
 <?php
 // Source https://gist.github.com/jakebellacera/635416
-// namespace Eventus\Admin\Business;
+namespace Eventus\Admin\Business;
 
 /**
 * ICS is a class use to generate ics calendars
 *
-* @package  Includes
+* @package  Admin/Business
 * @access   public
 */
-
 class Ics {
-    use TraitHelper;
+    use \TraitHelper;
     const DT_FORMAT = 'Ymd\THis';
     const TIMEZONE = 'Europe/Paris';
     private static $events;
     private static $clubName;
     private static $teamName;
 
+    /**
+    * Init Ics
+    *
+    * @param Match[]   Matches to be had in a ics file
+    * @return void
+    * @access public
+    */
     public static function init($matches) {
         if($matches !== null && sizeof($matches)){
             self::$events = array();
@@ -57,6 +63,12 @@ class Ics {
              
     }
 
+    /**
+    * Init Ics content
+    *
+    * @return void
+    * @access private
+    */
     private function prepare() {
         $cp = array();
         if (count(self::$events) > 0) {
@@ -82,6 +94,12 @@ class Ics {
         return implode("\r\n", $cp);
     }
 
+    /**
+    * Format values
+    *
+    * @return void
+    * @access private
+    */
     private function sanitize_val($val, $key = false) {
         switch ($key) {
             case 'dtstamp':
@@ -98,23 +116,48 @@ class Ics {
         return $val;
     }
 
+    /**
+    * Format values start match
+    *
+    * @return void
+    * @access private
+    */
     private function format_timestamp($timestamp) {      
         $dt = new DateTime($timestamp, new DateTimeZone(self::TIMEZONE));
         date_default_timezone_set("UTC");
         return $dt->format(self::DT_FORMAT);
     }
 
+    /**
+    * Format values end match
+    *
+    * @return void
+    * @access private
+    */
     private function format_timestamp_end($timestamp) {
         $dt = new DateTime($timestamp, new DateTimeZone(self::TIMEZONE));
         $dt->modify('+1 hour +30 minutes');
         date_default_timezone_set("UTC");
         return $dt->format(self::DT_FORMAT);
     }
-    
+
+    /**
+    * Format values escape string
+    *
+    * @return void
+    * @access private
+    */
     private function escape_string($str) {
         return preg_replace('/([,;])/','\$1', $str);
     }
     
+    /**
+    * Know if match is won
+    *
+    * @param Match
+    * @return void
+    * @access private
+    */
     private function getState($match){
         $res = "";
         if ((!$match->getExt() && $match->getLocalTeamScore() > $match->getVisitingTeamScore()) || ($match->getExt() && $match->getLocalTeamScore() < $match->getVisitingTeamScore())) {

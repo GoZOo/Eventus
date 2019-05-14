@@ -106,7 +106,8 @@ class MatchDAO extends MasterDAO {
                         $row->club_name, 
                         $row->club_string, 
                         $row->club_address, 
-                        $row->club_img
+                        $row->club_img,
+                        $row->club_season
                     )
                 ),
                 $row->idMatchRef ? 
@@ -144,7 +145,8 @@ class MatchDAO extends MasterDAO {
                                 $row->club_name, 
                                 $row->club_string, 
                                 $row->club_address, 
-                                $row->club_img
+                                $row->club_img,
+                                $row->club_season
                             )
                         )
                     ) : null
@@ -231,7 +233,8 @@ class MatchDAO extends MasterDAO {
                         $row->club_name, 
                         $row->club_string, 
                         $row->club_address, 
-                        $row->club_img
+                        $row->club_img,
+                        $row->club_season
                     )
                 ),
                 $row->match_idMatchRef ? 
@@ -269,7 +272,8 @@ class MatchDAO extends MasterDAO {
                                 $row->club_name, 
                                 $row->club_string, 
                                 $row->club_address, 
-                                $row->club_img
+                                $row->club_img,
+                                $row->club_season
                             )
                         )
                     ) : null
@@ -415,7 +419,8 @@ class MatchDAO extends MasterDAO {
                         $row->club_name, 
                         $row->club_string, 
                         $row->club_address, 
-                        $row->club_img
+                        $row->club_img,
+                        $row->club_season
                     )
                 ),
                 null

@@ -91,6 +91,7 @@ class Eventus {
 	}
 
 	function createTables() {
+        update_option('eventus_season', date("Y") ." - ". (date("Y")+1), false);
 		Includes\DAO\Database::getInstance()->createTables();
 	}
 

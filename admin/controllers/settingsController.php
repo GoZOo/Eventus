@@ -12,7 +12,7 @@ namespace Eventus\Admin\Controllers;
 class SettingsController extends MasterController {
     public function __construct() {
 		parent::__construct();
-        wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../js/screens/adminScreen.js', '', '', true); 
+        wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../views/js/screens/adminScreen.js', '', '', true); 
 
         $this->displayIndex();
     }	

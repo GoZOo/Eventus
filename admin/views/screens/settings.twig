@@ -79,6 +79,7 @@
                             </th>
                             <td>
                                 <select name="season" id='season'>
+                                    <option value="" selected disabled hidden>Sélectionner une date</option>
                                     {% for i in 2035..2000 %}
                                         <option 
                                             value="{{ i }} - {{ i + 1 }}" 

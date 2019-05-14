@@ -16,7 +16,7 @@ class HomeController extends MasterController {
 
 		if (isset($_GET['action']) && $_GET['action']=="team") {
 			wp_enqueue_media();     
-			wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../js/uploadImg.js', '', '', true); 
+			wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../views/js/uploadImg.js', '', '', true); 
 			wp_localize_script('upImgJs', 'translations', 
 				array(                
 					'selectAnImg' => __('Select the default team image', 'eventus' ),
@@ -24,11 +24,11 @@ class HomeController extends MasterController {
 				)
 			);
 			wp_enqueue_script('upImgJs');
-			wp_enqueue_script('teamJs', plugin_dir_url( __FILE__ ).'/../../js/screens/teamDetailScreen.js', '', '', true); 
+			wp_enqueue_script('teamJs', plugin_dir_url( __FILE__ ).'/../../views/js/screens/teamDetailScreen.js', '', '', true); 
 			
 			$this->displayTeam();
 		} else if(isset($_GET['action']) && $_GET['action']=="matchs"){
-			wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../js/screens/matchDetailScreen.js', '', '', true); 
+			wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../views/js/screens/matchDetailScreen.js', '', '', true); 
 
 			$this->displayMatches();
 		} else {

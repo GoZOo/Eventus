@@ -174,12 +174,15 @@ class PostHandler {
         if ($_POST['clubId']) {
             $club = DAO\ClubDAO::getInstance()->getClubById($_POST['clubId']);
         } else {
-            $club = new Entities\Club(null, "", "", "", "");
+            $club = new Entities\Club(
+                null, 
+                $_POST['nom'] ? $_POST['nom'] : "", 
+                $_POST['chaine'] ? $_POST['chaine'] : "", 
+                $_POST['adresse'] ? $_POST['adresse'] : null, 
+                $_POST['img'] ? $_POST['img'] : null, 
+                get_option("eventus_season")
+            );
         }        
-        $club->setName(($_POST['nom'] ? $_POST['nom'] : ""));
-        $club->setString(($_POST['chaine'] ? $_POST['chaine'] : ""));
-        $club->setAddress(($_POST['adresse'] ? $_POST['adresse'] : null));
-        $club->setImg(($_POST['img'] ? $_POST['img'] : null));
 
         if($club->getName() && $club->getString() && $club->getAddress()){
             if ($club->getId()) {

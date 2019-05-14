@@ -16,7 +16,7 @@ class ClubController extends MasterController {
         
 		if (isset($_GET['action']) && $_GET['action']=="club") {
             wp_enqueue_media();    
-            wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../js/uploadImg.js', '', '', true); 
+            wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../views/js/uploadImg.js', '', '', true); 
             wp_localize_script('upImgJs', 'translations', 
                 array(                
                     'selectAnImg' => __('Select the default team image', 'eventus' ),
@@ -47,7 +47,7 @@ class ClubController extends MasterController {
 
     function displayClub(){
         $club = DAO\ClubDAO::getInstance()->getClubById($_GET['clubId']);
-        if (!$_GET['clubId']) $club = new Entities\Club(null, "", "", "");
+        if (!$_GET['clubId']) $club = new Entities\Club(null, "", "", "", null, "");
 
         $this->context['club'] = $club;
         $this->context['isNew'] = $_GET['clubId'] ? false : true;

@@ -57,7 +57,7 @@
     </a>
     <br/><br/>
 
-    {% if teams %}
+    {% if clubs[0].teams|length %}
         <form action={{ adminPostUrl }} method="post">
             <div class="myTooltip">
                 <button type="submit" name="action" value="eventus_syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">

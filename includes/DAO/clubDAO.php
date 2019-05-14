@@ -41,20 +41,23 @@ class ClubDAO extends MasterDAO {
     * @return Club[] All the clubs that exist
     * @access public
     */
-    function getAllClubs(){    
+    function getAllClubs(){  
         $allClubs = [];
         $clubs = $this->wpdb->get_results("
             SELECT * 
             FROM 
-                {$this->t1}"
-        );
+                {$this->t1}
+            WHERE
+                club_season='{$this->season}'"
+        ); 
         foreach($clubs as $row) { 
             $allClubs[] = new Entities\Club(
                 $row->club_id, 
                 $row->club_name, 
                 $row->club_string, 
                 $row->club_address, 
-                $row->club_img
+                $row->club_img,
+                $row->club_season
             );
         }
         return $allClubs;
@@ -73,13 +76,15 @@ class ClubDAO extends MasterDAO {
             FROM 
                 {$this->t1} 
             WHERE 
-                club_id=$myClubId");
+                club_id=$myClubId AND
+                club_season='{$this->season}'");
         return new Entities\Club(
             $row->club_id, 
             $row->club_name, 
             $row->club_string, 
             $row->club_address, 
-            $row->club_img
+            $row->club_img,
+            $row->club_season
         );
     }
 
@@ -115,7 +120,9 @@ class ClubDAO extends MasterDAO {
         return $this->wpdb->get_row("
             SELECT 
                 count(DISTINCT club_id) as nbr_clubs
-            FROM {$this->t1};
+            FROM {$this->t1}
+            WHERE
+                club_season='{$this->season}';
         ");
     }
     /***************************
@@ -157,7 +164,8 @@ class ClubDAO extends MasterDAO {
                 'club_name' => $club->getName(), 
                 'club_string' => $club->getString(), 
                 'club_address' => $club->getAddress(), 
-                'club_img' => $club->getImg()
+                'club_img' => $club->getImg(), 
+                'club_season' => $club->getSeason()
             );
             $this->wpdb->insert("{$this->t1}", $data);
         }

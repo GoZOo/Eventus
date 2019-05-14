@@ -19,6 +19,7 @@ abstract class MasterDAO {
         $this->t1 = $this->wpdb->prefix.MasterDAO::NAME.MasterDAO::TABLE_NAME1;       
         $this->t2 = $this->wpdb->prefix.MasterDAO::NAME.MasterDAO::TABLE_NAME2;
         $this->t3 = $this->wpdb->prefix.MasterDAO::NAME.MasterDAO::TABLE_NAME3;  
+        $this->season = get_option("eventus_season");
     }
 }
 

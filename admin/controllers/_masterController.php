@@ -148,7 +148,7 @@ abstract class MasterController {
                 'str'   => "Les calendriers ont bien été supprimé."
             )
         );
-        if ($_GET['message'] && $notices[$_GET['message']]) {
+        if (array_key_exists('message', $_GET) && $_GET['message'] && $notices[$_GET['message']]) {
             return '<div class="notice notice-'.$notices[$_GET['message']]['state'].' is-dismissible"><p><strong>'.$notices[$_GET['message']]['str'].'</strong></p></div>'; 
         }
         return;

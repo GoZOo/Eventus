@@ -51,6 +51,8 @@ class TeamDAO extends MasterDAO {
                 {$this->t1} b 
             ON 
                 a.team_clubId = b.club_id 
+            WHERE
+                b.club_season='{$this->season}'
             ORDER BY 
                 a.team_name DESC 
         ");
@@ -143,7 +145,7 @@ class TeamDAO extends MasterDAO {
             ON 
                 a.team_clubId = b.club_id 
             WHERE 
-                a.team_clubId={$club->getId()}
+                a.team_clubId={$club->getId()} 
             ORDER BY 
                 a.team_boy=1 DESC, 
                 a.team_girl=1 DESC,
@@ -202,7 +204,7 @@ class TeamDAO extends MasterDAO {
             ON 
                 a.team_clubId = b.club_id 
             WHERE 
-                a.team_clubId={$club->getId()}
+                a.team_clubId={$club->getId()}   
             ORDER BY             
                 (CASE
                     WHEN LOWER(a.team_name) LIKE '%senior%' THEN 1 
@@ -271,7 +273,14 @@ class TeamDAO extends MasterDAO {
         return $this->wpdb->get_row("
             SELECT 
                 count(DISTINCT team_id) as nbr_teams
-            FROM {$this->t3};
+            FROM 
+                {$this->t3} a 
+            LEFT JOIN 
+                {$this->t1} b 
+            ON 
+                a.team_clubId = b.club_id 
+            WHERE
+                b.club_season='{$this->season}';
         ");
     }
 

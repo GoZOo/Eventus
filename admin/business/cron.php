@@ -4,7 +4,7 @@
 namespace Eventus\Admin\Business;
 use Eventus\Includes\DAO as DAO;
 
-include_once __DIR__ . '/.../../vendor/autoload.php';
+include_once __DIR__ . '/../../vendor/autoload.php';
 include_once __DIR__ . '/../../includes/DTO/club.php';
 include_once __DIR__ . '/../../includes/DTO/match.php';
 include_once __DIR__ . '/../../includes/DTO/team.php';
@@ -21,9 +21,8 @@ update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
 
 foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
 	Finder::getInstance()->updateMatches($team);
-	\Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($teams[$i]->getId()));
+	Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($team->getId()));
 }
-
 
 echo get_option("eventus_emailnotif");
 if (get_option("eventus_emailnotif")){

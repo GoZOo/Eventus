@@ -6,11 +6,15 @@ Useful Wordpress plugin that allow you to manage handball teams results through 
 
 ### Installing
 
-Simply retrieve the project and drag it into the plugins folder of your WordPress site.
-
+* Retrieve the project and drag it into the plugins folder of your WordPress site.
 ```
 wp-content/plugins/
 ```
+* Install librairies with composer
+```
+composer install
+```
+* And that's it !
 
 ### Initialization
 
@@ -43,6 +47,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Evo results shown in two rows : main club is in a different color
 * Evo remove some useless text for widget home
 * Evo none buttons/links can be clicked when button loading
+* Evo use twig for templating screen in back end
 
 ### 2.4.2
 

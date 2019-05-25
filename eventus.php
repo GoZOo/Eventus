@@ -9,61 +9,92 @@
  */
 namespace Eventus;
 
-require_once plugin_dir_path( __FILE__ ).'vendor/autoload.php';
+require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
-include_once plugin_dir_path( __FILE__ ).'includes/DTO/club.php';
-include_once plugin_dir_path( __FILE__ ).'includes/DTO/match.php';
-include_once plugin_dir_path( __FILE__ ).'includes/DTO/team.php';
-include_once plugin_dir_path( __FILE__ ).'includes/DAO/_masterDAO.php';
-include_once plugin_dir_path( __FILE__ ).'includes/DAO/_database.php';
-include_once plugin_dir_path( __FILE__ ).'includes/DAO/teamDAO.php';
-include_once plugin_dir_path( __FILE__ ).'includes/DAO/clubDAO.php';
-include_once plugin_dir_path( __FILE__ ).'includes/DAO/matchDAO.php';
-include_once plugin_dir_path( __FILE__ ).'admin/controllers/_masterController.php';
-include_once plugin_dir_path( __FILE__ ).'admin/controllers/HomeController.php';
-include_once plugin_dir_path( __FILE__ ).'admin/controllers/clubController.php';
-include_once plugin_dir_path( __FILE__ ).'admin/controllers/logController.php';
-include_once plugin_dir_path( __FILE__ ).'admin/controllers/settingsController.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/finder.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/traitHelper.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/ics.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/postHandler.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/widgetDashboard.php';
-include_once plugin_dir_path( __FILE__ ).'admin/business/twig.php';
+include_once plugin_dir_path(__FILE__) . 'includes/DTO/club.php';
+include_once plugin_dir_path(__FILE__) . 'includes/DTO/match.php';
+include_once plugin_dir_path(__FILE__) . 'includes/DTO/team.php';
+include_once plugin_dir_path(__FILE__) . 'includes/DAO/_masterDAO.php';
+include_once plugin_dir_path(__FILE__) . 'includes/DAO/_database.php';
+include_once plugin_dir_path(__FILE__) . 'includes/DAO/teamDAO.php';
+include_once plugin_dir_path(__FILE__) . 'includes/DAO/clubDAO.php';
+include_once plugin_dir_path(__FILE__) . 'includes/DAO/matchDAO.php';
+include_once plugin_dir_path(__FILE__) . 'admin/controllers/_masterController.php';
+include_once plugin_dir_path(__FILE__) . 'admin/controllers/homeController.php';
+include_once plugin_dir_path(__FILE__) . 'admin/controllers/clubController.php';
+include_once plugin_dir_path(__FILE__) . 'admin/controllers/logController.php';
+include_once plugin_dir_path(__FILE__) . 'admin/controllers/settingsController.php';
+include_once plugin_dir_path(__FILE__) . 'admin/business/finder.php';
+include_once plugin_dir_path(__FILE__) . 'admin/business/traitHelper.php';
+include_once plugin_dir_path(__FILE__) . 'admin/business/ics.php';
+include_once plugin_dir_path(__FILE__) . 'admin/business/postHandler.php';
+include_once plugin_dir_path(__FILE__) . 'admin/business/widgetDashboard.php';
+include_once plugin_dir_path(__FILE__) . 'admin/business/twig.php';
 
-if (file_exists(get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php')){
-	include_once get_template_directory().'/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/calendar.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/match.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/circlePosPts.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/buttonResults.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/results.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/teamPicture.php';
-	include_once plugin_dir_path( __FILE__ ).'admin/business/aviaShortcode/icsCalendar.php';	
+if (file_exists(get_template_directory() . '/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php')) {
+	include_once get_template_directory() . '/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
+	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/calendar.php';
+	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/match.php';
+	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/circlePosPts.php';
+	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/buttonResults.php';
+	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/results.php';
+	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/teamPicture.php';
+	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/icsCalendar.php';
 }
 
-class Eventus {	
-    public function __construct() {
+class Eventus {
+	public function __construct() {
 		//Translations
-		add_action('init', array($this, 'loadTranslation') );
-	
+		add_action('init', function () {
+			load_textdomain('eventus', plugin_dir_path(__FILE__) . 'lang/eventus-' . get_locale() . '.mo');
+			load_plugin_textdomain('eventus', false, plugin_dir_path(__FILE__) . 'lang');
+		});
+
 		//Settings Link
-		add_filter( "plugin_action_links_".plugin_basename( __FILE__ ), array($this, 'settingsLink'));
+		add_filter("plugin_action_links_" . plugin_basename(__FILE__), function ($links) {
+			array_unshift($links, '<a href="admin.php?page=eventus">' . __('Settings') . '</a>');
+			return $links;
+		});
 
 		//Dashboard
-		add_action('wp_dashboard_setup', array($this, 'dashboard'));
+		add_action('wp_dashboard_setup', function () {
+			wp_add_dashboard_widget('dashboard_eventus',  'Eventus - ' . __('Overview', 'eventus'), function () {
+				Admin\Business\EventusWidgetDashboard::getInstance()->display();
+			});
+		});
 
 		//Style
-		wp_enqueue_style( 'style', plugin_dir_url( __FILE__ ).'/admin/views/css/styles.css' ); 
+		add_action('admin_enqueue_scripts', function () {			
+			wp_enqueue_style('eventus', plugin_dir_url(__FILE__) . 'admin/views/css/styles.css', array(), null, 'all');
+		});
+		// wp_enqueue_style('eventus', plugin_dir_url(__FILE__) . 'admin/views/css/styles.css', []);
 
-    	//Menu
-		add_action('admin_menu', array($this, 'menu'));	
+		//Menu
+		add_action('admin_menu', function () {
+			$icon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(plugin_dir_path(__FILE__) . 'admin/views/svg/handball.svg'));
+			add_menu_page(__('Teams & Results', 'eventus') . ' - Eventus', 'Eventus', 'manage_options', 'eventus', function () {
+				new Admin\Controllers\HomeController;
+			}, $icon);
+			add_submenu_page('eventus', __('Teams & Results', 'eventus') . ' - Eventus', __('Teams', 'eventus'), 'manage_options', 'eventus');
+			add_submenu_page('eventus', __('Clubs', 'eventus') . ' - Eventus', __('Clubs', 'eventus'), 'manage_options', 'eventus_club', function () {
+				new Admin\Controllers\ClubController;
+			});
+			add_submenu_page('eventus', __('Logs', 'eventus') . ' - Eventus', __('Logs', 'eventus'), 'manage_options', 'eventus_logs', function () {
+				new Admin\Controllers\LogController;
+			});
+			add_submenu_page('eventus', __('Settings', 'eventus') . ' - Eventus', __('Settings', 'eventus'), 'manage_options', 'eventus_admin', function () {
+				new Admin\Controllers\SettingsController;
+			});
+		});
 
 		//Bdd
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        register_activation_hook( __FILE__, array($this, 'createTables'));
-		register_deactivation_hook( __FILE__, array($this, 'deleteTables'));
-		register_uninstall_hook( __FILE__, array($this, 'deleteTables'));
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		register_activation_hook(__FILE__, function () {
+			update_option('eventus_season', date("Y") . " - " . (date("Y") + 1), false);
+			Includes\DAO\Database::getInstance()->createTables();
+		});
+		register_deactivation_hook(__FILE__, array($this, 'uninstall'));
+		register_uninstall_hook(__FILE__, 'uninstall');
 
 		//PostHandler
 		Admin\Business\PostHandler::getInstance();
@@ -72,57 +103,9 @@ class Eventus {
 		new Admin\Business\Twig;
 	}
 
-    function menu() {
-    	$icon = 'data:image/svg+xml;base64,' . base64_encode(file_get_contents(plugin_dir_path( __FILE__ ).'admin/views/svg/handball.svg'));
-	    add_menu_page( __('Teams & Results', 'eventus').' - Eventus', 'Eventus', 'manage_options', 'eventus', array($this, 'callbackMain'), $icon);
-	    add_submenu_page( 'eventus', __('Teams & Results', 'eventus').' - Eventus', __('Teams', 'eventus'), 'manage_options', 'eventus');
-	    add_submenu_page( 'eventus', __('Clubs', 'eventus').' - Eventus', __('Clubs', 'eventus'), 'manage_options', 'eventus_club', array($this, 'callbackClubs'));
-	    add_submenu_page( 'eventus', __('Logs', 'eventus').' - Eventus', __('Logs', 'eventus'), 'manage_options', 'eventus_logs', array($this, 'callbackLogs'));
-	    add_submenu_page( 'eventus', __('Settings', 'eventus').' - Eventus', __('Settings', 'eventus'), 'manage_options', 'eventus_admin', array($this, 'callbackAdmin'));
-	} 
-
-	function dashboard() {
-	    wp_add_dashboard_widget('dashboard_eventus',  'Eventus - '.__('Overview', 'eventus'), array($this, 'callbackDashboard'));  
-	}
-
-	function settingsLink( $links ) {
-	    array_unshift( $links, '<a href="admin.php?page=eventus">' . __( 'Settings' ) . '</a>' );
-	  	return $links;
-	}
-
-	function createTables() {
-        update_option('eventus_season', date("Y") ." - ". (date("Y")+1), false);
-		Includes\DAO\Database::getInstance()->createTables();
-	}
-
-	function deleteTables() {
+	function uninstall() {
 		Includes\DAO\Database::getInstance()->deleteTables();
 	}	
-
-	function callbackMain(){  
-        new Admin\Controllers\HomeController; 
-	}
-
-	function callbackClubs(){  
-        new Admin\Controllers\ClubController; 
-	}
-
-	function callbackLogs(){  
-        new Admin\Controllers\LogController; 
-	}
-
-	function callbackAdmin(){  
-        new Admin\Controllers\SettingsController; 
-	}	
-
-	function callbackDashboard() { 
-        Admin\Business\EventusWidgetDashboard::getInstance()->display(); 
-	}
-	
-	function loadTranslation(){
-		load_textdomain('eventus', plugin_dir_path( __FILE__ ).'lang/eventus-'.get_locale().'.mo' );
-		load_plugin_textdomain('eventus', false, plugin_dir_path( __FILE__ ).'lang' ); 
-	}
 }
+
 new Eventus();
-?>

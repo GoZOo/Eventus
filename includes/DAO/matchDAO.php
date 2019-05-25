@@ -110,7 +110,7 @@ class MatchDAO extends MasterDAO {
                         $row->club_season
                     )
                 ),
-                $row->idMatchRef ? 
+                $row->match_idMatchRef ? 
                     new Entities\Match(
                         $row->refMatch_id, 
                         $row->refMatch_matchDay,
@@ -325,22 +325,22 @@ class MatchDAO extends MasterDAO {
         LIMIT 1;
         ");  
         return new Entities\Match(
-            $row->match_id, 
-            $row->match_matchDay,
-            $row->match_numMatch,
-            $row->match_date, 
-            $row->match_hourRdv, 
-            $row->match_hourStart, 
-            $row->match_localTeam, 
-            $row->match_localTeamScore, 
-            $row->match_visitingTeam, 
-            $row->match_visitingTeamScore, 
-            $row->match_ext, 
-            $row->match_street, 
-            $row->match_city, 
-            $row->match_gym, 
-            $row->match_type, 
-            $row->match_champ, 
+            $row ? $row->match_id : null, 
+            $row ? $row->match_matchDay : null,
+            $row ? $row->match_numMatch : null,
+            $row ? $row->match_date : null, 
+            $row ? $row->match_hourRdv : null, 
+            $row ? $row->match_hourStart : null, 
+            $row ? $row->match_localTeam : null,
+            $row ? $row->match_localTeamScore : null, 
+            $row ? $row->match_visitingTeam : null,
+            $row ? $row->match_visitingTeamScore : null,
+            $row ? $row->match_ext : null,
+            $row ? $row->match_street : null,
+            $row ? $row->match_city : null,
+            $row ? $row->match_gym : null, 
+            $row ? $row->match_type : null, 
+            $row ? $row->match_champ : null,
             null,
             null
         );          

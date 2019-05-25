@@ -297,11 +297,11 @@ class PostHandler {
     ***************************/
     function updateIcs(){
         if ($_POST['teamId']) {
-            \Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId']));
+            Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId']));
             wp_redirect( add_query_arg( 'message', 'succesOneIcs',  wp_get_referer() ));  
         } else {
             foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
-                \Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($team->getId()));
+                Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($team->getId()));
             }
             wp_redirect( add_query_arg( 'message', 'succesMultiIcs',  wp_get_referer() ));  
         } 

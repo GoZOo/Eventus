@@ -70,11 +70,11 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 								<p>".date_create_from_format('Y-m-d',$myMatch->getDate())->format('d/m')."</p>
 							</div>
 							<div class='equipe1'>
-								<p>".$myMatch->getLocalTeamScore()."</p>
-								<p style=''>".$myMatch->getLocalTeam()."</p>
+								<p>".($myMatch->getLocalTeamScore() ? $myMatch->getLocalTeamScore() : '-')."</p>
+								<p>".$myMatch->getLocalTeam()."</p>
 							</div>
 							<div class='equipe2'>
-								<p>".$myMatch->getVisitingTeamScore()."</p>
+								<p>".($myMatch->getVisitingTeamScore() ? $myMatch->getVisitingTeamScore() : '-') ."</p>
 								<p>".$myMatch->getVisitingTeam()."</p>
 							</div>
 						</div>";

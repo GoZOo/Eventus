@@ -69,7 +69,7 @@ class Ics {
     * @return void
     * @access private
     */
-    private function prepare() {
+    private static function prepare() {
         $cp = array();
         if (count(self::$events) > 0) {
             $cp[] = 'BEGIN:VCALENDAR';
@@ -100,7 +100,7 @@ class Ics {
     * @return void
     * @access private
     */
-    private function sanitize_val($val, $key = false) {
+    private static function sanitize_val($val, $key = false) {
         switch ($key) {
             case 'dtstamp':
                 break;
@@ -122,8 +122,8 @@ class Ics {
     * @return void
     * @access private
     */
-    private function format_timestamp($timestamp) {      
-        $dt = new DateTime($timestamp, new DateTimeZone(self::TIMEZONE));
+    private static function format_timestamp($timestamp) {      
+        $dt = new \DateTime($timestamp, new \DateTimeZone(self::TIMEZONE));
         date_default_timezone_set("UTC");
         return $dt->format(self::DT_FORMAT);
     }
@@ -134,8 +134,8 @@ class Ics {
     * @return void
     * @access private
     */
-    private function format_timestamp_end($timestamp) {
-        $dt = new DateTime($timestamp, new DateTimeZone(self::TIMEZONE));
+    private static function format_timestamp_end($timestamp) {
+        $dt = new \DateTime($timestamp, new \DateTimeZone(self::TIMEZONE));
         $dt->modify('+1 hour +30 minutes');
         date_default_timezone_set("UTC");
         return $dt->format(self::DT_FORMAT);
@@ -147,7 +147,7 @@ class Ics {
     * @return void
     * @access private
     */
-    private function escape_string($str) {
+    private static function escape_string($str) {
         return preg_replace('/([,;])/','\$1', $str);
     }
     
@@ -158,7 +158,7 @@ class Ics {
     * @return void
     * @access private
     */
-    private function getState($match){
+    private static function getState($match){
         $res = "";
         if ((!$match->getExt() && $match->getLocalTeamScore() > $match->getVisitingTeamScore()) || ($match->getExt() && $match->getLocalTeamScore() < $match->getVisitingTeamScore())) {
             $res = "(V)";

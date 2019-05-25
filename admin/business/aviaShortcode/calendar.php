@@ -38,6 +38,7 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 		function shortcode_handler($atts, $content = "", $shortcodename = "", $meta = "") {		
 	        $myMatches = DAO\MatchDAO::getInstance()->getMatchesWithDate(); 
 			if ($myMatches) {
+				$arrays = "";
 				foreach ($myMatches as $key => $match) {
 					$ext = $match->getExt() == 0 ? "DOM" : "EXT";
 					$domTeam = $match->getLocalTeam();

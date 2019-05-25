@@ -48,6 +48,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Evo remove some useless text for widget home
 * Evo none buttons/links can be clicked when button loading
 * Evo use twig for templating screen in back end
+* Add choice of season
 
 ### 2.4.2
 

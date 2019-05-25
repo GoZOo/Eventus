@@ -32,7 +32,8 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 				__("Flexible font size (adjusts to screen width)" , 'avia_framework') => AviaHtmlHelper::number_array(3,7,0.5 , array(), "vw", "", "vw"),
 				__("Fixed font size" , 'avia_framework') => AviaHtmlHelper::number_array(11,150,1, array(), "px", "", "")
 			);	
-		
+
+			$allTeamsDisplay = array();
 			foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
 				$allTeamsDisplay[$team->getName()." ".$this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed())." - ".$team->getClub()->getName()] = $team->getId();
 			}		

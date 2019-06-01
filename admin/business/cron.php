@@ -12,6 +12,8 @@ include_once __DIR__ . '/../../includes/DAO/_masterDAO.php';
 include_once __DIR__ . '/../../includes/DAO/teamDAO.php';
 include_once __DIR__ . '/../../includes/DAO/clubDAO.php';
 include_once __DIR__ . '/../../includes/DAO/matchDAO.php';
+include_once __DIR__ . '/../../admin/business/helper/traitHelper.php';
+include_once __DIR__ . '/../../admin/business/helper/staticHelper.php';
 include_once __DIR__ . '/../../admin/business/finder.php';
 include_once __DIR__ . '/../../../../../wp-config.php';
 include_once __DIR__ . '/../../admin/business/ics.php';

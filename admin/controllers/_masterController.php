@@ -12,7 +12,7 @@ abstract class MasterController {
     protected $context; 
 
     protected function __construct() {  
-        wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../js/common.js', '', '', true); 
+        wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../views/js/common.js', '', '', true); 
         wp_localize_script('commonJs', 'translations', 
             array(                
                 'defMessage' => __('This action is irreversible. Do you really want to delete the element?', 'eventus' ),
@@ -25,7 +25,14 @@ abstract class MasterController {
         $this->context = \Timber\Timber::get_context();
         $this->context['notice'] = $this->showNotice();
         $this->context['isAdmin'] = current_user_can('administrator');
-        $this->context['adminPostUrl'] = admin_url('admin-post.php');
+        $this->context['adminPostUrl'] = admin_url('admin-post.php');        
+
+		$this->get = array(
+            'message' => (isset($_GET['message']) ? $_GET['message'] : null),
+			'action' => (isset($_GET['action']) ? $_GET['action'] : null),
+            'teamId' => (isset($_GET['teamId']) ? $_GET['teamId'] : null),
+            'clubId' => (isset($_GET['clubId']) ? $_GET['clubId'] : null),
+		);
     }
 
     protected function render($template){   

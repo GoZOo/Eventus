@@ -104,24 +104,24 @@ class TeamDAO extends MasterDAO {
                 a.team_id=$myTeamId
         ");
         return new Entities\Team(
-                $row->team_id, 
-                $row->team_name, 
-                $row->team_urlOne, 
-                $row->team_urlTwo, 
-                $row->team_boy, 
-                $row->team_girl, 
-                $row->team_mixed, 
-                $row->team_position, 
-                $row->team_points, 
-                $row->team_time, 
-                $row->team_img, 
+                $row ? $row->team_id : 0, 
+                $row ? $row->team_name : null,
+                $row ? $row->team_urlOne : null,
+                $row ? $row->team_urlTwo : null,
+                $row ? $row->team_boy : null,
+                $row ? $row->team_girl : null,
+                $row ? $row->team_mixed : null,
+                $row ? $row->team_position : null,
+                $row ? $row->team_points : null,
+                $row ? $row->team_time : null,
+                $row ? $row->team_img : null,
                 new Entities\Club(
-                    $row->club_id, 
-                    $row->club_name, 
-                    $row->club_string, 
-                    $row->club_address, 
-                    $row->club_img,
-                    $row->club_season
+                    $row ? $row->club_id : null,
+                    $row ? $row->club_name : null,
+                    $row ? $row->club_string : null,
+                    $row ? $row->club_address : null,
+                    $row ? $row->club_img : null,
+                    $row ? $row->club_season : null
                 )
             );
     }
@@ -356,9 +356,9 @@ class TeamDAO extends MasterDAO {
     */
     function deleteTeam($teamId = null){ 
         if ($teamId){
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3} WHERE team_id=$teamId", null));
+            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3} WHERE team_id=%", $teamId));
         } else {
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3}", null));
+            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3} WHERE 1=%d", 1));
         }
     }
 }

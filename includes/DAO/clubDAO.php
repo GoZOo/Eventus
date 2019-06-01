@@ -79,12 +79,12 @@ class ClubDAO extends MasterDAO {
                 club_id=$myClubId AND
                 club_season='{$this->season}'");
         return new Entities\Club(
-            $row->club_id, 
-            $row->club_name, 
-            $row->club_string, 
-            $row->club_address, 
-            $row->club_img,
-            $row->club_season
+            $row ? $row->club_id : 0, 
+            $row ? $row->club_name : null, 
+            $row ? $row->club_string : null, 
+            $row ? $row->club_address : null, 
+            $row ? $row->club_img : null,
+            $row ? $row->club_season : null
         );
     }
 
@@ -188,14 +188,16 @@ class ClubDAO extends MasterDAO {
                 DELETE FROM 
                     {$this->t1} 
                 WHERE  
-                    club_id=$clubId", 
-                null)
+                    club_id=%d", 
+                $clubId)
             );
         } else {
             $this->wpdb->query($this->wpdb->prepare("
                 DELETE FROM 
-                    {$this->t1}", 
-                null)
+                    {$this->t1}
+                WHERE 
+                    1=%d", 
+                1)
             );
         }
     }

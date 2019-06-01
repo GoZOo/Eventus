@@ -10,68 +10,64 @@
     </h1>
     <hr class="wp-header-end">
     {{ notice }}
-    {% if not club.getId() and not isNew %}
-        <h2>{{ _e('Error: The club could not be found...', 'eventus') }}</h2>
-    {% else %}
-        <h2></h2>
-        <form action="{{ adminPostUrl }}" method="post">
-            <div>
-                <table class='form-table'>
-                    <tbody>
-                        <tr>
-                            <th scope='row'>
-                                <label for='nom'>{{ _e('Name', 'eventus') }}<span class="required">*</span>
-                                </label>
-                            </th>
-                            <td>
-                                <input name='nom' id='nom' value="{{ club.getName()|toProperText }}" class='regular-text' type='text' required title="{{ _e('Name', 'eventus') }}" placeholder="{{ _e('Name', 'eventus') }}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>
-                                <label for='chaine'>{{ _e('String', 'eventus') }}<span class="required">*</span>
-                                </label>
-                            </th>
-                            <td>
-                                <input name='chaine' id='chaine' aria-describedby='tagline-description' value='{{ club.getString()|toProperText }}' class='regular-text' type='text' required title="{{ _e('String', 'eventus') }}" placeholder="{{ _e('String', 'eventus') }}">
-                                <p class='description' id='tagline-description'>{{ _e('String that the algorithm will search on the FFHB website', 'eventus') }}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>
-                                <label for='adresse'>{{ _e('Address of the gym', 'eventus') }}<span class="required">*</span>
-                                </label>
-                            </th>
-                            <td>
-                                <input name='adresse' id='adresse' value='{{ club.getAddress()|toProperText }}' class='regular-text' type='text' required title="{{ _e('Address', 'eventus') }}" placeholder="{{ _e('Address', 'eventus') }}">
-                                <p class='description' id='tagline-description'>{{ _e('Address used to calculate match rdv schedules', 'eventus') }}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>
-                                <label for='img'>{{ _e('Image', 'eventus') }}</label>
-                            </th>
-                            <td>
-                                <input id="upload_image_button" type="button" class="button" value="{{ _e('Select an image', 'eventus') }}"/>
-                                <input id="delete_image_button" type="button" class="button" value="{{ _e('Delete the image', 'eventus') }}" disabled/>
-                                <input id='image_attachment_id' type='hidden' name='img' value='{{ club.getImg() }}'>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <h2></h2>
+    <form action="{{ adminPostUrl }}" method="post">
+        <div>
+            <table class='form-table'>
+                <tbody>
+                    <tr>
+                        <th scope='row'>
+                            <label for='nom'>{{ _e('Name', 'eventus') }}<span class="required">*</span>
+                            </label>
+                        </th>
+                        <td>
+                            <input name='nom' id='nom' value="{{ club.getName()|toProperText }}" class='regular-text' type='text' required title="{{ _e('Name', 'eventus') }}" placeholder="{{ _e('Name', 'eventus') }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label for='chaine'>{{ _e('String', 'eventus') }}<span class="required">*</span>
+                            </label>
+                        </th>
+                        <td>
+                            <input name='chaine' id='chaine' aria-describedby='tagline-description' value='{{ club.getString()|toProperText }}' class='regular-text' type='text' required title="{{ _e('String', 'eventus') }}" placeholder="{{ _e('String', 'eventus') }}">
+                            <p class='description' id='tagline-description'>{{ _e('String that the algorithm will search on the FFHB website', 'eventus') }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label for='adresse'>{{ _e('Address of the gym', 'eventus') }}<span class="required">*</span>
+                            </label>
+                        </th>
+                        <td>
+                            <input name='adresse' id='adresse' value='{{ club.getAddress()|toProperText }}' class='regular-text' type='text' required title="{{ _e('Address', 'eventus') }}" placeholder="{{ _e('Address', 'eventus') }}">
+                            <p class='description' id='tagline-description'>{{ _e('Address used to calculate match rdv schedules', 'eventus') }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label for='img'>{{ _e('Image', 'eventus') }}</label>
+                        </th>
+                        <td>
+                            <input id="upload_image_button" type="button" class="button" value="{{ _e('Select an image', 'eventus') }}"/>
+                            <input id="delete_image_button" type="button" class="button" value="{{ _e('Delete the image', 'eventus') }}" disabled/>
+                            <input id='image_attachment_id' type='hidden' name='img' value='{{ club.getImg() }}'>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-            </div>
-            <input type='hidden' name='clubId' value="{{ club.getId() }}">
-            <input class="hiddenSubmit" name="action" type="submit" value="eventus_majClub">
-            <br>
+        </div>
+        <input type='hidden' name='clubId' value="{{ club.getId() }}">
+        <input class="hiddenSubmit" name="action" type="submit" value="eventus_majClub">
+        <br>
 
-            {% if club.getId() %}
-                <a class='button-primary ico ico-add' href='admin.php?page=eventus_club&action=club' type='button'>{{ _e('Add a club', 'eventus') }}</a>
-                <button class="button-primary ico ico-del" name="action" onclick="return validate('{{ _e('This action is irreversible. Do you really want to delete the club?', 'eventus') }}')" type="submit" value="eventus_delClub">{{ _e('Delete the club', 'eventus') }}</button>
-                <br/>
-            {% endif %}
+        {% if club.getId() %}
+            <a class='button-primary ico ico-add' href='admin.php?page=eventus_club&action=club' type='button'>{{ _e('Add a club', 'eventus') }}</a>
+            <button class="button-primary ico ico-del" name="action" onclick="return validate('{{ _e('This action is irreversible. Do you really want to delete the club?', 'eventus') }}')" type="submit" value="eventus_delClub">{{ _e('Delete the club', 'eventus') }}</button>
             <br/>
-            <button class="button-primary ico ico-save" name="action" type="submit" value="eventus_majClub">{{ _e('Save changes', 'eventus') }}</button>
-        </form>
-    {% endif %}
+        {% endif %}
+        <br/>
+        <button class="button-primary ico ico-save" name="action" type="submit" value="eventus_majClub">{{ _e('Save changes', 'eventus') }}</button>
+    </form>
 {% endblock %}

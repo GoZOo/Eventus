@@ -14,7 +14,7 @@ class ClubController extends MasterController {
     public function __construct() {  
         parent::__construct();
         
-		if (isset($_GET['action']) && $_GET['action']=="club") {
+		if ($this->get['action'] == "club") {
             wp_enqueue_media();    
             wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../views/js/uploadImg.js', '', '', true); 
             wp_localize_script('upImgJs', 'translations', 
@@ -46,11 +46,14 @@ class ClubController extends MasterController {
     }
 
     function displayClub(){
-        $club = DAO\ClubDAO::getInstance()->getClubById($_GET['clubId']);
-        if (!$_GET['clubId']) $club = new Entities\Club(null, "", "", "", null, "");
+        if ($this->get['clubId']){  
+            $club = DAO\ClubDAO::getInstance()->getClubById($this->get['clubId']);
+            if (!$club->getId()) return $this->render('error');            
+    	} else {
+            $club = new Entities\Club(null, "", "", "", null, "");
+        }
 
         $this->context['club'] = $club;
-        $this->context['isNew'] = $_GET['clubId'] ? false : true;
 
         $this->render('club'); 
     }

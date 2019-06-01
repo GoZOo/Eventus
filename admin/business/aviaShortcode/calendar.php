@@ -1,6 +1,7 @@
 <?php
 
 use Eventus\Includes\DAO as DAO;
+use Eventus\Admin\Business\Helper as Helper;
 
 if (!defined('ABSPATH')) {  // Exit if accessed directly
 	exit;  
@@ -13,7 +14,7 @@ if (!defined('ABSPATH')) {  // Exit if accessed directly
 */
 if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')) {
 	class EventusCalendrier extends aviaShortcodeTemplate {
-        use TraitHelper;
+        use Helper\TraitHelper;
 
 		function shortcode_insert_button() {
 			$this->config['self_closing']	=	'yes';

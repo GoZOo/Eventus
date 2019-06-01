@@ -14,7 +14,7 @@ class HomeController extends MasterController {
 	public function __construct() {
 		parent::__construct();
 
-		if (isset($_GET['action']) && $_GET['action']=="team") {
+		if ($this->get['action'] == "team") {
 			wp_enqueue_media();     
 			wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../views/js/uploadImg.js', '', '', true); 
 			wp_localize_script('upImgJs', 'translations', 
@@ -27,7 +27,7 @@ class HomeController extends MasterController {
 			wp_enqueue_script('teamJs', plugin_dir_url( __FILE__ ).'/../../views/js/screens/teamDetailScreen.js', '', '', true); 
 			
 			$this->displayTeam();
-		} else if(isset($_GET['action']) && $_GET['action']=="matchs"){
+		} else if($this->get['action'] == "matchs"){
 			wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../views/js/screens/matchDetailScreen.js', '', '', true); 
 
 			$this->displayMatches();
@@ -37,12 +37,9 @@ class HomeController extends MasterController {
     }	
 
 	private function displayTeam(){	
-		if (isset($_GET['teamId'])){  
-            $team = DAO\TeamDAO::getInstance()->getTeamById($_GET['teamId']);
-            if (!$team->getId()) {
-                echo "<h2>Erreur : L'équipe n'a pas pu être trouvée...</h2>";
-                return;
-            }            
+		if ($this->get['teamId']){  
+			$team = DAO\TeamDAO::getInstance()->getTeamById($this->get['teamId']);
+            if (!$team->getId()) return $this->render('error');            
     	} else {
             $team = new Entities\Team(null, "", "", "", 0, 0, 0, 0, 0, "", "", null);
 		}
@@ -76,7 +73,11 @@ class HomeController extends MasterController {
 
 	
 	private function displayMatches(){
-		$team = DAO\TeamDAO::getInstance()->getTeamById($_GET['teamId']);
+		if (!$this->get['teamId']) return $this->render('error');
+
+		$team = DAO\TeamDAO::getInstance()->getTeamById($this->get['teamId']);
+		if (!$team->getId()) return $this->render('error');  
+		
 		$this->context['team'] = $team;
 		$this->context['myMatchParent'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
 		$this->context['myMatchSon'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),1); 

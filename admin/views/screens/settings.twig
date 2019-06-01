@@ -110,7 +110,7 @@
 
         <h2>{{ _e('Reset actions ', 'eventus') }}<img draggable="false" class="emoji" alt="⚠" src="https://s.w.org/images/core/emoji/11/svg/26a0.svg"></h2>  
         <br>     
-        <form action="<?php echo admin_url( 'admin-post.php' ) ?>" method="post">
+        <form action="{{ adminPostUrl }}" method="post">
             <button 
                 type="submit" 
                 name="action" 

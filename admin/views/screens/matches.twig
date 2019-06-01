@@ -9,9 +9,6 @@
             {{ _e('New team', 'eventus') }}
         {% endif %}
     </h1>
-    {% if not team %}
-        <h2>{{ _e('Error: The team could not be found....', 'eventus') }}</h2>
-    {% else %}
         <a class="page-title-action" href="admin.php?page=eventus&action=team&teamId={{ team.getId() }}">
             {{ _e('Team', 'eventus') }}
         </a>
@@ -258,9 +255,6 @@
             <div class="myTooltip">
                 <button class="button-primary ico ico-calendar" name="action" onclick="setLoading(this)" type="submit" value="eventus_majIcs">{{ _e('Update the calendar', 'eventus') }}</button>
                 <span class="myTooltiptext">{{ _e('Update the team\'s ICS calendar', 'eventus') }}</span>
-            </div>  			
-                        
-                    
+            </div>  
         </form>
-    {% endif %}
 {% endblock %}

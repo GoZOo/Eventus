@@ -451,9 +451,10 @@ class MatchDAO extends MasterDAO {
                     match_idTeam={$match->getTeam()->getId()} AND 
                     match_numMatch={$match->getNumMatch()} AND 
                     match_champ={$match->getChamp()}"
-            )->match_id;
+            );
             //var_dump($myId);
             if($myId){
+                $myId = $myId->match_id;
                 $data = array(
                     'match_matchDay' => $match->getMatchDay(), 
                     'match_numMatch' => $match->getNumMatch(), 
@@ -494,6 +495,7 @@ class MatchDAO extends MasterDAO {
     * @access public
     */
     function updateMatchesScreen($allMatches, $type, $teamId){
+        $matchesIdToDelete = "";
         foreach($allMatches as $matches) {
             if ($matches->getId()){
                 $matchesIdToDelete .= $matches->getId().", ";
@@ -609,9 +611,9 @@ class MatchDAO extends MasterDAO {
     function deleteMatchesNotIn($myMatchesId, $type, $teamId){  
         //echo "DELETE FROM {$this->t2} WHERE match_id NOT IN ($myMatchesId) AND match_type=$type AND match_idTeam=$teamId";
         if ($myMatchesId){
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE match_id NOT IN ($myMatchesId) AND match_type=$type AND match_idTeam=$teamId", null));
+            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE match_id NOT IN ($myMatchesId) AND match_type=%d AND match_idTeam=%d", $type, $teamId));
         } else {
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE match_type=$type AND match_idTeam=$teamId", null));
+            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE match_type=%d AND match_idTeam=%d", $type, $teamId));
         }
     }
 
@@ -624,9 +626,9 @@ class MatchDAO extends MasterDAO {
     */
     function deleteMatches($teamId = null){  
         if ($teamId){
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE match_idTeam=$teamId", null));
+            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE match_idTeam=%d", $teamId));
         } else {
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2}", null));
+            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t2} WHERE 1=%d", 1));
         }
     }
 }

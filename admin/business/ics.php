@@ -1,6 +1,7 @@
 <?php
 // Source https://gist.github.com/jakebellacera/635416
 namespace Eventus\Admin\Business;
+use Eventus\Admin\Business\Helper as Helper;
 
 /**
 * ICS is a class use to generate ics calendars
@@ -9,7 +10,6 @@ namespace Eventus\Admin\Business;
 * @access   public
 */
 class Ics {
-    use \TraitHelper;
     const DT_FORMAT = 'Ymd\THis';
     const TIMEZONE = 'Europe/Paris';
     private static $events;
@@ -37,8 +37,7 @@ class Ics {
                             ($match->getLocalTeamScore() && $match->getVisitingTeamScore() ? "Score : " . $match->getLocalTeamScore() ." - ". $match->getVisitingTeamScore() . " ". self::getState($match) . "\\n" : '' ). 
                             ($match->getHourRdv() ? "RDV : " . $match->getHourRdv() ."\\n" : '' ). 
                             ($match->getGym() ? __('Hall', 'eventus')." : " . $match->getGym() ."\\n" : '' ). 
-                            ($match->getTeam()->getName() ? __('Team', 'eventus')." : " . $match->getTeam()->getName() ." " . 
-                                self::getSexLabel($match->getTeam()->getBoy(), $match->getTeam()->getGirl(), $match->getTeam()->getMixed())
+                            ($match->getTeam()->getName() ? __('Team', 'eventus')." : " . $match->getTeam()->getName() ." " . Helper\StaticHelper::getSexLabel($match->getTeam()->getBoy(), $match->getTeam()->getGirl(), $match->getTeam()->getMixed())
                             : '' ),
                         'dtstart' => ($match->getDate() && $match->getHourStart() ? $match->getDate(). ' ' . $match->getHourStart() : ''),
                         'dtend' => ($match->getDate() && $match->getHourStart() ? $match->getDate(). ' ' . $match->getHourStart() : ''),

@@ -3,6 +3,7 @@
 namespace Eventus\Admin\Business;
 use Eventus\Includes\DAO as DAO;
 use Eventus\Includes\DTO as Entities;
+use Eventus\Admin\Business\Helper as Helper;
 use Sunra\PhpSimple\HtmlDomParser;
 
 /**
@@ -12,6 +13,7 @@ use Sunra\PhpSimple\HtmlDomParser;
 * @access   public
 */
 class Finder {
+    use Helper\TraitHelper;
     /**
     * @var Finder   $_instance  Var use to store an instance
     */
@@ -161,12 +163,12 @@ class Finder {
         }
         if ($allAdresses){
             $requestGoogleMap = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?key=".get_option("eventus_mapapikey")."&origins=".urlencode($allMatches[0]->getTeam()->getClub()->getAddress())."&destinations=".$allAdresses),true);
-            var_dump($requestGoogleMap);
+            // var_dump($requestGoogleMap);
             $key = 0;
             foreach($allMatches as $match) {
                 if ($match->getExt() && $match->getStreet() && $match->getCity() && date($match->getDate()) > date('Y-m-d') ) {
                     if ($requestGoogleMap['rows'][0]['elements'][$key]['status'] != "OK" || $requestGoogleMap['status'] != "OK") {
-                        self::addLog("Error GoogleMap (TeamId: ".$match->getTeam()->getId().", MatchId: ".$match->getId().", matchDay: ".$match->getMatchDay().", Error Api: ".($requestGoogleMap['rows'][0]['elements'][$key]['status'] ? $requestGoogleMap['rows'][0]['elements'][$key]['status'] : $requestGoogleMap['status'] ).")");
+                        $this->addLog("Error GoogleMap (TeamId: ".$match->getTeam()->getId().", MatchId: ".$match->getId().", matchDay: ".$match->getMatchDay().", Error Api: ".($requestGoogleMap['rows'][0]['elements'][$key]['status'] ? $requestGoogleMap['rows'][0]['elements'][$key]['status'] : $requestGoogleMap['status'] ).")");
                     } else {
                         $travelTime = round($requestGoogleMap['rows'][0]['elements'][$key]['duration']['value'] / 60);
                         $lastDigit = substr($travelTime,-1);
@@ -183,16 +185,6 @@ class Finder {
         }    
         return $allMatches;
     }    
-    /**
-    * Transform character with accent to characters without accents
-    *
-    * @param string    String to strip accents
-    * @return Match[]  String with accents strip 
-    * @access public
-    */
-    function stripAccents($str) {
-        return strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
-    }
     /**
     * Add log in file log
     *

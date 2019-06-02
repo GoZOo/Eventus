@@ -60,7 +60,7 @@ class Eventus {
 		//Dashboard
 		add_action('wp_dashboard_setup', function () {
 			wp_add_dashboard_widget('dashboard_eventus',  'Eventus - ' . __('Overview', 'eventus'), function () {
-				Admin\Business\EventusWidgetDashboard::getInstance()->display();
+				new Admin\Business\EventusWidgetDashboard();
 			});
 		});
 

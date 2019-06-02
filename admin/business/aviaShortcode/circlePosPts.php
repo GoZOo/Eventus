@@ -68,10 +68,12 @@ if (!class_exists( 'EventusCirclePosPts') && class_exists('aviaShortcodeTemplate
 	                'teamid' => ''
 	            ),
 	        $atts));
-	        
-	        $myTeam = DAO\TeamDAO::getInstance()->getTeamById($teamid); 
+			
+			\Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../../../public/views/screens/aviaComponents/';
+			$this->context = \Timber\Timber::get_context();	
+			$this->context['team'] = DAO\TeamDAO::getInstance()->getTeamById($teamid);  
 
-	        return do_shortcode("[av_textblock size='' font_color='' color='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='' admin_preview_bg='']<p style='text-align: center;'><span style='font-size: 28px;'>".$myTeam->getPosition()."e</span><br>".$myTeam->getPoints()." pts</p>[/av_textblock]");
+			return \Timber\Timber::fetch("circlePosPts.twig", $this->context);
 	    }  
 	}
 }

@@ -1,3 +1,6 @@
 <Files *.php>
 	Deny from all
 </Files>
+<Files *.twig>
+	Deny from all
+</Files>

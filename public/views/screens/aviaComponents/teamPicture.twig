@@ -1,0 +1,10 @@
+{% if img.attachment %}
+    {% filter shortcodes %}   
+        [av_image src='{{ img.src }}' attachment='{{ img.attachment }}' attachment_size='{{ img.format }}' align='center' styling='' hover='' link='' target='' caption='' font_size='' appearance='' overlay_opacity='0.4' overlay_color='#000000' overlay_text_color='#ffffff' copyright='' animation='no-animation' av_uid='' custom_class='' admin_preview_bg='']
+        [/av_image]
+    {% endfilter %}
+{% else %}
+    {% filter shortcodes %} 
+        [av_image src='{{ img.src }}' attachment='' attachment_size='' align='center' styling='' hover='' link='' target='' caption='' font_size='' appearance='' overlay_opacity='0.4' overlay_color='#000000' overlay_text_color='#ffffff' copyright='' animation='no-animation' av_uid='' custom_class='' admin_preview_bg=''][/av_image]
+    {% endfilter %}
+{% endif %}

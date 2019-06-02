@@ -37,11 +37,11 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 		 * @return string $output returns the modified html string 
 		 */
 		function shortcode_handler($atts, $content = "", $shortcodename = "", $meta = "") {		
-	        $myMatches = DAO\MatchDAO::getInstance()->getMatchesWithDate(); 
+			$myMatches = DAO\MatchDAO::getInstance()->getMatchesWithDate(); 
+			$datas = array();
 			if ($myMatches) {
-				$arrays = "";
+				$content = array();
 				foreach ($myMatches as $key => $match) {
-					$ext = $match->getExt() == 0 ? "DOM" : "EXT";
 					$domTeam = $match->getLocalTeam();
 					$extTeam = $match->getVisitingTeam();
 					if ($match->getExt()) {
@@ -49,33 +49,39 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 						$domTeam = $extTeam;
 						$extTeam = $temp;
 					}
-					$domTeam = $match->getTeam()->getName()." ".$this->getSexLabel($match->getTeam()->getBoy(), $match->getTeam()->getGirl(), $match->getTeam()->getMixed());
-					
-					if($key == 0){
-						$arrays .= "[av_heading heading='".$this->toFrenchDate(date_create_from_format('Y-m-d', $match->getDate())->format('l d F Y'))."' tag='h2' style='' size='' subheading_active='' subheading_size='15' margin='' margin_sync='true' padding='10' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='av-jl3st843' custom_class='' admin_preview_bg=''][/av_heading]
-						[av_table purpose='tabular' pricing_table_design='avia_pricing_default' pricing_hidden_cells='' caption='' responsive_styling='avia_responsive_table' av_uid='' custom_class='']
-						[av_row row_style=''][av_cell col_style='']Catégorie[/av_cell][av_cell col_style='']Lieu[/av_cell][av_cell col_style='']Rencontre[/av_cell][av_cell col_style='']RDV[/av_cell][av_cell col_style='']Match[/av_cell][/av_row]";
-					} else if ($key > 0 && ($myMatches[$key]->getDate() !== $myMatches[$key-1]->getDate())) {                              
-						$arrays .= "[/av_table][av_heading heading='".$this->toFrenchDate(date_create_from_format('Y-m-d', $match->getDate())->format('l d F Y'))."' tag='h2' style='' size='' subheading_active='' subheading_size='15' margin='' margin_sync='true' padding='10' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='av-jl3st843' custom_class='' admin_preview_bg=''][/av_heading]
-						[av_table purpose='tabular' pricing_table_design='avia_pricing_default' pricing_hidden_cells='' caption='' responsive_styling='avia_responsive_table' av_uid='' custom_class='']
-						[av_row row_style=''][av_cell col_style='']Catégorie[/av_cell][av_cell col_style='']Lieu[/av_cell][av_cell col_style='']Rencontre[/av_cell][av_cell col_style='']RDV[/av_cell][av_cell col_style='']Match[/av_cell][/av_row]";
-					}
-					if ($key > 0 && $myMatches[$key]->getDate() == $myMatches[$key-1]->getDate() && $myMatches[$key]->getTeam()->getId() == $myMatches[$key-1]->getTeam()->getId()) {
-						$hourRDV = "";
-					} else {
-						$hourRDV = $match->getHourRDV();
-					}  
-					$arrays .= "[av_row row_style=''][av_cell col_style='']".$domTeam."[/av_cell][av_cell col_style='']".$ext."[/av_cell][av_cell col_style='']".$extTeam."[/av_cell][av_cell col_style='']".$hourRDV."[/av_cell][av_cell col_style='']".$match->getHourStart()."[/av_cell][/av_row]";
-	
-					if ($key == sizeof($myMatches)-1) {
-						$arrays .= "[/av_table]";
+
+					$newDate = array(
+						'date'=> $this->toFrenchDate(date_create_from_format('Y-m-d', $match->getDate())->format('l d F Y')),
+						'content' => array()
+					);
+
+					array_push($content, 
+						array(
+							'domTeam' => 
+								$match->getTeam()->getName()." ".$this->getSexLabel($match->getTeam()->getBoy(), $match->getTeam()->getGirl(), $match->getTeam()->getMixed()),
+							'ext' => 
+								$match->getExt() == 0 ? "DOM" : "EXT",
+							'extTeam' => 
+								$extTeam,
+							'hourRDV' => 
+								$key > 0 && $myMatches[$key]->getDate() == $myMatches[$key-1]->getDate() && $myMatches[$key]->getTeam()->getId() == $myMatches[$key-1]->getTeam()->getId() ? "" : $match->getHourRDV(),
+							'hourStart' => 
+								$match->getHourStart()
+						)
+					);					
+					if (($key < sizeof($myMatches)-1 && ($myMatches[$key]->getDate() !== $myMatches[$key+1]->getDate())) || $key == sizeof($myMatches)-1) {     
+						$newDate['content'] = $content;                        
+						array_push($datas, $newDate);
+						$content = array();
 					}
 				}
-	
-				return do_shortcode($arrays);
-			} else {
-				return do_shortcode("[av_heading heading='Aucune match trouvé' tag='h2' style='' size='' subheading_active='' subheading_size='15' margin='' margin_sync='true' padding='10' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='av-jl3st843' custom_class='' admin_preview_bg=''][/av_heading]");
-			}
+			} 
+
+			\Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../../../public/views/screens/aviaComponents/';
+			$this->context = \Timber\Timber::get_context();	
+			$this->context['myMatches'] = $datas; 
+
+			return \Timber\Timber::fetch("calendar.twig", $this->context);
 	    }
 					
 			

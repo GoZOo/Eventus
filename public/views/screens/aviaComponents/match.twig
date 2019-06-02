@@ -1,0 +1,9 @@
+{% if format == 1 %}
+    {% filter shortcodes %}
+        [av_heading heading='{{ title }}' tag='h2' style='blockquote modern-quote modern-centered' size='' subheading_active='subheading_below' subheading_size='15' margin='0' margin_sync='true' padding='' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='' admin_preview_bg='']{{ stringDisplay }}[/av_heading]
+    {% endfilter %}
+{% else %}
+    {% filter shortcodes %}    
+        [av_heading heading='{{ stringDisplay }}' tag='h6' style='blockquote modern-quote modern-centered' size='' subheading_active='subheading_above' subheading_size='15' margin='0' margin_sync='true' padding='0' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='av-jl3p1zhc' custom_class='' admin_preview_bg='']{{ title }}<span style='float: right;'>{{ stringDisplay2 }}</span>[/av_heading]
+    {% endfilter %}
+{% endif %}

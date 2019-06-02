@@ -1,0 +1,50 @@
+<div class='allClbus'>
+    {% for club in allClubs %}
+        {# add i #}
+        <div class='blockClub' style='right:-{{loop.index0}}00%'>
+            <div class='ligneNomSuivant'>
+                <p>{{ club.club }}</p>
+                {% if allClubs|length > 1 %}
+                    <button class='clubSuivant' type='button'>&#9658;&#9658;</button>
+                {% endif %}
+            </div>
+            {% set tempSex = '' %}
+            {% for data in club.allTeams %}
+                {% if data.match.getId() %}
+                    {% if data.sex != tempSex %}
+                        <p class='sexe'>{{ data.sex }}</p>
+                    {% endif %}
+                    {% set tempSex = data.sex %}
+                    <div class='resultat'>
+                        <div class='ligneEqDate'>
+                            <a href='{% if data.team.getUrlTwo() %}{{ data.team.getUrlTwo() }}{% else %}{{ data.team.getUrlOne() }}{% endif %}' target='_blank'>
+                                {{ data.team.getName() }}
+                            </a>
+                            <p>{{ data.match.getDate()|date("d/m") }}</p>
+                        </div>
+                        <div class='equipe1'>
+                            <p>
+                                {% if data.match.getLocalTeamScore() %}
+                                    {{ data.match.getLocalTeamScore() }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </p>
+                            <p>{{ data.match.getLocalTeam() }}</p>
+                        </div>
+                        <div class='equipe2'>
+                            <p>
+                                {% if data.match.getVisitingTeamScore() %}
+                                    {{ data.match.getVisitingTeamScore() }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </p>
+                            <p>{{ data.match.getVisitingTeam() }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>

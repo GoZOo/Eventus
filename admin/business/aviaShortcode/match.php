@@ -87,17 +87,21 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 	                'type' => '',
 	                'format' => ''
 	            ),
-	        $atts));
-
+			$atts));			
+			
+			\Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../../../public/views/screens/aviaComponents/';
+			$this->context = \Timber\Timber::get_context();	
     		
-    		$stringDisplay = $stringDisplay2 = __('No matches available', 'eventus');
+			$this->context['stringDisplay'] = __('No matches available', 'eventus');	
+			$this->context['stringDisplay2'] = __('No matches available', 'eventus');	
+			$this->context['format'] = $format;
 	        if ($format == 0) {
 	        	if ($type == 0) {
 	        		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
-	               	$title = __('Next match', 'eventus');
+					$this->context['title'] = __('Next match', 'eventus');
 
 			        if ($myMatch->getId()){
-			            $stringDisplay = 
+						$this->context['stringDisplay'] = 
 			                $this->toFrenchDate(date_create_from_format('Y-m-d', $myMatch->getDate())->format('l d F Y'))." : ".
 			                str_replace(":", "H", $myMatch->getHourStart()). 
 			                ($myMatch->getMatchDay() ? " / Journée ".$myMatch->getMatchDay() :"")."<br>".
@@ -106,10 +110,10 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 			        } 
 		        } else {
 		        	$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "last"); 
-		            $title = __('Last match', 'eventus');
+		            $this->context['title'] = __('Last match', 'eventus');
 
 			        if ($myMatch->getId()){
-			            $stringDisplay = 
+			            $this->context['stringDisplay'] =
 			                $this->toFrenchDate(date_create_from_format('Y-m-d', $myMatch->getDate())->format('l d F Y'))." : ".
 			                str_replace(":", "H", $myMatch->getHourStart()). 
 			                ($myMatch->getMatchDay() ? " / Journée ".$myMatch->getMatchDay() :"") ."<br>".
@@ -119,44 +123,39 @@ if (!class_exists( 'EventusMatch') && class_exists('aviaShortcodeTemplate')) {
 			                $myMatch->getVisitingTeam();
 			        }		       
 		        }
-
-		        return do_shortcode("[av_heading heading='".$title."' tag='h2' style='blockquote modern-quote modern-centered' size='' subheading_active='subheading_below' subheading_size='15' margin='0' margin_sync='true' padding='' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='' admin_preview_bg='']".$stringDisplay."[/av_heading]");
 		    } else {
 		    	if ($type == 0) {
 		    		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "next"); 
-	               	$title =  __('Next match', 'eventus');
+					$this->context['title'] =  __('Next match', 'eventus');
 
 		    		if ($myMatch->getId()){
-			            $stringDisplay = 
+			            $this->context['stringDisplay'] = 
 							$myMatch->getExt() ? 
 								"<span style=\"color: white;\">". $myMatch->getLocalTeam()." -</span> ". $myMatch->getVisitingTeam() 
 								:
 								$myMatch->getLocalTeam() . " - <span style=\"color: white;\">". $myMatch->getVisitingTeam() ." </span> ";
-			            $stringDisplay2 = 
+						$this->context['stringDisplay2'] = 
 			                date_create_from_format('Y-m-d', $myMatch->getDate())->format('d/m/Y')." - ".
 			                str_replace(":", "H", $myMatch->getHourStart());
 			        } 
 		    	} else {
 		    		$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($teamid, "last"); 
-		            $title = __('Last match', 'eventus');
+		            $this->context['title'] = __('Last match', 'eventus');
 		    		if ($myMatch->getId()){
-						$stringDisplay = 
+						$this->context['stringDisplay'] = 
 							$myMatch->getExt() ? 
 								"<span style=\"color: white;\">". $myMatch->getLocalTeam()." : ". $myMatch->getLocalTeamScore()." -</span> ". $myMatch->getVisitingTeamScore()." : ". $myMatch->getVisitingTeam() 
 								:
 								$myMatch->getLocalTeam()." : ". $myMatch->getLocalTeamScore()." - <span style=\"color: white;\">". $myMatch->getVisitingTeamScore()." : ". $myMatch->getVisitingTeam()." </span> ";
 			                
-			            $stringDisplay2 = 
+						$this->context['stringDisplay2'] = 
 			                date_create_from_format('Y-m-d', $myMatch->getDate())->format('d/m/Y')." - ".
 			                str_replace(":", "H", $myMatch->getHourStart());
 			        } 
 		    	}
-
-		        return do_shortcode("[av_heading heading='".$stringDisplay."' tag='h6' style='blockquote modern-quote modern-centered' size='' subheading_active='subheading_above' subheading_size='15' margin='0' margin_sync='true' padding='0' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='av-jl3p1zhc' custom_class='' admin_preview_bg='']
-		            ".$title."<span style='float: right;''>".$stringDisplay2."</span>
-			        [/av_heading]");
-
-		    }
+			}
+			
+			return \Timber\Timber::fetch("match.twig", $this->context);
 	    }
 	}
 }

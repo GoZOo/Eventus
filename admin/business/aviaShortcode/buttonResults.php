@@ -70,22 +70,13 @@ if (!class_exists( 'EventusButtonResults') && class_exists('aviaShortcodeTemplat
 	        $atts));
 	        
 			$myTeam = DAO\TeamDAO::getInstance()->getTeamById($teamid); 
-			// $myUrlOne = $myTeam->getUrlOne();
-			// $myUrlOne = str_replace("[", "&#91;", $myUrlOne);
-			// $myUrlOne = str_replace("]", "&#93;", $myUrlOne);
-			// $myUrlTwo = $myTeam->getUrlTwo();
-			// $myUrlTwo = str_replace("[", "&#91;", $myUrlTwo);
-			// $myUrlTwo = str_replace("]", "&#93;", $myUrlTwo);
 			
-			$sc = "[av_buttonrow alignment='center' button_spacing='5' button_spacing_unit='px' av_uid='av-r75dw' custom_class='' admin_preview_bg='']";
+			\Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../../../public/views/screens/aviaComponents/';
+			$this->context = \Timber\Timber::get_context();	
+			$this->context['url_one'] = str_replace("]", "&#93;", str_replace("[", "&#91;", $myTeam->getUrlOne()));
+			$this->context['url_two'] = str_replace("]", "&#93;", str_replace("[", "&#91;", $myTeam->getUrlTwo()));
 
-			$myTeam->getUrlOne() ? $sc .= "[av_buttonrow_item label='Voir l’ensemble des résultats' link='manually,".str_replace("]", "&#93;", str_replace("[", "&#91;", $myTeam->getUrlOne()))."' link_target='_blank' size='large' label_display='' icon_select='yes-right-icon' icon_hover='aviaTBaviaTBicon_hover' icon='ue889' font='entypo-fontello' color='theme-color' custom_bg='#444444' custom_font='#ffffff']" : '';	
-
-			$myTeam->getUrlTwo() ? $sc .= "[av_buttonrow_item label='Voir l’ensemble des résultats' link='manually,".str_replace("]", "&#93;", str_replace("[", "&#91;", $myTeam->getUrlTwo()))."' link_target='_blank' size='large' label_display='' icon_select='yes-right-icon' icon_hover='aviaTBaviaTBicon_hover' icon='ue889' font='entypo-fontello' color='theme-color' custom_bg='#444444' custom_font='#ffffff']" : '';
-
-			$sc .= "[/av_buttonrow]";
-
-			return do_shortcode($sc);
+			return \Timber\Timber::fetch("buttonResults.twig", $this->context);
 	    }  
 	}
 }

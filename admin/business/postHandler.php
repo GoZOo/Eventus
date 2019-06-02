@@ -3,6 +3,7 @@
 namespace Eventus\Admin\Business;
 use Eventus\Includes\DAO as DAO;
 use Eventus\Includes\DTO as Entities;
+use Eventus\Admin\Business\Helper as Helper;
 
 /**
 * PostHandler is a class use to manage submit form
@@ -127,7 +128,7 @@ class PostHandler {
                     $sonMatch['localTeamScoreSon'] ? $sonMatch['localTeamScoreSon'] : null,
                     $sonMatch['visitingTeamSon'] ? $sonMatch['visitingTeamSon'] : null, 
                     $sonMatch['visitingTeamScoreSon'] ? $sonMatch['visitingTeamScoreSon'] : null, 
-                    strpos(strtolower(\StaticHelper::stripAccents($sonMatch['localTeamSon'])),strtolower(\StaticHelper::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
+                    strpos(strtolower(Helper\StaticHelper::stripAccents($sonMatch['localTeamSon'])),strtolower(Helper\StaticHelper::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
                     $sonMatch['streetSon'] ? $sonMatch['streetSon'] : null, 
                     $sonMatch['citySon'] ? $sonMatch['citySon'] : null, 
                     $sonMatch['gymSon'] ? $sonMatch['gymSon'] : null,
@@ -138,7 +139,9 @@ class PostHandler {
                 );
             } 
             DAO\MatchDAO::getInstance()->updateMatchesScreen($allMatchesSon, 1, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId()); 
-        }        
+        } else {            
+            DAO\MatchDAO::getInstance()->updateMatchesScreen([], 1, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId()); 
+        }   
 
         if (isset($_POST['otherMatches'])) {
             $allMatchesOther = [];
@@ -159,7 +162,7 @@ class PostHandler {
                         $otherMatch['localTeamScoreOther'] ? $otherMatch['localTeamScoreOther'] : null,
                         $otherMatch['visitingTeamOther'] ? $otherMatch['visitingTeamOther'] : null, 
                         $otherMatch['visitingTeamScoreOther'] ? $otherMatch['visitingTeamScoreOther'] : null, 
-                        strpos(strtolower(\StaticHelper::stripAccents($otherMatch['localTeamOther'])),strtolower(\StaticHelper::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
+                        strpos(strtolower(Helper\StaticHelper::stripAccents($otherMatch['localTeamOther'])),strtolower(Helper\StaticHelper::stripAccents($myTeam->getClub()->getString()))) !== false ? 0 : 1,
                         $otherMatch['streetOther'] ? $otherMatch['streetOther'] : null, 
                         $otherMatch['cityOther'] ? $otherMatch['cityOther'] : null, 
                         $otherMatch['gymOther'] ? $otherMatch['gymOther'] : null,
@@ -171,7 +174,9 @@ class PostHandler {
                 }                
             }
             DAO\MatchDAO::getInstance()->updateMatchesScreen($allMatchesOther, 2, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  
-        }
+        } else {            
+            DAO\MatchDAO::getInstance()->updateMatchesScreen([], 2, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId());  
+        } 
     }
     
     /**************************

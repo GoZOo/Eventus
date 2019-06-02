@@ -41,53 +41,36 @@ if (!class_exists( 'EventusResults') && class_exists('aviaShortcodeTemplate')) {
 		 * @return string $output returns the modified html string 
 		 */
 		function shortcode_handler($atts, $content = "", $shortcodename = "", $meta = "") {	
-			wp_enqueue_script('scriptEventusResults', plugin_dir_url( __FILE__ ).'/../../../../public/js/eventusResults.js', '', '', true); 
-			wp_enqueue_style('cssEventusResults', plugin_dir_url( __FILE__ ).'/../../../../public/css/eventusResults.css');
+			wp_enqueue_script('scriptEventusResults', WP_PLUGIN_URL.'/eventus/public/views/js/eventusResults.js'); 
+			wp_enqueue_style('cssEventusResults', WP_PLUGIN_URL.'/eventus/public/views/css/eventusResults.css');
 			$allClubs = DAO\ClubDAO::getInstance()->getAllClubs();
 			
-			$output  = 
-			"<div class='allClbus'>";
+			\Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../../../public/views/screens/aviaComponents/';
+			$this->context = \Timber\Timber::get_context();	
+			
+			$clubsTemp = array();
 
-	        foreach ($allClubs as $i => $club) {
-				$output .= "
-					<div class='blockClub' style='right:-".$i++."00%'>
-						<div class='ligneNomSuivant'>
-							<p>".$club->getName()."</p>".
-							(sizeof($allClubs) > 1 ? "<button type='button' class='clubSuivant' >&#9658;&#9658;</button>" : "")."
-						</div>";
+	        foreach ($allClubs as $club) {
+				$clubTemp = array(
+					'club'=> $club->getName(),
+					'allTeams' => array()
+				);
 				$allTeams = DAO\TeamDAO::getInstance()->getAllTeamsByClubOrderBySex($club);
-				$tempSex = "";
-				foreach ($allTeams as $team) { 
-					//$myMatch = MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "next"); //wrong method : temporary when no matches
-					$myMatch = DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last");
-					if ($myMatch->getId()) {
-						$newSex = $this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed());
-						$output .= ($tempSex != $newSex ? "<p class='sexe'>".$newSex." :</p>" : "");
-						$tempSex = $newSex;
-						$output .= "
-						<div class='resultat'>
-							<div class='ligneEqDate'>
-								<a href='".($team->getUrlTwo() ? $team->getUrlTwo() : $team->getUrlOne())."' target='_blank'>".$team->getName()."</a>
-								<p>".date_create_from_format('Y-m-d',$myMatch->getDate())->format('d/m')."</p>
-							</div>
-							<div class='equipe1'>
-								<p>".($myMatch->getLocalTeamScore() ? $myMatch->getLocalTeamScore() : '-')."</p>
-								<p>".$myMatch->getLocalTeam()."</p>
-							</div>
-							<div class='equipe2'>
-								<p>".($myMatch->getVisitingTeamScore() ? $myMatch->getVisitingTeamScore() : '-') ."</p>
-								<p>".$myMatch->getVisitingTeam()."</p>
-							</div>
-						</div>";
-					}        
-	            } 
-				$output .= 
-					"</div>";  
-	        }
-			$output  .= 
-			"</div>";
+				$teamsTemp = array();
+				foreach ($allTeams as $team) {
+					array_push($teamsTemp, array(
+						'team' => $team,
+						'sex' => $this->getSexLabel($team->getBoy(), $team->getGirl(), $team->getMixed()),
+						'match'=> DAO\MatchDAO::getInstance()->getCloseMatchByTeamId($team->getId(), "last")
+					));
+				}
+				$clubTemp['allTeams'] = $teamsTemp;
+				array_push($clubsTemp, $clubTemp);
+			}
 
-	        return $output;
+			$this->context['allClubs'] = $clubsTemp;
+
+			return \Timber\Timber::fetch("results.twig", $this->context);
 	    }  
 	}
 }

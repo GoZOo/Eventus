@@ -112,7 +112,7 @@
                             <a type='button' class='button-primary ico ico-link ico-no-text' href='{{ team.getUrlOne()|toProperText }}' target='_blank'></a>
                         </td>
                     </tr>
-                    <tr {% if not team.getUrlOne() %} "style='display: none'" {% endif %}>
+                    <tr {% if not team.getUrlOne() %} style='display: none' {% endif %}>
                         <th scope='row'>
                             <label for='urlTwo' name="urlTwo">{{ _e('Link n°2 of the championship results', 'eventus') }}</label>
                         </th>

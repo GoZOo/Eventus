@@ -7,13 +7,17 @@ Useful Wordpress plugin that allow you to manage handball teams results through 
 ### Installing
 
 * Retrieve the project and drag it into the plugins folder of your WordPress site.
-```
+
+```file
 wp-content/plugins/
 ```
+
 * Install librairies with composer
-```
+
+```sh
 composer install
 ```
+
 * And that's it !
 
 ### Initialization
@@ -27,17 +31,21 @@ Then, you can create a team with your link to FFHB's website results.
 You can now synchronize matches data.
 ![showteams](https://user-images.githubusercontent.com/24525092/48315819-603cdc80-e5db-11e8-9682-01f315594fa1.png)
 
-### More 
+### More
 
 Do not forget to put your GoogleMap Matrix Distance Api Key in the settings page.
 
-This plugin has been created to work with Enfold Theme. So, if you do not have it, you will not be able to display information on your site. 
+This plugin has been created to work with Enfold Theme. So, if you do not have it, you will not be able to display information on your site.
 
 Feel free to edit the project, so you can use it with your own theme.
 
 Most of the files are documented. So, you can give it an eye if you want to understand more.
 
 ## Updates
+
+### 2.6 - About Update of the FFHB website
+
+* Fix second url display momentally
 
 ### 2.5 - Calendar Update
 
@@ -53,7 +61,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 ### 2.4.2
 
 * Add possibility to reset log for each notification mail send
-* Evo check error on framework's website 
+* Evo check error on framework's website
 
 ### 2.4.1
 
@@ -96,23 +104,22 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Fix cron
 * Add link to club in team card
 * Add link to github in credits
-* Add htaccess to denied direct acces to php files 
+* Add htaccess to denied direct acces to php files
 * Add tooltips on heavy load buttons
 * Add documentations on most of the files
 * Evo Club are now displayed in cards
 * Evo some files have changed name
-* Evo optimized displaying buttons choose sex and delete image 
+* Evo optimized displaying buttons choose sex and delete image
 * Evo rename every columns in db with a corresponding prefix
 * Evo big change on DAOs. Now opti with joint request
 * Evo back end check on team & club submit
 * Evo you can now submit create/update team/club when press enter
 
-
 ### 2.2 - (Massive) BackEnd Update
 
 * Fix displaying of last match
 * Fix displaying of match in calendar : show only the ones greater than yesterday
-* Fix displaying of results carousel 
+* Fix displaying of results carousel
 * Fix calc of hours rdv
 * Fix issue with bracket in button results
 * Fix pick a sexe is required to create a team
@@ -124,7 +131,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Add page to show logs
 * Add infos debug about a team in footer card
 * Add possibility to select an image for a team and delete it
-* Add Avia Builder Element for team picture 
+* Add Avia Builder Element for team picture
 * Add img default if null for a team on the Avia Builder Element
 * Add loading spinner on some buttons
 * Add message asking to create a club first if none exist
@@ -144,17 +151,21 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Evo class Master doesn't exist anymore
 * Evo you can't sync match if the team has no url
 
-### 2.1.1* 
+### 2.1.1*
+
 * Improve visual elements
 
 ### 2.1* - Avia Constructor Update
+
 * Add Avia Builder Element
 * Delete widget results
 
 ### 2.0* - Birth of Eventus
+
 * Plugin recast and new name "Eventus"
- 
+
 ### 1.0* - Resultat Match
+
 * First and deprecated version named "Resultat Match"
 
 *not available on this github

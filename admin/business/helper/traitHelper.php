@@ -28,17 +28,6 @@ trait TraitHelper{
         }
         return;
     }
-    
-    /**
-    * Transform character with accent to characters without accents
-    *
-    * @param string    String to strip accents
-    * @return Match[]  String with accents strip 
-    * @access public
-    */
-    function stripAccents($str) {
-        return strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
-    }
 
     /**
     * Convert english string date to a french date

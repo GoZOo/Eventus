@@ -45,7 +45,10 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 
 ### 2.6 - About Update of the FFHB website
 
-* Fix second url display momentally
+* Evo implement new API of the FFHB Website
+* Evo opti on css
+* Add licence MIT
+* Fix momentary display of the second url
 
 ### 2.5 - Calendar Update
 

@@ -18,23 +18,24 @@
             <h2>{{ team.getClub().getName()|toProperText }}</h2>
             <div class="overflow">
                 <table class='matchTable parentMatches' {% if not myMatchParent %} style="display:none;" {% endif %}>
-                    <tr>
-                        <th>{{ _e('Id', 'eventus') }}</th>
-                        <th>{{ _e('Ch.', 'eventus') }}</th>
-                        <th>{{ _e('D.', 'eventus') }}</th>
-                        <th>{{ _e('Date', 'eventus') }}</th>
-                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('RDV', 'eventus') }}</th>
-                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('Match', 'eventus') }}</th>
-                        <th>{{ _e('Loc.', 'eventus') }}<span class="required">*</span>
-                        </th>
-                        <th>{{ _e('Loc.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
-                        <th>{{ _e('Opp.', 'eventus') }}<span class="required">*</span>
-                        </th>
-                        <th>{{ _e('Opp.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
-                        <th>{{ _e('Street', 'eventus') }}</th>
-                        <th>{{ _e('City', 'eventus') }}</th>
-                        <th>{{ _e('Gym', 'eventus') }}</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>{{ _e('Id', 'eventus') }}</th>
+                            <th>{{ _e('Ch.', 'eventus') }}</th>
+                            <th>{{ _e('D.', 'eventus') }}</th>
+                            <th>{{ _e('Date', 'eventus') }}</th>
+                            <th>{{ _e('Time', 'eventus') }}<br>{{ _e('RDV', 'eventus') }}</th>
+                            <th>{{ _e('Time', 'eventus') }}<br>{{ _e('Match', 'eventus') }}</th>
+                            <th>{{ _e('Loc.', 'eventus') }}<span class="required">*</span></th>
+                            <th>{{ _e('Loc.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                            <th>{{ _e('Opp.', 'eventus') }}<span class="required">*</span></th>
+                            <th>{{ _e('Opp.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                            <th>{{ _e('Street', 'eventus') }}</th>
+                            <th>{{ _e('City', 'eventus') }}</th>
+                            <th>{{ _e('Gym', 'eventus') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {% for match in myMatchParent %}
                         <tr class={{ match.getId() }}>
                             <th>
@@ -93,28 +94,30 @@
                             <input type='hidden' value="{{ match.getId() }}" data-name="idSon">
                         </tr>
                     {% endfor %}
+                    </tbody>
                 </table>
 
                 <br class="sonMatches" {% if not myMatchSon %} style="display:none;" {% endif %}>
                 <h3 class="sonMatches" {% if not myMatchSon %} style="display:none;" {% endif %}>{{ _e('Son matches', 'eventus') }}</h3>
                 <table class='matchTable sonMatches' {% if not myMatchSon %} style="display:none;" {% endif %}>
-                    <tr>
-                        <th>{{ _e('Id', 'eventus') }}<br>{{ _e('Orig.', 'eventus') }}</th>
-                        <th>{{ _e('Ch.', 'eventus') }}</th>
-                        <th>{{ _e('D.', 'eventus') }}</th>
-                        <th>{{ _e('Date', 'eventus') }}</th>
-                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('RDV', 'eventus') }}</th>
-                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('Match', 'eventus') }}</th>
-                        <th>{{ _e('Loc.', 'eventus') }}<span class="required">*</span>
-                        </th>
-                        <th>{{ _e('Loc.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
-                        <th>{{ _e('Opp.', 'eventus') }}<span class="required">*</span>
-                        </th>
-                        <th>{{ _e('Opp.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
-                        <th>{{ _e('Street', 'eventus') }}</th>
-                        <th>{{ _e('City', 'eventus') }}</th>
-                        <th>{{ _e('Gym', 'eventus') }}</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>{{ _e('Id', 'eventus') }}<br>{{ _e('Orig.', 'eventus') }}</th>
+                            <th>{{ _e('Ch.', 'eventus') }}</th>
+                            <th>{{ _e('D.', 'eventus') }}</th>
+                            <th>{{ _e('Date', 'eventus') }}</th>
+                            <th>{{ _e('Time', 'eventus') }}<br>{{ _e('RDV', 'eventus') }}</th>
+                            <th>{{ _e('Time', 'eventus') }}<br>{{ _e('Match', 'eventus') }}</th>
+                            <th>{{ _e('Loc.', 'eventus') }}<span class="required">*</span></th>
+                            <th>{{ _e('Loc.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                            <th>{{ _e('Opp.', 'eventus') }}<span class="required">*</span></th>
+                            <th>{{ _e('Opp.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                            <th>{{ _e('Street', 'eventus') }}</th>
+                            <th>{{ _e('City', 'eventus') }}</th>
+                            <th>{{ _e('Gym', 'eventus') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {% for match in myMatchSon %}
                         <tr class="{% if match.getMatchRef() %}{{ match.getMatchRef().getId() }}{% endif %}">
                             <th>
@@ -170,25 +173,27 @@
                             <input type='hidden' name='idSon{{ match.getId() }}' value="{{ match.getId() }}" data-name="idSon">
                         </tr>
                     {% endfor %}
+                    </tbody>
                 </table>
                 
                 <br {% if not myMatchParent %} style="display:none;" {% endif %}>
                 <h3 class="">{{ _e('Other matches', 'eventus') }}</h3>
                 <table class='matchTable otherMatches'>
-                    <tr>
-                        <th>{{ _e('Date', 'eventus') }}</th>
-                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('RDV', 'eventus') }}</th>
-                        <th>{{ _e('Time', 'eventus') }}<br>{{ _e('Match', 'eventus') }}</th>
-                        <th>{{ _e('Loc.', 'eventus') }}<span class="required">*</span>
-                        </th>
-                        <th>{{ _e('Loc.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
-                        <th>{{ _e('Opp.', 'eventus') }}<span class="required">*</span>
-                        </th>
-                        <th>{{ _e('Opp.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
-                        <th>{{ _e('Street', 'eventus') }}</th>
-                        <th>{{ _e('City', 'eventus') }}</th>
-                        <th>{{ _e('Gym', 'eventus') }}</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>{{ _e('Date', 'eventus') }}</th>
+                            <th>{{ _e('Time', 'eventus') }}<br>{{ _e('RDV', 'eventus') }}</th>
+                            <th>{{ _e('Time', 'eventus') }}<br>{{ _e('Match', 'eventus') }}</th>
+                            <th>{{ _e('Loc.', 'eventus') }}<span class="required">*</span></th>
+                            <th>{{ _e('Loc.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                            <th>{{ _e('Opp.', 'eventus') }}<span class="required">*</span></th>
+                            <th>{{ _e('Opp.', 'eventus') }}<br>{{ _e('goals', 'eventus') }}</th>
+                            <th>{{ _e('Street', 'eventus') }}</th>
+                            <th>{{ _e('City', 'eventus') }}</th>
+                            <th>{{ _e('Gym', 'eventus') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {% for match in myMatchOther %}
                         {% set tempId = generateId %}
                         <tr class="{% if match.getId() %}{{match.getId()}}{% else %}{{tempId}}{% endif %}">
@@ -230,6 +235,7 @@
                             <input type='hidden'>
                         </tr>
                     {% endfor %}
+                    </tbody>
                 </table>
             </div>
             <br><br>

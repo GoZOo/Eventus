@@ -1,6 +1,7 @@
 {
+    "name": "kiriancaumes/eventus",
+    "description": "Useful Wordpress plugin that allow you to manage handball teams results through FFHB website.",
     "require": {
-        "sunra/php-simple-html-dom-parser": "1.5.2",
-        "timber/timber": "^1.9"
+        "timber/timber": "^1.10"
     }
 }

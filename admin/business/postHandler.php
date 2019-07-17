@@ -244,7 +244,7 @@ class PostHandler {
             $team->setBoy(($_POST['sexe'] == "h" ? 1 : 0));
             $team->setGirl(($_POST['sexe'] == "f" ? 1 : 0));
             $team->setMixed(($_POST['sexe'] == "m" ? 1 : 0));
-            $team->setTime(($_POST['time'] ? $_POST['time'] : 45));
+            $team->setTime(($_POST['time'] ? $_POST['time'] : 50));
             $team->setImg(($_POST['img'] ? $_POST['img'] : null)); //$team->getImg()
             $team->setClub(DAO\ClubDAO::getInstance()->getClubById(($_POST['club'] ? $_POST['club'] : $team->getClub()->getId())));
         } else {
@@ -258,7 +258,7 @@ class PostHandler {
                 ($_POST['sexe'] == "m" ? 1 : 0), 
                 0, 
                 0, 
-                ($_POST['time'] ? $_POST['time'] : 45), 
+                ($_POST['time'] ? $_POST['time'] : 50), 
                 ($_POST['img'] ? $_POST['img'] : ""),
                 (DAO\ClubDAO::getInstance()->getClubById(($_POST['club'] ? $_POST['club'] : "")))
             );

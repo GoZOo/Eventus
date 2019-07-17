@@ -83,9 +83,9 @@ class Finder {
                 return strpos(mb_strtolower($var['name']), mb_strtolower($team->getClub()->getString())) !== false;
             });    
             $teamInfos = array_values($teamInfos);
-            var_dump($teamInfos);      
-            if (sizeof($teamInfos) === 0) {
-                $this->addLog("Error String (TeamId: ".$team->getId().") : Can't find the string in matches list");
+            
+            if (!$teamInfos || sizeof($teamInfos) === 0) {
+                $this->addLog("Error String (TeamId: ".$team->getId().") : Can't find the string in results list");
                 continue;
             } else {
                 if ($i+1 == $turn) { //Check if last url, so last champ

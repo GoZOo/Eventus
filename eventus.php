@@ -22,6 +22,7 @@ include_once plugin_dir_path(__FILE__) . 'includes/DAO/matchDAO.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/_masterController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/homeController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/clubController.php';
+include_once plugin_dir_path(__FILE__) . 'admin/controllers/seekerController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/logController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/settingsController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/helper/traitHelper.php';
@@ -29,6 +30,7 @@ include_once plugin_dir_path(__FILE__) . 'admin/business/helper/staticHelper.php
 include_once plugin_dir_path(__FILE__) . 'admin/business/finder.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/ics.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/postHandler.php';
+include_once plugin_dir_path(__FILE__) . 'admin/business/seeker.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/widgetDashboard.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/twig.php';
 
@@ -82,10 +84,13 @@ class Eventus {
 			});
 			add_submenu_page('eventus', __('Logs', 'eventus') . ' - Eventus', __('Logs', 'eventus'), 'manage_options', 'eventus_logs', function () {
 				new Admin\Controllers\LogController;
+			});	
+			add_submenu_page('eventus', "Chercheur" . ' - Eventus', "Chercheur", 'manage_options', 'eventus_seeker', function () {
+				new Admin\Controllers\SeekerController;
 			});
 			add_submenu_page('eventus', __('Settings', 'eventus') . ' - Eventus', __('Settings', 'eventus'), 'manage_options', 'eventus_admin', function () {
 				new Admin\Controllers\SettingsController;
-			});
+			});		
 		});
 
 		//Bdd

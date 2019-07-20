@@ -1,0 +1,92 @@
+{% extends "_base.twig" %}
+
+{% block wrap %}
+    <h1 class="wp-heading-inline">Chercheur</h1>
+    <hr class="wp-header-end">
+    {{ notice }}
+    <form action={{ adminPostUrl }} method='post'>
+        <h2>Sélectionner un club</h2>
+        <div>
+            <table class='form-table'>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <label for="club">{{ _e('Club', 'eventus') }}<span class="required">*</span>
+                            </label>
+                        </th>
+                        <td>
+                            <select id='club' name="clubId">
+                                <option disabled hidden selected value="">Sélectionner un club</option>
+                                {% for club in clubs %}
+                                    <option value="{{ club.getId()}}">
+                                        {{ club.getName() }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <h2>Sélectionner les championnats</h2>
+        <div>
+            <table class='form-table'>
+                <tbody>
+                    <tr>
+                        <th scope='row'>
+                            <label>Départemental :</label>
+                        </th>
+                        <td>
+                            <select id='departemental' name="departemental">
+                                <option selected value="">- Aucun -</option>
+                                {% for champ in champ.departemental %}
+                                    <option value="{{ champ.champCode }}">
+                                        {{ champ.sequence }} - {{ champ.eventName }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label>Régional :</label>
+                        </th>
+                        <td>
+                            <select id='regional' name="regional">
+                                <option selected value="">- Aucun -</option>
+                                {% for champ in champ.regional %}
+                                    <option value="{{ champ.champCode }}">
+                                        {{ champ.sequence }} - {{ champ.eventName }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>
+                            <label>National :</label>
+                        </th>
+                        <td>
+                            <select id='national' name="national">
+                                <option selected value="false">Non</option>
+                                <option value="true">Oui</option>
+                            </select>
+                        </td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+
+        <br />
+
+        <button 
+            class="button-primary ico ico-sync" 
+            name="action" 
+            type="submit" 
+            value="eventus_seek"
+        >
+            Chercher
+        </button>
+    </form>
+{% endblock %}

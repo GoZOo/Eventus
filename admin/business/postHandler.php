@@ -49,7 +49,9 @@ class PostHandler {
         add_action('admin_post_eventus_majSettings', array($this, 'updateSettings'));         
         
         add_action('admin_post_eventus_majIcs', array($this, 'updateIcs'));    
-        add_action('admin_post_eventus_delIcs', array($this, 'deleteIcs'));    
+        add_action('admin_post_eventus_delIcs', array($this, 'deleteIcs'));  
+
+        add_action('admin_post_eventus_seek', array($this, 'seek'));  
     }
     
        
@@ -346,5 +348,30 @@ class PostHandler {
             } 
         }   
         wp_redirect( add_query_arg( 'message', 'succesDelIcs',  wp_get_referer() ));       
+    }
+
+    /**************************
+    *********** Seek **********
+    ***************************/
+    function seek(){
+        // var_dump($_POST);
+        // if (isset($_POST['clubId']) && $_POST['clubId']) {
+        //     set_time_limit(0);
+        //     $club = DAO\ClubDAO::getInstance()->getClubById($_POST['clubId']);
+        //     $res = array();
+        //     $seeker = new Seeker();
+        //     if (isset($_POST['departemental']) && $_POST['departemental'] !== ''){
+        //         array_push($res, $seeker->seek($_POST['departemental'], $club->getString()));
+        //     }            
+        //     if (isset($_POST['regional']) && $_POST['regional'] !== ''){
+        //         array_push($res, $seeker->seek($_POST['regional'], $club->getString()));
+        //     }            
+        //     if (isset($_POST['national']) && filter_var($_POST['national'], FILTER_VALIDATE_BOOLEAN)){
+        //         array_push($res, $seeker->seek("national", $club->getString()));
+        //     }
+        //     var_dump($res); exit;
+        // }
+        wp_redirect( add_query_arg( 'data', urlencode('{"0":{"team":{"position":3,"name":"THOUARE HBC 2","points":22,"games":10,"wins":6,"draws":0,"defeats":4,"scored":237,"missed":243,"difference":-6},"name":"-10 ANS MIXTE","phase":"-10 ANS MIXTE 2EME PHASE","pool":"D 6","url":"https:\/\/ffhandball.fr\/fr\/competition\/11587#poule-57749"},"1":{"team":{"position":5,"name":"THOUARE HBC 1","points":13,"games":9,"wins":2,"draws":0,"defeats":7,"scored":233,"missed":268,"difference":-35},"name":"-10 ANS MIXTE","phase":"-10 ANS MIXTE 2EME PHASE","pool":"D 2","url":"https:\/\/ffhandball.fr\/fr\/competition\/11587#poule-59959"},"2":{"team":{"position":6,"name":"THOUARE HANDBALL CLUB","points":14,"games":10,"wins":2,"draws":0,"defeats":8,"scored":148,"missed":257,"difference":-109},"name":"-11 ANS F","phase":"-11 ANS F 2EME PHASE","pool":"D 1 B","url":"https:\/\/ffhandball.fr\/fr\/competition\/11573#poule-57803"},"3":{"team":{"position":2,"name":"THOUARE HBC","points":36,"games":14,"wins":11,"draws":0,"defeats":3,"scored":333,"missed":244,"difference":89},"name":"-12 ANS F","phase":"-12 ANS F 2EME PHASE","pool":"D 1","url":"https:\/\/ffhandball.fr\/fr\/competition\/11043#poule-53752"},"4":{"team":{"position":4,"name":"THOUARE HBC 1","points":26,"games":14,"wins":6,"draws":0,"defeats":8,"scored":325,"missed":335,"difference":-10},"name":"-12 ANS M","phase":"-12 ANS M 2EME PHASE","pool":"D 1 A","url":"https:\/\/ffhandball.fr\/fr\/competition\/11034#poule-53746"},"5":{"team":{"position":5,"name":"THOUARE HBC 2","points":16,"games":10,"wins":2,"draws":2,"defeats":6,"scored":231,"missed":255,"difference":-24},"name":"-12 ANS M","phase":"-12 ANS M 2EME PHASE","pool":"D 4 ","url":"https:\/\/ffhandball.fr\/fr\/competition\/11034#poule-57663"},"6":{"team":{"position":3,"name":"THOUARE HANDBALL CLUB","points":31,"games":14,"wins":7,"draws":3,"defeats":4,"scored":277,"missed":258,"difference":19},"name":"-14 ANS F","phase":"-14 ANS F 2EME PHASE","pool":"D 1","url":"https:\/\/ffhandball.fr\/fr\/competition\/11042#poule-53750"},"7":{"team":{"position":6,"name":"THOUARE HANDBALL CLUB","points":13,"games":10,"wins":1,"draws":1,"defeats":8,"scored":262,"missed":311,"difference":-49},"name":"-14 ANS M","phase":"-14 ANS M 2EME PHASE","pool":"D 5","url":"https:\/\/ffhandball.fr\/fr\/competition\/11002#poule-57633"},"8":{"team":{"position":3,"name":"THOUARE HANDBALL CLUB","points":20,"games":10,"wins":5,"draws":0,"defeats":5,"scored":226,"missed":224,"difference":2},"name":"-16 ANS M","phase":"-16 ANS M 2EME PHASE","pool":"D 7","url":"https:\/\/ffhandball.fr\/fr\/competition\/11000#poule-57581"},"9":{"team":{"position":1,"name":"THOUARE HANDBALL CLUB","points":63,"games":22,"wins":20,"draws":1,"defeats":1,"scored":676,"missed":492,"difference":184},"name":"2EME D. T. M.","phase":"2EME D. T. M. ","pool":"2EME DTM","url":"https:\/\/ffhandball.fr\/fr\/competition\/10930#poule-47504"}}'),  wp_get_referer() ));   
+        
     }
 }

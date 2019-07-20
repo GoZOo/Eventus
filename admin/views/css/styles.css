@@ -90,6 +90,13 @@ body[class*="eventus"] .eventusCardList .eventusCardClub {
 ************************************/
 
 /***********************************
+*********** PAGE SEEKER ************
+************************************/
+body[class*="eventus"] select {
+  width: 25em;
+}
+
+/***********************************
 ********* WIDGET DASHBOARD *********
 ************************************/
 #dashboard_eventus .inside {

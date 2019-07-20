@@ -43,7 +43,7 @@ class Seeker {
         return $res;
     }
 
-    public function seek($champCode, $string){
+    public function seek($champCode, $string, $compet){
         $res = array();
         $competitions = $this->getCompetitions($champCode);   
                 
@@ -56,8 +56,9 @@ class Seeker {
                 $team = $this->getTeamInPool($this->getPoolDetail($pool['poolId']), $string);
 
                 if ($team !== null) array_push($res, array(
-                    "team" => $team,
-                    "name" => array_key_exists('eventName', $competition) ? $competition['eventName'] : null,
+                    "name" => array_key_exists('name', $team) ? $team['name'] : null,
+                    "compet" => $compet,
+                    "cat" => array_key_exists('eventName', $competition) ? $competition['eventName'] : null,
                     "phase" => array_key_exists('phaseName', $pool) ? $pool['phaseName'] : null,
                     "pool" => array_key_exists('poolName', $pool) ? $pool['poolName'] : null,
                     "url" => "https://ffhandball.fr/fr/competition/".$competition['eventId']."#poule-".$pool['poolId']

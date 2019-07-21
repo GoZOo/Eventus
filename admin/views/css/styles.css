@@ -14,8 +14,9 @@ body[class*="eventus"] .dern-synch {
 ************************************/
 body[class*="eventus"] .overflow {
   overflow-x: auto;
+  overflow-y: hidden;
 }
-body[class*="eventus"] table.matchTable {
+body[class*="eventus"] table.matchTable  {
   table-layout: fixed;
   min-width: 1200px;
 }
@@ -92,9 +93,40 @@ body[class*="eventus"] .eventusCardList .eventusCardClub {
 /***********************************
 *********** PAGE SEEKER ************
 ************************************/
+/* seek */
 body[class*="eventus"] select {
   width: 25em;
 }
+
+/* seeked */
+body[class*="eventus"] table.seekedTable {
+  table-layout: fixed;
+  min-width: 1000px;
+  width: 100%;
+}
+body[class*="eventus"] table.seekedTable input[type="text"], body[class*="eventus"] table.seekedTable input[type="url"] {
+  width: 100%;
+}
+body[class*="eventus"] table.seekedTable thead th {
+  background: #d8d8d8;
+  padding: .75em 0;
+}
+body[class*="eventus"] table.seekedTable thead tr th:nth-child(1) {
+  width: 60px;
+}
+body[class*="eventus"] table.seekedTable thead tr th:nth-child(2) {
+  width: 240px;
+}
+body[class*="eventus"] table.seekedTable thead tr th:nth-child(3) {
+  width: 35%;
+}
+body[class*="eventus"] table.seekedTable tbody tr td:nth-child(1), body[class*="eventus"] table.seekedTable tbody tr td:nth-child(2) {
+  text-align: center;
+}
+/* body[class*="eventus"] table.seekedTable thead tr th:nth-child(3),
+body[class*="eventus"] table.seekedTable thead tr th:nth-child(4) {
+  width: 20%;
+} */
 
 /***********************************
 ********* WIDGET DASHBOARD *********

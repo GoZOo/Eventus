@@ -13,8 +13,12 @@ use Eventus\Admin\Business\Helper as Helper;
 */
 class Seeker {
     // use Helper\TraitHelper;
-    private $_baseUrl = "https://jjht57whqb.execute-api.us-west-2.amazonaws.com/prod/";
-    
+    /**
+    * @var Seeker   $_instance  Var use to store an instance
+    */
+    private static $_instance;
+
+    private $_baseUrl = "https://jjht57whqb.execute-api.us-west-2.amazonaws.com/prod/";    
     private $_championship = "championship/";
     private $_competition = "competition/";
     private $_pools = "competitionPool/";
@@ -22,8 +26,19 @@ class Seeker {
     private $_departemental = "D";
     private $_regional = "R";
     
-    function __construct() {
-    }   
+    /**
+    * Returns an instance of the object
+    *
+    * @return Seeker
+    * @access public
+    */
+    public static function getInstance() {
+        if (is_null(self::$_instance)) {
+            self::$_instance = new Seeker();
+        }
+        return self::$_instance;
+    }
+    private function __construct() {}     
 
     public function getChampionship() {
         $competitions = array(            
@@ -60,7 +75,7 @@ class Seeker {
                     "compet" => $compet,
                     "cat" => array_key_exists('eventName', $competition) ? $competition['eventName'] : null,
                     "phase" => array_key_exists('phaseName', $pool) ? $pool['phaseName'] : null,
-                    "pool" => array_key_exists('poolName', $pool) ? $pool['poolName'] : null,
+                    // "pool" => array_key_exists('poolName', $pool) ? $pool['poolName'] : null,
                     "url" => "https://ffhandball.fr/fr/competition/".$competition['eventId']."#poule-".$pool['poolId']
                 ));
             }          

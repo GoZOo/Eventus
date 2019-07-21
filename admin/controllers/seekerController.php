@@ -24,19 +24,24 @@ class SeekerController extends MasterController {
     }	
 
     private function displayIndex(){
-        $seeker = new Business\Seeker();
-        $this->context['champ'] = $seeker->getChampionship();        
+        $this->context['champ'] = Business\Seeker::getInstance()->getChampionship();        
         $this->context['clubs'] = DAO\ClubDAO::getInstance()->getAllClubs();
-
-        // var_dump($seeker->seek('C44',"thouare"));
 
         $this->render('seeker');
     }
 
     private function displayRes(){
-        var_dump(json_decode(stripslashes($_GET['seeked']), JSON_UNESCAPED_SLASHES));
+        if ($this->get['clubId']){  
+            $club = DAO\ClubDAO::getInstance()->getClubById($this->get['clubId']);
+            if (!$club->getId()) return $this->render('error');   
+    	} else {
+            return $this->render('error');
+        }
+            
+        $this->context['club'] = $club;
+        $this->context['seeked'] = json_decode(stripslashes($_GET['seeked']), JSON_UNESCAPED_SLASHES);
 
-        // $this->render('seeked');
+        $this->render('seeked');
     }
 }
 

@@ -52,6 +52,7 @@ class PostHandler {
         add_action('admin_post_eventus_delIcs', array($this, 'deleteIcs'));  
 
         add_action('admin_post_eventus_seek', array($this, 'seek'));  
+        add_action('admin_post_eventus_seekAdd', array($this, 'addTeamSeek'));  
     }
     
        
@@ -358,14 +359,46 @@ class PostHandler {
             set_time_limit(0);
             $club = DAO\ClubDAO::getInstance()->getClubById($_POST['clubId']);
             $res = array();
-            $seeker = new Seeker();
             if (isset($_POST['departemental']) && $_POST['departemental'] !== '') 
-                array_push($res, $seeker->seek($_POST['departemental'], $club->getString(), "departemental"));
+                array_push($res, Seeker::getInstance()->seek($_POST['departemental'], $club->getString(), "departemental"));
             if (isset($_POST['regional']) && $_POST['regional'] !== '') 
-                array_push($res, $seeker->seek($_POST['regional'], $club->getString(), "regional"));            
+                array_push($res, Seeker::getInstance()->seek($_POST['regional'], $club->getString(), "regional"));            
             if (isset($_POST['national']) && filter_var($_POST['national'], FILTER_VALIDATE_BOOLEAN)) 
-                array_push($res, $seeker->seek("national", $club->getString(), "national"));   
-            wp_redirect( add_query_arg( 'seeked', urlencode(json_encode($res)), wp_get_referer()));   
+                array_push($res, Seeker::getInstance()->seek("national", $club->getString(), "national"));   
+            wp_redirect( add_query_arg(array('seeked' => urlencode('[{"name":"THOUARE HBC 2","category":"-10 ANS MIXTE","phase":"-10 ANS MIXTE 2EME PHASE","pool":"D 6","url":"https://ffhandball.fr/fr/competition/11587#poule-57749"},{"name":"THOUARE HBC 1","category":"-10 ANS MIXTE","phase":"-10 ANS MIXTE 2EME PHASE","pool":"D 2","url":"https://ffhandball.fr/fr/competition/11587#poule-59959"},{"name":"THOUARE HANDBALL CLUB","category":"-11 ANS F","phase":"-11 ANS F 2EME PHASE","pool":"D 1 B","url":"https://ffhandball.fr/fr/competition/11573#poule-57803"},{"name":"THOUARE HBC","category":"-12 ANS F","phase":"-12 ANS F 2EME PHASE","pool":"D 1","url":"https://ffhandball.fr/fr/competition/11043#poule-53752"},{"name":"THOUARE HBC 1","category":"-12 ANS M","phase":"-12 ANS M 2EME PHASE","pool":"D 1 A","url":"https://ffhandball.fr/fr/competition/11034#poule-53746"},{"name":"THOUARE HBC 2","category":"-12 ANS M","phase":"-12 ANS M 2EME PHASE","pool":"D 4 ","url":"https://ffhandball.fr/fr/competition/11034#poule-57663"},{"name":"THOUARE HANDBALL CLUB","category":"-14 ANS F","phase":"-14 ANS F 2EME PHASE","pool":"D 1","url":"https://ffhandball.fr/fr/competition/11042#poule-53750"},{"name":"THOUARE HANDBALL CLUB","category":"-14 ANS M","phase":"-14 ANS M 2EME PHASE","pool":"D 5","url":"https://ffhandball.fr/fr/competition/11002#poule-57633"},{"name":"THOUARE HANDBALL CLUB","category":"-16 ANS M","phase":"-16 ANS M 2EME PHASE","pool":"D 7","url":"https://ffhandball.fr/fr/competition/11000#poule-57581"},{"name":"THOUARE HANDBALL CLUB","category":"2EME D. T. M.","phase":"2EME D. T. M. ","pool":"2EME DTM","url":"https://ffhandball.fr/fr/competition/10930#poule-47504"}]'), array('clubId' => $_POST['clubId'])), wp_get_referer()));   
+            // wp_redirect( add_query_arg(array('seeked' => urlencode(json_encode($res)), array('clubId' => $_POST['clubId'])), wp_get_referer()));   
+        } else {
+            wp_redirect( add_query_arg( 'message', 'errorSeeker',  wp_get_referer() )); 
         }
+    }
+
+    function addTeamSeek(){
+        // var_dump($_POST);exit;
+        if (isset($_POST['data']) && $_POST['data'] && isset($_POST['clubId']) && $_POST['clubId']) {
+            $club = DAO\ClubDAO::getInstance()->getClubById(($_POST['clubId'] ? $_POST['clubId'] : ""));
+            foreach ($_POST['data'] as $team) {
+                if (isset($team['add']) && filter_var($team['add'], FILTER_VALIDATE_BOOLEAN)){
+                    $newTeam = new Entities\Team(
+                        null, 
+                        ($team['nom'] ? $team['nom'] : ""), 
+                        ($team['urlOne'] ? $team['urlOne'] : ""), 
+                        ($team['urlTwo'] ? $team['urlTwo'] : ""), 
+                        ($team['sexe'] == "h" ? 1 : 0), 
+                        ($team['sexe'] == "f" ? 1 : 0), 
+                        ($team['sexe'] == "m" ? 1 : 0), 
+                        0, 
+                        0, 
+                        50, 
+                        "",
+                        $club
+                    );
+                    var_dump($newTeam);
+                    // DAO\TeamDAO::getInstance()->insertTeam($newTeam); 
+                }                
+            }
+            wp_redirect( add_query_arg( 'message', 'succesNewClub', 'admin.php?page=eventus' )); 
+        } else {
+            wp_redirect( add_query_arg( 'message', 'errorNewTeam',  wp_get_referer() )); 
+        }        
     }
 }

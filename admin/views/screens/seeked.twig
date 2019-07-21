@@ -1,0 +1,125 @@
+{% extends "_base.twig" %}
+
+{% block wrap %}
+    <h1 class="wp-heading-inline">Equipe(s) trouvée(s)</h1>
+    <hr class="wp-header-end">
+    {{ notice }}
+    <form action={{ adminPostUrl }} method='post'>
+        <h2>{% if club %}{{ club.getName }}{% endif %}</h2>
+        {% if seeked and club %}
+            <div class="overflow">
+                <table class="seekedTable">
+                    <thead>
+                        <tr>
+                            <th>Ajouter</th>
+                            <th>{{ _e('Sex', 'eventus') }}</th>
+                            <th>{{ _e('Name', 'eventus') }}</th>
+                            <th>{{ _e('Link n°1 of the championship results', 'eventus') }}</th>
+                            <th>{{ _e('Link n°2 of the championship results', 'eventus') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for team in seeked %}
+                        <tr>
+                            <td>
+                                <input 
+                                    type="checkbox" 
+                                    name="data[{{ loop.index0 }}][add]"
+                                    value="true"
+                                >
+                            </td>
+                            <td>
+                                <label>
+                                    <input 
+                                        type="radio" 
+                                        value="h" 
+                                        name="data[{{ loop.index0 }}][sexe]"
+                                        title="{{ _e('Male', 'eventus') }}" 
+                                        required
+                                    />
+                                    {{ _e('Male', 'eventus') }}
+                                </label>
+                                &nbsp;&nbsp;
+                                <label>
+                                    <input 
+                                        type="radio" 
+                                        value="f" 
+                                        name="data[{{ loop.index0 }}][sexe]" 
+                                        title="{{ _e('Female', 'eventus') }}" 
+                                    />
+                                    {{ _e('Female', 'eventus') }}                                        
+                                </label>
+                                &nbsp;&nbsp;
+                                <label>
+                                    <input 
+                                        type="radio" 
+                                        value="m" 
+                                        name="data[{{ loop.index0 }}][sexe]" 
+                                        title="{{ _e('Mixed', 'eventus') }}" 
+                                    />
+                                    {{ _e('Mixed', 'eventus') }}                                        
+                                </label>
+                            </td>
+                            <td >
+                                <input 
+                                    name='data[{{ loop.index0 }}][nom]' 
+                                    id='nom' 
+                                    value='{{ team.name }} | {{ team.category }} | {{ team.phase }}' 
+                                    class='regular-text' 
+                                    type='text' 
+                                    required 
+                                    title="{{ _e('Name', 'eventus') }}" 
+                                    placeholder="{{ _e('Name', 'eventus') }}"
+                                >
+                            </td>
+                            <td>
+                                <input 
+                                    name='data[{{ loop.index0 }}][urlOne]' 
+                                    id='urlOne' 
+                                    value='{{ team.url }}' 
+                                    class='regular-text'
+                                    type='url' 
+                                    title="{{ _e('Link n°1 of the championship results', 'eventus') }}" 
+                                    placeholder="{{ _e('Link n°1 of the championship results', 'eventus') }}"
+                                >
+                            </td>
+                            <td>
+                                <input 
+                                    name='data[{{ loop.index0 }}][urlTwo]' 
+                                    id='urlTwo' 
+                                    value='' 
+                                    class='regular-text' 
+                                    type='url' 
+                                    title="{{ _e('Link n°2 of the championship results', 'eventus') }}" 
+                                    placeholder="{{ _e('Link n°2 of the championship results', 'eventus') }}"
+                                >
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <br />
+    
+        <input type='hidden' name='clubId' value="{{ club.getId }}">	
+        <button 
+            class="button-primary ico ico-add" 
+            name="action" 
+            type="submit" 
+            value="eventus_seekAdd"
+        >
+           Ajouter les équipes
+        </button>
+        
+    {% else %}  
+        <p>Aucun résultat</p>
+        <button 
+            class="button-primary" 
+            type="button" 
+            onclick="window.history.back()"
+        >
+           Retour
+        </button> 
+    {% endif %}
+    </form>
+{% endblock %}

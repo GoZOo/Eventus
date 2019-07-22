@@ -64,7 +64,7 @@
                                 <input 
                                     name='data[{{ loop.index0 }}][nom]' 
                                     id='nom' 
-                                    value='{{ team.name }} | {{ team.category }} | {{ team.phase }}' 
+                                    value='{{ team.name }} | {{ team.cat }} | {{ team.phase }}' 
                                     class='regular-text' 
                                     type='text' 
                                     required 
@@ -76,7 +76,7 @@
                                 <input 
                                     name='data[{{ loop.index0 }}][urlOne]' 
                                     id='urlOne' 
-                                    value='{{ team.url }}' 
+                                    value='https://ffhandball.fr/fr/competition/{{ team.url }}' 
                                     class='regular-text'
                                     type='url' 
                                     title="{{ _e('Link n°1 of the championship results', 'eventus') }}" 
@@ -114,7 +114,7 @@
     {% else %}  
         <p>Aucun résultat</p>
         <button 
-            class="button-primary" 
+            class="button-primary ico ico-back" 
             type="button" 
             onclick="window.history.back()"
         >

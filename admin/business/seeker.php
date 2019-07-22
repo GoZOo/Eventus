@@ -1,18 +1,19 @@
 <?php 
 
 namespace Eventus\Admin\Business;
-use Eventus\Includes\DAO as DAO;
-use Eventus\Includes\DTO as Entities;
-use Eventus\Admin\Business\Helper as Helper;
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
+use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Exception\RequestException;
+
 
 /**
-* Finder is a class that allows you to manage all synchronization actions of matches.
+* Seeker is a class that allows you to seek for all teams in your club.
 *
 * @package  Admin/Business
 * @access   public
 */
 class Seeker {
-    // use Helper\TraitHelper;
     /**
     * @var Seeker   $_instance  Var use to store an instance
     */
@@ -33,87 +34,122 @@ class Seeker {
     * @access public
     */
     public static function getInstance() {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new Seeker();
-        }
+        if (is_null(self::$_instance)) self::$_instance = new Seeker();
         return self::$_instance;
     }
-    private function __construct() {}     
 
+    private function __construct() {        
+        $this->client = new Client(['base_uri' => $this->_baseUrl]);
+    }     
+
+    /**
+    * Get constants list of championship for departements and regions
+    *
+    * @return array[]    
+    * @access public
+    */
     public function getChampionship() {
-        $competitions = array(            
-            "departemental" => $this->_baseUrl . $this->_championship . $this->_departemental,
-            "regional" => $this->_baseUrl . $this->_championship . $this->_regional
-        );
-        $res = array(
+        $promises = [
+            'departemental' => $this->client->getAsync($this->_championship . $this->_departemental),
+            'regional' => $this->client->getAsync($this->_championship . $this->_regional)
+        ];
+        $results = Promise\unwrap($promises);
+        
+        $final = array( 
             "departemental" => array(),
             "regional" => array()
         );
-        foreach ($competitions as $key => $url) {            
-            $output = $this->fetch($url);
-            $res[$key] = $output && $output['events'] ? $output['events'] : array();
-            $col = array_column($res[$key], 'sequence');
-            array_multisort($col, SORT_ASC, $res[$key]);
+        foreach (array_keys($promises) as $key) {    
+            $data = json_decode($results[$key]->getBody(), true); 
+            $final[$key] = $data && array_key_exists('events', $data) ? $data['events'] : array();
+            $col = array_column($final[$key], 'sequence');
+            array_multisort($col, SORT_ASC, $final[$key]);
         }
-        return $res;
+        return $final;
     }
 
-    public function seek($champCode, $string, $compet){
-        $res = array();
-        $competitions = $this->getCompetitions($champCode);   
-                
+    /**
+    * Seek for all teams by a club
+    *
+    * @param string        Code of the championship
+    * @param string        String of a club used to search team
+    * @param string        Level of competition
+    * @return array[]    
+    * @access public
+    */
+    public function seek($champCode, $string, $level = null){        
+        $competitions = $this->parseJson($this->client->get($this->_competition . $champCode)->getBody(), 'events'); //Get all the competitions
+        $promises = array();
+
         foreach ($competitions as $competition) {
-            if(!array_key_exists('eventId', $competition)) continue;
-            $pools = $this->getPools($competition['eventId']);
+            if(!array_key_exists('eventId', $competition)) continue;            
+            $promises[$competition['eventId']] = $this->client->getAsync($this->_pools . $competition['eventId']) //Get all the pools
+                ->then(
+                    function (ResponseInterface $res) use ($string, $level, $competition) {                        
+                        $pools = $this->parseJson($res->getBody(), 'pools');
+                        $promises1 = array();
 
-            foreach ($pools as $pool) {
-                if(!array_key_exists('poolId', $pool)) continue;
-                $team = $this->getTeamInPool($this->getPoolDetail($pool['poolId']), $string);
-
-                if ($team !== null) array_push($res, array(
-                    "name" => array_key_exists('name', $team) ? $team['name'] : null,
-                    "compet" => $compet,
-                    "cat" => array_key_exists('eventName', $competition) ? $competition['eventName'] : null,
-                    "phase" => array_key_exists('phaseName', $pool) ? $pool['phaseName'] : null,
-                    // "pool" => array_key_exists('poolName', $pool) ? $pool['poolName'] : null,
-                    "url" => "https://ffhandball.fr/fr/competition/".$competition['eventId']."#poule-".$pool['poolId']
-                ));
-            }          
+                        foreach ($pools as $pool) { 
+                            if(!array_key_exists('poolId', $pool)) continue; 
+                            $promises1[$pool['poolId']] = $this->client->getAsync($this->_pool . $pool['poolId']) //Get data of a given pool
+                                ->then(
+                                    function (ResponseInterface $res1) use ($string, $level, $competition, $pool) {                  
+                                        $teams = $this->parseJson($res1->getBody(), 'teams');
+                                        $team = $this->getTeamInPool($teams, $string);
+                                        if ($team !== null) return array(
+                                            "name" => array_key_exists('name', $team) ? $team['name'] : null,
+                                            "cat" => array_key_exists('eventName', $competition) ? $competition['eventName'] : null,
+                                            "phase" => array_key_exists('phaseName', $pool) ? $pool['phaseName'] : null,
+                                            "url" => $competition['eventId']."#poule-".$pool['poolId'],
+                                            // "pool" => array_key_exists('poolName', $pool) ? $pool['poolName'] : null,
+                                            // "level" => $level,
+                                        );
+                                    },
+                                    function (RequestException $e) { $e->getMessage(); }
+                                );                        
+                        }
+                        return array_filter(Promise\unwrap($promises1));      
+                    },
+                    function (RequestException $e) { $e->getMessage(); }
+                );
+        } 
+        $results = array_filter(Promise\unwrap($promises));
+        $final = array();
+        foreach ($results as $res) {
+            foreach ($res as $r) {
+                array_push($final, $r);
+            }
         }
-        return $res;
+        // var_dump($final);exit;
+        return $final;
     }
 
-    private function getCompetitions($champId){
-        $output = $this->fetch($this->_baseUrl . $this->_competition . $champId);
-        return $output && array_key_exists('events', $output) ? $output['events'] : array();
-    }
-
-    private function getPools($competId){
-        $output = $this->fetch($this->_baseUrl . $this->_pools . $competId);
-        return $output && array_key_exists('pools', $output) ? $output['pools'] : array();
-    }
-
-    private function getPoolDetail($poolId){
-        $output = $this->fetch($this->_baseUrl . $this->_pool . $poolId);
-        return $output && array_key_exists('teams', $output) ? $output['teams'] : array();
+    /**
+    * Parse json from data from API
+    *
+    * @param string        Data to be parsed
+    * @param string        Key to find
+    * @return array[]    
+    * @access private
+    */
+    private function parseJson($data, $key){
+        $json = json_decode($data, true);
+        return $json !== null && json_last_error() === JSON_ERROR_NONE && array_key_exists($key, $json) ? $json[$key] : array();
     }
     
+    /**
+    * Find team in a pool
+    *
+    * @param array[]       Pool data
+    * @param string        String to find
+    * @return array[]    
+    * @access private
+    */
     private function getTeamInPool($pool, $string){
         $team = array_filter($pool, function ($var) use($string) {
             return strpos(mb_strtolower($var['name']), mb_strtolower($string)) !== false;
         });  
         $team = array_values($team); 
         return $team && sizeof($team) !== 0 ? $team[0] : null;
-    }
-
-    private function fetch($url){
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        curl_setopt($ch,CURLOPT_ENCODING , "gzip");            
-        $output = curl_exec($ch);
-        curl_close($ch); 
-        return json_decode($output, true);   
     }
 }

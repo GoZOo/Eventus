@@ -4,7 +4,6 @@ namespace Eventus\Admin\Business;
 use Eventus\Includes\DAO as DAO;
 use Eventus\Includes\DTO as Entities;
 use Eventus\Admin\Business\Helper as Helper;
-use GuzzleHttp\Promise\Promise;
 
 /**
 * PostHandler is a class use to manage submit form
@@ -357,23 +356,15 @@ class PostHandler {
     ***************************/
     function seek(){
         if (isset($_POST['clubId']) && $_POST['clubId']) {
+            set_time_limit(0);
             $club = DAO\ClubDAO::getInstance()->getClubById($_POST['clubId']);
-            // $final = array();
-            $final = Seeker::getInstance()->seek(
-                array(
-                    "departemental" => isset($_POST['departemental']) && $_POST['departemental'] !== '' ? $_POST['departemental'] : false,
-                    "regional" => isset($_POST['regional']) && $_POST['regional'] !== '' ? $_POST['regional'] : false,
-                    "national" => isset($_POST['departemental']) && filter_var($_POST['national'], FILTER_VALIDATE_BOOLEAN) ?"national" : false,
-                ),
-                $club->getString()
-            );
-            var_dump($final);exit;
-            // if (isset($_POST['departemental']) && $_POST['departemental'] !== '') 
-            //     $final = array_merge($final, Seeker::getInstance()->seek($_POST['departemental'], $club->getString(), "departemental"));
-            // if (isset($_POST['regional']) && $_POST['regional'] !== '') 
-            //     $final = array_merge($final, Seeker::getInstance()->seek($_POST['regional'], $club->getString(), "regional"));            
-            // if (isset($_POST['national']) && filter_var($_POST['national'], FILTER_VALIDATE_BOOLEAN)) 
-            //     $final = array_merge($final, Seeker::getInstance()->seek("national", $club->getString(), "national"));   
+            $final = array();
+            if (isset($_POST['departemental']) && $_POST['departemental'] !== '') 
+                $final = array_merge($final, Seeker::getInstance()->seek($_POST['departemental'], $club->getString(), "departemental"));
+            if (isset($_POST['regional']) && $_POST['regional'] !== '') 
+                $final = array_merge($final, Seeker::getInstance()->seek($_POST['regional'], $club->getString(), "regional"));            
+            if (isset($_POST['national']) && filter_var($_POST['national'], FILTER_VALIDATE_BOOLEAN)) 
+                $final = array_merge($final, Seeker::getInstance()->seek("national", $club->getString(), "national"));   
             wp_redirect( add_query_arg(array('seeked' => urlencode(json_encode($final)), array('clubId' => $_POST['clubId'])), wp_get_referer()));   
         } else {
             wp_redirect( add_query_arg( 'message', 'errorSeeker',  wp_get_referer() )); 

@@ -137,7 +137,7 @@
                             <input 
                                 name='time' 
                                 id='time' 
-                                value="{% if team.getTime() %}{{ team.getTime() }}{% else %}50{% endif %}"
+                                value="{% if team.getTime() %}{{ team.getTime() }}{% else %}{{ rdvTime }}{% endif %}"
                                 class='regular-text' 
                                 type='number' 
                                 min='0' 

@@ -29,6 +29,25 @@
                         </tr>
                         <tr>
                             <th scope='row'>
+                                <label for='rdvTime'>Temps de rdv d'avant match<span class="required">*</span></label>
+                            </th>
+                            <td>
+                                <input 
+                                    name='rdvTime'
+                                    id='rdvTime'
+                                    class='regular-text'
+                                    type='number'
+                                    min="30"
+                                    max="90"
+                                    required
+                                    title="Temps de rdv avant match par défaut"
+                                    placeholder="Temps de rdv avant match par défaut"
+                                    value={{ options.rdvTime }}
+                                >
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>
                                 <label for='emailNotif'>{{  _e('Notification email', 'eventus') }}<span class="required">*</span></label>
                             </th>
                             <td>

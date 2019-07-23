@@ -97,6 +97,7 @@ class Eventus {
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		register_activation_hook(__FILE__, function () {
 			update_option('eventus_season', (date('n') < 9 ? date("Y")-1 . " - " . (date("Y")) : date("Y") . " - " . (date("Y") + 1)), false);
+        	update_option('eventus_rdvTime', 45, false);
 			Includes\DAO\Database::getInstance()->createTables();
 		});
 		register_deactivation_hook(__FILE__, array($this, 'uninstall'));

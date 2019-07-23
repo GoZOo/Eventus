@@ -17,6 +17,7 @@ class SeekerController extends MasterController {
 		parent::__construct();
 
         if ($this->get['seeked']) {
+			wp_enqueue_script('seeked', plugin_dir_url( __FILE__ ).'/../../views/js/screens/seekedScreen.js', '', '', true); 
             $this->displayRes();
         } else {
             $this->displayIndex();

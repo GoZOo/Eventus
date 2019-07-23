@@ -234,6 +234,7 @@ class PostHandler {
     *********** Team ***********
     ***************************/
     function updateTeam(){  
+        $rdvTime = get_option("eventus_rdvTime");
         if (isset($_POST['teamId']) && $_POST['teamId']) {
             $team = DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']);
             $team->setName(($_POST['nom'] ? $_POST['nom'] : $team->getName()));
@@ -247,7 +248,7 @@ class PostHandler {
             $team->setBoy(($_POST['sexe'] == "h" ? 1 : 0));
             $team->setGirl(($_POST['sexe'] == "f" ? 1 : 0));
             $team->setMixed(($_POST['sexe'] == "m" ? 1 : 0));
-            $team->setTime(($_POST['time'] ? $_POST['time'] : 50));
+            $team->setTime(($_POST['time'] ? $_POST['time'] : $rdvTime));
             $team->setImg(($_POST['img'] ? $_POST['img'] : null)); //$team->getImg()
             $team->setClub(DAO\ClubDAO::getInstance()->getClubById(($_POST['club'] ? $_POST['club'] : $team->getClub()->getId())));
         } else {
@@ -261,7 +262,7 @@ class PostHandler {
                 ($_POST['sexe'] == "m" ? 1 : 0), 
                 0, 
                 0, 
-                ($_POST['time'] ? $_POST['time'] : 50), 
+                ($_POST['time'] ? $_POST['time'] : $rdvTime), 
                 ($_POST['img'] ? $_POST['img'] : ""),
                 (DAO\ClubDAO::getInstance()->getClubById(($_POST['club'] ? $_POST['club'] : "")))
             );
@@ -312,6 +313,7 @@ class PostHandler {
         delete_option('eventus_datetimesynch');
         delete_option('eventus_emailnotif');
         delete_option('eventus_season');
+        delete_option('eventus_rdvTime');
         wp_redirect( add_query_arg( 'message', 'succesReset',  'admin.php?page=eventus' ));
     }
 
@@ -320,6 +322,7 @@ class PostHandler {
         update_option('eventus_emailnotif', $_POST['emailNotif'], false);
         update_option('eventus_resetlog', $_POST['resetlog'], false);
         update_option('eventus_season', $_POST['season'], false);
+        update_option('eventus_rdvTime', $_POST['rdvTime'], false);
         wp_redirect( add_query_arg( 'message', 'succesUpSet',  wp_get_referer() ));
     }
 
@@ -392,7 +395,7 @@ class PostHandler {
     }
 
     function addTeamSeek(){
-        // var_dump($_POST);exit;
+        $rdvTime = get_option("eventus_rdvTime");
         if (isset($_POST['data']) && $_POST['data'] && isset($_POST['clubId']) && $_POST['clubId']) {
             $club = DAO\ClubDAO::getInstance()->getClubById(($_POST['clubId'] ? $_POST['clubId'] : ""));
             foreach ($_POST['data'] as $team) {
@@ -407,7 +410,7 @@ class PostHandler {
                         ($team['sexe'] == "m" ? 1 : 0), 
                         0, 
                         0, 
-                        50, 
+                        $rdvTime, 
                         "",
                         $club
                     );

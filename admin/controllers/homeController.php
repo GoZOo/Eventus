@@ -42,7 +42,8 @@ class HomeController extends MasterController {
             if (!$team->getId()) return $this->render('error');            
     	} else {
             $team = new Entities\Team(null, "", "", "", 0, 0, 0, 0, 0, "", "", null);
-		}
+		}		
+        $this->context['rdvTime'] = get_option("eventus_rdvTime");
 			
 		$this->context['team'] = $team;
 		$this->context['clubs'] = DAO\ClubDAO::getInstance()->getAllClubs();

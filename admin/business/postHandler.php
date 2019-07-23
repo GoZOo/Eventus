@@ -63,11 +63,10 @@ class PostHandler {
         if (get_option("eventus_mapapikey")) {
             if (isset($_POST['teamId']) && $_POST['teamId']) {
                 PostHandler::getInstance()->setUpdateMatch();
-                Finder::getInstance()->updateMatches(DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId']));
+                Finder::getInstance()->updateMatches([DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])]);
             } else {
-                foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
-                    Finder::getInstance()->updateMatches($team);
-                }
+                $matches = DAO\TeamDAO::getInstance()->getAllTeams();
+                Finder::getInstance()->updateMatches($matches);
             }
             date_default_timezone_set("Europe/Paris");
             update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
@@ -417,7 +416,7 @@ class PostHandler {
                     DAO\TeamDAO::getInstance()->insertTeam($newTeam); 
                 }                
             }
-            wp_redirect( add_query_arg( 'message', 'succesNewClub', 'admin.php?page=eventus' )); 
+            wp_redirect( add_query_arg( 'message', 'errorNewTeam', 'admin.php?page=eventus' )); 
         } else {
             wp_redirect( add_query_arg( 'message', 'errorNewTeam',  wp_get_referer() )); 
         }        

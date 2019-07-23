@@ -38,7 +38,7 @@ class Seeker {
         return self::$_instance;
     }
 
-    private function __construct() {        
+    private function __construct() {
         $this->client = new Client(['base_uri' => $this->_baseUrl]);
     }     
 

@@ -23,9 +23,9 @@ class SeekerController extends MasterController {
         }        
     }	
 
-    private function displayIndex(){
-        $this->context['champ'] = Business\Seeker::getInstance()->getChampionship();        
+    private function displayIndex(){   
         $this->context['clubs'] = DAO\ClubDAO::getInstance()->getAllClubs();
+        if(!!$this->context['clubs']) $this->context['champ'] = Business\Seeker::getInstance()->getChampionship();     
 
         $this->render('seeker');
     }
@@ -39,7 +39,8 @@ class SeekerController extends MasterController {
         }
             
         $this->context['club'] = $club;
-        $this->context['seeked'] = json_decode(stripslashes($_GET['seeked']), JSON_UNESCAPED_SLASHES);
+        $this->context['seeked'] = json_decode(stripslashes($this->get['seeked']), JSON_UNESCAPED_SLASHES);
+        $this->context['error'] = $this->get['err'];
 
         $this->render('seeked');
     }

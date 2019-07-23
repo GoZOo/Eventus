@@ -359,13 +359,33 @@ class PostHandler {
             set_time_limit(0);
             $club = DAO\ClubDAO::getInstance()->getClubById($_POST['clubId']);
             $final = array();
-            if (isset($_POST['departemental']) && $_POST['departemental'] !== '') 
-                $final = array_merge($final, Seeker::getInstance()->seek($_POST['departemental'], $club->getString(), "departemental"));
-            if (isset($_POST['regional']) && $_POST['regional'] !== '') 
-                $final = array_merge($final, Seeker::getInstance()->seek($_POST['regional'], $club->getString(), "regional"));            
-            if (isset($_POST['national']) && filter_var($_POST['national'], FILTER_VALIDATE_BOOLEAN)) 
-                $final = array_merge($final, Seeker::getInstance()->seek("national", $club->getString(), "national"));   
-            wp_redirect( add_query_arg(array('seeked' => urlencode(json_encode($final)), array('clubId' => $_POST['clubId'])), wp_get_referer()));   
+            $error = false;
+            if (isset($_POST['departemental']) && $_POST['departemental'] !== '') {
+                $res = Seeker::getInstance()->seek($_POST['departemental'], $club->getString(), "departemental");
+                $final = array_merge($final, $res['data']);
+                $error = $res['error'] ? true : $error;
+            }                
+            if (isset($_POST['regional']) && $_POST['regional'] !== '') {
+                $res = Seeker::getInstance()->seek($_POST['regional'], $club->getString(), "regional");
+                $final = array_merge($final, $res['data']);
+                $error = $res['error'] ? true : $error;   
+            }                       
+            if (isset($_POST['national']) && filter_var($_POST['national'], FILTER_VALIDATE_BOOLEAN)) {
+                $res = Seeker::getInstance()->seek("national", $club->getString(), "national");
+                $final = array_merge($final, $res['data']);
+                $error = $res['error'] ? true : $error;  
+            }
+                 
+            wp_redirect( 
+                add_query_arg(
+                    array(
+                        'seeked' => urlencode(json_encode($final)),
+                        'clubId' => $_POST['clubId'],
+                        'err' => $error,
+                    ), 
+                    wp_get_referer()
+                )
+            );   
         } else {
             wp_redirect( add_query_arg( 'message', 'errorSeeker',  wp_get_referer() )); 
         }
@@ -391,8 +411,7 @@ class PostHandler {
                         "",
                         $club
                     );
-                    var_dump($newTeam);
-                    // DAO\TeamDAO::getInstance()->insertTeam($newTeam); 
+                    DAO\TeamDAO::getInstance()->insertTeam($newTeam); 
                 }                
             }
             wp_redirect( add_query_arg( 'message', 'succesNewClub', 'admin.php?page=eventus' )); 

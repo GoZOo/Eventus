@@ -122,4 +122,7 @@
         </button> 
     {% endif %}
     </form>
+    {% if error %}
+        <p>⚠ Des erreurs se sont produites durant la récupération des données.</p>  
+    {% endif %}
 {% endblock %}

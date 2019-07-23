@@ -56,15 +56,20 @@ class Seeker {
         $results = Promise\unwrap($promises);
         
         $final = array( 
-            "departemental" => array(),
-            "regional" => array()
+            'data' => array(
+                'departemental' => array(),
+                'regional' => array()
+            ),
+            'error' => false            
         );
         foreach (array_keys($promises) as $key) {    
             $data = json_decode($results[$key]->getBody(), true); 
-            $final[$key] = $data && array_key_exists('events', $data) ? $data['events'] : array();
-            $col = array_column($final[$key], 'sequence');
-            array_multisort($col, SORT_ASC, $final[$key]);
+            $final['data'][$key] = $data && array_key_exists('events', $data) ? $data['events'] : array();
+            $col = array_column($final['data'][$key], 'sequence');
+            array_multisort($col, SORT_ASC, $final['data'][$key]);
         }
+        $final['error'] = $results['departemental']->getStatusCode() >= 400 || $results['regional']->getStatusCode() >= 400;
+        
         return $final;
     }
 
@@ -77,7 +82,7 @@ class Seeker {
     * @return array[]    
     * @access public
     */
-    public function seek($champCode, $string, $level = null){        
+    public function seek($champCode, $string, $level = null){  
         $competitions = $this->parseJson($this->client->get($this->_competition . $champCode)->getBody(), 'events'); //Get all the competitions
         $promises = array();
 
@@ -93,33 +98,44 @@ class Seeker {
                             if(!array_key_exists('poolId', $pool)) continue; 
                             $promises1[$pool['poolId']] = $this->client->getAsync($this->_pool . $pool['poolId']) //Get data of a given pool
                                 ->then(
-                                    function (ResponseInterface $res1) use ($string, $level, $competition, $pool) {                  
+                                    function (ResponseInterface $res1) use ($string, $level, $competition, $pool) { 
                                         $teams = $this->parseJson($res1->getBody(), 'teams');
                                         $team = $this->getTeamInPool($teams, $string);
-                                        if ($team !== null) return array(
-                                            "name" => array_key_exists('name', $team) ? $team['name'] : null,
-                                            "cat" => array_key_exists('eventName', $competition) ? $competition['eventName'] : null,
-                                            "phase" => array_key_exists('phaseName', $pool) ? $pool['phaseName'] : null,
-                                            "url" => $competition['eventId']."#poule-".$pool['poolId'],
-                                            // "pool" => array_key_exists('poolName', $pool) ? $pool['poolName'] : null,
-                                            // "level" => $level,
+                                        return array(
+                                            'status' => $res1->getStatusCode(),
+                                            'content' => $team !== null ? array(
+                                                'name' => array_key_exists('name', $team) ? $team['name'] : null,
+                                                'cat' => array_key_exists('eventName', $competition) ? $competition['eventName'] : null,
+                                                'phase' => array_key_exists('phaseName', $pool) ? $pool['phaseName'] : null,
+                                                'url' => $competition['eventId']."#poule-".$pool['poolId'],
+                                                // 'pool' => array_key_exists('poolName', $pool) ? $pool['poolName'] : null,
+                                                // 'level' => $level,
+                                            ) : null                                        
                                         );
                                     },
-                                    function (RequestException $e) { $e->getMessage(); }
+                                    function (RequestException $e) { return array('status' => $e->getResponse()->getStatusCode(), 'content' => null); }
                                 );                        
                         }
-                        return array_filter(Promise\unwrap($promises1));      
+                        return Promise\settle($promises1)->wait();      
                     },
-                    function (RequestException $e) { $e->getMessage(); }
+                    function (RequestException $e) { return array('status' => $e->getResponse()->getStatusCode(), 'content' => null); }
                 );
         } 
-        $results = array_filter(Promise\unwrap($promises));
-        $final = array();
+
+        $results = Promise\settle($promises)->wait();
+                
+        $final = array( 
+            'data' => array(),
+            'error' => false            
+        );  
+
         foreach ($results as $res) {
-            foreach ($res as $r) {
-                array_push($final, $r);
+            foreach ($res['value'] as $r) {
+                if ($r['value']['content'] !== null) array_push($final['data'], $r['value']['content']);
+                if ($r['value']['status'] >= 400) $final['error'] = true;
             }
         }
+
         return $final;
     }
 

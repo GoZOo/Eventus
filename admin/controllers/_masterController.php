@@ -33,6 +33,7 @@ abstract class MasterController {
             'teamId' => (isset($_GET['teamId']) ? $_GET['teamId'] : null),
             'clubId' => (isset($_GET['clubId']) ? $_GET['clubId'] : null),
             'seeked' => (isset($_GET['seeked']) ? $_GET['seeked'] : null),
+            'err' => (isset($_GET['err']) ? $_GET['err'] : null),
 		);
     }
 

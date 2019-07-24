@@ -12,21 +12,25 @@ class Eventus_MatchScreen extends Eventus {
 
 	//Add new Son match
 	createSonMatch(id) {
-		//Display son match
+		//Display son match table
 		this.get('table.sonMatches').style.display = 'block'
 		this.get('br.sonMatches').style.display = 'inline-block'
 
-		//Clone match
+		//Hide button to create a new son match
+		this.get(`table.parentMatches .parent-${id} button`).style.display = 'none'
+
+		//Clone match to be added in son matches
 		let clone = this.get(`table.parentMatches .parent-${id}`).cloneNode(true)
+
+		//Change class
 		clone.classList.remove(`parent-${id}`)
 		clone.classList.add(`son-${id}`)
-		this.get('table.sonMatches tbody').appendChild(clone)
 
-		//Erease id element
-		this.getA('table.sonMatches tr:last-child input[data-name="idSon"]').forEach(x => x.setAttribute('value', ''))
+		//Clear id element (herited from parent)
+		clone.querySelector('input[data-name="idSon"]').setAttribute('value', '')
 
 		//Element can be edited 
-		this.getA('table.sonMatches tr:last-child td input').forEach(x => {
+		clone.querySelectorAll('td input').forEach(x => {
 			x.removeAttribute('disabled')
 			//Simple workearound for firefox
 			let type = x.getAttribute('type')
@@ -35,16 +39,14 @@ class Eventus_MatchScreen extends Eventus {
 		})
 
 		//Set actions
-		this.getA('table.sonMatches tr:last-child td button').forEach(x => {
-			x.setAttribute('title', 'Supprimer le match')
-			x.setAttribute('onclick', `deleMatch(${id},'sonMatches')`)
-		})
+		clone.querySelector('td button').setAttribute('title', 'Supprimer le match')
+		clone.querySelector('td button').setAttribute('onclick', `deleMatch(${id},'sonMatches')`)
 
 		//Switch button to display
-		this.getA('table.sonMatches tr:last-child td button *').forEach(x => x.style.display = x.className === 'edit' ? 'none' : 'inline-block')
+		clone.querySelectorAll('td button *').forEach(x => x.style.display = x.className === 'edit' ? 'none' : 'inline-block')
 
-		//Hide button to create a new son match
-		this.get(`table.parentMatches .parent-${id} button`).style.display = 'none'
+		//Add clone
+		this.get('table.sonMatches tbody').appendChild(clone)
 
 		this.updateRow("sonMatches")
 	}

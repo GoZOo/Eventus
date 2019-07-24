@@ -108,6 +108,16 @@ class Eventus {
 
 		//Twig settings		
 		new Admin\Business\Twig;
+		
+		//Js settings to enable import/export
+		add_filter( 'script_loader_tag', function ( $tag, $handle, $source ) {
+			$scirpts = array("eventus", "eventus_adminScreen","eventus_seekedScreen", "eventus_teamScreen","eventus_matchScreen");	
+			if (in_array($handle, $scirpts)) {
+				$tag = '<script src="' . $source . '" type="module"></script>';
+			}
+			return $tag;
+		}, 10, 3 );
+		
 	}
 
 	function uninstall() {

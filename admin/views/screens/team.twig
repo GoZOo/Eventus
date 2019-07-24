@@ -165,7 +165,7 @@
         <br>
 
         {% if team.getId() %}
-            <button type="submit" name="action" value="eventus_delTeam" class="button-primary ico ico-del" onclick="return validate(null)" >
+            <button type="submit" name="action" value="eventus_delTeam" class="button-primary ico ico-del" onclick="return window.eventus.validate(null)" >
                 {{ _e('Delete the team', 'eventus') }}
             </button>  
             <br />

@@ -10,16 +10,19 @@ namespace Eventus\Admin\Controllers;
 */
 abstract class MasterController { 
     protected $context; 
+    protected $translationsJs;
 
     protected function __construct() {  
-        wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../views/js/common.js', '', '', true); 
-        wp_localize_script('commonJs', 'translations', 
-            array(                
-                'defMessage' => __('This action is irreversible. Do you really want to delete the element?', 'eventus' ),
-                'loading' => __('Loading in progress....', 'eventus' )
-            )
+        $this->translationsJs = array(
+            'defMessage' => __('This action is irreversible. Do you really want to delete the element?', 'eventus' ),
+            'loading' => __('Loading in progress....', 'eventus' ),
+            'selectAnImg' => __('Select the default team image', 'eventus' ),
+            'selectImg' => __('Use this image', 'eventus' )
         );
-        wp_enqueue_script('commonJs');
+
+        wp_register_script('eventus', plugin_dir_url( __FILE__ ).'/../../views/js/_eventus.js', '', '', true); 
+        wp_localize_script('eventus', 'translations', $this->translationsJs);
+        wp_enqueue_script('eventus');
 
         \Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../views/screens/';
         $this->context = \Timber\Timber::get_context();

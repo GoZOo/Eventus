@@ -1,25 +1,32 @@
-//Second link url
-setUrls();
+import Eventus from "../_eventus"
 
-jQuery('#urlOne').on('change', ()=> {
-	setUrls();
-});
+class Eventus_TeamDetailScreen extends Eventus {
+	constructor() {
+		super()
 
-function setUrls(){
-	if (jQuery('#urlOne').val() || jQuery('#urlTwo').val()){
-		jQuery('tbody tr:eq(4)').css({'display': 'table-row'});
-	} else {
-		jQuery('tbody tr:eq(4)').css({'display': 'none'});
-	}	
-}
+		this.urlOne = this.get('#urlOne')
+		this.urlTwo = this.get('#urlTwo')
+		this.rowrlOne = this.get('tbody tr:nth-child(4)')
+		this.rowrlTwo = this.get('tbody tr:nth-child(5)')
 
-//Set link in button
-jQuery('input[id*="url"]').on('change', ()=> {
-	if (jQuery('#urlOne').val()){
-		jQuery('tbody tr:eq(3) button').attr('onclick', "window.open('"+ jQuery('tbody tr:eq(3) input').val() +"', '_blank')");		
+		this.urlOne.addEventListener('change', (el) => {
+			//Put content of input into <a>
+			this.rowrlOne.querySelector('a').setAttribute('href', this.urlOne.value)
+			this.displayRowTwo()
+		})
+
+		this.urlTwo.addEventListener('change', () => {
+			//Put content of input into <a>
+			this.rowrlTwo.querySelector('a').setAttribute('href', this.urlTwo.value)
+			this.displayRowTwo()
+		})
+
+		this.displayRowTwo()
 	}
-	
-	if (jQuery('#urlTwo').val()){
-		jQuery('tbody tr:eq(4) button').attr('onclick', "window.open('"+ jQuery('tbody tr:eq(4) input').val() +"', '_blank')");
-	} 
-});
+
+	//Check first url input, to display the second
+	displayRowTwo() {
+		this.rowrlTwo.style.display = this.urlOne.value || this.urlTwo.value ? 'table-row' : 'none'
+	}
+}
+new Eventus_TeamDetailScreen()

@@ -1,14 +1,13 @@
-//Show reset log option
-showResetLogs();
+import Eventus from "../_eventus"
 
-jQuery('#emailNotif').on('change', ()=> {
-	showResetLogs();
-});
-
-function showResetLogs(){
-	if (jQuery('#emailNotif').val()){
-		jQuery('tbody tr:eq(2)').css({'display': 'table-row'});
-	} else {
-		jQuery('tbody tr:eq(2)').css({'display': 'none'});
-	}	
+class Eventus_AdminScreen extends Eventus{
+	constructor() {
+		super()
+		this.inputMail = this.get('#emailNotif')
+		
+		//Listener to display choice reset logs
+		this.inputMail.addEventListener('change', () => this.get('tbody tr:nth-child(4)').style.display = this.inputMail.value ? 'table-row' : 'none')
+		this.inputMail.dispatchEvent(new Event('change'))
+	}
 }
+new Eventus_AdminScreen()

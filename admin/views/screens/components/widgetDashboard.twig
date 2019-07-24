@@ -33,7 +33,7 @@
         </h3>
         <form action="{{ adminPostUrl }}" method="post">
             <div class="myTooltip">
-                <button class="button-primary ico ico-sync" name="action" onclick="setLoading(this)" type="submit" value="eventus_syncMatch">
+                <button class="button-primary ico ico-sync" name="action" onclick="window.eventus.setLoading(this)" type="submit" value="eventus_syncMatch">
                     {{ _e('Synchronize match data', 'eventus') }}
                 </button>
                 <span class="myTooltiptext">

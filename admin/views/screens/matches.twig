@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                     {% for match in myMatchParent %}
-                        <tr class={{ match.getId() }}>
+                        <tr class="parent-{{ match.getId() }}">
                             <th>
                                 {{ match.getId() }}
                             </th>
@@ -78,7 +78,7 @@
                                 <input type='text' value="{{ match.getGym()|toProperText }}" class='regular-text' disabled data-name="gymSon">
                             </td>
                             <td>
-                                <button class='button-primary' onclick='editMatch({{ match.getId() }})' title="Editer le match" type='button'>
+                                <button class='button-primary' onclick='window.eventusMatchScreen.createSonMatch({{ match.getId() }})' title="Editer le match" type='button'>
                                     <div class="edit">
                                         {{ icons.edit }}
                                     </div>
@@ -246,20 +246,20 @@
             <button class="button-primary ico ico-save" name="action" type="submit" value="eventus_majMatch">{{ _e('Save changes', 'eventus') }}</button>
 
             <div class="myTooltip">
-                <button class="button-primary ico ico-time" name="action" onclick="setLoading(this)" type="submit" value="eventus_majHours">{{ _e('Recalculate RDV schedules', 'eventus') }}</button>
+                <button class="button-primary ico ico-time" name="action" onclick="window.eventus.setLoading(this)" type="submit" value="eventus_majHours">{{ _e('Recalculate RDV schedules', 'eventus') }}</button>
                 <span class="myTooltiptext">{{ _e('Saves & updates schedules of upcoming outdoor games with a valid address.', 'eventus') }}</span>
             </div>
 
             {% if team.getUrlOne() %}
                 <div class="myTooltip">
-                    <button class="button-primary ico ico-sync" name="action" onclick="setLoading(this)" type="submit" value="eventus_syncMatch">{{ _e('Synchronize match data', 'eventus') }}</button>
+                    <button class="button-primary ico ico-sync" name="action" onclick="window.eventus.setLoading(this)" type="submit" value="eventus_syncMatch">{{ _e('Synchronize match data', 'eventus') }}</button>
                     <span class="myTooltiptext">{{ _e('Saves & synchronizes match data with the Federation website.', 'eventus') }}</span>
                 </div>
             {% endif %}
             
 
             <div class="myTooltip">
-                <button class="button-primary ico ico-calendar" name="action" onclick="setLoading(this)" type="submit" value="eventus_majIcs">{{ _e('Update the calendar', 'eventus') }}</button>
+                <button class="button-primary ico ico-calendar" name="action" onclick="window.eventus.setLoading(this)" type="submit" value="eventus_majIcs">{{ _e('Update the calendar', 'eventus') }}</button>
                 <span class="myTooltiptext">{{ _e('Update the team\'s ICS calendar', 'eventus') }}</span>
             </div>  
         </form>

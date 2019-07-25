@@ -1,4 +1,4 @@
-import Eventus from "../_parent"
+import Eventus from "../_eventus"
 
 class Eventus_SeekedScreen extends Eventus {
 	constructor() {

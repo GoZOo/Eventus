@@ -16,7 +16,7 @@ body[class*="eventus"] .overflow {
   overflow-x: auto;
   overflow-y: hidden;
 }
-body[class*="eventus"] table.matchTable  {
+body[class*="eventus"] table.matchTable {
   table-layout: fixed;
   min-width: 1200px;
 }
@@ -104,12 +104,13 @@ body[class*="eventus"] table.seekedTable {
   min-width: 1000px;
   width: 100%;
 }
-body[class*="eventus"] table.seekedTable input[type="text"], body[class*="eventus"] table.seekedTable input[type="url"] {
+body[class*="eventus"] table.seekedTable input[type="text"],
+body[class*="eventus"] table.seekedTable input[type="url"] {
   width: 100%;
 }
 body[class*="eventus"] table.seekedTable thead th {
   background: #d8d8d8;
-  padding: .75em 0;
+  padding: 0.75em 0;
 }
 body[class*="eventus"] table.seekedTable thead tr th:nth-child(1) {
   width: 60px;
@@ -120,7 +121,8 @@ body[class*="eventus"] table.seekedTable thead tr th:nth-child(2) {
 body[class*="eventus"] table.seekedTable thead tr th:nth-child(3) {
   width: 35%;
 }
-body[class*="eventus"] table.seekedTable tbody tr td:nth-child(1), body[class*="eventus"] table.seekedTable tbody tr td:nth-child(2) {
+body[class*="eventus"] table.seekedTable tbody tr td:nth-child(1),
+body[class*="eventus"] table.seekedTable tbody tr td:nth-child(2) {
   text-align: center;
 }
 /* body[class*="eventus"] table.seekedTable thead tr th:nth-child(3),
@@ -408,4 +410,32 @@ body[class*="eventus"] .hiddenSubmit {
   margin: 0 !important;
   border: 0 !important;
   display: block !important;
+}
+/* Break responsive for tables */
+@media screen and (max-width: 782px) {
+  body[class*="eventus"] table[class*="Table"] input,
+  body[class*="eventus"] table[class*="Table"] textarea {
+    font-size: 14px !important;
+  }
+  body[class*="eventus"] table[class*="Table"] input[type="email"],
+  body[class*="eventus"] table[class*="Table"] input[type="number"],
+  body[class*="eventus"] table[class*="Table"] input[type="password"],
+  body[class*="eventus"] table[class*="Table"] input[type="search"],
+  body[class*="eventus"] table[class*="Table"] input[type="text"] {
+    padding: 3px 5px !important;
+  }
+  body[class*="eventus"] table[class*="Table"] input[type="checkbox"],
+  body[class*="eventus"] table[class*="Table"] input[type="radio"] {
+    height: 16px !important;
+    width: 16px !important;
+  }
+  body[class*="eventus"] table[class*="Table"] input[type="radio"]:checked::before {
+    vertical-align: middle;
+    width: 6px !important;
+    height: 6px !important;
+    margin: 4px !important;
+  }
+  body[class*="eventus"] table[class*="Table"] input[type="number"] {
+    height: 28px !important;
+  }
 }

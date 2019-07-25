@@ -48,7 +48,6 @@ if (file_exists(get_template_directory() . '/config-templatebuilder/avia-templat
 class Eventus {
 	public function __construct() {
 		//Translations
-		var_dump(plugin_dir_path(__FILE__) . 'lang/eventus-' . get_locale() . '.mo');
 		add_action('init', function () {
 			load_textdomain('eventus', plugin_dir_path(__FILE__) . 'lang/eventus-' . get_locale() . '.mo');
 			load_plugin_textdomain('eventus', false, plugin_dir_path(__FILE__) . 'lang');

@@ -149,23 +149,23 @@ abstract class MasterController {
             ),
             'succesMultiIcs'=>array(
                 'state' => "success", 
-                'str'   => "Les calendriers ont bien été mise à jour."
+                'str'   => __('The calendars have been updated.', 'eventus')
             ),
             'succesOneIcs'=>array(
                 'state' => "success", 
-                'str'   => "Le calendrier a bien été mise à jour."
+                'str'   => __('The calendar has been updated.', 'eventus')
             ),
             'succesDelIcs'=>array(
                 'state' => "success", 
-                'str'   => "Les calendriers ont bien été supprimé."
+                'str'   => __('The calendars have been deleted.', 'eventus')
             ),
             'errorSeeker'=>array(
                 'state' => "error", 
-                'str'   => "Veuillez séléctionner un club."
+                'str'   => __('Please select a club.', 'eventus')
             ),
             'succesSeeked'=>array(
                 'state' => "error", 
-                'str'   => "Les équipes ont bien été ajoutées"
+                'str'   => __('The teams have been added well.', 'eventus')
             ),
         );
         if (array_key_exists('message', $_GET) && $_GET['message'] && $notices[$_GET['message']]) {

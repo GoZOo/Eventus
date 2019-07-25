@@ -109,21 +109,21 @@
             type="submit" 
             value="eventus_seekAdd"
         >
-           Ajouter les équipes
+            {{ _e('Add teams', 'eventus')}}           
         </button>
         
     {% else %}  
-        <p>Aucun résultat</p>
+        <p>{{ _e('No result', 'eventus')}}</p>
         <button 
             class="button-primary ico ico-back" 
             type="button" 
             onclick="window.history.back()"
         >
-           Retour
+           {{ _e('Return', 'eventus')}}
         </button> 
     {% endif %}
     </form>
     {% if error %}
-        <p>⚠ Des erreurs se sont produites durant la récupération des données.</p>  
+        <p>⚠ {{ _e('Errors occurred during data recovery.', 'eventus')}}</p>  
     {% endif %}
 {% endblock %}

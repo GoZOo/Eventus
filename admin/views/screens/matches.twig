@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                     {% for match in myMatchParent %}
-                        <tr class="parent-{{ match.getId() }}">
+                        <tr class="{{ match.getId() }}">
                             <th>
                                 {{ match.getId() }}
                             </th>
@@ -78,7 +78,7 @@
                                 <input type='text' value="{{ match.getGym()|toProperText }}" class='regular-text' disabled data-name="gymSon">
                             </td>
                             <td>
-                                <button class='button-primary' onclick='window.eventusMatchScreen.createSonMatch({{ match.getId() }})' title="Editer le match" type='button'>
+                                <button disabled class='button-primary' onclick='window.eventusMatchScreen.createSonMatch({{ match.getId() }})' title="Editer le match" type='button'>
                                     <div class="edit">
                                         {{ icons.edit }}
                                     </div>
@@ -162,7 +162,7 @@
                                 <input type='text' value="{{ match.getGym()|toProperText }}" class='regular-text' data-name="gymSon">
                             </td>
                             <td>
-                                <button class='button-primary' onclick='deleMatch({{ match.getMatchRef().getId() }}, "sonMatches")' title="Supprimer le match" type='button'>
+                                <button disabled class='button-primary' onclick='window.eventusMatchScreen.removeMatch({{ match.getMatchRef().getId() }}, "sonMatches")' title="Supprimer le match" type='button'>
                                     {{ icons.del }}
                                 </button>
                             </td>
@@ -196,7 +196,7 @@
                     <tbody>
                     {% for match in myMatchOther %}
                         {% set tempId = generateId %}
-                        <tr class="{% if match.getId() %}{{match.getId()}}{% else %}{{tempId}}{% endif %}">
+                        <tr class="{{match.getId()}}">
                             <td>
                                 <input type='date' value="{{ match.getDate() }}" class='regular-text' data-name="dateOther">
                             </td>
@@ -228,11 +228,11 @@
                                 <input type='text' value="{{ match.getGym()|toProperText }}" class='regular-text' data-name="gymOther">
                             </td>
                             <td>
-                                <button class='button-primary' onclick="deleMatch('{% if match.getId() %}{{match.getId()}}{% else %}{{tempId}}{% endif %}', 'otherMatches')" title="Supprimer le match" type='button'>
+                                <button disabled class='button-primary' onclick="window.eventusMatchScreen.removeMatch('{% if match.getId() %}{{match.getId()}}{% else %}{{tempId}}{% endif %}', 'otherMatches')" title="Supprimer le match" type='button'>
                                     {{ icons.del }}
                                 </button>
                             </td>
-                            <input type='hidden'>
+                            <input type='hidden' value="{{ match.getId() }}" data-name="idOther">
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -240,7 +240,7 @@
             </div>
             <br><br>
             <input type='hidden' name='teamId' value="{{ team.getId() }}">
-            <button class='button-primary ico ico-add' onclick='addOtherMatch()' type='button'>{{ _e('Add a match', 'eventus') }}</button>
+            <button class='button-primary ico ico-add' onclick='window.eventusMatchScreen.addOtherMatch()' type='button'>{{ _e('Add a match', 'eventus') }}</button>
             <br><br>
 
             <button class="button-primary ico ico-save" name="action" type="submit" value="eventus_majMatch">{{ _e('Save changes', 'eventus') }}</button>

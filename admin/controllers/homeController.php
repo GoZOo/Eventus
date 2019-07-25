@@ -19,11 +19,11 @@ class HomeController extends MasterController {
 			wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../views/js/uploadImg.js', '', '', true); 
 			wp_localize_script('upImgJs', 'translations', $this->translationsJs);
 			wp_enqueue_script('upImgJs');
-			wp_enqueue_script('eventus_teamScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/teamDetailScreen.js', '', '', true); 
+			wp_enqueue_script('eventus_teamScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/teamScreen.js', '', '', true); 
 			
 			$this->displayTeam();
 		} else if($this->get['action'] == "matchs"){
-			wp_enqueue_script('eventus_matchScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/matchDetailScreen.js', '', '', true); 
+			wp_enqueue_script('eventus_matchScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/matchScreen.js', '', '', true); 
 
 			$this->displayMatches();
 		} else {
@@ -78,7 +78,7 @@ class HomeController extends MasterController {
 		$this->context['myMatchParent'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
 		$this->context['myMatchSon'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),1); 
 		$myMatchOther = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
-		if (!$myMatchOther) $myMatchOther[] = new Entities\Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		if (!$myMatchOther) $myMatchOther[] = new Entities\Match(substr(md5(uniqid(rand(), true)), 2, 9), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 		$this->context['myMatchOther'] = $myMatchOther; 
 
 		$this->context['icons'] = [

@@ -29,7 +29,7 @@
                         </tr>
                         <tr>
                             <th scope='row'>
-                                <label for='rdvTime'>Temps de rdv d'avant match<span class="required">*</span></label>
+                                <label for='rdvTime'>{{ _e('Pre-game rdv time', 'eventus') }}<span class="required">*</span></label>
                             </th>
                             <td>
                                 <input 
@@ -40,8 +40,8 @@
                                     min="30"
                                     max="90"
                                     required
-                                    title="Temps de rdv avant match par défaut"
-                                    placeholder="Temps de rdv avant match par défaut"
+                                    title="{{ _e('Default rdv time before the game', 'eventus') }}"
+                                    placeholder="{{ _e('Default rdv time before the game', 'eventus') }}"
                                     value={{ options.rdvTime }}
                                 >
                             </td>
@@ -94,11 +94,11 @@
                         </tr>
                         <tr>
                             <th scope='row'>
-                                <label>Saison en cours<span class="required">*</span></label>
+                                <label>{{ _e('Current season', 'eventus') }}<span class="required">*</span></label>
                             </th>
                             <td>
                                 <select name="season" id='season'>
-                                    <option value="" selected disabled hidden>Sélectionner une date</option>
+                                    <option value="" selected disabled hidden>{{ _e('Select a date', 'eventus') }}</option>
                                     {% for i in 2035..2000 %}
                                         <option 
                                             value="{{ i }} - {{ i + 1 }}" 

@@ -8,7 +8,7 @@
         <h2>{{ _e('Please add a club first...', 'eventus') }}</h2>
     {% else %}
         <form action={{ adminPostUrl }} method='post'>
-            <h2>Sélectionner un club</h2>
+            <h2>{{ _e('Select a club', 'eventus')}}</h2>
             <div>
                 <table class='form-table'>
                     <tbody>
@@ -19,7 +19,7 @@
                             </th>
                             <td>
                                 <select id='club' name="clubId" required>
-                                    <option disabled hidden selected value="">Sélectionner un club</option>
+                                    <option disabled hidden selected value="">{{ _e('Select a club', 'eventus')}}</option>
                                     {% for club in clubs %}
                                         <option value="{{ club.getId()}}">
                                             {{ club.getName() }}
@@ -32,17 +32,17 @@
                 </table>
             </div>
             <br />
-            <h2>Sélectionner les championnats</h2>
+            <h2>{{ _e('Select the championships', 'eventus')}}</h2>
             <div>
                 <table class='form-table'>
                     <tbody>
                         <tr>
                             <th scope='row'>
-                                <label>Départemental :</label>
+                                <label>{{ _e('Departmental:', 'eventus')}}</label>
                             </th>
                             <td>
                                 <select id='departemental' name="departemental">
-                                    <option selected value="">- Aucun -</option>
+                                    <option selected value="">{{ _e('- None -', 'eventus')}}</option>
                                     {% for champ in champ.data.departemental %}
                                         <option value="{{ champ.champCode }}">
                                             {{ champ.sequence }} - {{ champ.eventName }}
@@ -53,11 +53,11 @@
                         </tr>
                         <tr>
                             <th scope='row'>
-                                <label>Régional :</label>
+                                <label>{{ _e('Regional:', 'eventus')}}</label>
                             </th>
                             <td>
                                 <select id='regional' name="regional">
-                                    <option selected value="">- Aucun -</option>
+                                    <option selected value="">{{ _e('- None -', 'eventus')}}</option>
                                     {% for champ in champ.data.regional %}
                                         <option value="{{ champ.champCode }}">
                                             {{ champ.sequence }} - {{ champ.eventName }}
@@ -68,12 +68,12 @@
                         </tr>
                         <tr>
                             <th scope='row'>
-                                <label>National :</label>
+                                <label>{{ _e('National:', 'eventus')}}</label>
                             </th>
                             <td>
                                 <select id='national' name="national">
-                                    <option selected value="false">Non</option>
-                                    <option value="true">Oui</option>
+                                    <option selected value="false">{{  _e('No', 'eventus') }}</option>
+                                    <option value="true">{{  _e('Yes', 'eventus') }}</option>
                                 </select>
                             </td>
                         </tr>                    
@@ -90,12 +90,12 @@
                 value="eventus_seek"
                 onclick="if(jQuery('form')[0].checkValidity())window.eventus.setLoading(this)"
             >
-                Chercher
+                {{ _e('Search for:', 'eventus')}}
             </button>
         </form>     
     {% endif %}
     
     {% if champ.error %}
-        <p>⚠ Des erreurs se sont produites durant la récupération des données.</p>  
+        <p>⚠ {{ _e('Errors occurred during data recovery.', 'eventus')}}</p>  
     {% endif %}
 {% endblock %}

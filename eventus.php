@@ -4,8 +4,8 @@
  * Description: Useful plugin that allow you to manage handball teams results through FFHB website.
  * Version: 2.7
  * Author: Kirian Caumes
- * Author URI: http://kiriancaumes.fr
- * License: 
+ * Author URI: https://github.com/KirianCaumes/Eventus
+ * License: MIT
  */
 namespace Eventus;
 

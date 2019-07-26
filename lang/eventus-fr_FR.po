@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Eventus\n"
-"POT-Creation-Date: 2019-07-25 21:44+0200\n"
-"PO-Revision-Date: 2019-07-25 21:45+0200\n"
+"POT-Creation-Date: 2019-07-26 21:20+0200\n"
+"PO-Revision-Date: 2019-07-26 21:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: Kirian Caumes\n"
 "Language: fr_FR\n"
@@ -397,27 +397,27 @@ msgstr "Veuillez sélectionner un club."
 msgid "The teams have been added well."
 msgstr "Les équipes ont bien été ajoutées."
 
-#: eventus.php:59 eventus.php:92
+#: eventus.php:58 eventus.php:91
 msgid "Settings"
 msgstr "Paramètres"
 
-#: eventus.php:65
+#: eventus.php:64
 msgid "Overview"
 msgstr "Vue d'ensemble"
 
-#: eventus.php:79 eventus.php:82
+#: eventus.php:78 eventus.php:81
 msgid "Teams & Results"
 msgstr "Équipe & Résultats"
 
-#: eventus.php:82
+#: eventus.php:81
 msgid "Teams"
 msgstr "Équipe"
 
-#: eventus.php:83
+#: eventus.php:82
 msgid "Clubs"
 msgstr "Clubs"
 
-#: eventus.php:86
+#: eventus.php:85
 msgid "Logs"
 msgstr "Logs"
 
@@ -839,10 +839,11 @@ msgstr "Recalculer les horaires de RDV"
 
 #: admin/views/screens/matches.twig:250
 msgid ""
-"Saves & updates schedules of upcoming outdoor games with a valid address."
+"Saves and updates the schedules of upcoming outdoor games with a valid "
+"address (limited to 10 games)."
 msgstr ""
-"Enregistre & mets à jour les horaires des matchs à venir à l'extérieur avec "
-"une adresse valide."
+"Enregistre et met à jour les horaires des prochains matchs à l’extérieur "
+"avec une adresse valide (limités à 10 matchs)."
 
 #: admin/views/screens/matches.twig:262
 msgid "Update the calendar"

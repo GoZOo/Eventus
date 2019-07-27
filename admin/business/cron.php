@@ -21,8 +21,11 @@ include_once __DIR__ . '/../../admin/business/ics.php';
 date_default_timezone_set("Europe/Paris");
 update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
 
-foreach (DAO\TeamDAO::getInstance()->getAllTeams() as $team) {
-	Finder::getInstance()->updateMatches($team);
+$matches = DAO\TeamDAO::getInstance()->getAllTeams();
+
+Finder::getInstance()->updateMatches($matches);
+
+foreach ($matches  as $team) {
 	Ics::init(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($team->getId()));
 }
 

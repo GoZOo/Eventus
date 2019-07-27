@@ -17,21 +17,18 @@ class HomeController extends MasterController {
 		if ($this->get['action'] == "team") {
 			wp_enqueue_media();     
 			wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../views/js/uploadImg.js', '', '', true); 
-			wp_localize_script('upImgJs', 'translations', 
-				array(                
-					'selectAnImg' => __('Select the default team image', 'eventus' ),
-					'selectImg' => __('Use this image', 'eventus' )
-				)
-			);
+			wp_localize_script('upImgJs', 'translations', $this->translationsJs);
 			wp_enqueue_script('upImgJs');
-			wp_enqueue_script('teamJs', plugin_dir_url( __FILE__ ).'/../../views/js/screens/teamDetailScreen.js', '', '', true); 
+			wp_enqueue_script('eventus_teamScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/teamScreen.js', '', '', true); 
 			
 			$this->displayTeam();
 		} else if($this->get['action'] == "matchs"){
-			wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../views/js/screens/matchDetailScreen.js', '', '', true); 
+			wp_enqueue_script('eventus_matchScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/matchScreen.js', '', '', true); 
 
 			$this->displayMatches();
 		} else {
+			wp_enqueue_script('eventus_defaultScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/_defaultScreen.js', '', '', true); 
+			
 			$this->displayIndex();
 		}
     }	
@@ -42,7 +39,8 @@ class HomeController extends MasterController {
             if (!$team->getId()) return $this->render('error');            
     	} else {
             $team = new Entities\Team(null, "", "", "", 0, 0, 0, 0, 0, "", "", null);
-		}
+		}		
+        $this->context['rdvTime'] = get_option("eventus_rdvTime");
 			
 		$this->context['team'] = $team;
 		$this->context['clubs'] = DAO\ClubDAO::getInstance()->getAllClubs();
@@ -82,7 +80,10 @@ class HomeController extends MasterController {
 		$this->context['myMatchParent'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
 		$this->context['myMatchSon'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),1); 
 		$myMatchOther = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
-		if (!$myMatchOther) $myMatchOther[] = new Entities\Match(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		$this->context['isMatchOther'] = sizeOf($myMatchOther) > 0 ? true : false; 
+		if (!$myMatchOther) {
+			$myMatchOther[] = new Entities\Match(substr(md5(uniqid(rand(), true)), 2, 9), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);			
+		} 
 		$this->context['myMatchOther'] = $myMatchOther; 
 
 		$this->context['icons'] = [

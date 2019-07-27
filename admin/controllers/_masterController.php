@@ -10,16 +10,19 @@ namespace Eventus\Admin\Controllers;
 */
 abstract class MasterController { 
     protected $context; 
+    protected $translationsJs;
 
     protected function __construct() {  
-        wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../views/js/common.js', '', '', true); 
-        wp_localize_script('commonJs', 'translations', 
-            array(                
-                'defMessage' => __('This action is irreversible. Do you really want to delete the element?', 'eventus' ),
-                'loading' => __('Loading in progress....', 'eventus' )
-            )
+        $this->translationsJs = array(
+            'defMessage' => __('This action is irreversible. Do you really want to delete the element?', 'eventus' ),
+            'loading' => __('Loading in progress....', 'eventus' ),
+            'selectAnImg' => __('Select the default team image', 'eventus' ),
+            'selectImg' => __('Use this image', 'eventus' )
         );
-        wp_enqueue_script('commonJs');
+
+        wp_register_script('eventus', plugin_dir_url( __FILE__ ).'/../../views/js/_eventus.js', '', '', true); 
+        wp_localize_script('eventus', 'translations', $this->translationsJs);
+        wp_enqueue_script('eventus');
 
         \Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../views/screens/';
         $this->context = \Timber\Timber::get_context();
@@ -32,6 +35,8 @@ abstract class MasterController {
 			'action' => (isset($_GET['action']) ? $_GET['action'] : null),
             'teamId' => (isset($_GET['teamId']) ? $_GET['teamId'] : null),
             'clubId' => (isset($_GET['clubId']) ? $_GET['clubId'] : null),
+            'seeked' => (isset($_GET['seeked']) ? $_GET['seeked'] : null),
+            'err' => (isset($_GET['err']) ? $_GET['err'] : null),
 		);
     }
 
@@ -144,16 +149,24 @@ abstract class MasterController {
             ),
             'succesMultiIcs'=>array(
                 'state' => "success", 
-                'str'   => "Les calendriers ont bien été mise à jour."
+                'str'   => __('The calendars have been updated.', 'eventus')
             ),
             'succesOneIcs'=>array(
                 'state' => "success", 
-                'str'   => "Le calendrier a bien été mise à jour."
+                'str'   => __('The calendar has been updated.', 'eventus')
             ),
             'succesDelIcs'=>array(
                 'state' => "success", 
-                'str'   => "Les calendriers ont bien été supprimé."
-            )
+                'str'   => __('The calendars have been deleted.', 'eventus')
+            ),
+            'errorSeeker'=>array(
+                'state' => "error", 
+                'str'   => __('Please select a club.', 'eventus')
+            ),
+            'succesSeeked'=>array(
+                'state' => "error", 
+                'str'   => __('The teams have been added well.', 'eventus')
+            ),
         );
         if (array_key_exists('message', $_GET) && $_GET['message'] && $notices[$_GET['message']]) {
             return '<div class="notice notice-'.$notices[$_GET['message']]['state'].' is-dismissible"><p><strong>'.$notices[$_GET['message']]['str'].'</strong></p></div>'; 

@@ -14,6 +14,7 @@ body[class*="eventus"] .dern-synch {
 ************************************/
 body[class*="eventus"] .overflow {
   overflow-x: auto;
+  overflow-y: hidden;
 }
 body[class*="eventus"] table.matchTable {
   table-layout: fixed;
@@ -90,6 +91,46 @@ body[class*="eventus"] .eventusCardList .eventusCardClub {
 ************************************/
 
 /***********************************
+*********** PAGE SEEKER ************
+************************************/
+/* seek */
+body[class*="eventus"] select {
+  width: 25em;
+}
+
+/* seeked */
+body[class*="eventus"] table.seekedTable {
+  table-layout: fixed;
+  min-width: 1000px;
+  width: 100%;
+}
+body[class*="eventus"] table.seekedTable input[type="text"],
+body[class*="eventus"] table.seekedTable input[type="url"] {
+  width: 100%;
+}
+body[class*="eventus"] table.seekedTable thead th {
+  background: #d8d8d8;
+  padding: 0.75em 0;
+}
+body[class*="eventus"] table.seekedTable thead tr th:nth-child(1) {
+  width: 60px;
+}
+body[class*="eventus"] table.seekedTable thead tr th:nth-child(2) {
+  width: 240px;
+}
+body[class*="eventus"] table.seekedTable thead tr th:nth-child(3) {
+  width: 35%;
+}
+body[class*="eventus"] table.seekedTable tbody tr td:nth-child(1),
+body[class*="eventus"] table.seekedTable tbody tr td:nth-child(2) {
+  text-align: center;
+}
+/* body[class*="eventus"] table.seekedTable thead tr th:nth-child(3),
+body[class*="eventus"] table.seekedTable thead tr th:nth-child(4) {
+  width: 20%;
+} */
+
+/***********************************
 ********* WIDGET DASHBOARD *********
 ************************************/
 #dashboard_eventus .inside {
@@ -149,6 +190,9 @@ body[class*="eventus"] .eventusCardList .eventusCard .card-body {
   flex: 1 1 auto;
   padding: 1.25rem;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 body[class*="eventus"] .eventusCardList .eventusCard .card-body .card-title {
   margin-bottom: 0.75rem;
@@ -221,7 +265,7 @@ body[class*="eventus"] .ico-sync:before,
 #dashboard_eventus .ico-sync:before {
   content: url("../svg/sync.svg");
   position: absolute;
-  top: 4.5px;
+  top: 3.5px;
   left: 2px;
   width: 20px;
 }
@@ -291,6 +335,13 @@ body[class*="eventus"] .ico-calendar:before {
   left: 4.4px;
   width: 17px;
 }
+body[class*="eventus"] .ico-back:before {
+  content: url("../svg/back.svg");
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 19px;
+}
 /* Loading button  */
 body[class*="eventus"] .ico-loading:before,
 #dashboard_eventus .ico-loading:before {
@@ -316,13 +367,13 @@ body[class*="eventus"] .ico-loading:before,
 }
 
 /* Tooltip  */
-body[class*="eventus"] .myTooltip,
-#dashboard_eventus .myTooltip {
+body[class*="eventus"] .tooltip,
+#dashboard_eventus .tooltip {
   position: relative;
   display: inline-block;
 }
-body[class*="eventus"] .myTooltip .myTooltiptext,
-#dashboard_eventus .myTooltip .myTooltiptext {
+body[class*="eventus"] .tooltip .tooltiptext,
+#dashboard_eventus .tooltip .tooltiptext {
   visibility: hidden;
   background-color: #555;
   color: #fff;
@@ -338,8 +389,8 @@ body[class*="eventus"] .myTooltip .myTooltiptext,
   opacity: 0;
   transition: opacity 0.3s;
 }
-body[class*="eventus"] .myTooltip .myTooltiptext::after,
-#dashboard_eventus .myTooltip .myTooltiptext::after {
+body[class*="eventus"] .tooltip .tooltiptext::after,
+#dashboard_eventus .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -349,8 +400,8 @@ body[class*="eventus"] .myTooltip .myTooltiptext::after,
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-body[class*="eventus"] .myTooltip:hover .myTooltiptext,
-#dashboard_eventus .myTooltip:hover .myTooltiptext {
+body[class*="eventus"] .tooltip:hover .tooltiptext,
+#dashboard_eventus .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
@@ -362,4 +413,32 @@ body[class*="eventus"] .hiddenSubmit {
   margin: 0 !important;
   border: 0 !important;
   display: block !important;
+}
+/* Break responsive for tables */
+@media screen and (max-width: 782px) {
+  body[class*="eventus"] table[class*="Table"] input,
+  body[class*="eventus"] table[class*="Table"] textarea {
+    font-size: 14px !important;
+  }
+  body[class*="eventus"] table[class*="Table"] input[type="email"],
+  body[class*="eventus"] table[class*="Table"] input[type="number"],
+  body[class*="eventus"] table[class*="Table"] input[type="password"],
+  body[class*="eventus"] table[class*="Table"] input[type="search"],
+  body[class*="eventus"] table[class*="Table"] input[type="text"] {
+    padding: 3px 5px !important;
+  }
+  body[class*="eventus"] table[class*="Table"] input[type="checkbox"],
+  body[class*="eventus"] table[class*="Table"] input[type="radio"] {
+    height: 16px !important;
+    width: 16px !important;
+  }
+  body[class*="eventus"] table[class*="Table"] input[type="radio"]:checked::before {
+    vertical-align: middle;
+    width: 6px !important;
+    height: 6px !important;
+    margin: 4px !important;
+  }
+  body[class*="eventus"] table[class*="Table"] input[type="number"] {
+    height: 28px !important;
+  }
 }

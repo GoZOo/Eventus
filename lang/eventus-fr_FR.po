@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Eventus\n"
-"POT-Creation-Date: 2019-05-06 09:04+0200\n"
-"PO-Revision-Date: 2019-05-06 09:04+0200\n"
+"POT-Creation-Date: 2019-07-27 17:38+0200\n"
+"PO-Revision-Date: 2019-07-27 17:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: Kirian Caumes\n"
 "Language: fr_FR\n"
@@ -17,330 +17,270 @@ msgstr ""
 "X-Poedit-SearchPath-1: .\n"
 "X-Poedit-SearchPathExcluded-0: ../../../../../../Program Files (x86)/Poedit\n"
 
-#: admin/business/aviaShortcode/buttonResults.php:21
+#: admin/business/aviaShortcode/buttonResults.php:22
 msgid "Results button"
 msgstr "Bouton Résultats"
 
-#: admin/business/aviaShortcode/buttonResults.php:26
+#: admin/business/aviaShortcode/buttonResults.php:27
 msgid "Display a button containing the results links"
 msgstr "Afficher un bouton contenant le liens des résultats"
 
-#: admin/business/aviaShortcode/buttonResults.php:31
-#: admin/business/aviaShortcode/circlePosPts.php:31
-#: admin/business/aviaShortcode/icsCalendar.php:31
-#: admin/business/aviaShortcode/match.php:31
-#: admin/business/aviaShortcode/teamPicture.php:31
-msgid "Default Size"
-msgstr ""
-
 #: admin/business/aviaShortcode/buttonResults.php:32
 #: admin/business/aviaShortcode/circlePosPts.php:32
-#: admin/business/aviaShortcode/icsCalendar.php:32
 #: admin/business/aviaShortcode/match.php:32
 #: admin/business/aviaShortcode/teamPicture.php:32
-msgid "Flexible font size (adjusts to screen width)"
+msgid "Default Size"
 msgstr ""
 
 #: admin/business/aviaShortcode/buttonResults.php:33
 #: admin/business/aviaShortcode/circlePosPts.php:33
-#: admin/business/aviaShortcode/icsCalendar.php:33
 #: admin/business/aviaShortcode/match.php:33
 #: admin/business/aviaShortcode/teamPicture.php:33
+msgid "Flexible font size (adjusts to screen width)"
+msgstr ""
+
+#: admin/business/aviaShortcode/buttonResults.php:34
+#: admin/business/aviaShortcode/circlePosPts.php:34
+#: admin/business/aviaShortcode/match.php:34
+#: admin/business/aviaShortcode/teamPicture.php:34
 msgid "Fixed font size"
 msgstr ""
 
-#: admin/business/aviaShortcode/buttonResults.php:42
-#: admin/business/aviaShortcode/circlePosPts.php:42
-#: admin/business/aviaShortcode/icsCalendar.php:42
-#: admin/business/aviaShortcode/match.php:60
-#: admin/business/aviaShortcode/teamPicture.php:69 admin/business/ics.php:24
-#: admin/screens/main/mainScreen.php:92
-#: admin/screens/main/matchDetailScreen.php:62
+#: admin/business/aviaShortcode/buttonResults.php:44
+#: admin/business/aviaShortcode/circlePosPts.php:44
+#: admin/business/aviaShortcode/icsCalendar.php:38
+#: admin/business/aviaShortcode/match.php:62
+#: admin/business/aviaShortcode/teamPicture.php:71 admin/business/ics.php:40
+#: admin/views/screens/home.twig:34 admin/views/screens/matches.twig:13
 msgid "Team"
 msgstr "Équipe"
 
-#: admin/business/aviaShortcode/buttonResults.php:43
-#: admin/business/aviaShortcode/circlePosPts.php:43
-#: admin/business/aviaShortcode/icsCalendar.php:43
-#: admin/business/aviaShortcode/match.php:61
-#: admin/business/aviaShortcode/teamPicture.php:70
+#: admin/business/aviaShortcode/buttonResults.php:45
+#: admin/business/aviaShortcode/circlePosPts.php:45
+#: admin/business/aviaShortcode/icsCalendar.php:39
+#: admin/business/aviaShortcode/match.php:63
+#: admin/business/aviaShortcode/teamPicture.php:72
 msgid "Select a team"
 msgstr "Sélectionnez une équipe"
 
-#: admin/business/aviaShortcode/calendar.php:21
-#: admin/business/aviaShortcode/calendar.php:26
+#: admin/business/aviaShortcode/calendar.php:22
+#: admin/business/aviaShortcode/calendar.php:27
 msgid "Match Calendar"
 msgstr "Calendrier des Matchs"
 
-#: admin/business/aviaShortcode/circlePosPts.php:21
+#: admin/business/aviaShortcode/circlePosPts.php:22
 msgid "Position and Score"
 msgstr "Position et Score"
 
-#: admin/business/aviaShortcode/circlePosPts.php:26
+#: admin/business/aviaShortcode/circlePosPts.php:27
 msgid "Display position and score"
 msgstr "Afficher la position et le score"
 
-#: admin/business/aviaShortcode/icsCalendar.php:93
-msgid "Download the calendar (ICS)"
-msgstr "Télécharger le calendrier (ICS)"
-
-#: admin/business/aviaShortcode/icsCalendar.php:94
-msgid "Copy the link of the calendar (ICS)"
-msgstr "Copier le lien du calendrier (ICS)"
-
-#: admin/business/aviaShortcode/match.php:21
+#: admin/business/aviaShortcode/match.php:22
 msgid "Matche"
 msgstr "Match"
 
-#: admin/business/aviaShortcode/match.php:26
-#: admin/business/aviaShortcode/match.php:42
+#: admin/business/aviaShortcode/match.php:27
+#: admin/business/aviaShortcode/match.php:44
 msgid "Display next/last match"
 msgstr "Afficher le prochain/dernier match"
 
-#: admin/business/aviaShortcode/match.php:43
+#: admin/business/aviaShortcode/match.php:45
 msgid "Select a type"
 msgstr "Sélectionnez un type"
 
-#: admin/business/aviaShortcode/match.php:47
-#: admin/business/aviaShortcode/match.php:95
-#: admin/business/aviaShortcode/match.php:125
+#: admin/business/aviaShortcode/match.php:49
+#: admin/business/aviaShortcode/match.php:101
+#: admin/business/aviaShortcode/match.php:129
 msgid "Next match"
 msgstr "Prochain match"
 
-#: admin/business/aviaShortcode/match.php:47
-#: admin/business/aviaShortcode/match.php:107
-#: admin/business/aviaShortcode/match.php:139
+#: admin/business/aviaShortcode/match.php:49
+#: admin/business/aviaShortcode/match.php:113
+#: admin/business/aviaShortcode/match.php:143
 msgid "Last match"
 msgstr "Dernier match"
 
-#: admin/business/aviaShortcode/match.php:51
+#: admin/business/aviaShortcode/match.php:53
 msgid "Format to display"
 msgstr "Format à afficher"
 
-#: admin/business/aviaShortcode/match.php:52
-#: admin/business/aviaShortcode/teamPicture.php:45
+#: admin/business/aviaShortcode/match.php:54
+#: admin/business/aviaShortcode/teamPicture.php:47
 msgid "Select a format"
 msgstr "Sélectionnez un format"
 
-#: admin/business/aviaShortcode/match.php:56
+#: admin/business/aviaShortcode/match.php:58
 msgid "Multiple lines"
 msgstr "Lignes multiples"
 
-#: admin/business/aviaShortcode/match.php:56
+#: admin/business/aviaShortcode/match.php:58
 msgid "Two lines"
 msgstr "Deux lignes"
 
-#: admin/business/aviaShortcode/match.php:91
+#: admin/business/aviaShortcode/match.php:95
+#: admin/business/aviaShortcode/match.php:96
 msgid "No matches available"
 msgstr "Aucun match disponible"
 
-#: admin/business/aviaShortcode/results.php:21
+#: admin/business/aviaShortcode/results.php:22
 msgid "Results List"
 msgstr "Liste Résultats"
 
-#: admin/business/aviaShortcode/results.php:26
+#: admin/business/aviaShortcode/results.php:27
 msgid "Display the results"
 msgstr "Afficher les résultats"
 
-#: admin/business/aviaShortcode/teamPicture.php:21
+#: admin/business/aviaShortcode/teamPicture.php:22
 msgid "Photo Team"
 msgstr "Photo Équipe"
 
-#: admin/business/aviaShortcode/teamPicture.php:26
+#: admin/business/aviaShortcode/teamPicture.php:27
 msgid "Photo of a Team"
 msgstr "Photo d'une Équipe"
 
-#: admin/business/aviaShortcode/teamPicture.php:44
+#: admin/business/aviaShortcode/teamPicture.php:46
 msgid "Image format"
 msgstr "Format de l'image"
 
-#: admin/business/ics.php:19
-msgid "at"
-msgstr "à"
-
-#: admin/business/ics.php:23
-msgid "Hall"
-msgstr "Salle"
-
-#: admin/business/ics.php:25 admin/business/traitHelper.php:20
-#: admin/screens/main/teamDetailScreen.php:110
-#: admin/screens/main/teamDetailScreen.php:111
+#: admin/business/helper/staticHelper.php:23
+#: admin/business/helper/traitHelper.php:23 admin/views/screens/seeked.twig:37
+#: admin/views/screens/seeked.twig:41 admin/views/screens/team.twig:51
+#: admin/views/screens/team.twig:55
 msgid "Male"
 msgstr "Masculin"
 
-#: admin/business/ics.php:25 admin/business/traitHelper.php:22
-#: admin/screens/main/teamDetailScreen.php:115
-#: admin/screens/main/teamDetailScreen.php:116
+#: admin/business/helper/staticHelper.php:25
+#: admin/business/helper/traitHelper.php:25 admin/views/screens/seeked.twig:49
+#: admin/views/screens/seeked.twig:51 admin/views/screens/team.twig:63
+#: admin/views/screens/team.twig:66
 msgid "Female"
 msgstr "Féminin"
 
-#: admin/business/ics.php:25 admin/business/traitHelper.php:24
-#: admin/screens/main/teamDetailScreen.php:120
-#: admin/screens/main/teamDetailScreen.php:121
+#: admin/business/helper/staticHelper.php:27
+#: admin/business/helper/traitHelper.php:27 admin/views/screens/seeked.twig:59
+#: admin/views/screens/seeked.twig:61 admin/views/screens/team.twig:74
+#: admin/views/screens/team.twig:77
 msgid "Mixed"
 msgstr "Mixte"
 
-#: admin/business/ics.php:29 admin/screens/main/matchDetailScreen.php:76
-#: admin/screens/main/matchDetailScreen.php:160
-msgid "D."
-msgstr "J."
-
-#: admin/business/traitHelper.php:38
+#: admin/business/helper/traitHelper.php:41
 msgid "Monday"
 msgstr "Lundi"
 
-#: admin/business/traitHelper.php:38
+#: admin/business/helper/traitHelper.php:41
 msgid "Tuesday"
 msgstr "Mardi"
 
-#: admin/business/traitHelper.php:38
+#: admin/business/helper/traitHelper.php:41
 msgid "Wednesday"
 msgstr "Mercredi"
 
-#: admin/business/traitHelper.php:38
+#: admin/business/helper/traitHelper.php:41
 msgid "Thursday"
 msgstr "Jeudi"
 
-#: admin/business/traitHelper.php:38
+#: admin/business/helper/traitHelper.php:41
 msgid "Friday"
 msgstr "Vendredi"
 
-#: admin/business/traitHelper.php:38
+#: admin/business/helper/traitHelper.php:41
 msgid "Saturday"
 msgstr "Samedi"
 
-#: admin/business/traitHelper.php:38
+#: admin/business/helper/traitHelper.php:41
 msgid "Sunday"
 msgstr "Dimanche"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "January"
 msgstr "Janvier"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "February"
 msgstr "Février"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "March"
 msgstr "Mars"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "April"
 msgstr "Avril"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "May"
 msgstr "Mai"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "June"
 msgstr "Juin"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "July"
 msgstr "Juillet"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "August"
 msgstr "Août"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "September"
 msgstr "Septembre"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "October"
 msgstr "Octobre"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "November"
 msgstr "Novembre"
 
-#: admin/business/traitHelper.php:41
+#: admin/business/helper/traitHelper.php:44
 msgid "December"
 msgstr "Décembre"
 
-#: admin/business/widgetDashboard.php:35 admin/screens/_masterScreen.php:16
+#: admin/business/ics.php:35
+msgid "at"
+msgstr "à"
+
+#: admin/business/ics.php:39
+msgid "Hall"
+msgstr "Salle"
+
+#: admin/business/ics.php:44 admin/views/screens/matches.twig:25
+#: admin/views/screens/matches.twig:113
+msgid "D."
+msgstr "J."
+
+#: admin/business/widgetDashboard.php:20
+#: admin/controllers/_masterController.php:17
 msgid "This action is irreversible. Do you really want to delete the element?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment supprimer l'élément ?"
 
-#: admin/business/widgetDashboard.php:36 admin/screens/_masterScreen.php:17
+#: admin/business/widgetDashboard.php:21
+#: admin/controllers/_masterController.php:18
 msgid "Loading in progress...."
 msgstr "Chargement en cours..."
 
-#: admin/business/widgetDashboard.php:50
-msgid ""
-"Find below the information related to the management of Eventus teams and "
-"clubs."
-msgstr ""
-"Retrouvez ci-dessous les informations relatives à la gestion des équipes et "
-"des clubs d'Eventus."
+#: admin/controllers/_masterController.php:19
+msgid "Select the default team image"
+msgstr "Sélectionnez l'image par défaut de l'équipe"
 
-#: admin/business/widgetDashboard.php:56
-msgid "Team(s): "
-msgstr "Équipe(s) : "
+#: admin/controllers/_masterController.php:20
+msgid "Use this image"
+msgstr "Utiliser cette image"
 
-#: admin/business/widgetDashboard.php:57
-msgid "See the team(s)"
-msgstr "Voir les équipes"
-
-#: admin/business/widgetDashboard.php:60
-msgid "Club(s): "
-msgstr "Club(s) : "
-
-#: admin/business/widgetDashboard.php:61
-msgid "See the club(s)"
-msgstr "Voir les clubs"
-
-#: admin/business/widgetDashboard.php:64
-msgid "Logs: "
-msgstr "Logs : "
-
-#: admin/business/widgetDashboard.php:65
-msgid "See the logs"
-msgstr "Voir les logs"
-
-#: admin/business/widgetDashboard.php:73
-msgid "Last synchronization of matches: "
-msgstr "Dernière synchronisation des matchs : "
-
-#: admin/business/widgetDashboard.php:82 admin/screens/main/mainScreen.php:129
-#: admin/screens/main/matchDetailScreen.php:316
-msgid "Synchronize match data"
-msgstr "Synchroniser les données des matchs"
-
-#: admin/business/widgetDashboard.php:83 admin/screens/main/mainScreen.php:131
-#: admin/screens/main/matchDetailScreen.php:317
-msgid "Saves & synchronizes match data with the Federation website."
-msgstr ""
-"Enregistre & synchronise les données des matchs avec le site de la "
-"Fédération."
-
-#: admin/business/widgetDashboard.php:96
-#: admin/screens/admin/adminScreen.php:127
-msgid "by"
-msgstr "par"
-
-#: admin/business/widgetDashboard.php:106
-#: admin/screens/admin/adminScreen.php:137
-msgid ""
-"In case of problems, several ways to contact me are available on my website "
-"or via my GitHub."
-msgstr ""
-"En cas de soucis, plusieurs moyens de me contacter sont disponibles sur mon "
-"site ou via mon GitHub."
-
-#: admin/screens/_masterScreen.php:29
+#: admin/controllers/_masterController.php:54
 msgid "Hello There"
 msgstr ""
 
-#: admin/screens/_masterScreen.php:43
+#: admin/controllers/_masterController.php:68
 msgid "The match data has been synchronized."
 msgstr "Les données des matchs ont bien été synchronisées."
 
-#: admin/screens/_masterScreen.php:47
+#: admin/controllers/_masterController.php:72
 msgid ""
 "The match data was synchronized well, despite some errors. For more "
 "information, see "
@@ -348,23 +288,24 @@ msgstr ""
 "Les données des matchs ont bien été synchronisées, malgré des erreurs. Pour "
 "plus d'informations, consultez "
 
-#: admin/screens/_masterScreen.php:47 admin/screens/_masterScreen.php:63
+#: admin/controllers/_masterController.php:72
+#: admin/controllers/_masterController.php:88
 msgid "the logs"
 msgstr "les logs"
 
-#: admin/screens/_masterScreen.php:51
+#: admin/controllers/_masterController.php:76
 msgid "The matches have been deleted."
 msgstr "Les matchs ont bien été supprimés."
 
-#: admin/screens/_masterScreen.php:55
+#: admin/controllers/_masterController.php:80
 msgid "The matches have been updated."
 msgstr "Les matchs ont bien été mis à jour."
 
-#: admin/screens/_masterScreen.php:59
+#: admin/controllers/_masterController.php:84
 msgid "The appointment times have been updated."
 msgstr "Les heures de rendez-vous ont bien été mises à jour."
 
-#: admin/screens/_masterScreen.php:63
+#: admin/controllers/_masterController.php:88
 msgid ""
 "The appointment times have been updated, despite some errors. For more "
 "information, see "
@@ -372,501 +313,766 @@ msgstr ""
 "Les heures de rendez-vous ont bien été mises à jour, malgré des erreurs. "
 "Pour plus d'informations, consultez "
 
-#: admin/screens/_masterScreen.php:67
+#: admin/controllers/_masterController.php:92
 msgid "The team has been well updated."
 msgstr "L'équipe à bien été mise à jour."
 
-#: admin/screens/_masterScreen.php:71
+#: admin/controllers/_masterController.php:96
 msgid "The team has been added well."
 msgstr "L'équipe à bien été ajoutée."
 
-#: admin/screens/_masterScreen.php:75
+#: admin/controllers/_masterController.php:100
 msgid "The team could not be modified. Some fields are missing."
 msgstr "L'équipe n'a pas pu être modifié. Certains champs sont manquants."
 
-#: admin/screens/_masterScreen.php:79
+#: admin/controllers/_masterController.php:104
 msgid "The team could not be added. Some fields are missing."
 msgstr "L'équipe n'a pas pu être ajouté. Certains champs sont manquants."
 
-#: admin/screens/_masterScreen.php:83
+#: admin/controllers/_masterController.php:108
 msgid "The team has been removed."
 msgstr "L'équipe à bien été supprimée."
 
-#: admin/screens/_masterScreen.php:87
+#: admin/controllers/_masterController.php:112
 msgid "The teams have been deleted."
 msgstr "Les équipes ont bien été supprimée."
 
-#: admin/screens/_masterScreen.php:91
+#: admin/controllers/_masterController.php:116
 msgid "The club has been updated."
 msgstr "Le club a bien été mis à jour."
 
-#: admin/screens/_masterScreen.php:95
+#: admin/controllers/_masterController.php:120
 msgid "The club has been well added."
 msgstr "Le club à bien été ajouté."
 
-#: admin/screens/_masterScreen.php:99
+#: admin/controllers/_masterController.php:124
 msgid "The club could not be modified. Some fields are missing."
 msgstr "Le club n'a pas pu être modifié. Certains champs sont manquants."
 
-#: admin/screens/_masterScreen.php:103
+#: admin/controllers/_masterController.php:128
 msgid "The club could not be added. Some fields are missing."
 msgstr "Le club n'a pas pu être ajouté. Certains champs sont manquants."
 
-#: admin/screens/_masterScreen.php:107
+#: admin/controllers/_masterController.php:132
 msgid "The club has been deleted."
 msgstr "Le club a bien été supprimés."
 
-#: admin/screens/_masterScreen.php:111
+#: admin/controllers/_masterController.php:136
 msgid "The logs have been deleted."
 msgstr "Les logs ont bien été supprimés."
 
-#: admin/screens/_masterScreen.php:115
+#: admin/controllers/_masterController.php:140
 msgid "The plugin has been reset."
 msgstr "Le plugin à bien été réinitialisé."
 
-#: admin/screens/_masterScreen.php:119
+#: admin/controllers/_masterController.php:144
 msgid "The parameters have been updated."
 msgstr "Les paramètres ont bien été mis à jour."
 
-#: admin/screens/_masterScreen.php:123
+#: admin/controllers/_masterController.php:148
 msgid "Please specify your Google Map API key in"
 msgstr "Veuillez préciser votre clé Api Google Map dans"
 
-#: admin/screens/_masterScreen.php:123
+#: admin/controllers/_masterController.php:148
 msgid "the parameters"
 msgstr "les paramètres"
 
-#: admin/screens/admin/adminScreen.php:45
-msgid "Administration"
-msgstr "Administration"
+#: admin/controllers/_masterController.php:152
+msgid "The calendars have been updated."
+msgstr "Les calendriers ont bien été mise à jour."
 
-#: admin/screens/admin/adminScreen.php:51
-msgid "Paramètres"
+#: admin/controllers/_masterController.php:156
+msgid "The calendar has been updated."
+msgstr "Le calendrier a bien été mise à jour."
+
+#: admin/controllers/_masterController.php:160
+msgid "The calendars have been deleted."
+msgstr "Les calendriers ont bien été supprimés."
+
+#: admin/controllers/_masterController.php:164
+msgid "Please select a club."
+msgstr "Veuillez sélectionner un club."
+
+#: admin/controllers/_masterController.php:168
+msgid "The teams have been added well."
+msgstr "Les équipes ont bien été ajoutées."
+
+#: eventus.php:58 eventus.php:91
+msgid "Settings"
 msgstr "Paramètres"
 
-#: admin/screens/admin/adminScreen.php:58
-msgid "Google Map API Key"
-msgstr "Clé Api Google Map"
+#: eventus.php:64
+msgid "Overview"
+msgstr "Vue d'ensemble"
 
-#: admin/screens/admin/adminScreen.php:61
-msgid "API Key"
-msgstr "Clé Api"
+#: eventus.php:78 eventus.php:81
+msgid "Teams & Results"
+msgstr "Équipe & Résultats"
 
-#: admin/screens/admin/adminScreen.php:66
-#: admin/screens/admin/adminScreen.php:69
-msgid "Notification email"
-msgstr "Adresse mail de notification"
+#: eventus.php:81
+msgid "Teams"
+msgstr "Équipes"
 
-#: admin/screens/admin/adminScreen.php:70
-msgid "Leave blank if you do not want notifications."
-msgstr "Laissez vide si vous ne voulez pas de notifications."
+#: eventus.php:82
+msgid "Clubs"
+msgstr "Clubs"
 
-#: admin/screens/admin/adminScreen.php:75
-msgid "Reset logs for each email sent"
-msgstr "Réinitialiser les logs pour chaque e-mail envoyé"
+#: eventus.php:85
+msgid "Logs"
+msgstr "Logs"
 
-#: admin/screens/admin/adminScreen.php:79
-#: admin/screens/admin/adminScreen.php:80
-msgid "Yes"
-msgstr "Oui"
+#: eventus.php:88
+msgid "Seeker"
+msgstr "Chercheur"
 
-#: admin/screens/admin/adminScreen.php:84
-#: admin/screens/admin/adminScreen.php:85
-msgid "No"
-msgstr "Non"
+#: vendor/timber/timber/lib/Archives.php:160
+#, php-format
+msgid "%1$s %2$d"
+msgstr ""
 
-#: admin/screens/admin/adminScreen.php:92
-#: admin/screens/club/clubDetailScreen.php:130
-#: admin/screens/main/matchDetailScreen.php:307
-#: admin/screens/main/teamDetailScreen.php:184
+#: vendor/timber/timber/lib/Archives.php:162
+#, php-format
+msgid "%1$s"
+msgstr ""
+
+#: vendor/timber/timber/lib/Pagination.php:115
+msgid "&laquo; Previous"
+msgstr ""
+
+#: vendor/timber/timber/lib/Pagination.php:116
+msgid "Next &raquo;"
+msgstr ""
+
+#: vendor/timber/timber/lib/Pagination.php:179
+#: vendor/timber/timber/lib/TextHelper.php:41
+msgid "&hellip;"
+msgstr ""
+
+#: vendor/timber/timber/tests/test-timber-gettext.php:8
+#: vendor/timber/timber/tests/test-timber-gettext.php:21
+msgid "my_boo"
+msgstr ""
+
+#: vendor/timber/timber/tests/test-timber-menu.php:558
+#: vendor/timber/timber/tests/test-timber-menu.php:559
+msgid "Gallery"
+msgstr ""
+
+#: vendor/timber/timber/tests/test-timber-revisions.php:18
+msgid "Box"
+msgstr ""
+
+#: vendor/timber/timber/tests/test-timber-revisions.php:19
+msgid "Post Type Description"
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:40
+#, php-format
+msgid "\"%1$s\" from %2$s by %3$s."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:43
+#, php-format
+msgid "\"%1$s\" from %2$s."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:46
+#, php-format
+msgid "\"%1$s\" by %2$s."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:48
+#, php-format
+msgid "\"%s\"."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:55
+#, php-format
+msgid "%1$s by %2$s."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:67
+#, php-format
+msgid "Released: %d."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:72
+#, php-format
+msgid "Track %1$s of %2$s."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:74
+#, php-format
+msgid "Track %1$s."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:78
+#, php-format
+msgid "Genre: %s."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:143
+msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:144
+msgid ""
+"The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
+"the HTML form."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:145
+msgid "The uploaded file was only partially uploaded."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:146
+msgid "No file was uploaded."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:148
+msgid "Missing a temporary folder."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:149
+msgid "Failed to write file to disk."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:150
+msgid "File upload stopped by extension."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:167
+msgid "Invalid form submission."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:177
+msgid "File is empty. Please upload something more substantial."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:179
+msgid ""
+"File is empty. Please upload something more substantial. This error could "
+"also be caused by uploads being disabled in your php.ini or by post_max_size "
+"being defined as smaller than upload_max_filesize in php.ini."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:185
+msgid "Specified file failed upload test."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:198
+msgid "Sorry, this file type is not permitted for security reasons."
+msgstr ""
+
+#: vendor/timber/timber/tests/wp-overrides.php:223
+#, php-format
+msgid "The uploaded file could not be moved to %s."
+msgstr ""
+
+#: admin/views/screens/club.twig:8
+msgid "New club"
+msgstr "Nouveau club"
+
+#: admin/views/screens/club.twig:20 admin/views/screens/club.twig:24
+#: admin/views/screens/seeked.twig:16 admin/views/screens/seeked.twig:72
+#: admin/views/screens/seeked.twig:73 admin/views/screens/team.twig:83
+#: admin/views/screens/team.twig:93 admin/views/screens/team.twig:94
+msgid "Name"
+msgstr "Nom"
+
+#: admin/views/screens/club.twig:29 admin/views/screens/club.twig:33
+msgid "String"
+msgstr "Chaîne de caractères"
+
+#: admin/views/screens/club.twig:34
+msgid "String that the algorithm will search on the FFHB website"
+msgstr ""
+"Chaîne de caractères que l'algorithme vas chercher sur le site de la FFHB"
+
+#: admin/views/screens/club.twig:39
+msgid "Address of the gym"
+msgstr "Adresse de la salle"
+
+#: admin/views/screens/club.twig:43
+msgid "Address"
+msgstr "Adresse"
+
+#: admin/views/screens/club.twig:44
+msgid "Address used to calculate match rdv schedules"
+msgstr "Adresse utilisé pour calculer les horaires de rdv des matchs"
+
+#: admin/views/screens/club.twig:49 admin/views/screens/team.twig:164
+msgid "Image"
+msgstr "Image"
+
+#: admin/views/screens/club.twig:52 admin/views/screens/team.twig:167
+msgid "Select an image"
+msgstr "Sélectionnez une image"
+
+#: admin/views/screens/club.twig:53 admin/views/screens/team.twig:168
+msgid "Delete the image"
+msgstr "Supprimer l'image"
+
+#: admin/views/screens/club.twig:71
+msgid "This action is irreversible. Do you really want to delete the club?"
+msgstr ""
+"Cette action est irréversible. Voulez-vous vraiment supprimer le club ?"
+
+#: admin/views/screens/club.twig:72
+msgid "Delete the club"
+msgstr "Supprimer le club"
+
+#: admin/views/screens/club.twig:76 admin/views/screens/matches.twig:277
+#: admin/views/screens/settings.twig:122 admin/views/screens/team.twig:187
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: admin/screens/admin/adminScreen.php:99
+#: admin/views/screens/clubs.twig:4
+msgid "List of Clubs"
+msgstr "Liste des Clubs"
+
+#: admin/views/screens/clubs.twig:8 admin/views/screens/home.twig:8
+#: admin/views/screens/seeker.twig:8
+msgid "Please add a club first..."
+msgstr "Veuillez d'abord ajouter un club....."
+
+#: admin/views/screens/clubs.twig:21 admin/views/screens/home.twig:37
+#: admin/views/screens/seeker.twig:17 admin/views/screens/team.twig:26
+msgid "Club"
+msgstr "Club"
+
+#: admin/views/screens/clubs.twig:25 admin/views/screens/home.twig:41
+msgid "ID : "
+msgstr "ID : "
+
+#: admin/views/screens/clubs.twig:27
+msgid "/ Teams : "
+msgstr "/ Équipe : "
+
+#: admin/views/screens/clubs.twig:34 admin/views/screens/home.twig:10
+msgid "Add a club"
+msgstr "Ajouter un club"
+
+#: admin/views/screens/components/widgetDashboard.twig:8
+msgid "Team(s): "
+msgstr "Équipe(s) : "
+
+#: admin/views/screens/components/widgetDashboard.twig:10
+msgid "See the team(s)"
+msgstr "Voir les équipes"
+
+#: admin/views/screens/components/widgetDashboard.twig:14
+msgid "Club(s): "
+msgstr "Club(s) : "
+
+#: admin/views/screens/components/widgetDashboard.twig:16
+msgid "See the club(s)"
+msgstr "Voir les clubs"
+
+#: admin/views/screens/components/widgetDashboard.twig:20
+msgid "Logs: "
+msgstr "Logs : "
+
+#: admin/views/screens/components/widgetDashboard.twig:22
+msgid "See the logs"
+msgstr "Voir les logs"
+
+#: admin/views/screens/components/widgetDashboard.twig:31
+msgid "Last synchronization of matches: "
+msgstr "Dernière synchronisation des matchs : "
+
+#: admin/views/screens/components/widgetDashboard.twig:37
+#: admin/views/screens/home.twig:64 admin/views/screens/matches.twig:298
+msgid "Synchronize match data"
+msgstr "Synchroniser les données des matchs"
+
+#: admin/views/screens/components/widgetDashboard.twig:40
+#: admin/views/screens/home.twig:66 admin/views/screens/matches.twig:299
+msgid "Saves & synchronizes match data with the Federation website."
+msgstr ""
+"Enregistre & synchronise les données des matchs avec le site de la "
+"Fédération."
+
+#: admin/views/screens/components/widgetDashboard.twig:54
+#: admin/views/screens/settings.twig:197
+msgid "by"
+msgstr "par"
+
+#: admin/views/screens/error.twig:1
+msgid "The item could not be found..."
+msgstr "L'élément n'a pas pu être trouvée..."
+
+#: admin/views/screens/error.twig:7 admin/views/screens/seeked.twig:122
+msgid "Return"
+msgstr "Retour"
+
+#: admin/views/screens/home.twig:4
+msgid "List of teams"
+msgstr "Liste des équipes"
+
+#: admin/views/screens/home.twig:18
+msgid "No team has been found for this club..."
+msgstr "Aucune équipe n'a été trouvée pour ce club..."
+
+#: admin/views/screens/home.twig:31 admin/views/screens/team.twig:14
+msgid "Matches"
+msgstr "Matchs"
+
+#: admin/views/screens/home.twig:43
+msgid " / Club ID : "
+msgstr " / Club ID : "
+
+#: admin/views/screens/home.twig:45
+msgid " / Matches : "
+msgstr " / Matchs : "
+
+#: admin/views/screens/home.twig:56
+msgid "Add a team"
+msgstr "Ajouter une équipe"
+
+#: admin/views/screens/home.twig:71
+msgid "Update calendars"
+msgstr "Mettre à jour les calendrier"
+
+#: admin/views/screens/home.twig:73
+msgid "Update all ICS team calendars"
+msgstr "Mets à jour tous les calendriers ICS des équipes"
+
+#: admin/views/screens/home.twig:77
+msgid "Last. synch. : "
+msgstr "Dern. synch. : "
+
+#: admin/views/screens/log.twig:4
+msgid "Log display"
+msgstr "Affichage des logs"
+
+#: admin/views/screens/log.twig:12
+msgid "No log to display"
+msgstr "Aucun log à afficher"
+
+#: admin/views/screens/log.twig:23
+msgid "This action is irreversible. Do you really want to delete the logs?"
+msgstr ""
+"Cette action est iréversible. Voulez-vous vraiment supprimer les logs ?"
+
+#: admin/views/screens/log.twig:25
+msgid "Delete logs"
+msgstr "Effacer les logs"
+
+#: admin/views/screens/matches.twig:9 admin/views/screens/team.twig:9
+msgid "New team"
+msgstr "Nouvelle équipe"
+
+#: admin/views/screens/matches.twig:23 admin/views/screens/matches.twig:111
+msgid "Id"
+msgstr "Id"
+
+#: admin/views/screens/matches.twig:24 admin/views/screens/matches.twig:112
+msgid "Ch."
+msgstr "Ch."
+
+#: admin/views/screens/matches.twig:26 admin/views/screens/matches.twig:114
+#: admin/views/screens/matches.twig:196
+msgid "Date"
+msgstr "Date"
+
+#: admin/views/screens/matches.twig:27 admin/views/screens/matches.twig:28
+#: admin/views/screens/matches.twig:115 admin/views/screens/matches.twig:116
+#: admin/views/screens/matches.twig:197 admin/views/screens/matches.twig:198
+msgid "Time"
+msgstr "Heure"
+
+#: admin/views/screens/matches.twig:27 admin/views/screens/matches.twig:115
+#: admin/views/screens/matches.twig:197
+msgid "RDV"
+msgstr "RDV"
+
+#: admin/views/screens/matches.twig:28 admin/views/screens/matches.twig:116
+#: admin/views/screens/matches.twig:198
+msgid "Match"
+msgstr "Match"
+
+#: admin/views/screens/matches.twig:29 admin/views/screens/matches.twig:30
+#: admin/views/screens/matches.twig:117 admin/views/screens/matches.twig:118
+#: admin/views/screens/matches.twig:199 admin/views/screens/matches.twig:200
+msgid "Loc."
+msgstr "Loc."
+
+#: admin/views/screens/matches.twig:30 admin/views/screens/matches.twig:32
+#: admin/views/screens/matches.twig:118 admin/views/screens/matches.twig:120
+#: admin/views/screens/matches.twig:200 admin/views/screens/matches.twig:202
+msgid "goals"
+msgstr "buts"
+
+#: admin/views/screens/matches.twig:31 admin/views/screens/matches.twig:32
+#: admin/views/screens/matches.twig:119 admin/views/screens/matches.twig:120
+#: admin/views/screens/matches.twig:201 admin/views/screens/matches.twig:202
+msgid "Opp."
+msgstr "Adv."
+
+#: admin/views/screens/matches.twig:33 admin/views/screens/matches.twig:121
+#: admin/views/screens/matches.twig:203
+msgid "Street"
+msgstr "Rue"
+
+#: admin/views/screens/matches.twig:34 admin/views/screens/matches.twig:122
+#: admin/views/screens/matches.twig:204
+msgid "City"
+msgstr "Ville"
+
+#: admin/views/screens/matches.twig:35 admin/views/screens/matches.twig:123
+#: admin/views/screens/matches.twig:205
+msgid "Gym"
+msgstr "Salle"
+
+#: admin/views/screens/matches.twig:107
+msgid "Son matches"
+msgstr "Matchs fils"
+
+#: admin/views/screens/matches.twig:111
+msgid "Orig."
+msgstr "Orig."
+
+#: admin/views/screens/matches.twig:192
+msgid "Other matches"
+msgstr "Autre Matchs"
+
+#: admin/views/screens/matches.twig:269
+msgid "Add a match"
+msgstr "Ajouter un match"
+
+#: admin/views/screens/matches.twig:286
+msgid "Recalculate RDV schedules"
+msgstr "Recalculer les horaires de RDV"
+
+#: admin/views/screens/matches.twig:287
+msgid ""
+"Saves and updates the schedules of upcoming outdoor games with a valid "
+"address (limited to 10 games)."
+msgstr ""
+"Enregistre et met à jour les horaires des prochains matchs à l’extérieur "
+"avec une adresse valide (limités à 10 matchs)."
+
+#: admin/views/screens/matches.twig:311
+msgid "Update the calendar"
+msgstr "Mettre à jour le calendrier"
+
+#: admin/views/screens/matches.twig:312
+msgid "Update the team's ICS calendar"
+msgstr "Mets à jour le calendrier ICS de l'équipe"
+
+#: admin/views/screens/seeked.twig:15 admin/views/screens/team.twig:43
+msgid "Sex"
+msgstr "Sexe"
+
+#: admin/views/screens/seeked.twig:17 admin/views/screens/seeked.twig:83
+#: admin/views/screens/seeked.twig:84 admin/views/screens/team.twig:100
+#: admin/views/screens/team.twig:109 admin/views/screens/team.twig:110
+msgid "Link n°1 of the championship results"
+msgstr "Lien n°1 des résultats du championnat"
+
+#: admin/views/screens/seeked.twig:18 admin/views/screens/seeked.twig:94
+#: admin/views/screens/seeked.twig:95 admin/views/screens/team.twig:123
+#: admin/views/screens/team.twig:132 admin/views/screens/team.twig:133
+msgid "Link n°2 of the championship results"
+msgstr "Lien n°2 des résultats du championnat"
+
+#: admin/views/screens/seeked.twig:112
+msgid "Add teams"
+msgstr "Ajouter les équipes"
+
+#: admin/views/screens/seeked.twig:116
+msgid "No result"
+msgstr "Aucun résultat"
+
+#: admin/views/screens/seeked.twig:127 admin/views/screens/seeker.twig:100
+msgid "Errors occurred during data recovery."
+msgstr "Des erreurs se sont produites durant la récupération des données."
+
+#: admin/views/screens/seeker.twig:11 admin/views/screens/seeker.twig:22
+msgid "Select a club"
+msgstr "Sélectionner un club"
+
+#: admin/views/screens/seeker.twig:35
+msgid "Select the championships"
+msgstr "Sélectionner les championnats"
+
+#: admin/views/screens/seeker.twig:41
+msgid "Departmental:"
+msgstr "Départemental :"
+
+#: admin/views/screens/seeker.twig:45 admin/views/screens/seeker.twig:60
+msgid "- None -"
+msgstr "- Aucun-"
+
+#: admin/views/screens/seeker.twig:56
+msgid "Regional:"
+msgstr "Régional :"
+
+#: admin/views/screens/seeker.twig:71
+msgid "National:"
+msgstr "National :"
+
+#: admin/views/screens/seeker.twig:75 admin/views/screens/settings.twig:88
+#: admin/views/screens/settings.twig:91
+msgid "No"
+msgstr "Non"
+
+#: admin/views/screens/seeker.twig:76 admin/views/screens/settings.twig:76
+#: admin/views/screens/settings.twig:80
+msgid "Yes"
+msgstr "Oui"
+
+#: admin/views/screens/seeker.twig:94
+msgid "Seek"
+msgstr "Chercher"
+
+#: admin/views/screens/settings.twig:4
+msgid "Administration"
+msgstr "Administration"
+
+#: admin/views/screens/settings.twig:8
+msgid "Paramètres"
+msgstr "Paramètres"
+
+#: admin/views/screens/settings.twig:15
+msgid "Google Map API Key"
+msgstr "Clé Api Google Map"
+
+#: admin/views/screens/settings.twig:24 admin/views/screens/settings.twig:25
+msgid "API Key"
+msgstr "Clé Api"
+
+#: admin/views/screens/settings.twig:32
+msgid "Pre-game rdv time"
+msgstr "Temps de rdv d'avant match"
+
+#: admin/views/screens/settings.twig:43 admin/views/screens/settings.twig:44
+msgid "Default rdv time before the game"
+msgstr "Temps de rdv avant match par défaut"
+
+#: admin/views/screens/settings.twig:51 admin/views/screens/settings.twig:59
+#: admin/views/screens/settings.twig:60
+msgid "Notification email"
+msgstr "Adresse mail de notification"
+
+#: admin/views/screens/settings.twig:63
+msgid "Leave blank if you do not want notifications."
+msgstr "Laissez vide si vous ne voulez pas de notifications."
+
+#: admin/views/screens/settings.twig:68
+msgid "Reset logs for each email sent"
+msgstr "Réinitialiser les logs pour chaque e-mail envoyé"
+
+#: admin/views/screens/settings.twig:97
+msgid "Current season"
+msgstr "Saison en cours"
+
+#: admin/views/screens/settings.twig:101
+msgid "Select a date"
+msgstr "Sélectionner une date"
+
+#: admin/views/screens/settings.twig:130
 msgid "Reset actions "
 msgstr "Actions de réinitialisations "
 
-#: admin/screens/admin/adminScreen.php:102
+#: admin/views/screens/settings.twig:137
 msgid ""
 "This action is irreversible. Do you really want to purge all the calendars?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les "
 "calendriers  ?"
 
-#: admin/screens/admin/adminScreen.php:102
+#: admin/views/screens/settings.twig:140
 msgid "Purge all calendars?"
-msgstr "Purger tous les calendriers"
+msgstr "Purger tous les calendriers ?"
 
-#: admin/screens/admin/adminScreen.php:103
+#: admin/views/screens/settings.twig:147
 msgid ""
 "This action is irreversible. Do you really want to purge all the matches?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les matchs ?"
 
-#: admin/screens/admin/adminScreen.php:103
+#: admin/views/screens/settings.twig:150
 msgid "Purge all matches"
 msgstr "Purger tous les matchs"
 
-#: admin/screens/admin/adminScreen.php:104
+#: admin/views/screens/settings.twig:157
 msgid "This action is irreversible. Do you really want to purge all the teams?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger toutes les "
 "équipes ?"
 
-#: admin/screens/admin/adminScreen.php:104
+#: admin/views/screens/settings.twig:160
 msgid "Purge all teams"
 msgstr "Purger toutes les équipes"
 
-#: admin/screens/admin/adminScreen.php:105
+#: admin/views/screens/settings.twig:167
 msgid "This action is irreversible. Do you really want to purge all the clubs?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les clubs ?"
 
-#: admin/screens/admin/adminScreen.php:105
+#: admin/views/screens/settings.twig:170
 msgid "Purge all clubs"
 msgstr "Purger tous les club"
 
-#: admin/screens/admin/adminScreen.php:106
+#: admin/views/screens/settings.twig:177
 msgid "This action is irreversible. Do you really want to reset Eventus?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment réinitialiser Eventus ?"
 
-#: admin/screens/admin/adminScreen.php:106
+#: admin/views/screens/settings.twig:180
 msgid "Reset Eventus"
 msgstr "Réinitialiser Eventus"
 
-#: admin/screens/admin/adminScreen.php:113
+#: admin/views/screens/settings.twig:186
 msgid "You are not authorized to access this page."
 msgstr "Vous n'êtes pas autorisé à accéder à cette page."
 
-#: admin/screens/admin/adminScreen.php:123
+#: admin/views/screens/settings.twig:193
 msgid "Credits"
 msgstr "Crédits"
 
-#: admin/screens/club/clubDetailScreen.php:39
-#: admin/screens/main/teamDetailScreen.php:39
-msgid "Select the default team image"
-msgstr "Sélectionnez l'image par défaut de l'équipe"
-
-#: admin/screens/club/clubDetailScreen.php:40
-#: admin/screens/main/teamDetailScreen.php:40
-msgid "Use this image"
-msgstr "Utiliser cette image"
-
-#: admin/screens/club/clubDetailScreen.php:56
-msgid "Error: The club could not be found..."
-msgstr "Erreur : Le club n'a pas pu être trouvé..."
-
-#: admin/screens/club/clubDetailScreen.php:66
-msgid "New club"
-msgstr "Nouveau club"
-
-#: admin/screens/club/clubDetailScreen.php:81
-#: admin/screens/club/clubDetailScreen.php:84
-#: admin/screens/main/teamDetailScreen.php:127
-#: admin/screens/main/teamDetailScreen.php:130
-msgid "Name"
-msgstr "Nom"
-
-#: admin/screens/club/clubDetailScreen.php:89
-#: admin/screens/club/clubDetailScreen.php:92
-msgid "String"
-msgstr "Chaîne de caractères"
-
-#: admin/screens/club/clubDetailScreen.php:93
-msgid "String that the algorithm will search on the FFHB website"
-msgstr ""
-"Chaîne de caractères que l'algorithme vas chercher sur le site de la FFHB"
-
-#: admin/screens/club/clubDetailScreen.php:98
-msgid "Address of the gym"
-msgstr "Adresse de la salle"
-
-#: admin/screens/club/clubDetailScreen.php:101
-msgid "Address"
-msgstr "Adresse"
-
-#: admin/screens/club/clubDetailScreen.php:102
-msgid "Address used to calculate match rdv schedules"
-msgstr "Adresse utilisé pour calculer les horaires de rdv des matchs"
-
-#: admin/screens/club/clubDetailScreen.php:107
-#: admin/screens/main/teamDetailScreen.php:161
-msgid "Image"
-msgstr "Image"
-
-#: admin/screens/club/clubDetailScreen.php:110
-#: admin/screens/main/teamDetailScreen.php:164
-msgid "Select an image"
-msgstr "Sélectionnez une image"
-
-#: admin/screens/club/clubDetailScreen.php:111
-#: admin/screens/main/teamDetailScreen.php:165
-msgid "Delete the image"
-msgstr "Supprimer l'image"
-
-#: admin/screens/club/clubDetailScreen.php:124
-#: admin/screens/club/clubScreen.php:89 admin/screens/main/mainScreen.php:61
-msgid "Add a club"
-msgstr "Ajouter un club"
-
-#: admin/screens/club/clubDetailScreen.php:125
-msgid "This action is irreversible. Do you really want to delete the club?"
-msgstr ""
-"Cette action est irréversible. Voulez-vous vraiment supprimer le club ?"
-
-#: admin/screens/club/clubDetailScreen.php:125
-msgid "Delete the club"
-msgstr "Supprimer le club"
-
-#: admin/screens/club/clubScreen.php:49
-msgid "List of Clubs"
-msgstr "Liste des Clubs"
-
-#: admin/screens/club/clubScreen.php:56 admin/screens/main/mainScreen.php:59
-msgid "Please add a club first..."
-msgstr "Veuillez ajouter un club dans un premier temps..."
-
-#: admin/screens/club/clubScreen.php:72 admin/screens/main/mainScreen.php:95
-#: admin/screens/main/teamDetailScreen.php:85
-msgid "Club"
-msgstr "Club"
-
-#: admin/screens/club/clubScreen.php:77 admin/screens/main/mainScreen.php:100
-msgid "ID : "
-msgstr "ID : "
-
-#: admin/screens/club/clubScreen.php:79
-msgid "/ Teams : "
-msgstr "/ Équipe : "
-
-#: admin/screens/log/logScreen.php:44
-msgid "Log display"
-msgstr "Affichage des logs"
-
-#: admin/screens/log/logScreen.php:58
-msgid "No log to display"
-msgstr "Aucun log à afficher"
-
-#: admin/screens/log/logScreen.php:64
-msgid "This action is irreversible. Do you really want to delete the logs?"
-msgstr ""
-"Cette action est iréversible. Voulez-vous vraiment supprimer les logs ?"
-
-#: admin/screens/log/logScreen.php:64
-msgid "Delete logs"
-msgstr "Effacer les logs"
-
-#: admin/screens/main/mainScreen.php:52
-msgid "List of teams"
-msgstr "Liste des équipes"
-
-#: admin/screens/main/mainScreen.php:74
-msgid "No team has been found for this club..."
-msgstr "Aucune équipe n'a été trouvée pour ce club..."
-
-#: admin/screens/main/mainScreen.php:89
-#: admin/screens/main/teamDetailScreen.php:72
-msgid "Matches"
-msgstr "Matchs"
-
-#: admin/screens/main/mainScreen.php:102
-msgid " / Club ID : "
-msgstr " / Club ID : "
-
-#: admin/screens/main/mainScreen.php:104
-msgid " / Matches : "
-msgstr " / Matchs : "
-
-#: admin/screens/main/mainScreen.php:119
-#: admin/screens/main/teamDetailScreen.php:177
-msgid "Add a team"
-msgstr "Ajouter une équipe"
-
-#: admin/screens/main/mainScreen.php:135
-msgid "Update calendars"
-msgstr "Mettre à jour les calendrier"
-
-#: admin/screens/main/mainScreen.php:136
-msgid "Update all ICS team calendars"
-msgstr "Mets à jour tous les calendriers ICS des équipes"
-
-#: admin/screens/main/mainScreen.php:139
-msgid "Last. synch. : "
-msgstr "Dern. synch. : "
-
-#: admin/screens/main/matchDetailScreen.php:48
-msgid "Error: The team could not be found...."
-msgstr "Erreur : L'équipe n'a pas pu être trouvée..."
-
-#: admin/screens/main/matchDetailScreen.php:56
-#: admin/screens/main/teamDetailScreen.php:67
-msgid "New team"
-msgstr "Nouvelle équipe"
-
-#: admin/screens/main/matchDetailScreen.php:74
-#: admin/screens/main/matchDetailScreen.php:158
-msgid "Id"
-msgstr "Id"
-
-#: admin/screens/main/matchDetailScreen.php:75
-#: admin/screens/main/matchDetailScreen.php:159
-msgid "Ch."
-msgstr "Ch."
-
-#: admin/screens/main/matchDetailScreen.php:77
-#: admin/screens/main/matchDetailScreen.php:161
-#: admin/screens/main/matchDetailScreen.php:237
-msgid "Date"
-msgstr "Date"
-
-#: admin/screens/main/matchDetailScreen.php:78
-#: admin/screens/main/matchDetailScreen.php:79
-#: admin/screens/main/matchDetailScreen.php:162
-#: admin/screens/main/matchDetailScreen.php:163
-#: admin/screens/main/matchDetailScreen.php:238
-#: admin/screens/main/matchDetailScreen.php:239
-msgid "Time"
-msgstr "Heure"
-
-#: admin/screens/main/matchDetailScreen.php:78
-#: admin/screens/main/matchDetailScreen.php:162
-#: admin/screens/main/matchDetailScreen.php:238
-msgid "RDV"
-msgstr "RDV"
-
-#: admin/screens/main/matchDetailScreen.php:79
-#: admin/screens/main/matchDetailScreen.php:163
-#: admin/screens/main/matchDetailScreen.php:239
-msgid "Match"
-msgstr "Match"
-
-#: admin/screens/main/matchDetailScreen.php:80
-#: admin/screens/main/matchDetailScreen.php:81
-#: admin/screens/main/matchDetailScreen.php:164
-#: admin/screens/main/matchDetailScreen.php:165
-#: admin/screens/main/matchDetailScreen.php:240
-#: admin/screens/main/matchDetailScreen.php:241
-msgid "Loc."
-msgstr "Loc."
-
-#: admin/screens/main/matchDetailScreen.php:81
-#: admin/screens/main/matchDetailScreen.php:83
-#: admin/screens/main/matchDetailScreen.php:165
-#: admin/screens/main/matchDetailScreen.php:167
-#: admin/screens/main/matchDetailScreen.php:241
-#: admin/screens/main/matchDetailScreen.php:243
-msgid "goals"
-msgstr "buts"
-
-#: admin/screens/main/matchDetailScreen.php:82
-#: admin/screens/main/matchDetailScreen.php:83
-#: admin/screens/main/matchDetailScreen.php:166
-#: admin/screens/main/matchDetailScreen.php:167
-#: admin/screens/main/matchDetailScreen.php:242
-#: admin/screens/main/matchDetailScreen.php:243
-msgid "Opp."
-msgstr "Adv."
-
-#: admin/screens/main/matchDetailScreen.php:84
-#: admin/screens/main/matchDetailScreen.php:168
-#: admin/screens/main/matchDetailScreen.php:244
-msgid "Street"
-msgstr "Rue"
-
-#: admin/screens/main/matchDetailScreen.php:85
-#: admin/screens/main/matchDetailScreen.php:169
-#: admin/screens/main/matchDetailScreen.php:245
-msgid "City"
-msgstr "Ville"
-
-#: admin/screens/main/matchDetailScreen.php:86
-#: admin/screens/main/matchDetailScreen.php:170
-#: admin/screens/main/matchDetailScreen.php:246
-msgid "Gym"
-msgstr "Salle"
-
-#: admin/screens/main/matchDetailScreen.php:155
-msgid "Son matches"
-msgstr "Matchs fils"
-
-#: admin/screens/main/matchDetailScreen.php:158
-msgid "Orig."
-msgstr "Orig."
-
-#: admin/screens/main/matchDetailScreen.php:234
-msgid "Other matches"
-msgstr "Autre Matchs"
-
-#: admin/screens/main/matchDetailScreen.php:304
-msgid "Add a match"
-msgstr "Ajouter un match"
-
-#: admin/screens/main/matchDetailScreen.php:310
-msgid "Recalculate RDV schedules"
-msgstr "Recalculer les horaires de RDV"
-
-#: admin/screens/main/matchDetailScreen.php:311
+#: admin/views/screens/settings.twig:207
 msgid ""
-"Saves & updates schedules of upcoming outdoor games with a valid address."
+"In case of problems, several ways to contact me are available on my website "
+"or via my GitHub."
 msgstr ""
-"Enregistre & mets à jour les horaires des matchs à venir à l'extérieur avec "
-"une adresse valide."
+"En cas de soucis, plusieurs moyens de me contacter sont disponibles sur mon "
+"site ou via mon GitHub."
 
-#: admin/screens/main/matchDetailScreen.php:322
-msgid "Update the calendar"
-msgstr "Mettre à jour le calendrier"
-
-#: admin/screens/main/matchDetailScreen.php:323
-msgid "Update the team's ICS calendar"
-msgstr "Mets à jour le calendrier ICS de l'équipe"
-
-#: admin/screens/main/teamDetailScreen.php:106
-msgid "Sex"
-msgstr "Sexe"
-
-#: admin/screens/main/teamDetailScreen.php:135
-#: admin/screens/main/teamDetailScreen.php:138
-msgid "Link n°1 of the championship results"
-msgstr "Lien n°1 des résultats du championnat"
-
-#: admin/screens/main/teamDetailScreen.php:144
-#: admin/screens/main/teamDetailScreen.php:147
-msgid "Link n°2 of the championship results"
-msgstr "Lien n°2 des résultats du championnat"
-
-#: admin/screens/main/teamDetailScreen.php:153
-#: admin/screens/main/teamDetailScreen.php:156
+#: admin/views/screens/team.twig:146 admin/views/screens/team.twig:157
+#: admin/views/screens/team.twig:158
 msgid "Time for pre-match RDV (in minutes)"
 msgstr "Temps pour RDV d'avant match (en minutes)"
 
-#: admin/screens/main/teamDetailScreen.php:178
+#: admin/views/screens/team.twig:181
 msgid "Delete the team"
 msgstr "Supprimer l'équipe"
 
-#: eventus.php:74 eventus.php:75
-msgid "Teams & Results"
-msgstr "Équipe & Résultats"
+#: public/views/screens/aviaComponents/icsCalendar.twig:3
+msgid "Download the calendar (ICS)"
+msgstr "Télécharger le calendrier (ICS)"
 
-#: eventus.php:75
-msgid "Teams"
-msgstr "Équipe"
+#: public/views/screens/aviaComponents/icsCalendar.twig:4
+msgid "Copy the link of the calendar (ICS)"
+msgstr "Copier le lien du calendrier (ICS)"
 
-#: eventus.php:76
-msgid "Clubs"
-msgstr "Clubs"
+#~ msgid "Search for:"
+#~ msgstr "Chercher"
 
-#: eventus.php:77
-msgid "Logs"
-msgstr "Logs"
+#~ msgid "Les calendriers ont bien été mise à jour."
+#~ msgstr "Les calendriers ont bien été mise à jour."
 
-#: eventus.php:78 eventus.php:86
-msgid "Settings"
-msgstr "Paramètres"
+#~ msgid ""
+#~ "Find below the information related to the management of Eventus teams and "
+#~ "clubs."
+#~ msgstr ""
+#~ "Retrouvez ci-dessous les informations relatives à la gestion des équipes "
+#~ "et des clubs d'Eventus."
 
-#: eventus.php:82
-msgid "Overview"
-msgstr "Vue d'ensemble"
+#~ msgid "Error: The club could not be found..."
+#~ msgstr "Erreur : Le club n'a pas pu être trouvé..."
 
 #~ msgid "Last Game"
 #~ msgstr "Dernier Match"

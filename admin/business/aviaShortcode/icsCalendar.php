@@ -56,7 +56,8 @@ if (!class_exists( 'EventusIcsCalender') && class_exists('aviaShortcodeTemplate'
 		 * @return string $output returns the modified html string 
 		 */
 		function shortcode_handler($atts, $content = "", $shortcodename = "", $meta = "") {	
-			wp_enqueue_script('scriptEventusCalendar', WP_PLUGIN_URL.'/eventus/public/views/js/eventusCalendar.js'); 
+			wp_enqueue_script('eventusFront', WP_PLUGIN_URL.'/eventus/public/views/js/_eventusFront.js', '', '', true); 
+			wp_enqueue_script('eventusFront_icsCalendar', WP_PLUGIN_URL.'/eventus/public/views/js/icsCalendar.js', '', '', true); 
 
 	        extract(shortcode_atts(
 	            array(

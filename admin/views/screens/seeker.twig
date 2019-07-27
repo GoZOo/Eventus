@@ -1,0 +1,102 @@
+{% extends "_base.twig" %}
+
+{% block wrap %}
+    <h1 class="wp-heading-inline">Chercheur</h1>
+    <hr class="wp-header-end">
+    {{ notice }}
+    {% if not clubs %}
+        <h2>{{ _e('Please add a club first...', 'eventus') }}</h2>
+    {% else %}
+        <form action={{ adminPostUrl }} method='post'>
+            <h2>{{ _e('Select a club', 'eventus')}}</h2>
+            <div>
+                <table class='form-table'>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label for="club">{{ _e('Club', 'eventus') }}<span class="required">*</span>
+                                </label>
+                            </th>
+                            <td>
+                                <select id='club' name="clubId" required>
+                                    <option disabled hidden selected value="">{{ _e('Select a club', 'eventus')}}</option>
+                                    {% for club in clubs %}
+                                        <option value="{{ club.getId()}}">
+                                            {{ club.getName() }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <h2>{{ _e('Select the championships', 'eventus')}}</h2>
+            <div>
+                <table class='form-table'>
+                    <tbody>
+                        <tr>
+                            <th scope='row'>
+                                <label>{{ _e('Departmental:', 'eventus')}}</label>
+                            </th>
+                            <td>
+                                <select id='departemental' name="departemental">
+                                    <option selected value="">{{ _e('- None -', 'eventus')}}</option>
+                                    {% for champ in champ.data.departemental %}
+                                        <option value="{{ champ.champCode }}">
+                                            {{ champ.sequence }} - {{ champ.eventName }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>
+                                <label>{{ _e('Regional:', 'eventus')}}</label>
+                            </th>
+                            <td>
+                                <select id='regional' name="regional">
+                                    <option selected value="">{{ _e('- None -', 'eventus')}}</option>
+                                    {% for champ in champ.data.regional %}
+                                        <option value="{{ champ.champCode }}">
+                                            {{ champ.sequence }} - {{ champ.eventName }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>
+                                <label>{{ _e('National:', 'eventus')}}</label>
+                            </th>
+                            <td>
+                                <select id='national' name="national">
+                                    <option selected value="false">{{  _e('No', 'eventus') }}</option>
+                                    <option value="true">{{  _e('Yes', 'eventus') }}</option>
+                                </select>
+                            </td>
+                        </tr>                    
+                    </tbody>
+                </table>
+            </div>  
+
+            <br />
+
+            <button 
+                class="button-primary ico ico-sync" 
+                name="action" 
+                type="submit" 
+                value="eventus_seek"
+                data-bind="{ action: 'setLoading', content: el }"
+                style="display:none"
+            >
+                {{ _e('Seek', 'eventus')}}
+            </button>
+        </form>     
+    {% endif %}
+    
+    {% if champ.error %}
+        <p>⚠ {{ _e('Errors occurred during data recovery.', 'eventus')}}</p>  
+    {% endif %}
+{% endblock %}

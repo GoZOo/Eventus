@@ -356,7 +356,7 @@ class TeamDAO extends MasterDAO {
     */
     function deleteTeam($teamId = null){ 
         if ($teamId){
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3} WHERE team_id=%", $teamId));
+            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3} WHERE team_id=%d", $teamId));
         } else {
             $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->t3} WHERE 1=%d", 1));
         }

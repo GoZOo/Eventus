@@ -34,19 +34,8 @@ class Twig {
     */
     function new_twig_functions($twig) {
 		$twig->addFunction(new \Twig_Function('getSexIco', array($this, 'getSexIco')));
-		$twig->addFunction(new \Twig_Function('generateId', array($this, 'generateId')));
 		return $twig;
     } 
-
-    /**
-    * Generate a uniq id
-    *
-    * @return string    Id
-    * @access public
-    */
-    function generateId(){
-        return substr(md5(uniqid(rand(), true)), 2, 9);
-    }
         
     /**
     * Get escaped text without double anti slash and ready to be put in html

@@ -27,15 +27,17 @@
                                 <p class="card-text">
                                     {{ club.detail.getName()|toProperText }}
                                 </p>
-                                <a class="button-primary ico ico-fight" href="admin.php?page=eventus&action=matchs&teamId={{ team.detail.getId() }}">
-                                    {{ _e('Matches', 'eventus') }}
-                                </a>
-                                <a class="button-primary ico ico-team" href="admin.php?page=eventus&action=team&teamId={{ team.detail.getId() }}">
-                                    {{ _e('Team', 'eventus') }}
-                                </a>
-                                <a class="button-primary ico ico-club" href="admin.php?page=eventus_club&action=club&clubId={{ team.detail.getClub().getId() }}">
-                                    {{ _e('Club', 'eventus') }}
-                                </a>
+                                <div>
+                                    <a class="button-primary ico ico-fight" href="admin.php?page=eventus&action=matchs&teamId={{ team.detail.getId() }}">
+                                        {{ _e('Matches', 'eventus') }}
+                                    </a>
+                                    <a class="button-primary ico ico-team" href="admin.php?page=eventus&action=team&teamId={{ team.detail.getId() }}">
+                                        {{ _e('Team', 'eventus') }}
+                                    </a>
+                                    <a class="button-primary ico ico-club" href="admin.php?page=eventus_club&action=club&clubId={{ team.detail.getClub().getId() }}">
+                                        {{ _e('Club', 'eventus') }}
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-footer text-muted">
                                 {{ _e('ID : ', 'eventus') }}
@@ -59,18 +61,18 @@
 
     {% if clubs[0].teams|length %}
         <form action={{ adminPostUrl }} method="post">
-            <div class="myTooltip">
-                <button type="submit" name="action" value="eventus_syncMatch" onclick="setLoading(this)" class="button-primary ico ico-sync">
+            <div class="tooltip">
+                <button type="submit" name="action" value="eventus_syncMatch" data-bind="{ action: 'setLoading', content: el }" class="button-primary ico ico-sync">
                     {{ _e('Synchronize match data', 'eventus') }}	
                 </button>
-                <span class="myTooltiptext">{{ _e('Saves & synchronizes match data with the Federation website.', 'eventus') }}</span>
+                <span class="tooltiptext">{{ _e('Saves & synchronizes match data with the Federation website.', 'eventus') }}</span>
             </div> 
 
-            <div class="myTooltip">
-                <button type="submit" name="action" value="eventus_majIcs" onclick="setLoading(this)" class="button-primary ico ico-calendar">
+            <div class="tooltip">
+                <button type="submit" name="action" value="eventus_majIcs" data-bind="{ action: 'setLoading', content: el }" class="button-primary ico ico-calendar">
                     {{ _e('Update calendars', 'eventus') }}
                 </button>
-                <span class="myTooltiptext">{{ _e('Update all ICS team calendars', 'eventus') }}</span>
+                <span class="tooltiptext">{{ _e('Update all ICS team calendars', 'eventus') }}</span>
             </div>  
             <br>
             <p class="dern-synch">

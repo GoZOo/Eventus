@@ -17,16 +17,14 @@ class ClubController extends MasterController {
 		if ($this->get['action'] == "club") {
             wp_enqueue_media();    
             wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../views/js/uploadImg.js', '', '', true); 
-            wp_localize_script('upImgJs', 'translations', 
-                array(                
-                    'selectAnImg' => __('Select the default team image', 'eventus' ),
-                    'selectImg' => __('Use this image', 'eventus' )
-                )
-            );
+            wp_localize_script('upImgJs', 'translations', $this->translationsJs);
             wp_enqueue_script('upImgJs');
+			wp_enqueue_script('eventus_defaultScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/_defaultScreen.js', '', '', true); 
 
 			$this->displayClub();
 		} else {
+			wp_enqueue_script('eventus_defaultScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/_defaultScreen.js', '', '', true); 
+            
             $this->displayIndex();
         }	
     }

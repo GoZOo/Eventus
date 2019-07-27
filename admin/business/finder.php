@@ -5,6 +5,11 @@ use Eventus\Includes\DAO as DAO;
 use Eventus\Includes\DTO as Entities;
 use Eventus\Admin\Business\Helper as Helper;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
+use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Exception\RequestException;
+
 /**
 * Finder is a class that allows you to manage all synchronization actions of matches.
 *
@@ -17,7 +22,8 @@ class Finder {
     * @var Finder   $_instance  Var use to store an instance
     */
     private static $_instance;
-    private $_baseUrl = "https://jjht57whqb.execute-api.us-west-2.amazonaws.com/prod/pool/";
+    private $_baseUrlFFHB = "https://jjht57whqb.execute-api.us-west-2.amazonaws.com/prod/pool/";
+    private $_baseUrlMap = "https://maps.googleapis.com/maps/api/distancematrix/json";
     
     /**
     * Returns an instance of the object
@@ -26,117 +32,100 @@ class Finder {
     * @access public
     */
     public static function getInstance() {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new Finder();
-        }
+        if (is_null(self::$_instance)) self::$_instance = new Finder();
         return self::$_instance;
     }
-    private function __construct() {}   
+    private function __construct() {
+        $this->clientFFHB = new Client(['base_uri' => $this->_baseUrlFFHB]);
+        $this->clientMap = new Client(['base_uri' => $this->_baseUrlMap]);
+    }   
 
     /**
     * Synchronize matches by team with FFHB website informations
     *
-    * @param Team   Team to update synchronize matches
+    * @param Team[]   Team to update synchronize matches
     * @return void
     * @access public
     */
-    public function updateMatches($team){
-        $turn = 0;
-        if ($team->getUrlOne()) {
-            $turn++;
-            if ($team->getUrlTwo()) $turn++;
+    public function updateMatches($teams){
+        $promises = array();
+        foreach ($teams as $team) { 
+            $urls = array();
+            if($team->getUrlOne()) array_push($urls, $team->getUrlOne());
+            if($team->getUrlTwo()) array_push($urls, $team->getUrlTwo());
+            foreach ($urls as $nbr => $url) {
+                $promises[$url] = $this->clientFFHB->getAsync($this->getUrlApi($url))
+                    ->then(
+                        function (ResponseInterface $res) use ($team, $nbr, $urls) { 
+                            $output = $this->parseJson($res->getBody());
+
+                            //Update teams infos
+                            $teamInfos = array_values(array_filter($output['teams'], function ($var) use($team) {
+                                return strpos(mb_strtolower($var['name']), mb_strtolower($team->getClub()->getString())) !== false;
+                            }));
+                            
+                            if (!$teamInfos || sizeof($teamInfos) === 0) {
+                                $this->addLog("Error String (TeamId: ".$team->getId().") : Can't find the string in results list");
+                            } else {
+                                if ($nbr+1 == sizeof($urls)) { //Check if last url, so last champ
+                                    $team->setPosition($teamInfos[0]['position']);
+                                    $team->setPoints($teamInfos[0]['points']);
+                                    DAO\TeamDAO::getInstance()->updateTeam($team);
+                                }
+                            }
+                            // var_dump($team);exit;
+                            
+                            //Update Matches infos
+                            foreach($output['dates'] as $matchDay => $rows) {
+                                $prevMatchDay = $matchDay;
+                                $numMatch = 0;
+                                foreach($rows['events'] as $row) {
+                                    if (
+                                        strpos(mb_strtolower($row['teams'][0]['name']), mb_strtolower($team->getClub()->getString())) !== false || 
+                                        strpos(mb_strtolower($row['teams'][1]['name']), mb_strtolower($team->getClub()->getString())) !== false
+                                    ) {
+                                        $hour = $row['date'] && $row['date']['hour'] && $row['date']['minute'] ? $row['date']['hour'].':'.$row['date']['minute'] : null;
+                                        if ($matchDay == $prevMatchDay) $numMatch++;                        
+
+                                        if ($row['teams'][0] && $row['teams'][1] && $row['teams'][0]['name'] && $row['teams'][1]['name']) {
+                                            $allMatches[] = new Entities\Match(
+                                                null, //id
+                                                $matchDay, //matchDay 
+                                                $numMatch, //numMatch 
+                                                $row['date'] ? $row['date']['date'] : null, //date
+                                                $hour ? date_create_from_format('H:i', $hour)->modify('-'. $team->getTime() .'minutes')->format('H:i:s') : null, //hourRdv
+                                                $hour ? date_create_from_format('H:i', $hour)->format('H:i:s') : null, //hourStart
+                                                $this->getCleanString($row['teams'][0]['name']), //localTeam
+                                                $row['teams'][0] ? $row['teams'][0]['score'] : null, //localTeamScore
+                                                $this->getCleanString($row['teams'][1]['name']), //visitingTeam
+                                                $row['teams'][1] ? $row['teams'][1]['score'] : null, //visitingTeamScore
+                                                strpos(mb_strtolower($row['teams'][0]['name']), mb_strtolower($team->getClub()->getString())) !== false ? false : true, //ext
+                                                $row['location'][1] ? $this->getCleanString($row['location'][1]) : null, //street
+                                                $row['location'][2] ? $this->getCleanString($row['location'][2]) : null, //city
+                                                $row['location'][0] ? $this->getCleanString($row['location'][0]) : null, //gym
+                                                0, //Type
+                                                $nbr+1, //Championship
+                                                $team, //team
+                                                null //matchRef
+                                            );
+                                        }                            
+                                    }                                        
+                                }
+                            }
+                            // var_dump($allMatches); exit;
+                            $allMatches = $this->setNewHoursRdv($allMatches);
+                            // var_dump($allMatches); exit;                            
+                            DAO\MatchDAO::getInstance()->updateMatchesSync($allMatches);
+                            // var_dump($allMatches); exit;
+                        },
+                        function (RequestException $e) use ($team, $nbr) { 
+                            return array('status' => $e->getResponse()->getStatusCode(), 'content' => null); 
+                            $this->addLog("Error Url (TeamId: ".$team->getId().", TeamUrl :".($nbr+1).", Http code: ".$e->getResponse()->getStatusCode().") : Unable to access this page");
+                        }
+                    );  
+            }            
         }
-        for ($i=0; $i < $turn; $i++) { 
-            $allMatches = [];
-            switch ($i) {
-                case 0:
-                    $url = $this->getPoolId($team->getUrlOne());
-                    break;
-                case 1:
-                    $url = $this->getPoolId($team->getUrlTwo());
-                    break;                
-                default:
-                    $url = null;
-                    break;
-            }
-            if (!$url) continue;
-
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-            curl_setopt($ch,CURLOPT_ENCODING , "gzip");            
-            $output = curl_exec($ch);
-            
-            if(curl_errno($ch)) {
-                $this->addLog("Error Url (TeamId: ".$team->getId().", TeamUrl :".($i+1)." ,Error cUrl: ".curl_errno($ch).") : Unable to access this page");
-                curl_close($ch); 
-                continue;
-            }
-            
-            // var_dump(json_decode($output, true)); exit;      
-            curl_close($ch); 
-            $output = json_decode($output, true);   
-
-            //Update teams infos
-            $teamInfos = array_filter($output['teams'], function ($var) use($team) {
-                return strpos(mb_strtolower($var['name']), mb_strtolower($team->getClub()->getString())) !== false;
-            });    
-            $teamInfos = array_values($teamInfos);
-            
-            if (!$teamInfos || sizeof($teamInfos) === 0) {
-                $this->addLog("Error String (TeamId: ".$team->getId().") : Can't find the string in results list");
-                continue;
-            } else {
-                if ($i+1 == $turn) { //Check if last url, so last champ
-                    $team->setPosition($teamInfos[0]['position']);
-                    $team->setPoints($teamInfos[0]['points']);
-                    DAO\TeamDAO::getInstance()->updateTeam($team);
-                }
-            }          
-            
-            //Update Matches infos
-            foreach($output['dates'] as $matchDay => $rows) {
-                $prevMatchDay = $matchDay;
-                $numMatch = 0;
-                foreach($rows['events'] as $row) {
-                    if (
-                        strpos(mb_strtolower($row['teams'][0]['name']), mb_strtolower($team->getClub()->getString())) !== false || 
-                        strpos(mb_strtolower($row['teams'][1]['name']), mb_strtolower($team->getClub()->getString())) !== false
-                    ) {
-                        $hour = $row['date'] && $row['date']['hour'] && $row['date']['minute'] ? $row['date']['hour'].':'.$row['date']['minute'] : null;
-                        if ($matchDay == $prevMatchDay) $numMatch++;                        
-
-                        if ($row['teams'][0] && $row['teams'][1] && $row['teams'][0]['name'] && $row['teams'][1]['name']) {
-                            $allMatches[] = 
-                            new Entities\Match(
-                                null, //id
-                                $matchDay, //matchDay 
-                                $numMatch, //numMatch 
-                                $row['date'] ? $row['date']['date'] : null, //date
-                                $hour ? date_create_from_format('H:i', $hour)->modify('-'. $team->getTime() .'minutes')->format('H:i:s') : null, //hourRdv
-                                $hour ? date_create_from_format('H:i', $hour)->format('H:i:s') : null, //hourStart
-                                $this->getCleanString($row['teams'][0]['name']), //localTeam
-                                $row['teams'][0] ? $row['teams'][0]['score'] : null, //localTeamScore
-                                $this->getCleanString($row['teams'][1]['name']), //visitingTeam
-                                $row['teams'][1] ? $row['teams'][1]['score'] : null, //visitingTeamScore
-                                strpos(mb_strtolower($row['teams'][0]['name']), mb_strtolower($team->getClub()->getString())) !== false ? false : true, //ext
-                                $row['location'][1] ? $this->getCleanString($row['location'][1]) : null, //street
-                                $row['location'][2] ? $this->getCleanString($row['location'][2]) : null, //city
-                                $row['location'][0] ? $this->getCleanString($row['location'][0]) : null, //gym
-                                0, //Type
-                                $i+1, //Championship
-                                $team, //team
-                                null //matchRef
-                            );
-                        }                            
-                    }                                        
-                }
-            }
-            // var_dump($allMatches); exit;
-            $allMatches = $this->setNewHoursRdv($allMatches);
-            DAO\MatchDAO::getInstance()->updateMatchesSync($allMatches);
-        }      
+        Promise\settle($promises)->wait();
     }
 
     /**
@@ -147,22 +136,32 @@ class Finder {
     * @access public
     */
     function setNewHoursRdv($allMatches){
+        //Get all adresses to be calculated
         $allAdresses = "";
+        $i = 0;
         foreach($allMatches as $match) {       
-            if ($match->getExt() && $match->getStreet() && $match->getCity() && date($match->getDate()) > date('Y-m-d') ) { 
+            if ($match->getExt() && $match->getStreet() && $match->getCity() && date($match->getDate()) > date('Y-m-d') && $i < 10 ) { 
                 $allAdresses .= str_replace(" ","%20",$match->getStreet())."%20".str_replace(" ","%20",$match->getCity())."|";
+                $i++;
             }
         }
-        if ($allAdresses) {
-            $requestGoogleMap = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?key=".get_option("eventus_mapapikey")."&origins=".urlencode($allMatches[0]->getTeam()->getClub()->getAddress())."&destinations=".$allAdresses),true);
+        // var_dump($allAdresses);
+
+        //Get and merge data from Google api
+        if ($allAdresses && $allAdresses != "") {
+            $requestGoogleMap = $this->parseJson($this->clientMap->get(
+                "?key=".get_option("eventus_mapapikey").
+                "&origins=".urlencode($allMatches[0]->getTeam()->getClub()->getAddress()).
+                "&destinations=".$allAdresses)->getBody()
+            );            
             // var_dump($requestGoogleMap);
-            $key = 0;
+            $y = 0;
             foreach($allMatches as $match) {
-                if ($match->getExt() && $match->getStreet() && $match->getCity() && date($match->getDate()) > date('Y-m-d') ) {
-                    if ($requestGoogleMap['rows'][0]['elements'][$key]['status'] != "OK" || $requestGoogleMap['status'] != "OK") {
-                        $this->addLog("Error GoogleMap (TeamId: ".$match->getTeam()->getId().", MatchId: ".$match->getId().", matchDay: ".$match->getMatchDay().", Error Api: ".($requestGoogleMap['rows'][0]['elements'][$key]['status'] ? $requestGoogleMap['rows'][0]['elements'][$key]['status'] : $requestGoogleMap['status'] ).")");
+                if ($match->getExt() && $match->getStreet() && $match->getCity() && date($match->getDate()) > date('Y-m-d')  && $y < 10) {
+                    if ($requestGoogleMap['status'] != "OK" || $requestGoogleMap['rows'][0]['elements'][$y]['status'] != "OK") {
+                        $this->addLog("Error GoogleMap (TeamId: ".$match->getTeam()->getId().", MatchId: ".$match->getId().", matchDay: ".$match->getMatchDay().", Error Api: ".($requestGoogleMap['status'] ? $requestGoogleMap['status'] : $requestGoogleMap['rows'][0]['elements'][$y]['status']).")");
                     } else {
-                        $travelTime = round($requestGoogleMap['rows'][0]['elements'][$key]['duration']['value'] / 60);
+                        $travelTime = round($requestGoogleMap['rows'][0]['elements'][$y]['duration']['value'] / 60);
                         $lastDigit = substr($travelTime,-1);
                         if (0 < $lastDigit && $lastDigit < 5) {
                             $travelTime = floor($travelTime/10)*10+5;
@@ -171,7 +170,7 @@ class Finder {
                         }
                         $match->setHourRdv(date_create_from_format('H:i', $match->getHourStart())->modify('-'. ($travelTime+$allMatches[0]->getTeam()->getTime()) .'minutes')->format('H:i:s'));
                     }
-                    $key++;                    
+                    $y++;                    
                 }
             }
         }
@@ -203,23 +202,35 @@ class Finder {
     }
 
     /**
-    * Get pool id from url
+    * Get url for API
     *
     * @param string     Url 
     * @return string    Pool id
     * @access private
     */
-    private function getPoolId($url){
+    private function getUrlApi($url){
         $parsed = parse_url($url, PHP_URL_FRAGMENT);
         if ($parsed) {
             $exploded = explode("-", $parsed);
             if ($exploded && sizeof($exploded) > 1){
                 if (is_numeric($exploded[1])) {
-                    return $this->_baseUrl . $exploded[1];
+                    return $this->_baseUrlFFHB . $exploded[1];
                 }
             }
         }
         return null;
+    }
+
+    /**
+    * Parse json from data from API
+    *
+    * @param string        Data to be parsed
+    * @return array[]    
+    * @access private
+    */
+    private function parseJson($data){
+        $json = json_decode($data, true);
+        return $json !== null && json_last_error() === JSON_ERROR_NONE ? $json : array();
     }
 }
 ?>

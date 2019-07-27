@@ -12,7 +12,7 @@ namespace Eventus\Admin\Controllers;
 class SettingsController extends MasterController {
     public function __construct() {
 		parent::__construct();
-        wp_enqueue_script('matchJs', plugin_dir_url( __FILE__ ).'/../../views/js/screens/adminScreen.js', '', '', true); 
+        wp_enqueue_script('eventus_adminScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/adminScreen.js', '', '', true); 
 
         $this->displayIndex();
     }	
@@ -22,7 +22,8 @@ class SettingsController extends MasterController {
             'apikey' => get_option("eventus_mapapikey"),
             'emailnotif' => get_option("eventus_emailnotif"),
             'resetlog' => get_option("eventus_resetlog"),
-            'season' => get_option("eventus_season")
+            'season' => get_option("eventus_season"),
+            'rdvTime' => get_option("eventus_rdvTime"),
         ];
         $this->context['pluginData'] = get_plugin_data(WP_PLUGIN_DIR.'/eventus/eventus.php');
 

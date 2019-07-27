@@ -14,14 +14,15 @@ class EventusWidgetDashboard {
     
     function __construct() {
 		wp_enqueue_style('styleEventus', WP_PLUGIN_URL.'/eventus/admin/views/css/styles.css'); 
-        wp_register_script('commonJs', plugin_dir_url( __FILE__ ).'/../../views/js/common.js', '', '', true); 
-        wp_localize_script('commonJs', 'translations', 
+        wp_register_script('eventus', plugin_dir_url( __FILE__ ).'/../../views/js/_eventus.js', '', '', true); 
+        wp_localize_script('eventus', 'translations', 
             array(                
                 'defMessage' => __('This action is irreversible. Do you really want to delete the element?', 'eventus' ),
                 'loading' => __('Loading in progress....', 'eventus' )
             )
         );
-        wp_enqueue_script('commonJs');
+        wp_enqueue_script('eventus');
+		wp_enqueue_script('eventus_defaultScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/_defaultScreen.js', '', '', true); 
         \Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../views/screens/components/';
         $this->context = \Timber\Timber::get_context();
         $this->context['adminPostUrl'] = admin_url('admin-post.php'); 

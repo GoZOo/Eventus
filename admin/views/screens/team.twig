@@ -109,7 +109,13 @@
                                 title="{{ _e('Link n°1 of the championship results', 'eventus') }}" 
                                 placeholder="{{ _e('Link n°1 of the championship results', 'eventus') }}"
                             >
-                            <a type='button' class='button-primary ico ico-link ico-no-text' href='{{ team.getUrlOne()|toProperText }}' target='_blank'></a>
+                            <a 
+                                type='button' 
+                                class='button-primary ico ico-link ico-no-text' 
+                                href='{{ team.getUrlOne()|toProperText }}' 
+                                target='_blank'
+                                {% if not team.getUrlOne() %} style='display: none' {% endif %}
+                            ></a>
                         </td>
                     </tr>
                     <tr {% if not team.getUrlOne() %} style='display: none' {% endif %}>
@@ -126,7 +132,13 @@
                                 title="{{ _e('Link n°2 of the championship results', 'eventus') }}" 
                                 placeholder="{{ _e('Link n°2 of the championship results', 'eventus') }}"
                             >
-                            <a type='button' class='button-primary ico ico-link ico-no-text' href='{{ team.getUrlTwo()|toProperText }}' target='_blank'></a>
+                            <a 
+                                type='button' 
+                                class='button-primary ico ico-link ico-no-text' 
+                                href='{{ team.getUrlTwo()|toProperText }}' 
+                                target='_blank'                                
+                                {% if not team.getUrlTwo() %} style='display: none' {% endif %}
+                            ></a>
                         </td>
                     </tr>
                     <tr>
@@ -137,7 +149,7 @@
                             <input 
                                 name='time' 
                                 id='time' 
-                                value="{% if team.getTime() %}{{ team.getTime() }}{% else %}50{% endif %}"
+                                value="{% if team.getTime() %}{{ team.getTime() }}{% else %}{{ rdvTime }}{% endif %}"
                                 class='regular-text' 
                                 type='number' 
                                 min='0' 
@@ -165,7 +177,7 @@
         <br>
 
         {% if team.getId() %}
-            <button type="submit" name="action" value="eventus_delTeam" class="button-primary ico ico-del" onclick="return validate(null)" >
+            <button type="submit" name="action" value="eventus_delTeam" class="button-primary ico ico-del" data-bind="{ action: 'validate', content: null }" >
                 {{ _e('Delete the team', 'eventus') }}
             </button>  
             <br />

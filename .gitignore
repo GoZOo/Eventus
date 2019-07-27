@@ -1,3 +1,4 @@
 public/ics/*
 finder.log
 /vendor/
+composer.lock

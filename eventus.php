@@ -2,10 +2,10 @@
 /* Plugin Name: Eventus
  * Plugin URI: 
  * Description: Useful plugin that allow you to manage handball teams results through FFHB website.
- * Version: 2.5
+ * Version: 2.7
  * Author: Kirian Caumes
- * Author URI: http://kiriancaumes.fr
- * License: 
+ * Author URI: https://github.com/KirianCaumes/Eventus
+ * License: MIT
  */
 namespace Eventus;
 
@@ -22,6 +22,7 @@ include_once plugin_dir_path(__FILE__) . 'includes/DAO/matchDAO.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/_masterController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/homeController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/clubController.php';
+include_once plugin_dir_path(__FILE__) . 'admin/controllers/seekerController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/logController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/controllers/settingsController.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/helper/traitHelper.php';
@@ -29,6 +30,7 @@ include_once plugin_dir_path(__FILE__) . 'admin/business/helper/staticHelper.php
 include_once plugin_dir_path(__FILE__) . 'admin/business/finder.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/ics.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/postHandler.php';
+include_once plugin_dir_path(__FILE__) . 'admin/business/seeker.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/widgetDashboard.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/twig.php';
 
@@ -82,16 +84,20 @@ class Eventus {
 			});
 			add_submenu_page('eventus', __('Logs', 'eventus') . ' - Eventus', __('Logs', 'eventus'), 'manage_options', 'eventus_logs', function () {
 				new Admin\Controllers\LogController;
+			});	
+			add_submenu_page('eventus', __('Seeker', 'eventus') . ' - Eventus', __('Seeker', 'eventus'), 'manage_options', 'eventus_seeker', function () {
+				new Admin\Controllers\SeekerController;
 			});
 			add_submenu_page('eventus', __('Settings', 'eventus') . ' - Eventus', __('Settings', 'eventus'), 'manage_options', 'eventus_admin', function () {
 				new Admin\Controllers\SettingsController;
-			});
+			});		
 		});
 
 		//Bdd
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		register_activation_hook(__FILE__, function () {
 			update_option('eventus_season', (date('n') < 9 ? date("Y")-1 . " - " . (date("Y")) : date("Y") . " - " . (date("Y") + 1)), false);
+        	update_option('eventus_rdvTime', 45, false);
 			Includes\DAO\Database::getInstance()->createTables();
 		});
 		register_deactivation_hook(__FILE__, array($this, 'uninstall'));
@@ -102,6 +108,19 @@ class Eventus {
 
 		//Twig settings		
 		new Admin\Business\Twig;
+		
+		//Js settings to enable import/export
+		add_filter( 'script_loader_tag', function ( $tag, $handle, $source ) {
+			$scirpts = array(
+				"eventus", "eventus_defaultScreen", "eventus_adminScreen","eventus_seekedScreen","eventus_seekerScreen", "eventus_teamScreen","eventus_matchScreen", 
+				"eventusFront", "eventusFront_icsCalendar", "eventusFront_results"
+			);	
+			if (in_array($handle, $scirpts)) {
+				$tag = '<script src="' . $source . '" type="module"></script>';
+			}
+			return $tag;
+		}, 10, 3 );
+		
 	}
 
 	function uninstall() {

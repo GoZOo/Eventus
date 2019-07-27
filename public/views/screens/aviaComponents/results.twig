@@ -1,11 +1,11 @@
-<div class='allClbus'>
+<div class='eventus_results'>
     {% for club in allClubs %}
         {# add i #}
-        <div class='blockClub' style='right:-{{loop.index0}}00%'>
+        <div class='club' style='right:-{{loop.index0}}00%'>
             <div class='ligneNomSuivant'>
                 <p>{{ club.club }}</p>
                 {% if allClubs|length > 1 %}
-                    <button class='clubSuivant' type='button'>&#9658;&#9658;</button>
+                    <button class='next-club' type='button'>&#9658;&#9658;</button>
                 {% endif %}
             </div>
             {% set tempSex = '' %}

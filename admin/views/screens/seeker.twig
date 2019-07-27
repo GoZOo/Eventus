@@ -88,7 +88,8 @@
                 name="action" 
                 type="submit" 
                 value="eventus_seek"
-                onclick="if(jQuery('form')[0].checkValidity())window.eventus.setLoading(this)"
+                data-bind="{ action: 'setLoading', content: el }"
+                style="display:none"
             >
                 {{ _e('Search for:', 'eventus')}}
             </button>

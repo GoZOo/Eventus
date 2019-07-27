@@ -63,8 +63,13 @@
         <br>
 
         {% if club.getId() %}
-            <a class='button-primary ico ico-add' href='admin.php?page=eventus_club&action=club' type='button'>{{ _e('Add a club', 'eventus') }}</a>
-            <button class="button-primary ico ico-del" name="action" onclick="return window.eventus.validate('{{ _e('This action is irreversible. Do you really want to delete the club?', 'eventus') }}')" type="submit" value="eventus_delClub">{{ _e('Delete the club', 'eventus') }}</button>
+            <button 
+                class="button-primary ico ico-del" 
+                name="action" 
+                type="submit" 
+                value="eventus_delClub"
+                data-bind="{ action: 'validate', content: '{{ _e('This action is irreversible. Do you really want to delete the club?', 'eventus') }}' }"
+            >{{ _e('Delete the club', 'eventus') }}</button>
             <br/>
         {% endif %}
         <br/>

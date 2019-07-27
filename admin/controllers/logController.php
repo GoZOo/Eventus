@@ -11,6 +11,8 @@ namespace Eventus\Admin\Controllers;
 class LogController extends MasterController {
     public function __construct() {
         parent::__construct();
+
+		wp_enqueue_script('eventus_defaultScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/_defaultScreen.js', '', '', true); 
         
         $this->displayIndex();
 	}	    

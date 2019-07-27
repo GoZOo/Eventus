@@ -20,7 +20,7 @@
             value="eventus_clearLog" 
             class="button-primary" 
             type="submit" 
-            onclick="return window.eventus.validate('<?php _e('This action is irreversible. Do you really want to delete the logs?', 'eventus') ?>')"
+            data-bind="{ action: 'validate', content: '{{ _e('This action is irreversible. Do you really want to delete the logs?', 'eventus') }}' }"
         >
             {{ _e('Delete logs', 'eventus') }}
         </button>                

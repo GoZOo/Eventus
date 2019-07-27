@@ -59,18 +59,18 @@
 
     {% if clubs[0].teams|length %}
         <form action={{ adminPostUrl }} method="post">
-            <div class="myTooltip">
-                <button type="submit" name="action" value="eventus_syncMatch" onclick="window.eventus.setLoading(this)" class="button-primary ico ico-sync">
+            <div class="tooltip">
+                <button type="submit" name="action" value="eventus_syncMatch" data-bind="{ action: 'setLoading', content: el }" class="button-primary ico ico-sync">
                     {{ _e('Synchronize match data', 'eventus') }}	
                 </button>
-                <span class="myTooltiptext">{{ _e('Saves & synchronizes match data with the Federation website.', 'eventus') }}</span>
+                <span class="tooltiptext">{{ _e('Saves & synchronizes match data with the Federation website.', 'eventus') }}</span>
             </div> 
 
-            <div class="myTooltip">
-                <button type="submit" name="action" value="eventus_majIcs" onclick="window.eventus.setLoading(this)" class="button-primary ico ico-calendar">
+            <div class="tooltip">
+                <button type="submit" name="action" value="eventus_majIcs" data-bind="{ action: 'setLoading', content: el }" class="button-primary ico ico-calendar">
                     {{ _e('Update calendars', 'eventus') }}
                 </button>
-                <span class="myTooltiptext">{{ _e('Update all ICS team calendars', 'eventus') }}</span>
+                <span class="tooltiptext">{{ _e('Update all ICS team calendars', 'eventus') }}</span>
             </div>  
             <br>
             <p class="dern-synch">

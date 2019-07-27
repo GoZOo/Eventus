@@ -2,7 +2,7 @@
 <button 
     class="button-primary ico ico-back" 
     type="button" 
-    onclick="window.history.back()"
+    data-bind="{ action: 'goBack', content: null }"
 >
     {{ _e('Return', 'eventus') }}
 </button> 

@@ -18,8 +18,11 @@ class SeekerController extends MasterController {
 
         if ($this->get['seeked']) {
 			wp_enqueue_script('eventus_seekedScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/seekedScreen.js', '', '', true); 
+            
             $this->displayRes();
         } else {
+			wp_enqueue_script('eventus_seekerScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/seekerScreen.js', '', '', true); 
+
             $this->displayIndex();
         }        
     }	

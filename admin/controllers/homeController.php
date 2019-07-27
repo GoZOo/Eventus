@@ -27,6 +27,8 @@ class HomeController extends MasterController {
 
 			$this->displayMatches();
 		} else {
+			wp_enqueue_script('eventus_defaultScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/_defaultScreen.js', '', '', true); 
+			
 			$this->displayIndex();
 		}
     }	

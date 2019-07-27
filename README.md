@@ -48,10 +48,12 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 * Add seeker class and seeker screens that allow to find team by club and championship !
 * Add option to define default rdv before match time
 * Evo seeker (for team) and finder (for matches) are now async (so faster process)
-* Evo Jquery is removed, Js scripts for each admin page has been remade
+* Evo Jquery is removed, Js scripts for each admin page has been reworked
+* Evo button to open link results on team are now hidden if no url
 * Fix bug on input date/time in firefox
 * Fix rdv time for outdoor matches are now limited to 10 calculations (Google Api Matrix Distance limitation)
 * Fix translations issues
+* Fix deletion of a team
 
 ### 2.6 - About Update of the FFHB website
 

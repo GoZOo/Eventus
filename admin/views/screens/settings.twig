@@ -134,7 +134,7 @@
                 type="submit" 
                 name="action" 
                 value="eventus_delIcs" 
-                onclick="return window.eventus.validate('{{ _e('This action is irreversible. Do you really want to purge all the calendars?', 'eventus') }}')" 
+                data-bind="{ action: 'validate', content: '{{ _e('This action is irreversible. Do you really want to purge all the calendars?', 'eventus') }}' }"
                 class="button-primary ico ico-del"
             >
             {{ _e('Purge all calendars?', 'eventus') }}
@@ -144,7 +144,7 @@
                 type="submit" 
                 name="action" 
                 value="eventus_delMatch" 
-                onclick="return window.eventus.validate('{{ _e('This action is irreversible. Do you really want to purge all the matches?', 'eventus') }}')" 
+                data-bind="{ action: 'validate', content: '{{ _e('This action is irreversible. Do you really want to purge all the matches?', 'eventus') }}' }"
                 class="button-primary ico ico-del"
             >
             {{ _e('Purge all matches', 'eventus') }}
@@ -154,7 +154,7 @@
                 type="submit" 
                 name="action" 
                 value="eventus_delTeam" 
-                onclick="return window.eventus.validate('{{ _e('This action is irreversible. Do you really want to purge all the teams?', 'eventus') }}')" 
+                data-bind="{ action: 'validate', content: '{{ _e('This action is irreversible. Do you really want to purge all the teams?', 'eventus') }}' }"
                 class="button-primary ico ico-del"
                 >
             {{ _e('Purge all teams', 'eventus') }}
@@ -164,7 +164,7 @@
                 type="submit" 
                 name="action" 
                 value="eventus_delClub" 
-                onclick="return window.eventus.validate('{{ _e('This action is irreversible. Do you really want to purge all the clubs?', 'eventus') }}')" 
+                data-bind="{ action: 'validate', content: '{{ _e('This action is irreversible. Do you really want to purge all the clubs?', 'eventus') }}' }"
                 class="button-primary ico ico-del"
             >
             {{  _e('Purge all clubs', 'eventus') }}
@@ -174,7 +174,7 @@
                 type="submit" 
                 name="action" 
                 value="eventus_resetEventus" 
-                onclick="return window.eventus.validate('{{ _e('This action is irreversible. Do you really want to reset Eventus?', 'eventus') }}')" 
+                data-bind="{ action: 'validate', content: '{{ _e('This action is irreversible. Do you really want to reset Eventus?', 'eventus') }}' }"
                 class="button-primary ico ico-reset"
             >
             {{ _e('Reset Eventus', 'eventus') }}

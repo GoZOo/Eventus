@@ -262,7 +262,7 @@ body[class*="eventus"] .ico-sync:before,
 #dashboard_eventus .ico-sync:before {
   content: url("../svg/sync.svg");
   position: absolute;
-  top: 4.5px;
+  top: 3.5px;
   left: 2px;
   width: 20px;
 }
@@ -364,13 +364,13 @@ body[class*="eventus"] .ico-loading:before,
 }
 
 /* Tooltip  */
-body[class*="eventus"] .myTooltip,
-#dashboard_eventus .myTooltip {
+body[class*="eventus"] .tooltip,
+#dashboard_eventus .tooltip {
   position: relative;
   display: inline-block;
 }
-body[class*="eventus"] .myTooltip .myTooltiptext,
-#dashboard_eventus .myTooltip .myTooltiptext {
+body[class*="eventus"] .tooltip .tooltiptext,
+#dashboard_eventus .tooltip .tooltiptext {
   visibility: hidden;
   background-color: #555;
   color: #fff;
@@ -386,8 +386,8 @@ body[class*="eventus"] .myTooltip .myTooltiptext,
   opacity: 0;
   transition: opacity 0.3s;
 }
-body[class*="eventus"] .myTooltip .myTooltiptext::after,
-#dashboard_eventus .myTooltip .myTooltiptext::after {
+body[class*="eventus"] .tooltip .tooltiptext::after,
+#dashboard_eventus .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -397,8 +397,8 @@ body[class*="eventus"] .myTooltip .myTooltiptext::after,
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-body[class*="eventus"] .myTooltip:hover .myTooltiptext,
-#dashboard_eventus .myTooltip:hover .myTooltiptext {
+body[class*="eventus"] .tooltip:hover .tooltiptext,
+#dashboard_eventus .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }

@@ -85,7 +85,7 @@ class Eventus {
 			add_submenu_page('eventus', __('Logs', 'eventus') . ' - Eventus', __('Logs', 'eventus'), 'manage_options', 'eventus_logs', function () {
 				new Admin\Controllers\LogController;
 			});	
-			add_submenu_page('eventus', "Chercheur" . ' - Eventus', "Chercheur", 'manage_options', 'eventus_seeker', function () {
+			add_submenu_page('eventus', __('Seeker', 'eventus') . ' - Eventus', __('Seeker', 'eventus'), 'manage_options', 'eventus_seeker', function () {
 				new Admin\Controllers\SeekerController;
 			});
 			add_submenu_page('eventus', __('Settings', 'eventus') . ' - Eventus', __('Settings', 'eventus'), 'manage_options', 'eventus_admin', function () {
@@ -111,7 +111,8 @@ class Eventus {
 		
 		//Js settings to enable import/export
 		add_filter( 'script_loader_tag', function ( $tag, $handle, $source ) {
-			$scirpts = array("eventus", "eventus_adminScreen","eventus_seekedScreen", "eventus_teamScreen","eventus_matchScreen");	
+			$scirpts = array("eventus", "eventus_defaultScreen", "eventus_adminScreen","eventus_seekedScreen","eventus_seekerScreen", "eventus_teamScreen","eventus_matchScreen", 
+			"eventusFront", "eventusFront_icsCalendar");	
 			if (in_array($handle, $scirpts)) {
 				$tag = '<script src="' . $source . '" type="module"></script>';
 			}

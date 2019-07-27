@@ -22,6 +22,7 @@ class EventusWidgetDashboard {
             )
         );
         wp_enqueue_script('eventus');
+		wp_enqueue_script('eventus_defaultScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/_defaultScreen.js', '', '', true); 
         \Timber\Timber::$locations = plugin_dir_path( __FILE__ ).'../views/screens/components/';
         $this->context = \Timber\Timber::get_context();
         $this->context['adminPostUrl'] = admin_url('admin-post.php'); 

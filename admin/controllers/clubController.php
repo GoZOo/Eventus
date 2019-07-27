@@ -19,9 +19,12 @@ class ClubController extends MasterController {
             wp_register_script('upImgJs', plugin_dir_url( __FILE__ ).'/../../views/js/uploadImg.js', '', '', true); 
             wp_localize_script('upImgJs', 'translations', $this->translationsJs);
             wp_enqueue_script('upImgJs');
+			wp_enqueue_script('eventus_defaultScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/_defaultScreen.js', '', '', true); 
 
 			$this->displayClub();
 		} else {
+			wp_enqueue_script('eventus_defaultScreen', plugin_dir_url( __FILE__ ).'/../../views/js/screens/_defaultScreen.js', '', '', true); 
+            
             $this->displayIndex();
         }	
     }

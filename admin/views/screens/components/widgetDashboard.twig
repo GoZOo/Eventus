@@ -32,11 +32,11 @@
             {{ last_sync }}
         </h3>
         <form action="{{ adminPostUrl }}" method="post">
-            <div class="myTooltip">
-                <button class="button-primary ico ico-sync" name="action" onclick="window.eventus.setLoading(this)" type="submit" value="eventus_syncMatch">
+            <div class="tooltip">
+                <button class="button-primary ico ico-sync" name="action" data-bind="{ action: 'setLoading', content: el }" type="submit" value="eventus_syncMatch">
                     {{ _e('Synchronize match data', 'eventus') }}
                 </button>
-                <span class="myTooltiptext">
+                <span class="tooltiptext">
                     {{ _e('Saves & synchronizes match data with the Federation website.', 'eventus') }}
                 </span>
             </div>

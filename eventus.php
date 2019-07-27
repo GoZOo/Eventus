@@ -111,8 +111,10 @@ class Eventus {
 		
 		//Js settings to enable import/export
 		add_filter( 'script_loader_tag', function ( $tag, $handle, $source ) {
-			$scirpts = array("eventus", "eventus_defaultScreen", "eventus_adminScreen","eventus_seekedScreen","eventus_seekerScreen", "eventus_teamScreen","eventus_matchScreen", 
-			"eventusFront", "eventusFront_icsCalendar");	
+			$scirpts = array(
+				"eventus", "eventus_defaultScreen", "eventus_adminScreen","eventus_seekedScreen","eventus_seekerScreen", "eventus_teamScreen","eventus_matchScreen", 
+				"eventusFront", "eventusFront_icsCalendar", "eventusFront_results"
+			);	
 			if (in_array($handle, $scirpts)) {
 				$tag = '<script src="' . $source . '" type="module"></script>';
 			}

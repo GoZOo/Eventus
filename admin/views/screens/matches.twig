@@ -222,7 +222,7 @@
                                 <input type='text' value="{{ match.getLocalTeam()|toProperText }}" class='regular-text' data-name="localTeamOther">
                             </td>
                             <td>
-                                <input type='number' value="{{ match.getgetLocalTeamScoreDate() }}" class='regular-text' data-name="localTeamScoreOther">
+                                <input type='number' value="{{ match.getLocalTeamScore() }}" class='regular-text' data-name="localTeamScoreOther">
                             </td>
                             <td>
                                 <input type='text' value="{{ match.getVisitingTeam()|toProperText }}" class='regular-text' data-name="visitingTeamOther">
@@ -250,7 +250,11 @@
                                     {{ icons.del }}
                                 </button>
                             </td>
-                            <input type='hidden' value="{{ match.getId() }}" data-name="idOther">
+                            {% if isMatchOther %}
+                                <input type='hidden' value="{{ match.getId() }}" data-name="idOther">
+                            {% else %}
+                                <input type='hidden' data-name="idOther">
+                            {% endif %}                            
                         </tr>
                     {% endfor %}
                     </tbody>

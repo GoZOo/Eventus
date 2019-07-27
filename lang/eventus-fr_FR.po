@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Eventus\n"
-"POT-Creation-Date: 2019-07-26 21:20+0200\n"
-"PO-Revision-Date: 2019-07-26 21:21+0200\n"
+"POT-Creation-Date: 2019-07-27 17:38+0200\n"
+"PO-Revision-Date: 2019-07-27 17:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: Kirian Caumes\n"
 "Language: fr_FR\n"
@@ -249,7 +249,7 @@ msgid "Hall"
 msgstr "Salle"
 
 #: admin/business/ics.php:44 admin/views/screens/matches.twig:25
-#: admin/views/screens/matches.twig:107
+#: admin/views/screens/matches.twig:113
 msgid "D."
 msgstr "J."
 
@@ -411,7 +411,7 @@ msgstr "Équipe & Résultats"
 
 #: eventus.php:81
 msgid "Teams"
-msgstr "Équipe"
+msgstr "Équipes"
 
 #: eventus.php:82
 msgid "Clubs"
@@ -420,6 +420,10 @@ msgstr "Clubs"
 #: eventus.php:85
 msgid "Logs"
 msgstr "Logs"
+
+#: eventus.php:88
+msgid "Seeker"
+msgstr "Chercheur"
 
 #: vendor/timber/timber/lib/Archives.php:160
 #, php-format
@@ -597,34 +601,29 @@ msgstr "Adresse"
 msgid "Address used to calculate match rdv schedules"
 msgstr "Adresse utilisé pour calculer les horaires de rdv des matchs"
 
-#: admin/views/screens/club.twig:49 admin/views/screens/team.twig:152
+#: admin/views/screens/club.twig:49 admin/views/screens/team.twig:164
 msgid "Image"
 msgstr "Image"
 
-#: admin/views/screens/club.twig:52 admin/views/screens/team.twig:155
+#: admin/views/screens/club.twig:52 admin/views/screens/team.twig:167
 msgid "Select an image"
 msgstr "Sélectionnez une image"
 
-#: admin/views/screens/club.twig:53 admin/views/screens/team.twig:156
+#: admin/views/screens/club.twig:53 admin/views/screens/team.twig:168
 msgid "Delete the image"
 msgstr "Supprimer l'image"
 
-#: admin/views/screens/club.twig:66 admin/views/screens/clubs.twig:34
-#: admin/views/screens/home.twig:10
-msgid "Add a club"
-msgstr "Ajouter un club"
-
-#: admin/views/screens/club.twig:67
+#: admin/views/screens/club.twig:71
 msgid "This action is irreversible. Do you really want to delete the club?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment supprimer le club ?"
 
-#: admin/views/screens/club.twig:67
+#: admin/views/screens/club.twig:72
 msgid "Delete the club"
 msgstr "Supprimer le club"
 
-#: admin/views/screens/club.twig:71 admin/views/screens/matches.twig:246
-#: admin/views/screens/settings.twig:122 admin/views/screens/team.twig:175
+#: admin/views/screens/club.twig:76 admin/views/screens/matches.twig:277
+#: admin/views/screens/settings.twig:122 admin/views/screens/team.twig:187
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
@@ -649,6 +648,10 @@ msgstr "ID : "
 #: admin/views/screens/clubs.twig:27
 msgid "/ Teams : "
 msgstr "/ Équipe : "
+
+#: admin/views/screens/clubs.twig:34 admin/views/screens/home.twig:10
+msgid "Add a club"
+msgstr "Ajouter un club"
 
 #: admin/views/screens/components/widgetDashboard.twig:8
 msgid "Team(s): "
@@ -679,12 +682,12 @@ msgid "Last synchronization of matches: "
 msgstr "Dernière synchronisation des matchs : "
 
 #: admin/views/screens/components/widgetDashboard.twig:37
-#: admin/views/screens/home.twig:64 admin/views/screens/matches.twig:255
+#: admin/views/screens/home.twig:64 admin/views/screens/matches.twig:298
 msgid "Synchronize match data"
 msgstr "Synchroniser les données des matchs"
 
 #: admin/views/screens/components/widgetDashboard.twig:40
-#: admin/views/screens/home.twig:66 admin/views/screens/matches.twig:256
+#: admin/views/screens/home.twig:66 admin/views/screens/matches.twig:299
 msgid "Saves & synchronizes match data with the Federation website."
 msgstr ""
 "Enregistre & synchronise les données des matchs avec le site de la "
@@ -747,6 +750,11 @@ msgstr "Affichage des logs"
 msgid "No log to display"
 msgstr "Aucun log à afficher"
 
+#: admin/views/screens/log.twig:23
+msgid "This action is irreversible. Do you really want to delete the logs?"
+msgstr ""
+"Cette action est iréversible. Voulez-vous vraiment supprimer les logs ?"
+
 #: admin/views/screens/log.twig:25
 msgid "Delete logs"
 msgstr "Effacer les logs"
@@ -755,89 +763,89 @@ msgstr "Effacer les logs"
 msgid "New team"
 msgstr "Nouvelle équipe"
 
-#: admin/views/screens/matches.twig:23 admin/views/screens/matches.twig:105
+#: admin/views/screens/matches.twig:23 admin/views/screens/matches.twig:111
 msgid "Id"
 msgstr "Id"
 
-#: admin/views/screens/matches.twig:24 admin/views/screens/matches.twig:106
+#: admin/views/screens/matches.twig:24 admin/views/screens/matches.twig:112
 msgid "Ch."
 msgstr "Ch."
 
-#: admin/views/screens/matches.twig:26 admin/views/screens/matches.twig:108
-#: admin/views/screens/matches.twig:184
+#: admin/views/screens/matches.twig:26 admin/views/screens/matches.twig:114
+#: admin/views/screens/matches.twig:196
 msgid "Date"
 msgstr "Date"
 
 #: admin/views/screens/matches.twig:27 admin/views/screens/matches.twig:28
-#: admin/views/screens/matches.twig:109 admin/views/screens/matches.twig:110
-#: admin/views/screens/matches.twig:185 admin/views/screens/matches.twig:186
+#: admin/views/screens/matches.twig:115 admin/views/screens/matches.twig:116
+#: admin/views/screens/matches.twig:197 admin/views/screens/matches.twig:198
 msgid "Time"
 msgstr "Heure"
 
-#: admin/views/screens/matches.twig:27 admin/views/screens/matches.twig:109
-#: admin/views/screens/matches.twig:185
+#: admin/views/screens/matches.twig:27 admin/views/screens/matches.twig:115
+#: admin/views/screens/matches.twig:197
 msgid "RDV"
 msgstr "RDV"
 
-#: admin/views/screens/matches.twig:28 admin/views/screens/matches.twig:110
-#: admin/views/screens/matches.twig:186
+#: admin/views/screens/matches.twig:28 admin/views/screens/matches.twig:116
+#: admin/views/screens/matches.twig:198
 msgid "Match"
 msgstr "Match"
 
 #: admin/views/screens/matches.twig:29 admin/views/screens/matches.twig:30
-#: admin/views/screens/matches.twig:111 admin/views/screens/matches.twig:112
-#: admin/views/screens/matches.twig:187 admin/views/screens/matches.twig:188
+#: admin/views/screens/matches.twig:117 admin/views/screens/matches.twig:118
+#: admin/views/screens/matches.twig:199 admin/views/screens/matches.twig:200
 msgid "Loc."
 msgstr "Loc."
 
 #: admin/views/screens/matches.twig:30 admin/views/screens/matches.twig:32
-#: admin/views/screens/matches.twig:112 admin/views/screens/matches.twig:114
-#: admin/views/screens/matches.twig:188 admin/views/screens/matches.twig:190
+#: admin/views/screens/matches.twig:118 admin/views/screens/matches.twig:120
+#: admin/views/screens/matches.twig:200 admin/views/screens/matches.twig:202
 msgid "goals"
 msgstr "buts"
 
 #: admin/views/screens/matches.twig:31 admin/views/screens/matches.twig:32
-#: admin/views/screens/matches.twig:113 admin/views/screens/matches.twig:114
-#: admin/views/screens/matches.twig:189 admin/views/screens/matches.twig:190
+#: admin/views/screens/matches.twig:119 admin/views/screens/matches.twig:120
+#: admin/views/screens/matches.twig:201 admin/views/screens/matches.twig:202
 msgid "Opp."
 msgstr "Adv."
 
-#: admin/views/screens/matches.twig:33 admin/views/screens/matches.twig:115
-#: admin/views/screens/matches.twig:191
+#: admin/views/screens/matches.twig:33 admin/views/screens/matches.twig:121
+#: admin/views/screens/matches.twig:203
 msgid "Street"
 msgstr "Rue"
 
-#: admin/views/screens/matches.twig:34 admin/views/screens/matches.twig:116
-#: admin/views/screens/matches.twig:192
+#: admin/views/screens/matches.twig:34 admin/views/screens/matches.twig:122
+#: admin/views/screens/matches.twig:204
 msgid "City"
 msgstr "Ville"
 
-#: admin/views/screens/matches.twig:35 admin/views/screens/matches.twig:117
-#: admin/views/screens/matches.twig:193
+#: admin/views/screens/matches.twig:35 admin/views/screens/matches.twig:123
+#: admin/views/screens/matches.twig:205
 msgid "Gym"
 msgstr "Salle"
 
-#: admin/views/screens/matches.twig:101
+#: admin/views/screens/matches.twig:107
 msgid "Son matches"
 msgstr "Matchs fils"
 
-#: admin/views/screens/matches.twig:105
+#: admin/views/screens/matches.twig:111
 msgid "Orig."
 msgstr "Orig."
 
-#: admin/views/screens/matches.twig:180
+#: admin/views/screens/matches.twig:192
 msgid "Other matches"
 msgstr "Autre Matchs"
 
-#: admin/views/screens/matches.twig:243
+#: admin/views/screens/matches.twig:269
 msgid "Add a match"
 msgstr "Ajouter un match"
 
-#: admin/views/screens/matches.twig:249
+#: admin/views/screens/matches.twig:286
 msgid "Recalculate RDV schedules"
 msgstr "Recalculer les horaires de RDV"
 
-#: admin/views/screens/matches.twig:250
+#: admin/views/screens/matches.twig:287
 msgid ""
 "Saves and updates the schedules of upcoming outdoor games with a valid "
 "address (limited to 10 games)."
@@ -845,11 +853,11 @@ msgstr ""
 "Enregistre et met à jour les horaires des prochains matchs à l’extérieur "
 "avec une adresse valide (limités à 10 matchs)."
 
-#: admin/views/screens/matches.twig:262
+#: admin/views/screens/matches.twig:311
 msgid "Update the calendar"
 msgstr "Mettre à jour le calendrier"
 
-#: admin/views/screens/matches.twig:263
+#: admin/views/screens/matches.twig:312
 msgid "Update the team's ICS calendar"
 msgstr "Mets à jour le calendrier ICS de l'équipe"
 
@@ -864,8 +872,8 @@ msgid "Link n°1 of the championship results"
 msgstr "Lien n°1 des résultats du championnat"
 
 #: admin/views/screens/seeked.twig:18 admin/views/screens/seeked.twig:94
-#: admin/views/screens/seeked.twig:95 admin/views/screens/team.twig:117
-#: admin/views/screens/team.twig:126 admin/views/screens/team.twig:127
+#: admin/views/screens/seeked.twig:95 admin/views/screens/team.twig:123
+#: admin/views/screens/team.twig:132 admin/views/screens/team.twig:133
 msgid "Link n°2 of the championship results"
 msgstr "Lien n°2 des résultats du championnat"
 
@@ -877,7 +885,7 @@ msgstr "Ajouter les équipes"
 msgid "No result"
 msgstr "Aucun résultat"
 
-#: admin/views/screens/seeked.twig:127 admin/views/screens/seeker.twig:99
+#: admin/views/screens/seeked.twig:127 admin/views/screens/seeker.twig:100
 msgid "Errors occurred during data recovery."
 msgstr "Des erreurs se sont produites durant la récupération des données."
 
@@ -915,8 +923,8 @@ msgstr "Non"
 msgid "Yes"
 msgstr "Oui"
 
-#: admin/views/screens/seeker.twig:93
-msgid "Search for:"
+#: admin/views/screens/seeker.twig:94
+msgid "Seek"
 msgstr "Chercher"
 
 #: admin/views/screens/settings.twig:4
@@ -977,7 +985,7 @@ msgstr ""
 
 #: admin/views/screens/settings.twig:140
 msgid "Purge all calendars?"
-msgstr "Purger tous les calendriers"
+msgstr "Purger tous les calendriers ?"
 
 #: admin/views/screens/settings.twig:147
 msgid ""
@@ -1033,12 +1041,12 @@ msgstr ""
 "En cas de soucis, plusieurs moyens de me contacter sont disponibles sur mon "
 "site ou via mon GitHub."
 
-#: admin/views/screens/team.twig:134 admin/views/screens/team.twig:145
-#: admin/views/screens/team.twig:146
+#: admin/views/screens/team.twig:146 admin/views/screens/team.twig:157
+#: admin/views/screens/team.twig:158
 msgid "Time for pre-match RDV (in minutes)"
 msgstr "Temps pour RDV d'avant match (en minutes)"
 
-#: admin/views/screens/team.twig:169
+#: admin/views/screens/team.twig:181
 msgid "Delete the team"
 msgstr "Supprimer l'équipe"
 
@@ -1049,6 +1057,9 @@ msgstr "Télécharger le calendrier (ICS)"
 #: public/views/screens/aviaComponents/icsCalendar.twig:4
 msgid "Copy the link of the calendar (ICS)"
 msgstr "Copier le lien du calendrier (ICS)"
+
+#~ msgid "Search for:"
+#~ msgstr "Chercher"
 
 #~ msgid "Les calendriers ont bien été mise à jour."
 #~ msgstr "Les calendriers ont bien été mise à jour."
@@ -1062,10 +1073,6 @@ msgstr "Copier le lien du calendrier (ICS)"
 
 #~ msgid "Error: The club could not be found..."
 #~ msgstr "Erreur : Le club n'a pas pu être trouvé..."
-
-#~ msgid "This action is irreversible. Do you really want to delete the logs?"
-#~ msgstr ""
-#~ "Cette action est iréversible. Voulez-vous vraiment supprimer les logs ?"
 
 #~ msgid "Last Game"
 #~ msgstr "Dernier Match"

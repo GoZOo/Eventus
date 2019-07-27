@@ -144,13 +144,12 @@ class PostHandler {
         } else {            
             DAO\MatchDAO::getInstance()->updateMatchesScreen([], 1, DAO\TeamDAO::getInstance()->getTeamById($_POST['teamId'])->getId()); 
         }   
-
         if (isset($_POST['otherMatches'])) {
             $allMatchesOther = [];
             foreach ($_POST['otherMatches'] as $otherMatch) {
                 if ($otherMatch['localTeamOther'] && $otherMatch['visitingTeamOther']) {
                     $allMatchesOther[] = new Entities\Match(
-                        isset($_POST['idOther']) && $otherMatch['idOther'] ? $otherMatch['idOther'] : null, 
+                        isset($otherMatch['idOther']) && $otherMatch['idOther'] ? $otherMatch['idOther'] : null, 
                         null,
                         null,
                         $otherMatch['dateOther'] ? $otherMatch['dateOther'] : null, 
@@ -416,7 +415,7 @@ class PostHandler {
                     DAO\TeamDAO::getInstance()->insertTeam($newTeam); 
                 }                
             }
-            wp_redirect( add_query_arg( 'message', 'errorNewTeam', 'admin.php?page=eventus' )); 
+            wp_redirect( add_query_arg( 'message', 'succesSeeked', 'admin.php?page=eventus' )); 
         } else {
             wp_redirect( add_query_arg( 'message', 'errorNewTeam',  wp_get_referer() )); 
         }        

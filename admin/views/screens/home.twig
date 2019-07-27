@@ -27,15 +27,17 @@
                                 <p class="card-text">
                                     {{ club.detail.getName()|toProperText }}
                                 </p>
-                                <a class="button-primary ico ico-fight" href="admin.php?page=eventus&action=matchs&teamId={{ team.detail.getId() }}">
-                                    {{ _e('Matches', 'eventus') }}
-                                </a>
-                                <a class="button-primary ico ico-team" href="admin.php?page=eventus&action=team&teamId={{ team.detail.getId() }}">
-                                    {{ _e('Team', 'eventus') }}
-                                </a>
-                                <a class="button-primary ico ico-club" href="admin.php?page=eventus_club&action=club&clubId={{ team.detail.getClub().getId() }}">
-                                    {{ _e('Club', 'eventus') }}
-                                </a>
+                                <div>
+                                    <a class="button-primary ico ico-fight" href="admin.php?page=eventus&action=matchs&teamId={{ team.detail.getId() }}">
+                                        {{ _e('Matches', 'eventus') }}
+                                    </a>
+                                    <a class="button-primary ico ico-team" href="admin.php?page=eventus&action=team&teamId={{ team.detail.getId() }}">
+                                        {{ _e('Team', 'eventus') }}
+                                    </a>
+                                    <a class="button-primary ico ico-club" href="admin.php?page=eventus_club&action=club&clubId={{ team.detail.getClub().getId() }}">
+                                        {{ _e('Club', 'eventus') }}
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-footer text-muted">
                                 {{ _e('ID : ', 'eventus') }}

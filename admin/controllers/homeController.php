@@ -80,7 +80,10 @@ class HomeController extends MasterController {
 		$this->context['myMatchParent'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(), 0); 
 		$this->context['myMatchSon'] = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),1); 
 		$myMatchOther = DAO\MatchDAO::getInstance()->getAllMatchesByTeamIdAndType($team->getId(),2);
-		if (!$myMatchOther) $myMatchOther[] = new Entities\Match(substr(md5(uniqid(rand(), true)), 2, 9), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		$this->context['isMatchOther'] = sizeOf($myMatchOther) > 0 ? true : false; 
+		if (!$myMatchOther) {
+			$myMatchOther[] = new Entities\Match(substr(md5(uniqid(rand(), true)), 2, 9), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);			
+		} 
 		$this->context['myMatchOther'] = $myMatchOther; 
 
 		$this->context['icons'] = [

@@ -127,9 +127,20 @@
         <hr/>
         <br>
 
-        <h2>{{ _e('Reset actions ', 'eventus') }}<img draggable="false" class="emoji" alt="⚠" src="https://s.w.org/images/core/emoji/11/svg/26a0.svg"></h2>  
-        <br>     
-        <form action="{{ adminPostUrl }}" method="post">
+        <h2>
+            {{ _e('Reset actions ', 'eventus') }}
+            <button 
+                type="button" 
+                class="button-primary"
+                id="see"
+            >
+                {{ _e('See', 'eventus') }}
+            </button>     
+            <img draggable="false" class="emoji" alt="⚠" src="https://s.w.org/images/core/emoji/11/svg/26a0.svg">        
+        </h2>  
+        <br> 
+        
+        <form action="{{ adminPostUrl }}" method="post" id="form" style="display:none;">
             <button 
                 type="submit" 
                 name="action" 
@@ -137,7 +148,7 @@
                 data-bind="{ action: 'validate', content: '{{ _e('This action is irreversible. Do you really want to purge all the calendars?', 'eventus') }}' }"
                 class="button-primary ico ico-del"
             >
-            {{ _e('Purge all calendars?', 'eventus') }}
+            {{ _e('Purge all calendars', 'eventus') }}
             </button>
 
             <button 
@@ -179,14 +190,14 @@
             >
             {{ _e('Reset Eventus', 'eventus') }}
             </button>
+            <br><br>
         </form>
-
         
     {% else %}
         <p>{{ _e('You are not authorized to access this page.', 'eventus') }}</p>
+        <br>
     {% endif %}
 
-    <br>
     <hr>
     <br>
 

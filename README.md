@@ -43,6 +43,12 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 
 ## Updates
 
+### 2.7.1
+
+* Evo reset option are not display by default
+* Fix hide button to create team of there are no club
+* Fix an issue with a translation
+
 ### 2.7 - Seeker Update
 
 * Add seeker class and seeker screens that allows you to find teams by a club and a championship !

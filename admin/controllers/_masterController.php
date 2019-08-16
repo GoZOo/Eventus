@@ -164,7 +164,7 @@ abstract class MasterController {
                 'str'   => __('Please select a club.', 'eventus')
             ),
             'succesSeeked'=>array(
-                'state' => "error", 
+                'state' => "success", 
                 'str'   => __('The teams have been added well.', 'eventus')
             ),
         );

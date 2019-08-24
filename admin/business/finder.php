@@ -40,14 +40,28 @@ class Finder {
         $this->clientMap = new Client(['base_uri' => $this->_baseUrlMap]);
     }   
 
+    public function updateMatches($teams){
+        $this->updateMatchesData($teams);
+
+        foreach ($teams as $team) {
+            DAO\MatchDAO::getInstance()->updateMatchesHours(
+                $this->setNewHoursRdv(
+                    DAO\MatchDAO::getInstance()->getAllMatchesByTeamId(
+                        $team->getId()
+                    )
+                )
+            );
+        }
+    }
+
     /**
-    * Synchronize matches by team with FFHB website informations
+    * Synchronize matches by team with FFHB website informations 
     *
     * @param Team[]   Team to update synchronize matches
     * @return void
     * @access public
     */
-    public function updateMatches($teams){
+    public function updateMatchesData($teams){
         $promises = array();
         foreach ($teams as $team) { 
             $urls = array();
@@ -112,11 +126,8 @@ class Finder {
                                     }                                        
                                 }
                             }
-                            // var_dump($allMatches); exit;
-                            $allMatches = $this->setNewHoursRdv($allMatches);
                             // var_dump($allMatches); exit;                            
                             DAO\MatchDAO::getInstance()->updateMatchesSync($allMatches);
-                            // var_dump($allMatches); exit;
                         },
                         function (RequestException $e) use ($team, $nbr) { 
                             return array('status' => $e->getResponse()->getStatusCode(), 'content' => null); 
@@ -135,29 +146,33 @@ class Finder {
     * @return Match[]   Match with updated hours rdv
     * @access public
     */
-    function setNewHoursRdv($allMatches){
-        //Get all adresses to be calculated
-        $allAdresses = "";
-        $i = 0;
-        foreach($allMatches as $match) {       
-            if ($match->getExt() && $match->getStreet() && $match->getCity() && date($match->getDate()) > date('Y-m-d') && $i < 10 ) { 
-                $allAdresses .= str_replace(" ","%20",$match->getStreet())."%20".str_replace(" ","%20",$match->getCity())."|";
-                $i++;
+    function setNewHoursRdv($matches){
+        $limit = 5;
+        //Get all matches to be calculated
+        $allMatches = [];
+        foreach($matches as $match) {       
+            if ($match->getExt() && $match->getStreet() && $match->getCity() && date($match->getDate()) > date('Y-m-d') ) { 
+                array_push($allMatches, $match);
             }
         }
-        // var_dump($allAdresses);
+        $allMatches = array_chunk($allMatches, $limit); //Split by limit
+        
+        //Foreach list
+        foreach ($allMatches as $list) {
+            $allAdresses = "";
+            foreach($list as $match) {       
+                $allAdresses .= str_replace(" ","%20",$match->getStreet())."%20".str_replace(" ","%20",$match->getCity())."|";
+            }
 
-        //Get and merge data from Google api
-        if ($allAdresses && $allAdresses != "") {
-            $requestGoogleMap = $this->parseJson($this->clientMap->get(
-                "?key=".get_option("eventus_mapapikey").
-                "&origins=".urlencode($allMatches[0]->getTeam()->getClub()->getAddress()).
-                "&destinations=".$allAdresses)->getBody()
-            );            
-            // var_dump($requestGoogleMap);
-            $y = 0;
-            foreach($allMatches as $match) {
-                if ($match->getExt() && $match->getStreet() && $match->getCity() && date($match->getDate()) > date('Y-m-d')  && $y < 10) {
+            //Get and merge data from Google api
+            if ($allAdresses && $allAdresses != "") {
+                $requestGoogleMap = $this->parseJson($this->clientMap->get(
+                    "?key=".get_option("eventus_mapapikey").
+                    "&origins=".urlencode($matches[0]->getTeam()->getClub()->getAddress()).
+                    "&destinations=".$allAdresses)->getBody()
+                );    
+
+                foreach($list as $y => $match) {
                     if ($requestGoogleMap['status'] != "OK" || $requestGoogleMap['rows'][0]['elements'][$y]['status'] != "OK") {
                         $this->addLog("Error GoogleMap (TeamId: ".$match->getTeam()->getId().", MatchId: ".$match->getId().", matchDay: ".$match->getMatchDay().", Error Api: ".($requestGoogleMap['status'] ? $requestGoogleMap['status'] : $requestGoogleMap['rows'][0]['elements'][$y]['status']).")");
                     } else {
@@ -168,13 +183,19 @@ class Finder {
                         } else if(5 < $lastDigit && $lastDigit <= 9) {
                             $travelTime = floor($travelTime/10)*10+10;
                         }
-                        $match->setHourRdv(date_create_from_format('H:i', $match->getHourStart())->modify('-'. ($travelTime+$allMatches[0]->getTeam()->getTime()) .'minutes')->format('H:i:s'));
+                        $match->setHourRdv(date_create_from_format('H:i', $match->getHourStart())->modify('-'. ($travelTime+$list[0]->getTeam()->getTime()) .'minutes')->format('H:i:s'));
                     }
-                    $y++;                    
                 }
             }
+            sleep(2); // We need to not spam google api
         }
-        return $allMatches;
+        $final = [];
+        foreach ($allMatches as $list) {
+            foreach ($list as $match) {
+                array_push($final, $match);
+            }
+        }
+        return $final;
     }
 
     /**

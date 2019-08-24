@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Eventus\n"
-"POT-Creation-Date: 2019-07-27 17:38+0200\n"
-"PO-Revision-Date: 2019-07-27 17:42+0200\n"
+"POT-Creation-Date: 2019-08-24 11:18+0200\n"
+"PO-Revision-Date: 2019-08-24 11:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: Kirian Caumes\n"
 "Language: fr_FR\n"
@@ -51,7 +51,7 @@ msgstr ""
 #: admin/business/aviaShortcode/icsCalendar.php:38
 #: admin/business/aviaShortcode/match.php:62
 #: admin/business/aviaShortcode/teamPicture.php:71 admin/business/ics.php:40
-#: admin/views/screens/home.twig:34 admin/views/screens/matches.twig:13
+#: admin/views/screens/home.twig:35 admin/views/screens/matches.twig:13
 msgid "Team"
 msgstr "Équipe"
 
@@ -636,20 +636,20 @@ msgstr "Liste des Clubs"
 msgid "Please add a club first..."
 msgstr "Veuillez d'abord ajouter un club....."
 
-#: admin/views/screens/clubs.twig:21 admin/views/screens/home.twig:37
+#: admin/views/screens/clubs.twig:22 admin/views/screens/home.twig:38
 #: admin/views/screens/seeker.twig:17 admin/views/screens/team.twig:26
 msgid "Club"
 msgstr "Club"
 
-#: admin/views/screens/clubs.twig:25 admin/views/screens/home.twig:41
+#: admin/views/screens/clubs.twig:27 admin/views/screens/home.twig:43
 msgid "ID : "
 msgstr "ID : "
 
-#: admin/views/screens/clubs.twig:27
+#: admin/views/screens/clubs.twig:29
 msgid "/ Teams : "
 msgstr "/ Équipe : "
 
-#: admin/views/screens/clubs.twig:34 admin/views/screens/home.twig:10
+#: admin/views/screens/clubs.twig:36 admin/views/screens/home.twig:10
 msgid "Add a club"
 msgstr "Ajouter un club"
 
@@ -682,19 +682,19 @@ msgid "Last synchronization of matches: "
 msgstr "Dernière synchronisation des matchs : "
 
 #: admin/views/screens/components/widgetDashboard.twig:37
-#: admin/views/screens/home.twig:64 admin/views/screens/matches.twig:298
+#: admin/views/screens/home.twig:68 admin/views/screens/matches.twig:298
 msgid "Synchronize match data"
 msgstr "Synchroniser les données des matchs"
 
 #: admin/views/screens/components/widgetDashboard.twig:40
-#: admin/views/screens/home.twig:66 admin/views/screens/matches.twig:299
+#: admin/views/screens/home.twig:70 admin/views/screens/matches.twig:299
 msgid "Saves & synchronizes match data with the Federation website."
 msgstr ""
 "Enregistre & synchronise les données des matchs avec le site de la "
 "Fédération."
 
 #: admin/views/screens/components/widgetDashboard.twig:54
-#: admin/views/screens/settings.twig:197
+#: admin/views/screens/settings.twig:208
 msgid "by"
 msgstr "par"
 
@@ -714,31 +714,31 @@ msgstr "Liste des équipes"
 msgid "No team has been found for this club..."
 msgstr "Aucune équipe n'a été trouvée pour ce club..."
 
-#: admin/views/screens/home.twig:31 admin/views/screens/team.twig:14
+#: admin/views/screens/home.twig:32 admin/views/screens/team.twig:14
 msgid "Matches"
 msgstr "Matchs"
 
-#: admin/views/screens/home.twig:43
+#: admin/views/screens/home.twig:45
 msgid " / Club ID : "
 msgstr " / Club ID : "
 
-#: admin/views/screens/home.twig:45
+#: admin/views/screens/home.twig:47
 msgid " / Matches : "
 msgstr " / Matchs : "
 
-#: admin/views/screens/home.twig:56
+#: admin/views/screens/home.twig:58
 msgid "Add a team"
 msgstr "Ajouter une équipe"
 
-#: admin/views/screens/home.twig:71
+#: admin/views/screens/home.twig:75
 msgid "Update calendars"
 msgstr "Mettre à jour les calendrier"
 
-#: admin/views/screens/home.twig:73
+#: admin/views/screens/home.twig:77
 msgid "Update all ICS team calendars"
 msgstr "Mets à jour tous les calendriers ICS des équipes"
 
-#: admin/views/screens/home.twig:77
+#: admin/views/screens/home.twig:81
 msgid "Last. synch. : "
 msgstr "Dern. synch. : "
 
@@ -848,10 +848,10 @@ msgstr "Recalculer les horaires de RDV"
 #: admin/views/screens/matches.twig:287
 msgid ""
 "Saves and updates the schedules of upcoming outdoor games with a valid "
-"address (limited to 10 games)."
+"address."
 msgstr ""
 "Enregistre et met à jour les horaires des prochains matchs à l’extérieur "
-"avec une adresse valide (limités à 10 matchs)."
+"avec une adresse valide."
 
 #: admin/views/screens/matches.twig:311
 msgid "Update the calendar"
@@ -972,68 +972,72 @@ msgstr "Saison en cours"
 msgid "Select a date"
 msgstr "Sélectionner une date"
 
-#: admin/views/screens/settings.twig:130
+#: admin/views/screens/settings.twig:131
 msgid "Reset actions "
 msgstr "Actions de réinitialisations "
 
 #: admin/views/screens/settings.twig:137
+msgid "See"
+msgstr "Voir"
+
+#: admin/views/screens/settings.twig:148
 msgid ""
 "This action is irreversible. Do you really want to purge all the calendars?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les "
 "calendriers  ?"
 
-#: admin/views/screens/settings.twig:140
-msgid "Purge all calendars?"
-msgstr "Purger tous les calendriers ?"
+#: admin/views/screens/settings.twig:151
+msgid "Purge all calendars"
+msgstr "Purger tous les calendriers"
 
-#: admin/views/screens/settings.twig:147
+#: admin/views/screens/settings.twig:158
 msgid ""
 "This action is irreversible. Do you really want to purge all the matches?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les matchs ?"
 
-#: admin/views/screens/settings.twig:150
+#: admin/views/screens/settings.twig:161
 msgid "Purge all matches"
 msgstr "Purger tous les matchs"
 
-#: admin/views/screens/settings.twig:157
+#: admin/views/screens/settings.twig:168
 msgid "This action is irreversible. Do you really want to purge all the teams?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger toutes les "
 "équipes ?"
 
-#: admin/views/screens/settings.twig:160
+#: admin/views/screens/settings.twig:171
 msgid "Purge all teams"
 msgstr "Purger toutes les équipes"
 
-#: admin/views/screens/settings.twig:167
+#: admin/views/screens/settings.twig:178
 msgid "This action is irreversible. Do you really want to purge all the clubs?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment purger tous les clubs ?"
 
-#: admin/views/screens/settings.twig:170
+#: admin/views/screens/settings.twig:181
 msgid "Purge all clubs"
 msgstr "Purger tous les club"
 
-#: admin/views/screens/settings.twig:177
+#: admin/views/screens/settings.twig:188
 msgid "This action is irreversible. Do you really want to reset Eventus?"
 msgstr ""
 "Cette action est irréversible. Voulez-vous vraiment réinitialiser Eventus ?"
 
-#: admin/views/screens/settings.twig:180
+#: admin/views/screens/settings.twig:191
 msgid "Reset Eventus"
 msgstr "Réinitialiser Eventus"
 
-#: admin/views/screens/settings.twig:186
+#: admin/views/screens/settings.twig:197
 msgid "You are not authorized to access this page."
 msgstr "Vous n'êtes pas autorisé à accéder à cette page."
 
-#: admin/views/screens/settings.twig:193
+#: admin/views/screens/settings.twig:204
 msgid "Credits"
 msgstr "Crédits"
 
-#: admin/views/screens/settings.twig:207
+#: admin/views/screens/settings.twig:218
 msgid ""
 "In case of problems, several ways to contact me are available on my website "
 "or via my GitHub."

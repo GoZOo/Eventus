@@ -10,6 +10,12 @@ class Eventus_AdminScreen extends Eventus {
 			this.get('tbody tr:nth-child(4)').style.display = this.inputMail.value ? 'table-row' : 'none'
 		)
 		this.inputMail.dispatchEvent(new Event('change'))
+
+		//Button to show option to reset
+		this.get('#see').addEventListener('click', () => {
+			this.get('#form').style.display = 'block'
+			this.get('#see').remove()
+		})
 	}
 }
 new Eventus_AdminScreen(translations)

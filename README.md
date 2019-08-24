@@ -43,11 +43,16 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 
 ## Updates
 
+### 2.7.2
+
+* Fix an issue with Google Distance Matrix API limitation
+
 ### 2.7.1
 
 * Evo reset option are not display by default
 * Fix hide button to create team of there are no club
 * Fix an issue with a translation
+* Fix an issue with message
 
 ### 2.7 - Seeker Update
 

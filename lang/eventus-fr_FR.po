@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Eventus\n"
-"POT-Creation-Date: 2019-08-16 21:05+0200\n"
-"PO-Revision-Date: 2019-08-16 21:06+0200\n"
+"POT-Creation-Date: 2019-08-24 11:18+0200\n"
+"PO-Revision-Date: 2019-08-24 11:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: Kirian Caumes\n"
 "Language: fr_FR\n"
@@ -682,12 +682,12 @@ msgid "Last synchronization of matches: "
 msgstr "Dernière synchronisation des matchs : "
 
 #: admin/views/screens/components/widgetDashboard.twig:37
-#: admin/views/screens/home.twig:66 admin/views/screens/matches.twig:298
+#: admin/views/screens/home.twig:68 admin/views/screens/matches.twig:298
 msgid "Synchronize match data"
 msgstr "Synchroniser les données des matchs"
 
 #: admin/views/screens/components/widgetDashboard.twig:40
-#: admin/views/screens/home.twig:68 admin/views/screens/matches.twig:299
+#: admin/views/screens/home.twig:70 admin/views/screens/matches.twig:299
 msgid "Saves & synchronizes match data with the Federation website."
 msgstr ""
 "Enregistre & synchronise les données des matchs avec le site de la "
@@ -730,15 +730,15 @@ msgstr " / Matchs : "
 msgid "Add a team"
 msgstr "Ajouter une équipe"
 
-#: admin/views/screens/home.twig:73
+#: admin/views/screens/home.twig:75
 msgid "Update calendars"
 msgstr "Mettre à jour les calendrier"
 
-#: admin/views/screens/home.twig:75
+#: admin/views/screens/home.twig:77
 msgid "Update all ICS team calendars"
 msgstr "Mets à jour tous les calendriers ICS des équipes"
 
-#: admin/views/screens/home.twig:79
+#: admin/views/screens/home.twig:81
 msgid "Last. synch. : "
 msgstr "Dern. synch. : "
 
@@ -848,10 +848,10 @@ msgstr "Recalculer les horaires de RDV"
 #: admin/views/screens/matches.twig:287
 msgid ""
 "Saves and updates the schedules of upcoming outdoor games with a valid "
-"address (limited to 10 games)."
+"address."
 msgstr ""
 "Enregistre et met à jour les horaires des prochains matchs à l’extérieur "
-"avec une adresse valide (limités à 10 matchs)."
+"avec une adresse valide."
 
 #: admin/views/screens/matches.twig:311
 msgid "Update the calendar"

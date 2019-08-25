@@ -27,6 +27,27 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 			$this->config['tooltip'] 	= __('Match Calendar', 'eventus');
 		}	
 		 
+		function popup_elements() {
+			$allClubsDisplay = array();
+			foreach (DAO\ClubDAO::getInstance()->getAllClubs() as $club) {
+				$allClubsDisplay[$club->getName()] = $club->getId();
+			}		
+			
+			global $_wp_additional_image_sizes;
+			
+			$this->elements = array(				
+				 array(	
+					"name" 	=> __('Club', 'eventus'),
+					"desc" 	=> __('Select a club', 'eventus'),
+					"id" 	=> "clubid",
+					"type" 	=> "select",
+					"std" 	=> $allClubsDisplay ? reset($allClubsDisplay) : '',
+					"subtype" => $allClubsDisplay
+					)	
+			);
+
+		}	
+		 
 		
 		/**
 		 * Frontend Shortcode Handler
@@ -36,8 +57,14 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 		 * @param string $shortcodename the shortcode found, when == callback name
 		 * @return string $output returns the modified html string 
 		 */
-		function shortcode_handler($atts, $content = "", $shortcodename = "", $meta = "") {		
-			$myMatches = DAO\MatchDAO::getInstance()->getMatchesWithDate(); 
+		function shortcode_handler($atts, $content = "", $shortcodename = "", $meta = "") {				
+	        extract(shortcode_atts(
+	            array(
+	                'clubid' => ''
+	            ),
+			$atts));
+
+			$myMatches = DAO\MatchDAO::getInstance()->getMatchesWithDateByClubId($clubid); 
 			$datas = array();
 			if ($myMatches) {
 				$content = array();

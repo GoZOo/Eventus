@@ -46,6 +46,7 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 ### 2.7.3
 
 * Evo string for teams are now regex (so possible to have multiple strings, ex: "team1|team2")
+* Evo avia calendars should have a club selected now
 
 ### 2.7.2
 

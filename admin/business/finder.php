@@ -40,6 +40,13 @@ class Finder {
         $this->clientMap = new Client(['base_uri' => $this->_baseUrlMap]);
     }   
 
+    /**
+    * Synchronize matches by team with FFHB website informations 
+    *
+    * @param Team[]   Team to update synchronize matches and sync hours rdv
+    * @return void
+    * @access public
+    */
     public function updateMatches($teams){
         $this->updateMatchesData($teams);
 
@@ -75,7 +82,7 @@ class Finder {
 
                             //Update teams infos
                             $teamInfos = array_values(array_filter($output['teams'], function ($var) use($team) {
-                                return strpos(mb_strtolower($var['name']), mb_strtolower($team->getClub()->getString())) !== false;
+                                return preg_match('/'.$team->getClub()->getString().'/', mb_strtolower($var['name']));
                             }));
                             
                             if (!$teamInfos || sizeof($teamInfos) === 0) {
@@ -95,8 +102,8 @@ class Finder {
                                 $numMatch = 0;
                                 foreach($rows['events'] as $row) {
                                     if (
-                                        strpos(mb_strtolower($row['teams'][0]['name']), mb_strtolower($team->getClub()->getString())) !== false || 
-                                        strpos(mb_strtolower($row['teams'][1]['name']), mb_strtolower($team->getClub()->getString())) !== false
+                                        preg_match('/'.$team->getClub()->getString().'/', mb_strtolower($row['teams'][0]['name'])) ||
+                                        preg_match('/'.$team->getClub()->getString().'/', mb_strtolower($row['teams'][1]['name']))
                                     ) {
                                         $hour = $row['date'] && $row['date']['hour'] && $row['date']['minute'] ? $row['date']['hour'].':'.$row['date']['minute'] : null;
                                         if ($matchDay == $prevMatchDay) $numMatch++;                        
@@ -113,7 +120,7 @@ class Finder {
                                                 $row['teams'][0] ? $row['teams'][0]['score'] : null, //localTeamScore
                                                 $this->getCleanString($row['teams'][1]['name']), //visitingTeam
                                                 $row['teams'][1] ? $row['teams'][1]['score'] : null, //visitingTeamScore
-                                                strpos(mb_strtolower($row['teams'][0]['name']), mb_strtolower($team->getClub()->getString())) !== false ? false : true, //ext
+                                                !preg_match('/'.$team->getClub()->getString().'/', mb_strtolower($row['teams'][0]['name'])), //ext
                                                 $row['location'][1] ? $this->getCleanString($row['location'][1]) : null, //street
                                                 $row['location'][2] ? $this->getCleanString($row['location'][2]) : null, //city
                                                 $row['location'][0] ? $this->getCleanString($row['location'][0]) : null, //gym

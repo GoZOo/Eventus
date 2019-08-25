@@ -162,7 +162,7 @@ class Seeker {
     */
     private function getTeamInPool($pool, $string){
         $team = array_filter($pool, function ($var) use($string) {
-            return strpos(mb_strtolower($var['name']), mb_strtolower($string)) !== false;
+            return preg_match('/'.$string.'/', mb_strtolower($var['name']));
         });  
         $team = array_values($team); 
         return $team && sizeof($team) !== 0 ? $team[0] : null;

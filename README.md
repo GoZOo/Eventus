@@ -43,6 +43,10 @@ Most of the files are documented. So, you can give it an eye if you want to unde
 
 ## Updates
 
+### 2.7.3
+
+* Evo string for teams are now regex (so possible to have multiple strings, ex: "team1|team2")
+
 ### 2.7.2
 
 * Fix an issue with Google Distance Matrix API limitation

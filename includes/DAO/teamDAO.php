@@ -213,7 +213,8 @@ class TeamDAO extends MasterDAO {
                     WHEN LOWER(a.team_name) LIKE '%mini%' THEN 4 
                     WHEN LOWER(a.team_name) LIKE '%loisir%' THEN 5 
                     ELSE 6 
-                END)
+                END),
+                a.team_name DESC
         "); 
         $allTeams = [];
         foreach($teams as $row) { 

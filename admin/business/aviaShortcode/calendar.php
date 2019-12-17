@@ -28,10 +28,11 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 		}	
 		 
 		function popup_elements() {
-			$allClubsDisplay = array();
+            $allClubsDisplay = array();
+            $allClubsDisplay['*'] = null;
 			foreach (DAO\ClubDAO::getInstance()->getAllClubs() as $club) {
 				$allClubsDisplay[$club->getName()] = $club->getId();
-			}		
+            }	
 			
 			global $_wp_additional_image_sizes;
 			
@@ -64,7 +65,8 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 	            ),
 			$atts));
 
-			$myMatches = DAO\MatchDAO::getInstance()->getMatchesWithDateByClubId($clubid); 
+            $myMatches = DAO\MatchDAO::getInstance()->getMatchesWithDateByClubId($clubid); 
+
 			$datas = array();
 			if ($myMatches) {
 				$content = array();
@@ -87,7 +89,7 @@ if (!class_exists( 'EventusCalendrier') && class_exists('aviaShortcodeTemplate')
 							'domTeam' => 
 								$match->getTeam()->getName()." ".$this->getSexLabel($match->getTeam()->getBoy(), $match->getTeam()->getGirl(), $match->getTeam()->getMixed()),
 							'ext' => 
-								$match->getExt() == 0 ? "DOM" : "EXT",
+								$match->getExt() == 0 ? ("DOM (" . $match->getCity().")"): "EXT",
 							'extTeam' => 
 								$extTeam,
 							'hourRDV' => 

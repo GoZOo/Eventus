@@ -347,13 +347,12 @@ class MatchDAO extends MasterDAO {
     }
     
     /**
-    * Return matches with a date for calender
+    * Return matches with a date for calendar
     *
     * @return Match[]     Match corresponding
     * @access public
     */
     function getMatchesWithDateByClubId($clubId){  
-        if (!$clubId) return [];
         $allMatches = [];
         $matches = $this->wpdb->get_results("
             SELECT                 
@@ -379,8 +378,8 @@ class MatchDAO extends MasterDAO {
                                 
                     ) OR
                     a.match_type IN (1,2)
-                ) AND
-                c.club_id=$clubId
+                )
+                ". ($clubId ? "AND c.club_id=$clubId" : "")."
             ORDER BY 
                 a.match_date, 
                 b.team_name asc,

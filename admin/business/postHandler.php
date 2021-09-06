@@ -70,7 +70,7 @@ class PostHandler {
             }
             date_default_timezone_set("Europe/Paris");
             update_option('eventus_datetimesynch', date("Y-m-d H:i:s"), false);
-            if (!file_exists(plugin_dir_path( __FILE__ ).'../../finder.log')) {
+            if (!filesize(plugin_dir_path( __FILE__ ).'../../finder.log')) {
                 wp_redirect( add_query_arg( 'message', 'succesSyncMatch',  wp_get_referer() ));
             } else {
                 wp_redirect( add_query_arg( 'message', 'warningSyncMatch',  wp_get_referer() ));
@@ -99,7 +99,7 @@ class PostHandler {
         if (get_option("eventus_mapapikey")) {
             PostHandler::getInstance()->setUpdateMatch();
             DAO\MatchDAO::getInstance()->updateMatchesHours(Finder::getInstance()->setNewHoursRdv(DAO\MatchDAO::getInstance()->getAllMatchesByTeamId($_POST['teamId'])));
-            if (!file_exists(plugin_dir_path( __FILE__ ).'../../finder.log')) {
+            if (!filesize(plugin_dir_path( __FILE__ ).'../../finder.log')) {
                 wp_redirect( add_query_arg( 'message', 'succesUpHoursMatch',  wp_get_referer() ));
             } else {
                 wp_redirect( add_query_arg( 'message', 'warningUpHoursMatch',  wp_get_referer() ));

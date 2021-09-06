@@ -96,14 +96,16 @@ class Finder {
                             }
                             // var_dump($team);exit;
                             
+                            $allMatches = [];
+                            
                             //Update Matches infos
                             foreach($output['dates'] as $matchDay => $rows) {
                                 $prevMatchDay = $matchDay;
                                 $numMatch = 0;
                                 foreach($rows['events'] as $row) {
                                     if (
-                                        preg_match('/'.$team->getClub()->getString().'/', mb_strtolower($row['teams'][0]['name'])) ||
-                                        preg_match('/'.$team->getClub()->getString().'/', mb_strtolower($row['teams'][1]['name']))
+                                        preg_match('/'.mb_strtolower($team->getClub()->getString()).'/', mb_strtolower($row['teams'][0]['name'])) ||
+                                        preg_match('/'.mb_strtolower($team->getClub()->getString()).'/', mb_strtolower($row['teams'][1]['name']))
                                     ) {
                                         $hour = $row['date'] && $row['date']['hour'] && $row['date']['minute'] ? $row['date']['hour'].':'.$row['date']['minute'] : null;
                                         if ($matchDay == $prevMatchDay) $numMatch++;                        

@@ -82,7 +82,7 @@ class Finder {
 
                             //Update teams infos
                             $teamInfos = array_values(array_filter($output['teams'], function ($var) use($team) {
-                                return preg_match('/'.$team->getClub()->getString().'/', mb_strtolower($var['name']));
+                                return preg_match('/'.mb_strtolower($team->getClub()->getString()).'/', mb_strtolower($var['name']));
                             }));
                             
                             if (!$teamInfos || sizeof($teamInfos) === 0) {
@@ -183,7 +183,7 @@ class Finder {
 
                 foreach($list as $y => $match) {
                     if ($requestGoogleMap['status'] != "OK" || $requestGoogleMap['rows'][0]['elements'][$y]['status'] != "OK") {
-                        $this->addLog("Error GoogleMap (TeamId: ".$match->getTeam()->getId().", MatchId: ".$match->getId().", matchDay: ".$match->getMatchDay().", Error Api: ".($requestGoogleMap['status'] ? $requestGoogleMap['status'] : $requestGoogleMap['rows'][0]['elements'][$y]['status']).")");
+                        $this->addLog("Error GoogleMap (TeamId: ".$match->getTeam()->getId().", MatchId: ".$match->getId().", matchDay: ".$match->getMatchDay().", Error Api: ".($requestGoogleMap['status'] . ' ' . $requestGoogleMap['rows'][0]['elements'][$y]['status']).")");
                     } else {
                         $travelTime = round($requestGoogleMap['rows'][0]['elements'][$y]['duration']['value'] / 60);
                         $lastDigit = substr($travelTime,-1);

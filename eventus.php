@@ -30,6 +30,7 @@ include_once plugin_dir_path(__FILE__) . 'admin/business/helper/staticHelper.php
 include_once plugin_dir_path(__FILE__) . 'admin/business/finder.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/ics.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/postHandler.php';
+include_once plugin_dir_path(__FILE__) . 'admin/business/decipher.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/seeker.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/widgetDashboard.php';
 include_once plugin_dir_path(__FILE__) . 'admin/business/twig.php';

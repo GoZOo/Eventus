@@ -77,11 +77,12 @@
                                 <input 
                                     name='data[{{ loop.index0 }}][urlOne]' 
                                     id='urlOne' 
-                                    value='https://ffhandball.fr/fr/competition/{{ team.url }}' 
+                                    value='https://ffhandball.fr/competitions/{{ team.url }}' 
                                     class='regular-text'
                                     type='url' 
                                     title="{{ _e('Link n°1 of the championship results', 'eventus') }}" 
-                                    placeholder="{{ _e('Link n°1 of the championship results', 'eventus') }}"
+                                    placeholder="https://www.ffhandball.fr/competitions/saison-XXXX-XXXX-XX/XXXXXX/XXXXX-XXXX/equipe-XXXX/"
+                                    pattern="https:\/\/www\.ffhandball\.fr\/competitions\/saison-.*\/.*\/.*\/equipe-\d+\/?$"
                                 >
                             </td>
                             <td>
@@ -92,7 +93,8 @@
                                     class='regular-text' 
                                     type='url' 
                                     title="{{ _e('Link n°2 of the championship results', 'eventus') }}" 
-                                    placeholder="{{ _e('Link n°2 of the championship results', 'eventus') }}"
+                                    placeholder="https://www.ffhandball.fr/competitions/saison-XXXX-XXXX-XX/XXXXXX/XXXXX-XXXX/equipe-XXXX/"
+                                    pattern="https:\/\/www\.ffhandball\.fr\/competitions\/saison-.*\/.*\/.*\/equipe-\d+\/?$"
                                 >
                             </td>
                         </tr>

@@ -22,7 +22,7 @@ class Finder {
     * @var Finder   $_instance  Var use to store an instance
     */
     private static $_instance;
-    private $_baseUrlFFHB = "https://jjht57whqb.execute-api.us-west-2.amazonaws.com/prod/pool/";
+    private $_baseUrlFFHB = "https://www.ffhandball.fr/wp-json/competitions/v1/computeBlockAttributes";
     private $_baseUrlMap = "https://maps.googleapis.com/maps/api/distancematrix/json";
     
     /**
@@ -69,12 +69,34 @@ class Finder {
     * @access public
     */
     public function updateMatchesData($teams){
+        $cfk = Decipher::getInstance()->getCfk();
+
         $promises = array();
         foreach ($teams as $team) { 
             $urls = array();
             if($team->getUrlOne()) array_push($urls, $team->getUrlOne());
             if($team->getUrlTwo()) array_push($urls, $team->getUrlTwo());
-            foreach ($urls as $nbr => $url) {
+            foreach ($urls as $nbr => $url) {        
+                // TODO: test to be deleted later
+                // Problem: The results displayed by the API do not take into account the selected team, so the ranking listings do not correspond always to the correct  "poule"
+                $classementResponseData = $this->clientFFHB
+                    ->get('', [
+                        'query' => [
+                            'block' => 'competitions---mini-classement-or-ads',
+                            'ext_saison_id' =>  '18',
+                            'url_competition_type' => 'regional',
+                            'url_competition' => 'hmpl-honneur-masculine-regionale-20303',
+                            'ext_equipe_id' => '1420423',
+                        ]
+                    ])
+                    ->getBody()
+                    ->getContents();
+    
+                $classementResponse = Decipher::getInstance()->decipher($classementResponseData, $cfk);
+
+                // TODO Look for addresses by scraping
+                // TODO Update result API
+                // TODO Add API result (see test/problem above)
                 $promises[$url] = $this->clientFFHB->getAsync($this->getUrlApi($url))
                     ->then(
                         function (ResponseInterface $res) use ($team, $nbr, $urls) { 

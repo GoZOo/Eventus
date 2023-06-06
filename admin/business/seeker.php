@@ -19,13 +19,7 @@ class Seeker {
     */
     private static $_instance;
 
-    private $_baseUrl = "https://jjht57whqb.execute-api.us-west-2.amazonaws.com/prod/";    
-    private $_championship = "championship/";
-    private $_competition = "competition/";
-    private $_pools = "competitionPool/";
-    private $_pool = "pool/";
-    private $_departemental = "D";
-    private $_regional = "R";
+    private $_baseUrl = "https://www.ffhandball.fr/wp-json/competitions/v1/computeBlockAttributes";
     
     /**
     * Returns an instance of the object
@@ -49,27 +43,62 @@ class Seeker {
     * @access public
     */
     public function getChampionship() {
-        $promises = [
-            'departemental' => $this->client->getAsync($this->_championship . $this->_departemental),
-            'regional' => $this->client->getAsync($this->_championship . $this->_regional)
-        ];
-        $results = Promise\unwrap($promises);
-        
         $final = array( 
             'data' => array(
                 'departemental' => array(),
                 'regional' => array()
             ),
+            'seasonId' => 0,
             'error' => false            
         );
-        foreach (array_keys($promises) as $key) {    
-            $data = json_decode($results[$key]->getBody(), true); 
-            $final['data'][$key] = $data && array_key_exists('events', $data) ? $data['events'] : array();
-            $col = array_column($final['data'][$key], 'sequence');
-            array_multisort($col, SORT_ASC, $final['data'][$key]);
-        }
-        $final['error'] = $results['departemental']->getStatusCode() >= 400 || $results['regional']->getStatusCode() >= 400;
+
+        $seasonsResponseData = $this->client
+            ->get('', [
+                'query' => ['block' => 'competitions---saison-selector']
+            ])
+            ->getBody()
+            ->getContents();
+
+        $cfk = Decipher::getInstance()->getCfk();
+        $seasonsResponse = Decipher::getInstance()->decipher($seasonsResponseData, $cfk);
+
+        // Pick active season
+        if (array_search('1', array_column($seasonsResponse['saisons'], 'administrative'))) {
+            $currentSeason = $seasonsResponse['saisons'][array_search('1', array_column($seasonsResponse['saisons'], 'administrative'))];
+            $final['seasonId'] = $currentSeason['ext_saisonId'];
+            $promises = [
+                'departemental' => $this->client->getAsync('', [
+                    'query' => [
+                        'block' => 'competitions---competition-main-menu',
+                        'ext_saison_id' => $currentSeason['ext_saisonId'],
+                        'url_competition_type' => 'departemental',
+                    ]
+                ]),
+                'regional' => $this->client->getAsync('', [
+                    'query' => [
+                        'block' => 'competitions---competition-main-menu',
+                        'ext_saison_id' => $currentSeason['ext_saisonId'],
+                        'url_competition_type' => 'regional',
+                    ]
+                ]),
+            ];
+            $results = Promise\unwrap($promises);
         
+            foreach (array_keys($promises) as $key) {    
+                $data = Decipher::getInstance()->decipher($results[$key]->getBody()->getContents(), $cfk); 
+                $final['data'][$key] = $data && array_key_exists('structures', $data) ? $data['structures'] : array();
+                $final['data'][$key] = array_map(function($x) { 
+                    return [
+                        'code' => strtolower(preg_replace('/\s+/', '-', $x['libelle']) .'-'.$x['ext_structureId']),
+                        'name' => $x['oldUrl'] . ' - ' . $x['libelle'],
+                    ];
+                }, $final['data'][$key]);
+                $col = array_column($final['data'][$key], 'name');
+                array_multisort($col, SORT_ASC, $final['data'][$key]);
+            }
+            $final['error'] = $results['departemental']->getStatusCode() >= 400 || $results['regional']->getStatusCode() >= 400;
+        }
+
         return $final;
     }
 
@@ -77,37 +106,72 @@ class Seeker {
     * Seek for all teams by a club
     *
     * @param string        Code of the championship
+    * @param string        Season id
     * @param string        String of a club used to search team
     * @param string        Level of competition
     * @return array[]    
     * @access public
     */
-    public function seek($champCode, $string, $level = null){  
-        $competitions = $this->parseJson($this->client->get($this->_competition . $champCode)->getBody(), 'events'); //Get all the competitions
+    public function seek($champCode, $seasonId, $string, $level = null){  
         $promises = array();
 
-        foreach ($competitions as $competition) {
-            if(!array_key_exists('eventId', $competition)) continue;            
-            $promises[$competition['eventId']] = $this->client->getAsync($this->_pools . $competition['eventId']) //Get all the pools
+        //Get all the competitions
+        $competitionsResponseData = $this->client->get('', [
+            'query' => [
+                'block' => 'competitions---competition-main-menu',
+                'ext_saison_id' => $seasonId,
+                'url_competition_type' => $level,
+                'url_structure' => $champCode
+            ]
+        ])->getBody();
+        
+        $cfk = Decipher::getInstance()->getCfk();
+        $competitionsResponse = Decipher::getInstance()->decipher($competitionsResponseData, $cfk);
+        
+        foreach ($competitionsResponse['competitions'] as $competition) {
+            if(!array_key_exists('ext_competitionId', $competition)) continue;  
+            $poolId = strtolower($competition['libelle'].'-'.$competition['ext_competitionId']);          
+            $promises[$poolId] = $this->client->getAsync('', [
+                    'query' => [
+                        'block' => 'competitions---poule-selector',
+                        'ext_saison_id' => $seasonId,
+                        'url_competition_type' => $level,
+                        'url_competition' => $poolId
+                    ]
+                ]) //Get all the pools
                 ->then(
-                    function (ResponseInterface $res) use ($string, $level, $competition) {                        
-                        $pools = $this->parseJson($res->getBody(), 'pools');
+                    function (ResponseInterface $res) use ($string, $level, $competition, $poolId, $seasonId, $cfk) {
+                        $poolsResponseData = $res->getBody()->getContents();
+                        $poolsResponse = Decipher::getInstance()->decipher($poolsResponseData, $cfk);     
+
                         $promises1 = array();
 
-                        foreach ($pools as $pool) { 
-                            if(!array_key_exists('poolId', $pool)) continue; 
-                            $promises1[$pool['poolId']] = $this->client->getAsync($this->_pool . $pool['poolId']) //Get data of a given pool
+                        foreach ($poolsResponse['poules'] as $pool) { 
+                            if(!array_key_exists('ext_pouleId', $pool)) continue; 
+                            
+                            $promises1[$pool['ext_pouleId']] = $this->client->getAsync('', [
+                                    'query' => [
+                                        'block' => 'competitions---poule-selector',
+                                        'ext_saison_id' => $seasonId,
+                                        'url_competition_type' => $level,
+                                        'url_competition' => $poolId,
+                                        'ext_poule_id' => $pool['ext_pouleId']
+                                    ]
+                                ]) //Get data of a given pool
                                 ->then(
-                                    function (ResponseInterface $res1) use ($string, $level, $competition, $pool) { 
-                                        $teams = $this->parseJson($res1->getBody(), 'teams');
+                                    function (ResponseInterface $res1) use ($string, $level, $competition, $pool, $poolId, $seasonId, $cfk) { 
+                                        $champsResponseData = $res1->getBody()->getContents();
+                                        $champsResponse = Decipher::getInstance()->decipher($champsResponseData, $cfk);
+                                        
+                                        $teams = $champsResponse['equipe_options'];
                                         $team = $this->getTeamInPool($teams, $string);
                                         return array(
                                             'status' => $res1->getStatusCode(),
                                             'content' => $team !== null ? array(
-                                                'name' => array_key_exists('name', $team) ? $team['name'] : null,
-                                                'cat' => array_key_exists('eventName', $competition) ? $competition['eventName'] : null,
-                                                'phase' => array_key_exists('phaseName', $pool) ? $pool['phaseName'] : null,
-                                                'url' => $competition['eventId']."#poule-".$pool['poolId'],
+                                                'name' => array_key_exists('libelle', $team) ? $team['libelle'] : null,
+                                                'cat' => array_key_exists('libelle', $competition) ? $competition['libelle'] : null,
+                                                'phase' => array_key_exists('libelle', $pool) ? $pool['libelle'] : null,
+                                                'url' => 'saison-0-0-' . $seasonId . '/' . $level . '/' . $poolId . '/equipe-' . $team['ext_equipeId'],
                                                 // 'pool' => array_key_exists('poolName', $pool) ? $pool['poolName'] : null,
                                                 // 'level' => $level,
                                             ) : null                                        
@@ -162,7 +226,7 @@ class Seeker {
     */
     private function getTeamInPool($pool, $string){
         $team = array_filter($pool, function ($var) use($string) {
-            return preg_match('/'.$string.'/', mb_strtolower($var['name']));
+            return preg_match('/'.$string.'/', mb_strtolower($var['libelle']));
         });  
         $team = array_values($team); 
         return $team && sizeof($team) !== 0 ? $team[0] : null;

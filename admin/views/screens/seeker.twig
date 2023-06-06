@@ -44,8 +44,8 @@
                                 <select id='departemental' name="departemental">
                                     <option selected value="">{{ _e('- None -', 'eventus')}}</option>
                                     {% for champ in champ.data.departemental %}
-                                        <option value="{{ champ.champCode }}">
-                                            {{ champ.sequence }} - {{ champ.eventName }}
+                                        <option value="{{ champ.code }}">
+                                            {{ champ.name }}
                                         </option>
                                     {% endfor %}
                                 </select>
@@ -59,8 +59,8 @@
                                 <select id='regional' name="regional">
                                     <option selected value="">{{ _e('- None -', 'eventus')}}</option>
                                     {% for champ in champ.data.regional %}
-                                        <option value="{{ champ.champCode }}">
-                                            {{ champ.sequence }} - {{ champ.eventName }}
+                                        <option value="{{ champ.code }}">
+                                            {{ champ.name }}
                                         </option>
                                     {% endfor %}
                                 </select>
@@ -80,6 +80,7 @@
                     </tbody>
                 </table>
             </div>  
+            <input type='hidden' name='seasonId' value="{{ champ.seasonId }}">
 
             <br />
 

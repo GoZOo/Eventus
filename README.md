@@ -2,6 +2,13 @@
 
 Useful Wordpress plugin that allow you to manage handball teams results through FFHB website.
 
+⚠️ Read before using the plugin, deprecation warning (06/2023) ⚠️:
+
+- There is a brand new FFHB website with new APIs. For the moment the old APIs still works, but when (if?) it will no longer be the case, the synchronization of the plugin will no longer works.
+  - You will still be able to use the plugin by manually adding matches.
+  - You can find the [branch/feature_new_ffhb-api](https://github.com/KirianCaumes/Eventus/tree/feature_new_ffhb-api) where I started adapting the new API, but this is abandoned.
+- The plugin does not work on PHP versions > 8.x; Eventus uses a "Match" class, but "match" is now a keyword, which creates a conflict. Please stay on a version of PHP < 8.x to use the plugin.
+
 ## How to use
 
 ### Installing

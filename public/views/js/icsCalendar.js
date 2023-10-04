@@ -5,23 +5,25 @@ class EventusFront_IcsCalendar extends EventusFront {
         super()
 
         //Get both buttons
-        this.buttonOne = this.get('.rowIcs a:nth-child(1)')
-        this.buttonTwo = this.get('.rowIcs a:nth-child(2)')
+        this.buttonTwo = this.getA('.rowIcs a:nth-child(2)')
 
-        //Settings for second button
-        this.buttonTwo.removeAttribute('href')
-        this.buttonTwo.style.cursor = 'pointer'
+        this.buttonTwo.forEach((element)  => {
 
-        //Listener click on second button
-        this.buttonTwo.addEventListener('click', () => {
-            this.get('#succes-copy-ics').style.display = 'block'
-            let dummy = document.createElement('input')
-            document.body.appendChild(dummy)
-            dummy.setAttribute('value', this.buttonOne.href)
-            dummy.select()
-            document.execCommand('copy')
-            document.body.removeChild(dummy)
-        })
+            //Settings for second button
+            element.removeAttribute('href')
+            element.style.cursor = 'pointer'
+
+            //Listener click on second button
+            element.addEventListener('click', () => {
+                let dummy = document.createElement('input')
+                document.body.appendChild(dummy)
+                dummy.setAttribute('value', element.parentNode.querySelector('a:nth-child(1)').href)
+                dummy.select()
+                document.execCommand('copy')
+                document.body.removeChild(dummy)
+                element.parentNode.parentNode.querySelector('#succes-copy-ics').style.display = 'block'
+            })
+        });
     }
 }
 new EventusFront_IcsCalendar()

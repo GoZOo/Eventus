@@ -14,8 +14,8 @@
                             <th>Ajouter <input type="checkbox"></th>
                             <th>{{ _e('Sex', 'eventus') }}</th>
                             <th>{{ _e('Name', 'eventus') }}</th>
-                            <th>{{ _e('Link n°1 of the championship results', 'eventus') }}</th>
-                            <th>{{ _e('Link n°2 of the championship results', 'eventus') }}</th>
+                            <th>{{ _e('Link n°1 of the championship results of the specific team', 'eventus') }}</th>
+                            <th>{{ _e('Link n°2 of the championship results of the pool', 'eventus') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,10 +77,10 @@
                                 <input 
                                     name='data[{{ loop.index0 }}][urlOne]' 
                                     id='urlOne' 
-                                    value='https://ffhandball.fr/competitions/{{ team.url }}' 
+                                    value='https://www.ffhandball.fr/competitions/{{ team.url }}'
                                     class='regular-text'
                                     type='url' 
-                                    title="{{ _e('Link n°1 of the championship results', 'eventus') }}" 
+                                    title="{{ _e('Link n°1 of the championship results of the specific team', 'eventus') }}"
                                     placeholder="https://www.ffhandball.fr/competitions/saison-XXXX-XXXX-XX/XXXXXX/XXXXX-XXXX/equipe-XXXX/"
                                     pattern="https:\/\/www\.ffhandball\.fr\/competitions\/saison-.*\/.*\/.*\/equipe-\d+\/?$"
                                 >
@@ -88,13 +88,13 @@
                             <td>
                                 <input 
                                     name='data[{{ loop.index0 }}][urlTwo]' 
-                                    id='urlTwo' 
-                                    value='' 
+                                    id='urlTwo'
+                                    value='https://www.ffhandball.fr/competitions/{{ team.urlPool }}'
                                     class='regular-text' 
                                     type='url' 
-                                    title="{{ _e('Link n°2 of the championship results', 'eventus') }}" 
+                                    title="{{ _e('Link n°2 of the championship results of the pool', 'eventus') }}"
                                     placeholder="https://www.ffhandball.fr/competitions/saison-XXXX-XXXX-XX/XXXXXX/XXXXX-XXXX/equipe-XXXX/"
-                                    pattern="https:\/\/www\.ffhandball\.fr\/competitions\/saison-.*\/.*\/.*\/equipe-\d+\/?$"
+                                    pattern="https:\/\/www\.ffhandball\.fr\/competitions\/saison-.*\/.*\/.*\/poule-\d+\/?$"
                                 >
                             </td>
                         </tr>

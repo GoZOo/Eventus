@@ -35,7 +35,7 @@ class SeekerController extends MasterController {
     }
 
     private function displayRes(){
-        if ($this->get['clubId']){  
+        if ($this->get['clubId']){
             $club = DAO\ClubDAO::getInstance()->getClubById($this->get['clubId']);
             if (!$club->getId()) return $this->render('error');   
     	} else {

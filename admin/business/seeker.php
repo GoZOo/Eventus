@@ -63,7 +63,7 @@ class Seeker {
         $seasonsResponse = Decipher::getInstance()->decipher($seasonsResponseData, $cfk);
 
         // Pick active season
-        if (array_search('1', array_column($seasonsResponse['saisons'], 'administrative'))) {
+        if (array_search('1', array_column($seasonsResponse['saisons'], 'administrative')) !== FALSE) {
             $currentSeason = $seasonsResponse['saisons'][array_search('1', array_column($seasonsResponse['saisons'], 'administrative'))];
             $final['seasonId'] = $currentSeason['ext_saisonId'];
             $promises = [
@@ -83,9 +83,10 @@ class Seeker {
                 ]),
             ];
             $results = Promise\unwrap($promises);
-        
-            foreach (array_keys($promises) as $key) {    
-                $data = Decipher::getInstance()->decipher($results[$key]->getBody()->getContents(), $cfk); 
+
+            foreach (array_keys($promises) as $key) {
+                $data = Decipher::getInstance()->decipher($results[$key]->getBody()->getContents(), $cfk);
+
                 $final['data'][$key] = $data && array_key_exists('structures', $data) ? $data['structures'] : array();
                 $final['data'][$key] = array_map(function($x) { 
                     return [
@@ -127,7 +128,7 @@ class Seeker {
         
         $cfk = Decipher::getInstance()->getCfk();
         $competitionsResponse = Decipher::getInstance()->decipher($competitionsResponseData, $cfk);
-        
+
         foreach ($competitionsResponse['competitions'] as $competition) {
             if(!array_key_exists('ext_competitionId', $competition)) continue;  
             $poolId = strtolower($competition['libelle'].'-'.$competition['ext_competitionId']);          
@@ -162,7 +163,7 @@ class Seeker {
                                     function (ResponseInterface $res1) use ($string, $level, $competition, $pool, $poolId, $seasonId, $cfk) { 
                                         $champsResponseData = $res1->getBody()->getContents();
                                         $champsResponse = Decipher::getInstance()->decipher($champsResponseData, $cfk);
-                                        
+
                                         $teams = $champsResponse['equipe_options'];
                                         $team = $this->getTeamInPool($teams, $string);
                                         return array(
@@ -172,6 +173,7 @@ class Seeker {
                                                 'cat' => array_key_exists('libelle', $competition) ? $competition['libelle'] : null,
                                                 'phase' => array_key_exists('libelle', $pool) ? $pool['libelle'] : null,
                                                 'url' => 'saison-0-0-' . $seasonId . '/' . $level . '/' . $poolId . '/equipe-' . $team['ext_equipeId'],
+                                                'urlPool' => 'saison-0-0-' . $seasonId . '/' . $level . '/' . $poolId . '/poule-' . $pool['ext_pouleId'],
                                                 // 'pool' => array_key_exists('poolName', $pool) ? $pool['poolName'] : null,
                                                 // 'level' => $level,
                                             ) : null                                        
@@ -187,8 +189,8 @@ class Seeker {
         } 
 
         $results = Promise\settle($promises)->wait();
-                
-        $final = array( 
+
+        $final = array(
             'data' => array(),
             'error' => false            
         );  
@@ -226,7 +228,7 @@ class Seeker {
     */
     private function getTeamInPool($pool, $string){
         $team = array_filter($pool, function ($var) use($string) {
-            return preg_match('/'.$string.'/', mb_strtolower($var['libelle']));
+            return preg_match('/'.mb_strtolower($string).'/', mb_strtolower($var['libelle']));
         });  
         $team = array_values($team); 
         return $team && sizeof($team) !== 0 ? $team[0] : null;

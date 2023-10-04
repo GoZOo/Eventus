@@ -1,5 +1,5 @@
 {
-    "name": "kiriancaumes/eventus",
+    "name": "gozoo/eventus",
     "description": "Useful Wordpress plugin that allow you to manage handball teams results through FFHB website.",
     "require": {
         "timber/timber": "^1.10",

@@ -1,4 +1,4 @@
-import EventusFront from "./_eventusFront"
+import EventusFront from "./_eventusFront.js"
 
 class EventusFront_Results extends EventusFront {
     constructor() {

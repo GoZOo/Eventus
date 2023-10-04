@@ -46,7 +46,7 @@ class Ics {
                     );
                 }            
             }
-            
+
             if (count(self::$events) > 0) {
                 for ($p = 0; $p <= count(self::$events) - 1; $p++) {
                     foreach (self::$events[$p] as $key => $val) {
@@ -57,7 +57,8 @@ class Ics {
             file_put_contents(
                 plugin_dir_path( __FILE__ ).'../../public/ics/'.str_replace(' ', '_', self::$clubName .'_'.self::$teamName .'_'. $matches[0]->getTeam()->getId()).'.ics',
                 self::prepare()
-            );  
+            );
+
         }
              
     }

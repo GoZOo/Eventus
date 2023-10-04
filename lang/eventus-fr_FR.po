@@ -868,14 +868,14 @@ msgstr "Sexe"
 #: admin/views/screens/seeked.twig:17 admin/views/screens/seeked.twig:83
 #: admin/views/screens/seeked.twig:84 admin/views/screens/team.twig:100
 #: admin/views/screens/team.twig:109 admin/views/screens/team.twig:110
-msgid "Link n°1 of the championship results"
-msgstr "Lien n°1 des résultats du championnat"
+msgid "Link n°1 of the championship results of the specific team"
+msgstr "Lien n°1 des résultats du championnat de l'équipe"
 
 #: admin/views/screens/seeked.twig:18 admin/views/screens/seeked.twig:94
 #: admin/views/screens/seeked.twig:95 admin/views/screens/team.twig:123
 #: admin/views/screens/team.twig:132 admin/views/screens/team.twig:133
-msgid "Link n°2 of the championship results"
-msgstr "Lien n°2 des résultats du championnat"
+msgid "Link n°2 of the championship results of the pool"
+msgstr "Lien n°2 des résultats du championnat de la poule"
 
 #: admin/views/screens/seeked.twig:112
 msgid "Add teams"

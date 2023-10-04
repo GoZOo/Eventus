@@ -22,7 +22,7 @@ class Finder {
     * @var Finder   $_instance  Var use to store an instance
     */
     private static $_instance;
-    private $_baseUrlFFHB = "https://jjht57whqb.execute-api.us-west-2.amazonaws.com/prod/pool/";
+    private $_baseUrlFFHB = "https://www.ffhandball.fr/wp-json/competitions/v1/computeBlockAttributes";
     private $_baseUrlMap = "https://maps.googleapis.com/maps/api/distancematrix/json";
     
     /**
@@ -69,81 +69,121 @@ class Finder {
     * @access public
     */
     public function updateMatchesData($teams){
+        $cfk = Decipher::getInstance()->getCfk();
+
         $promises = array();
         foreach ($teams as $team) { 
-            $urls = array();
-            if($team->getUrlOne()) array_push($urls, $team->getUrlOne());
-            if($team->getUrlTwo()) array_push($urls, $team->getUrlTwo());
-            foreach ($urls as $nbr => $url) {
-                $promises[$url] = $this->clientFFHB->getAsync($this->getUrlApi($url))
-                    ->then(
-                        function (ResponseInterface $res) use ($team, $nbr, $urls) { 
-                            $output = $this->parseJson($res->getBody());
+            $urlTeam = $team->getUrlOne();
+            $urlPool = $team->getUrlTwo();
 
-                            //Update teams infos
-                            $teamInfos = array_values(array_filter($output['teams'], function ($var) use($team) {
-                                return preg_match('/'.mb_strtolower($team->getClub()->getString()).'/', mb_strtolower($var['name']));
-                            }));
-                            
-                            if (!$teamInfos || sizeof($teamInfos) === 0) {
-                                $this->addLog("Error String (TeamId: ".$team->getId().") : Can't find the string in results list");
-                            } else {
-                                if ($nbr+1 == sizeof($urls)) { //Check if last url, so last champ
-                                    $team->setPosition($teamInfos[0]['position']);
-                                    $team->setPoints($teamInfos[0]['points']);
-                                    DAO\TeamDAO::getInstance()->updateTeam($team);
-                                }
-                            }
-                            // var_dump($team);exit;
-                            
-                            $allMatches = [];
-                            
-                            //Update Matches infos
-                            foreach($output['dates'] as $matchDay => $rows) {
-                                $prevMatchDay = $matchDay;
-                                $numMatch = 0;
-                                foreach($rows['events'] as $row) {
-                                    if (
-                                        preg_match('/'.mb_strtolower($team->getClub()->getString()).'/', mb_strtolower($row['teams'][0]['name'])) ||
-                                        preg_match('/'.mb_strtolower($team->getClub()->getString()).'/', mb_strtolower($row['teams'][1]['name']))
-                                    ) {
-                                        $hour = $row['date'] && $row['date']['hour'] && $row['date']['minute'] ? $row['date']['hour'].':'.$row['date']['minute'] : null;
-                                        if ($matchDay == $prevMatchDay) $numMatch++;                        
+            $expression = "/competitions\/saison-[0-9]+-[0-9]+-([0-9]+)\/([^\/]+)\/([^\/]+)\/[^\/]+-([0-9]+)/";
+            preg_match($expression, $urlPool, $urlDatas);
+            $seasonId = $urlDatas[1];
+            $competitionType = $urlDatas[2];
+            $competition = $urlDatas[3];
+            $poolId = $urlDatas[4];
+            preg_match($expression, $urlTeam, $urlDatas);
+            $teamId = $urlDatas[4];
 
-                                        if ($row['teams'][0] && $row['teams'][1] && $row['teams'][0]['name'] && $row['teams'][1]['name']) {
-                                            $allMatches[] = new Entities\Match(
-                                                null, //id
-                                                $matchDay, //matchDay 
-                                                $numMatch, //numMatch 
-                                                $row['date'] ? $row['date']['date'] : null, //date
-                                                $hour ? date_create_from_format('H:i', $hour)->modify('-'. $team->getTime() .'minutes')->format('H:i:s') : null, //hourRdv
-                                                $hour ? date_create_from_format('H:i', $hour)->format('H:i:s') : null, //hourStart
-                                                $this->getCleanString($row['teams'][0]['name']), //localTeam
-                                                $row['teams'][0] ? $row['teams'][0]['score'] : null, //localTeamScore
-                                                $this->getCleanString($row['teams'][1]['name']), //visitingTeam
-                                                $row['teams'][1] ? $row['teams'][1]['score'] : null, //visitingTeamScore
-                                                !preg_match('/'.$team->getClub()->getString().'/', mb_strtolower($row['teams'][0]['name'])), //ext
-                                                $row['location'][1] ? $this->getCleanString($row['location'][1]) : null, //street
-                                                $row['location'][2] ? $this->getCleanString($row['location'][2]) : null, //city
-                                                $row['location'][0] ? $this->getCleanString($row['location'][0]) : null, //gym
-                                                0, //Type
-                                                $nbr+1, //Championship
-                                                $team, //team
-                                                null //matchRef
-                                            );
-                                        }                            
-                                    }                                        
-                                }
-                            }
-                            // var_dump($allMatches); exit;                            
-                            DAO\MatchDAO::getInstance()->updateMatchesSync($allMatches);
-                        },
-                        function (RequestException $e) use ($team, $nbr) { 
-                            return array('status' => $e->getResponse()->getStatusCode(), 'content' => null); 
-                            $this->addLog("Error Url (TeamId: ".$team->getId().", TeamUrl :".($nbr+1).", Http code: ".$e->getResponse()->getStatusCode().") : Unable to access this page");
+//echo "<pre>" . print_r([
+//        'ext_saison_id' =>  $seasonId,
+//        'url_competition_type' => $competitionType,
+//        'url_competition' => $competition,
+//        'ext_poule_id' => $poolId,
+//        'ext_equipe_id' => $teamId,
+//    ], true) . "</pre>";
+            $promises[$urlPool] = $this->clientFFHB->getAsync('', [
+                'query' => [
+                    'block' => 'competitions---mini-classement-or-ads',
+                    'ext_saison_id' =>  $seasonId,
+                    'url_competition_type' => $competitionType,
+                    'url_competition' => $competition,
+                    'ext_poule_id' => $poolId,
+                ]
+            ])
+            ->then(
+                function (ResponseInterface $res) use ($team, $cfk) {
+                    $classementResponseData = $res->getBody()->getContents();
+                    $classementResponse = Decipher::getInstance()->decipher($classementResponseData, $cfk);
+
+                    //Update teams infos
+                    $teamInfos = array_values(array_filter($classementResponse['classements'], function ($var) use($team) {
+                        return preg_match('/'.mb_strtolower($team->getClub()->getString()).'/', mb_strtolower($var['equipe_libelle']));
+                    }));
+
+                    if (!$teamInfos || sizeof($teamInfos) === 0) {
+                        $this->addLog("Error String (TeamId: ".$team->getId().") : Can't find the string in results list");
+                    } else {
+                        $team->setPosition($teamInfos[0]['place']);
+                        $team->setPoints($teamInfos[0]['point']);
+                        DAO\TeamDAO::getInstance()->updateTeam($team);
+                    }
+                },
+                function (RequestException $e) use ($team, $urlPool) {
+                    return array('status' => $e->getResponse()->getStatusCode(), 'content' => null);
+                    $this->addLog("Error Url (TeamId: ".$team->getId().", TeamUrl :".($urlPool).", Http code: ".$e->getResponse()->getStatusCode().") : Unable to access this page");
+                }
+            );
+            $promises[$urlTeam] = $this->clientFFHB->getAsync('', [
+                'query' => [
+                    'block' => 'competitions---rencontre-list',
+                    'ext_saison_id' =>  $seasonId,
+                    'url_competition_type' => $competitionType,
+                    'url_competition' => $competition,
+                    'ext_equipe_id' => $teamId,
+                ]
+            ])
+            ->then(
+                function (ResponseInterface $res) use ($team, $cfk) {
+                    $classementResponseData = $res->getBody()->getContents();
+                    $classementResponse = Decipher::getInstance()->decipher($classementResponseData, $cfk);
+
+                    $allMatches = [];
+
+                    // Update Matches infos
+                    foreach($classementResponse['rencontres'] as $matchDay => $row) {
+
+                        if (mb_strtolower($row['equipe1Libelle']) ===  mb_strtolower($team->getClub()->getString())) {
+                            $equipeNum = 1;
                         }
-                    );  
-            }            
+                        elseif (mb_strtolower($row['equipe2Libelle']) === mb_strtolower($team->getClub()->getString())) {
+                            $equipeNum = 2;
+                        }
+                        else {
+                            continue;
+                        }
+
+                        $date = !empty($row['date']) ? $row['date'] : null;
+
+                        $allMatches[] = new Entities\Match(
+                            null, //id
+                            $row['journeeNumero'], //matchDay
+                            $row['ext_rencontreId'], //numMatch
+                            $date, //date
+                            $date ? date_create_from_format('Y-m-d H:i:s.v', $date)->modify('-'. $team->getTime() .'minutes')->format('H:i:s') : null, //hourRdv
+                            $date ? date_create_from_format('Y-m-d H:i:s.v', $date)->format('H:i:s') : null, //hourStart
+                            $this->getCleanString($row['equipe1Libelle']), //localTeam
+                            $row['equipe1Score'], //localTeamScore
+                            $this->getCleanString($row['equipe2Libelle']), //visitingTeam
+                            $row['equipe2Score'], //visitingTeamScore
+                            $equipeNum === 2, //ext
+                            null, //street
+                            null, //city
+                            null, //gym
+                            0, //Type
+                            1, //Championship
+                            $team, //team
+                            null //matchRef
+                        );
+                    }
+//echo "<pre>" . print_r($classementResponse, true) . "</pre>";
+                    DAO\MatchDAO::getInstance()->updateMatchesSync($allMatches);
+                },
+                function (RequestException $e) use ($team, $urlTeam) {
+                    return array('status' => $e->getResponse()->getStatusCode(), 'content' => null);
+                    $this->addLog("Error Url (TeamId: ".$team->getId().", TeamUrl :".($urlTeam).", Http code: ".$e->getResponse()->getStatusCode().") : Unable to access this page");
+                }
+            );
         }
         Promise\settle($promises)->wait();
     }

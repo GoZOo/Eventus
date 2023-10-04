@@ -362,17 +362,17 @@ class PostHandler {
             $final = array();
             $error = false;
             if (isset($_POST['departemental']) && $_POST['departemental'] !== '') {
-                $res = Seeker::getInstance()->seek($_POST['departemental'], $club->getString(), "departemental");
+                $res = Seeker::getInstance()->seek($_POST['departemental'], $_POST['seasonId'], $club->getString(), "departemental");
                 $final = array_merge($final, $res['data']);
                 $error = $res['error'] ? true : $error;
             }                
             if (isset($_POST['regional']) && $_POST['regional'] !== '') {
-                $res = Seeker::getInstance()->seek($_POST['regional'], $club->getString(), "regional");
+                $res = Seeker::getInstance()->seek($_POST['regional'], $_POST['seasonId'], $club->getString(), "regional");
                 $final = array_merge($final, $res['data']);
                 $error = $res['error'] ? true : $error;   
             }                       
             if (isset($_POST['national']) && filter_var($_POST['national'], FILTER_VALIDATE_BOOLEAN)) {
-                $res = Seeker::getInstance()->seek("national", $club->getString(), "national");
+                $res = Seeker::getInstance()->seek("national", $_POST['seasonId'], $club->getString(), "national");
                 $final = array_merge($final, $res['data']);
                 $error = $res['error'] ? true : $error;  
             }

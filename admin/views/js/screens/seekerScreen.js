@@ -1,4 +1,4 @@
-import Eventus from "../_eventus"
+import Eventus from "../_eventus.js"
 
 class Eventus_SeekerScreen extends Eventus {
 	constructor(translations) {

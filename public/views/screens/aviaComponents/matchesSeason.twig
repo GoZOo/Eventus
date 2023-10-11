@@ -1,0 +1,34 @@
+<div class='eventus_matches_season'>
+    {% if matches %}
+        {% filter shortcodes %}
+{#            [av_heading heading='{{ title }}' tag='h2' style='' size='' subheading_active='' subheading_size='15' margin='' margin_sync='true' padding='10' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='av-jl3st843' custom_class='' admin_preview_bg='']#}
+{#            [/av_heading]#}
+            <h2>{{ title }}</h2>
+            <div style=" margin-top:5px; margin-bottom:20px;" class="hr hr-custom hr-center hr-icon-yes   avia-builder-el-14  el_after_av_heading  el_before_eventus_button_results "><span class="hr-inner   inner-border-av-border-thin" style=" width:15%;"><span class="hr-inner-style"></span></span><span class="av-seperator-icon" aria-hidden="true" data-av_icon="" data-av_iconfont="entypo-fontello"></span><span class="hr-inner   inner-border-av-border-thin" style=" width:15%;"><span class="hr-inner-style"></span></span></div>
+            {% for match in matches %}
+                <div class="match">
+                    <div class="match--info">
+                        <div class="match--day">Journée {{ match.matchDay }}</div>
+                        <div class="match--date">{{ match.date|date("d l F Y") }} à {{ match.hourStart }}</div>
+                        <div class="match--detail">
+                            <div class="match--team--detail match--team--local{% if not match.ext %} match--team--is-club{% endif %}{% if match.localTeamScore > match.visitingTeamScore %} match--team--win{% endif %}">
+                                <div class="match--team--name">{{ match.localTeam }}</div>
+                                <div class="match--team--score">{% if match.localTeamScore %}{{ match.localTeamScore }}{% else %}-{% endif %}</div>
+                            </div>
+                            <div class="match--team--detail match--team-visiting{% if match.ext %} match--team--is-club{% endif %}{% if match.visitingTeamScore > match.localTeamScore %} match--team--win{% endif %}">
+                                <div class="match--team--score">{% if match.localTeamScore %}{{ match.visitingTeamScore }}{% else %}-{% endif %}</div>
+                                <div class="match--team--name">{{ match.visitingTeam }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfilter %}
+    {% else %}
+        {% filter shortcodes %}
+            [av_heading heading='{{ title }}' tag='h2' style='' size='' subheading_active='' subheading_size='15' margin='' margin_sync='true' padding='10' color='' custom_font='' av-medium-font-size-title='' av-small-font-size-title='' av-mini-font-size-title='' av-medium-font-size='' av-small-font-size='' av-mini-font-size='' av_uid='av-jl3st843' custom_class='' admin_preview_bg='']
+            [/av_heading]
+            <p>Aucun match trouvé</p>
+        {% endfilter %}
+    {% endif %}
+</div>

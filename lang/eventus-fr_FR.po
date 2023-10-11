@@ -89,6 +89,10 @@ msgstr "Afficher le prochain/dernier match"
 msgid "Select a type"
 msgstr "Sélectionnez un type"
 
+#: admin/business/aviaShortcode/matchsSeason.php:83
+msgid "Matchs de la saison"
+msgstr "Matchs de la saison"
+
 #: admin/business/aviaShortcode/match.php:49
 #: admin/business/aviaShortcode/match.php:101
 #: admin/business/aviaShortcode/match.php:129

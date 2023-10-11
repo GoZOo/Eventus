@@ -290,7 +290,7 @@ class MatchDAO extends MasterDAO {
     * @return Match     Match corresponding
     * @access public
     */
-    function getCloseMatchByTeamId($teamId, $close){  
+    function getCloseMatchByTeamId($teamId, $close){
         $row = $this->wpdb->get_row("
         SELECT                 
             a.*
@@ -344,6 +344,71 @@ class MatchDAO extends MasterDAO {
             null,
             null
         );          
+    }
+
+    /**
+    * Return closest match before of after today
+    *
+    * @param int        Id of the team
+    * @param string     Year of the season, start in september, so 2023 has to be setted for 2023/2024 season.
+    * @return Match[]     Matches corresponding
+    * @access public
+    */
+    function getSeasonMatchsByTeamId($teamId, $year = NULL){
+        if (NULL === $year) {
+            $year = date('Y');
+        }
+        $endYear = (int) $year + 1;
+        $matches = $this->wpdb->get_results("
+        SELECT                 
+            a.*
+        FROM {$this->t2} a
+        WHERE              
+            a.match_idTeam=$teamId AND
+            a.match_date BETWEEN '$year-09-01' AND '$endYear-08-31' AND
+            (
+                (
+                    a.match_type=0 AND
+                    (
+                        SELECT 
+                            z.match_id 
+                        FROM {$this->t2} z 
+                        WHERE 
+                            z.match_idMatchRef = a.match_id
+                    ) IS NULL                        
+                )
+                OR
+                a.match_type IN (1,2)
+            )        
+        ORDER BY 
+            a.match_date ASC, 
+            a.match_hourStart ASC
+        ;
+        ");
+        foreach($matches as $row) {
+            $allMatches[] = new Entities\Match(
+                $row ? $row->match_id : null,
+                $row ? $row->match_matchDay : null,
+                $row ? $row->match_numMatch : null,
+                $row ? $row->match_date : null,
+                $row ? $row->match_hourRdv : null,
+                $row ? $row->match_hourStart : null,
+                $row ? $row->match_localTeam : null,
+                $row ? $row->match_localTeamScore : null,
+                $row ? $row->match_visitingTeam : null,
+                $row ? $row->match_visitingTeamScore : null,
+                $row ? $row->match_ext : null,
+                $row ? $row->match_street : null,
+                $row ? $row->match_city : null,
+                $row ? $row->match_gym : null,
+                $row ? $row->match_type : null,
+                $row ? $row->match_champ : null,
+                null,
+                null
+            );
+        }
+//        echo "<pre>" . print_r($allMatches, true) . "</pre>";
+        return $allMatches;
     }
     
     /**

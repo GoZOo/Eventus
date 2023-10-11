@@ -39,6 +39,7 @@ if (file_exists(get_template_directory() . '/config-templatebuilder/avia-templat
 	include_once get_template_directory() . '/config-templatebuilder/avia-template-builder/php/shortcode-template.class.php';
 	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/calendar.php';
 	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/match.php';
+	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/matchsSeason.php';
 	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/circlePosPts.php';
 	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/buttonResults.php';
 	include_once plugin_dir_path(__FILE__) . 'admin/business/aviaShortcode/results.php';

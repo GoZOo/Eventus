@@ -1,0 +1,74 @@
+.eventus_matches_season {
+    margin: 3em 0 0;
+}
+.eventus_matches_season h2 {
+    text-align: center;
+}
+
+.match {
+    border-bottom: 1px solid #e1e1e1;
+    width: 80%;
+    margin: auto;
+    padding: 1em 0;
+}
+
+.match--day {
+    text-align: center;
+    font-weight: bold;
+}
+
+.match--date {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.match--detail {
+    padding: 0 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.match--team--detail {
+    align-items: center;
+    display: flex;
+    gap: 25px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.match--team--detail > div {
+    display: inline-block;
+}
+
+.match--team--local {
+    justify-content: flex-end;
+    padding-right: 0.25em;
+}
+.match--team--visiting {
+    justify-content: flex-start;
+    padding-left: 0.25em;
+}
+
+.match--team--score {
+    color: #0F3375;
+    background-color: #e1e1e1;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 1.2em;
+    flex-shrink: 0;
+    font-weight: 800;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    transition: opacity .5s;
+    width: 45px;
+}
+
+.match--team--win .match--team--score {
+    background-color: #fedf47;
+    color: #0F3375;
+}
+
+.match--team--is-club {
+    font-weight: 800;
+}

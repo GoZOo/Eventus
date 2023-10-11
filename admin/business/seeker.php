@@ -130,8 +130,9 @@ class Seeker {
         $competitionsResponse = Decipher::getInstance()->decipher($competitionsResponseData, $cfk);
 
         foreach ($competitionsResponse['competitions'] as $competition) {
-            if(!array_key_exists('ext_competitionId', $competition)) continue;  
-            $poolId = strtolower($competition['libelle'].'-'.$competition['ext_competitionId']);          
+            if(!array_key_exists('ext_competitionId', $competition)) continue;
+            $competitionLibelle = preg_replace("/([ \-]+)/", '-', trim($competition['libelle']));
+            $poolId = strtolower($competitionLibelle.'-'.$competition['ext_competitionId']);
             $promises[$poolId] = $this->client->getAsync('', [
                     'query' => [
                         'block' => 'competitions---poule-selector',
@@ -186,7 +187,7 @@ class Seeker {
                     },
                     function (RequestException $e) { return array('status' => $e->getResponse()->getStatusCode(), 'content' => null); }
                 );
-        } 
+        }
 
         $results = Promise\settle($promises)->wait();
 
